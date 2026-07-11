@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function Introduction() {
   const [visible, setVisible] = useState(false);
@@ -48,9 +49,13 @@ export default function Introduction() {
 
           {/* Image Side */}
           <div className="relative -[2rem] overflow-hidden shadow-2xl border border-fortress-gold/10 aspect-[4/3] lg:aspect-square rounded-sm">
-            <div 
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: "url('/black-men-cafe-have-business.jpg')" }}
+            <Image
+              src="/black-men-cafe-have-business.jpg"
+              alt=""
+              fill
+              className="object-cover"
+              loading="lazy"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
             <div className="absolute inset-0 bg-fortress-navy/20" />
           </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Hero() {
   const [visible, setVisible] = useState(false);
@@ -21,12 +22,16 @@ export default function Hero() {
       >
         
         {/* Background Image - Occupies the entire section container */}
-        <div 
-          className="absolute inset-0 z-0 bg-[#4F8AB9] bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/portrait-smiling.jpg')" }}
-        >
-          {/* Overlay to ensure text readability */}
-          <div className="absolute inset-0 bg-black/25"></div>
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/portrait-smiling.jpg"
+            alt=""
+            fill
+            className="object-cover"
+            loading="lazy"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/25" />
         </div>
 
         {/* Top Content (Text + Buttons) */}

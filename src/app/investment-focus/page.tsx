@@ -255,6 +255,7 @@ export default function InvestmentFocusPage() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 40vw"
+                    loading="lazy"
                   />
                   <div className={`absolute inset-0 bg-gradient-to-t ${index % 2 === 1 ? "from-fortress-deep/40" : "from-white/40"} to-transparent`} />
                 </div>

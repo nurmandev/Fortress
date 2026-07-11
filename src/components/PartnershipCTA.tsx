@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function PartnershipCTA() {
@@ -20,10 +21,16 @@ export default function PartnershipCTA() {
     <section className="relative py-20 md:py-32 overflow-hidden bg-fortress-navy border-t border-fortress-gold/10 rounded-2xl mx-4 my-8">
       
       {/* Background Image with Dark Overlay */}
-      <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/strategy-ideas.jpg')" }}
-      />
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/strategy-ideas.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          loading="lazy"
+          sizes="100vw"
+        />
+      </div>
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-fortress-navy/95 via-fortress-navy/90 to-fortress-navy/95" />
       
       <div ref={ref} className="relative z-20 max-w-[1400px] mx-auto px-6 lg:px-12">

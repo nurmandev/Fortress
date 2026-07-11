@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 const sectors = [
@@ -83,10 +84,16 @@ export default function InvestmentSectors() {
                 className={`group relative overflow-hidden bg-fortress-deep border border-fortress-gold/5 flex flex-col justify-end p-6 md:p-10 transition-all duration-500 hover:border-fortress-gold/30 hover:shadow-2xl hover:-translate-y-1 ${sector.className} rounded-sm`}
               >
                 {/* Background Image with Zoom Effect */}
-                <div 
-                  className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
-                  style={{ backgroundImage: `url('${sector.image}')` }}
-                />
+                <div className="absolute inset-0 z-0 overflow-hidden transition-transform duration-700 ease-out group-hover:scale-105">
+                  <Image
+                    src={sector.image}
+                    alt=""
+                    fill
+                    className="object-cover"
+                    loading="lazy"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
                 
                 {/* Dynamic Gradient Overlay */}
                 <div className="absolute inset-0 z-10 bg-gradient-to-t from-fortress-navy via-fortress-navy/80 to-transparent opacity-95 transition-opacity duration-300 group-hover:opacity-90" />
