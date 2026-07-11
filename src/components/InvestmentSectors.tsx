@@ -117,13 +117,14 @@ export default function InvestmentSectors() {
 
         <div ref={ctaRef} className="mt-12 flex justify-center">
           <motion.div
+            className="w-full sm:w-auto"
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 380, damping: 22 }}
           >
             <Link
               href="/investment-focus"
-              className="inline-flex items-center px-8 py-3.5 border border-fortress-gold text-fortress-gold hover:bg-fortress-gold hover:text-fortress-navy text-sm tracking-widest font-semibold transition-colors duration-300 rounded-sm"
+              className="inline-flex items-center justify-center w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 border border-fortress-gold text-fortress-gold hover:bg-fortress-gold hover:text-fortress-navy text-xs sm:text-sm tracking-widest font-semibold transition-colors duration-300 rounded-sm"
             >
               VIEW ALL INVESTMENT SECTORS
             </Link>
