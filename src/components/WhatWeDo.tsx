@@ -59,17 +59,17 @@ export default function WhatWeDo() {
   }, []);
 
   return (
-    <section className="relative py-28 overflow-hidden bg-fortress-navy border-t border-fortress-gold/10 rounded-2xl mx-4 my-2">
+    <section className="relative py-16 md:py-28 overflow-hidden bg-fortress-navy border-t border-fortress-gold/10 rounded-2xl mx-4 my-8">
       <div ref={ref} className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className={`transition-all duration-800 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6">
             <div>
               <span className="block text-fortress-gold text-xs tracking-[6px] uppercase mb-4 font-semibold">
                 02 — What We Do
               </span>
-              <h2 className="text-3xl md:text-5xl font-light text-fortress-ivory leading-tight uppercase tracking-tight">
-                Strategic Investment.<br />Sustainable Growth.
+              <h2 className="text-2xl md:text-5xl font-light text-fortress-ivory leading-tight uppercase tracking-tight">
+                Strategic Investment. Sustainable Growth.
               </h2>
             </div>
             <p className="text-fortress-silver/80 text-base md:text-lg leading-relaxed max-w-[500px]">
@@ -82,7 +82,7 @@ export default function WhatWeDo() {
             {activities.map((item, i) => (
               <div
                 key={i}
-                className={`group p-8 md:p-10 border border-fortress-gold/10 bg-fortress-deep flex flex-col justify-between min-h-[220px] transition-all duration-500 hover:border-fortress-gold/30 hover:shadow-xl hover:-translate-y-1 ${item.className} rounded-sm`}
+                className={`group p-6 md:p-10 border border-fortress-gold/10 bg-fortress-deep flex flex-col justify-between min-h-[180px] md:min-h-[220px] transition-all duration-500 hover:border-fortress-gold/30 hover:shadow-xl hover:-translate-y-1 ${item.className} rounded-sm`}
               >
                 <div>
                   <span className="text-fortress-gold/45 text-[10px] tracking-[4px] uppercase font-semibold block mb-4">
@@ -99,7 +99,7 @@ export default function WhatWeDo() {
             ))}
           </div>
 
-          <div className="mt-12 p-8 border-l border-fortress-gold/25 bg-fortress-deep/30">
+          <div className="mt-8 md:mt-12 p-6 md:p-8 border-l border-fortress-gold/25 bg-fortress-deep/30">
             <p className="text-fortress-silver/60 text-sm leading-relaxed italic">
               Every opportunity passes through a structured evaluation process focused on
               commercial viability, risk, scalability, and long-term value. If it does not meet

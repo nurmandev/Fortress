@@ -17,10 +17,10 @@ export default function Newsletter() {
   }, []);
 
   return (
-    <section className="relative py-24 overflow-hidden rounded-2xl mx-4 my-2">
+    <section className="relative py-16 md:py-24 overflow-hidden rounded-2xl mx-4 my-8">
       <div className="absolute inset-0 bg-fortress-deep" />
       <div className="section-divider max-w-[1280px] mx-auto" />
-      <div ref={ref} className="relative max-w-[1280px] mx-auto px-8 pt-24">
+      <div ref={ref} className="relative max-w-[1280px] mx-auto px-6 lg:px-8 pt-16 md:pt-24">
         <div className={`max-w-[600px] mx-auto text-center transition-all duration-800 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <h2 className="text-2xl md:text-3xl font-bold text-fortress-ivory mb-4">
             Receive Fortress Insights

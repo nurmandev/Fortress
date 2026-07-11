@@ -11,11 +11,11 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen pt-28 pb-12 px-4 lg:px-8 bg-white flex flex-col items-center rounded-2xl mx-4 my-2 overflow-hidden">
+    <section className="relative min-h-screen pt-24 pb-12 px-4 lg:px-8 bg-white flex flex-col items-center rounded-2xl mx-4 my-8 overflow-hidden">
       
       {/* Main Container */}
       <div 
-        className={`relative w-full max-w-[1400px] min-h-[85vh] -[3rem] overflow-hidden transition-all duration-1000 flex flex-col items-center justify-center p-8 md:p-16 ${
+        className={`relative w-full max-w-[1400px] min-h-[70vh] md:min-h-[85vh] overflow-hidden transition-all duration-1000 flex flex-col items-center justify-center p-6 md:p-16 ${
           visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
         }`}
       >
@@ -31,7 +31,7 @@ export default function Hero() {
 
         {/* Top Content (Text + Buttons) */}
         <div className="relative z-10 flex flex-col items-center text-center px-4 max-w-4xl">
-          <h1 className="text-white text-5xl md:text-6xl lg:text-[5.5rem] leading-[1.1] font-light uppercase tracking-tight mb-8">
+          <h1 className="text-white text-4xl md:text-6xl lg:text-[5.5rem] leading-[1.1] font-light uppercase tracking-tight mb-8">
             Invest in spaces<br />
             that matter
           </h1>

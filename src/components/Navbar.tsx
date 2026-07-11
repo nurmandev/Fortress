@@ -26,8 +26,8 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-fortress-navy/95 backdrop-blur-xl border-b border-fortress-gold/10 shadow-lg shadow-black/30"
-          : "bg-fortress-navy/60 backdrop-blur-md"
+          ? "bg-white/95 backdrop-blur-xl border-b border-gray-200 shadow-lg"
+          : "bg-white/80 backdrop-blur-md"
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
@@ -36,8 +36,8 @@ export default function Navbar() {
           {/* Center Logo — always visually centered on desktop via absolute side panels */}
           <div className="hidden lg:block absolute left-1/2 -translate-x-1/2">
             <Link href="/" className="flex flex-col items-center group">
-              <span className="text-lg font-extrabold tracking-[8px] uppercase leading-none text-fortress-ivory group-hover:text-fortress-gold transition-colors duration-300">
-                FORTRESS <span className="text-fortress-gold group-hover:text-fortress-ivory transition-colors duration-300">IH</span>
+              <span className="text-lg font-extrabold tracking-[8px] uppercase leading-none text-gray-900 group-hover:text-fortress-gold transition-colors duration-300">
+                FORTRESS <span className="text-fortress-gold group-hover:text-gray-900 transition-colors duration-300">IH</span>
               </span>
               <span className="text-[9px] tracking-[5px] uppercase text-fortress-gold/50 mt-1 font-medium">
                 Investment Holdings
@@ -51,7 +51,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="relative px-4 py-2 text-[13px] font-medium tracking-wide whitespace-nowrap text-fortress-silver hover:text-fortress-ivory transition-colors duration-300 group"
+                className="relative px-4 py-2 text-[13px] font-medium tracking-wide whitespace-nowrap text-gray-600 hover:text-gray-900 transition-colors duration-300 group"
               >
                 {link.label}
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-fortress-gold group-hover:w-3/4 transition-all duration-300" />
@@ -62,7 +62,7 @@ export default function Navbar() {
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center flex-shrink-0">
             <Link href="/" className="flex flex-col items-center">
-              <span className="text-lg font-extrabold tracking-[6px] uppercase leading-none text-fortress-ivory">
+              <span className="text-lg font-extrabold tracking-[6px] uppercase leading-none text-gray-900">
                 FORTRESS <span className="text-fortress-gold">IH</span>
               </span>
             </Link>
@@ -72,7 +72,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center">
             <Link
               href="/contact"
-              className="px-7 py-2.5 border border-fortress-gold/40 text-fortress-gold hover:bg-fortress-gold hover:text-fortress-navy text-[13px] font-semibold tracking-wider transition-all duration-300 whitespace-nowrap rounded-sm"
+               className="px-7 py-2.5 border border-fortress-gold/40 text-fortress-gold hover:bg-fortress-gold hover:text-white text-[13px] font-semibold tracking-wider transition-all duration-300 whitespace-nowrap rounded-sm"
             >
               Contact Us
             </Link>
@@ -81,7 +81,7 @@ export default function Navbar() {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 transition-colors text-fortress-silver hover:text-fortress-gold rounded-sm"
+            className="lg:hidden p-2 transition-colors text-gray-600 hover:text-fortress-gold rounded-sm"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -91,23 +91,23 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-fortress-navy border-t border-fortress-gold/10">
+        <div className="lg:hidden bg-white border-t border-gray-200">
           <div className="px-6 py-8 space-y-6 flex flex-col">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-lg font-medium text-fortress-silver hover:text-fortress-gold transition-colors"
+                className="text-lg font-medium text-gray-700 hover:text-fortress-gold transition-colors"
               >
                 {link.label}
               </Link>
             ))}
-            <div className="pt-6 border-t border-fortress-gold/10 flex flex-col gap-4">
+            <div className="pt-6 border-t border-gray-200 flex flex-col gap-4">
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="block text-center px-6 py-3 border border-fortress-gold/40 text-fortress-gold hover:bg-fortress-gold hover:text-fortress-navy text-base font-semibold tracking-wider transition-all duration-300 rounded-sm"
+                className="block text-center px-6 py-3 border border-fortress-gold/40 text-fortress-gold hover:bg-fortress-gold hover:text-white text-base font-semibold tracking-wider transition-all duration-300 rounded-sm"
               >
                 Contact Us
               </Link>

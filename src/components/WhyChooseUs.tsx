@@ -43,14 +43,14 @@ export default function WhyChooseUs() {
   }, []);
 
   return (
-    <section className="relative py-28 overflow-hidden rounded-2xl mx-4 my-2">
+    <section className="relative py-16 md:py-28 overflow-hidden rounded-2xl mx-4 my-8">
       <div className="absolute inset-0 bg-fortress-deep" />
-      <div ref={ref} className="relative max-w-[1280px] mx-auto px-8">
+      <div ref={ref} className="relative max-w-[1280px] mx-auto px-6 lg:px-12">
         <div className={`transition-all duration-800 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           <span className="block text-fortress-gold/50 text-xs tracking-[6px] uppercase mb-6 font-medium">
             04 - Why Choose Fortress
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-fortress-ivory mb-12 leading-tight">
+          <h2 className="text-2xl md:text-4xl font-bold text-fortress-ivory mb-8 md:mb-12 leading-tight">
             A Stronger Foundation for Growth
           </h2>
 
@@ -64,7 +64,7 @@ export default function WhyChooseUs() {
           </div>
         </div>
       </div>
-      <div className="section-divider mt-28 max-w-[1280px] mx-auto" />
+      <div className="section-divider mt-16 md:mt-28 max-w-[1280px] mx-auto" />
     </section>
   );
 }

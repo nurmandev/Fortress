@@ -16,18 +16,17 @@ export default function Introduction() {
   }, []);
 
   return (
-    <section id="about" className="relative py-28 overflow-hidden bg-fortress-navy border-t border-fortress-gold/10 rounded-2xl mx-4 my-2">
+    <section id="about" className="relative py-16 md:py-28 overflow-hidden bg-fortress-navy border-t border-fortress-gold/10 rounded-2xl mx-4 my-8">
       <div ref={ref} className="relative max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center transition-all duration-800 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center transition-all duration-800 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
           
           {/* Text Content */}
           <div className="space-y-6">
             <span className="block text-fortress-gold text-xs tracking-[6px] uppercase font-semibold">
               01 - Introduction
             </span>
-            <h2 className="text-3xl md:text-5xl font-light text-fortress-ivory leading-tight uppercase tracking-tight">
-              Strength Behind<br />
-              Every Investment
+            <h2 className="text-2xl md:text-5xl font-light text-fortress-ivory leading-tight uppercase tracking-tight">
+              Strength Behind Every Investment
             </h2>
             <div className="h-0.5 w-12 bg-fortress-gold/30 my-6"></div>
             <p className="text-fortress-silver/90 text-base md:text-lg leading-relaxed">

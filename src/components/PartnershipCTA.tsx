@@ -17,7 +17,7 @@ export default function PartnershipCTA() {
   }, []);
 
   return (
-    <section className="relative py-32 overflow-hidden bg-fortress-navy border-t border-fortress-gold/10 rounded-2xl mx-4 my-2">
+    <section className="relative py-20 md:py-32 overflow-hidden bg-fortress-navy border-t border-fortress-gold/10 rounded-2xl mx-4 my-8">
       
       {/* Background Image with Dark Overlay */}
       <div 
@@ -31,14 +31,14 @@ export default function PartnershipCTA() {
           <span className="block text-fortress-gold text-xs tracking-[6px] uppercase mb-6 font-semibold">
             06 - Partnership
           </span>
-          <h2 className="text-3xl md:text-5xl font-light text-fortress-ivory mb-6 uppercase tracking-tight leading-tight">
-            Let&apos;s Build Long-Term<br />Value Together
+          <h2 className="text-2xl md:text-5xl font-light text-fortress-ivory mb-6 uppercase tracking-tight leading-tight">
+            Let&apos;s Build Long-Term Value Together
           </h2>
           <p className="text-fortress-silver/90 text-lg leading-relaxed mb-6 max-w-[700px] mx-auto">
             We welcome selected opportunities from business owners, entrepreneurs, investors,
             developers, advisors, and strategic partners.
           </p>
-          <p className="text-fortress-silver/70 text-sm leading-relaxed mb-12 max-w-[600px] mx-auto">
+          <p className="text-fortress-silver/70 text-sm leading-relaxed mb-8 md:mb-12 max-w-[600px] mx-auto">
             Whether you are seeking investment, presenting a business for acquisition, proposing
             a joint venture, or exploring a long-term partnership - our team is ready to review
             your opportunity with professionalism and discretion.
