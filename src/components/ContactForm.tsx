@@ -29,13 +29,13 @@ export default function ContactForm() {
   if (submitted) {
     return (
       <div className="text-center py-16">
-        <div className="w-20 h-20 bg-fortress-gold/10 flex items-center justify-center mx-auto mb-6">
+        <div className="w-20 h-20 bg-fortress-gold/10 flex items-center justify-center mx-auto mb-6 rounded-2xl">
           <CheckCircle2 className="w-10 h-10 text-fortress-gold" />
         </div>
-        <h3 className="text-2xl font-bold text-fortress-ivory mb-3">
+        <h3 className="text-2xl font-bold text-fortress-navy mb-3">
           Message Sent
         </h3>
-        <p className="text-fortress-silver max-w-md mx-auto">
+        <p className="text-fortress-navy/60 max-w-md mx-auto">
           Thank you for contacting us. Our team will respond within 1-2
           business days.
         </p>
@@ -44,10 +44,10 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid sm:grid-cols-2 gap-6">
+    <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+      <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
         <div>
-          <label className="block text-fortress-silver text-sm mb-2">
+          <label className="block text-fortress-navy/70 text-sm mb-2">
             Full Name *
           </label>
           <input
@@ -56,12 +56,12 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-5 py-3.5 bg-fortress-navy border border-fortress-gold/20 text-fortress-ivory placeholder:text-fortress-silver/40 focus:outline-none focus:border-fortress-gold/50 transition-colors rounded-sm"
+            className="w-full px-4 md:px-5 py-3 md:py-3.5 bg-white border border-fortress-navy/20 text-fortress-navy placeholder:text-fortress-navy/30 focus:outline-none focus:border-fortress-gold transition-colors rounded-xl"
             placeholder="Your full name"
           />
         </div>
         <div>
-          <label className="block text-fortress-silver text-sm mb-2">
+          <label className="block text-fortress-navy/70 text-sm mb-2">
             Email Address *
           </label>
           <input
@@ -70,15 +70,15 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-5 py-3.5 bg-fortress-navy border border-fortress-gold/20 text-fortress-ivory placeholder:text-fortress-silver/40 focus:outline-none focus:border-fortress-gold/50 transition-colors rounded-sm"
+            className="w-full px-4 md:px-5 py-3 md:py-3.5 bg-white border border-fortress-navy/20 text-fortress-navy placeholder:text-fortress-navy/30 focus:outline-none focus:border-fortress-gold transition-colors rounded-xl"
             placeholder="your@email.com"
           />
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-6">
+      <div className="grid sm:grid-cols-2 gap-4 md:gap-6">
         <div>
-          <label className="block text-fortress-silver text-sm mb-2">
+          <label className="block text-fortress-navy/70 text-sm mb-2">
             Phone Number
           </label>
           <input
@@ -86,12 +86,12 @@ export default function ContactForm() {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-5 py-3.5 bg-fortress-navy border border-fortress-gold/20 text-fortress-ivory placeholder:text-fortress-silver/40 focus:outline-none focus:border-fortress-gold/50 transition-colors rounded-sm"
+            className="w-full px-4 md:px-5 py-3 md:py-3.5 bg-white border border-fortress-navy/20 text-fortress-navy placeholder:text-fortress-navy/30 focus:outline-none focus:border-fortress-gold transition-colors rounded-xl"
             placeholder="+971 50 XXX XXXX"
           />
         </div>
         <div>
-          <label className="block text-fortress-silver text-sm mb-2">
+          <label className="block text-fortress-navy/70 text-sm mb-2">
             Subject *
           </label>
           <select
@@ -99,7 +99,7 @@ export default function ContactForm() {
             value={formData.subject}
             onChange={handleChange}
             required
-            className="w-full px-5 py-3.5 bg-fortress-navy border border-fortress-gold/20 text-fortress-ivory focus:outline-none focus:border-fortress-gold/50 transition-colors appearance-none rounded-sm"
+            className="w-full px-4 md:px-5 py-3 md:py-3.5 bg-white border border-fortress-navy/20 text-fortress-navy focus:outline-none focus:border-fortress-gold transition-colors appearance-none rounded-xl"
           >
             <option value="">Select a subject</option>
             <option value="general">General Enquiry</option>
@@ -112,7 +112,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label className="block text-fortress-silver text-sm mb-2">
+        <label className="block text-fortress-navy/70 text-sm mb-2">
           Message *
         </label>
         <textarea
@@ -121,14 +121,14 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           rows={5}
-          className="w-full px-5 py-3.5 bg-fortress-navy border border-fortress-gold/20 text-fortress-ivory placeholder:text-fortress-silver/40 focus:outline-none focus:border-fortress-gold/50 transition-colors resize-none rounded-sm"
+          className="w-full px-4 md:px-5 py-3 md:py-3.5 bg-white border border-fortress-navy/20 text-fortress-navy placeholder:text-fortress-navy/30 focus:outline-none focus:border-fortress-gold transition-colors resize-none rounded-xl"
           placeholder="How can we help you?"
         />
       </div>
 
       <button
         type="submit"
-        className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-fortress-gold to-fortress-champagne text-fortress-navy font-bold text-sm hover:shadow-2xl hover:shadow-fortress-gold/25 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 rounded-sm"
+        className="w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 bg-fortress-gold text-fortress-navy font-bold text-sm hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2 rounded-xl"
       >
         <Send className="w-4 h-4" />
         Send Message

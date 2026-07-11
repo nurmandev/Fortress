@@ -43,44 +43,40 @@ const contactInfo = [
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-fortress-navy">
+    <main className="min-h-screen bg-white">
       <Navbar />
 
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-fortress-deep" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(201,162,74,0.08),transparent_60%)]" />
-        <div className="relative max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">
-              Contact Us
-            </p>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-fortress-ivory">Let&apos;s Start a </span>
-              <span className="bg-gradient-to-r from-fortress-gold to-fortress-champagne bg-clip-text text-transparent rounded-sm">
-                Conversation
-              </span>
-            </h1>
-            <p className="text-fortress-silver text-lg leading-relaxed max-w-2xl">
-              Whether you have a question, an investment opportunity, or simply
-              want to learn more about Fortress - we are here to help.
-            </p>
-          </div>
+      {/* Banner */}
+      <section className="bg-white pt-24 md:pt-32 pb-12 md:pb-20 text-center">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
+          <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">
+            Contact Us
+          </p>
+          <h1 className="text-3xl md:text-6xl font-bold text-fortress-navy">
+            Let&apos;s Start a Conversation
+          </h1>
+          <p className="text-fortress-navy/60 text-lg leading-relaxed max-w-2xl mx-auto mt-6">
+            Whether you have a question, an investment opportunity, or simply
+            want to learn more about Fortress - we are here to help.
+          </p>
         </div>
       </section>
 
       {/* Contact Info Cards */}
-      <section className="py-12 border-t border-fortress-gold/10">
+      <section className="bg-fortress-navy my-8 md:my-12 sm:mx-4 rounded-2xl py-12 md:py-20">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <h2 className="text-center text-fortress-ivory text-2xl md:text-3xl font-bold mb-12">
+            Get in Touch
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {contactInfo.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="flex items-center gap-4 p-5 bg-gradient-to-br from-fortress-deep to-fortress-charcoal border border-fortress-gold/10 hover:border-fortress-gold/30 transition-all duration-300 rounded-sm"
+                className="flex items-center gap-4 p-5 bg-fortress-charcoal/40 rounded-2xl hover:bg-fortress-charcoal/60 transition-all duration-300"
               >
-                <div className="w-12 h-12 bg-fortress-gold/10 flex items-center justify-center flex-shrink-0">
-                  <item.icon className="w-6 h-6 text-fortress-gold" />
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-fortress-gold/10 flex items-center justify-center flex-shrink-0 rounded-xl">
+                  <item.icon className="w-5 h-5 md:w-6 md:h-6 text-fortress-gold" />
                 </div>
                 <div>
                   <p className="text-fortress-silver text-xs">{item.label}</p>
@@ -95,25 +91,25 @@ export default function ContactPage() {
       </section>
 
       {/* Form + Map */}
-      <section className="py-20 border-t border-fortress-gold/10">
+      <section className="my-8 md:my-12 sm:mx-4">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-12">
+          <div className="grid lg:grid-cols-5 gap-8">
             {/* Form */}
-            <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold text-fortress-ivory mb-2">
+            <div className="lg:col-span-2 bg-white rounded-2xl p-6 md:p-10">
+              <h2 className="text-2xl font-bold text-fortress-navy mb-2">
                 Send Us a Message
               </h2>
-              <p className="text-fortress-silver text-sm mb-8">
+              <p className="text-fortress-navy/60 text-sm mb-8">
                 We typically respond within 1-2 business days.
               </p>
               <ContactForm />
 
-              <div className="mt-10 pt-8 border-t border-fortress-gold/10">
+              <div className="mt-10 pt-8 border-t border-fortress-navy/10">
                 <a
                   href="https://wa.me/971500000000"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-6 py-3 bg-green-500/10 border border-green-500/20 text-green-400 hover:bg-green-500/20 hover:border-green-500/30 transition-all duration-300 text-sm font-medium rounded-sm"
+                  className="inline-flex items-center gap-3 px-6 py-3 bg-green-500 text-white hover:bg-green-600 transition-all duration-300 text-sm font-medium rounded-xl"
                 >
                   <MessageCircle className="w-5 h-5" />
                   Chat on WhatsApp
@@ -122,19 +118,20 @@ export default function ContactPage() {
             </div>
 
             {/* Map */}
-            <div className="lg:col-span-3" id="map">
-              <div className="bg-gradient-to-br from-fortress-deep to-fortress-charcoal border border-fortress-gold/10 overflow-hidden h-full min-h-[500px] rounded-sm">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.643879742878!2d55.2708!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5d348d56a8df%3A0x2e84e1b4b4b4b4b4!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sae!4v1234567890"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, filter: "grayscale(0.6) contrast(1.1)" }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Fortress Investment Holdings Office Location"
-                />
-              </div>
+            <div
+              className="lg:col-span-3 bg-fortress-charcoal rounded-2xl overflow-hidden h-full min-h-[500px]"
+              id="map"
+            >
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.643879742878!2d55.2708!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5d348d56a8df%3A0x2e84e1b4b4b4b4b4!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sae!4v1234567890"
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: "grayscale(0.6) contrast(1.1)" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Fortress Investment Holdings Office Location"
+              />
             </div>
           </div>
         </div>
