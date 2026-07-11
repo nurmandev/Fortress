@@ -1,56 +1,96 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Newsletter() {
-  const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState("");
-  const ref = useRef<HTMLDivElement>(null);
+  const [submitted, setSubmitted] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const subRef = useRef<HTMLParagraphElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+      });
+      tl.fromTo(headingRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" })
+        .fromTo(subRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3")
+        .fromTo(formRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3");
+    }, sectionRef);
+    return () => ctx.revert();
   }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setEmail("");
+  };
 
   return (
     <section className="relative py-16 md:py-24 overflow-hidden rounded-2xl mx-4 my-8">
       <div className="absolute inset-0 bg-fortress-deep" />
       <div className="section-divider max-w-[1280px] mx-auto" />
-      <div ref={ref} className="relative max-w-[1280px] mx-auto px-6 lg:px-8 pt-16 md:pt-24">
-        <div className={`max-w-[600px] mx-auto text-center transition-all duration-800 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-          <h2 className="text-2xl md:text-3xl font-bold text-fortress-ivory mb-4">
+
+      <div ref={sectionRef} className="relative max-w-[1280px] mx-auto px-6 lg:px-8 pt-16 md:pt-24">
+        <div className="max-w-[600px] mx-auto text-center">
+          <h2 ref={headingRef} className="text-2xl md:text-3xl font-bold text-fortress-ivory mb-4">
             Receive Fortress Insights
           </h2>
-          <p className="text-fortress-silver/60 leading-relaxed mb-8">
-            Selected market developments, investment perspectives, and company updates -
-            delivered occasionally, and only when worth your time.
+          <p ref={subRef} className="text-fortress-silver/60 leading-relaxed mb-8">
+            Selected market developments, investment perspectives, and company updates — delivered occasionally, and only when worth your time.
           </p>
-          <form
-            onSubmit={(e) => { e.preventDefault(); setEmail(""); }}
-            className="flex flex-col sm:flex-row"
-          >
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email Address"
-              required
-              className="w-full sm:flex-1 px-5 py-3.5 bg-fortress-navy border border-fortress-gold/20 text-fortress-ivory text-sm placeholder:text-fortress-silver/40 focus:outline-none focus:border-fortress-gold/50 transition-colors"
-            />
-            <button
-              type="submit"
-              className="w-full sm:w-auto px-8 py-3.5 bg-fortress-gold text-fortress-navy font-bold text-sm tracking-widest hover:bg-fortress-champagne transition-colors duration-300"
+
+          {submitted ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 22 }}
+              className="py-6 px-8 border border-fortress-gold/30 bg-fortress-gold/5 rounded-sm"
             >
-              SUBSCRIBE
-            </button>
-          </form>
+              <p className="text-fortress-gold font-semibold text-sm tracking-widest uppercase">Thank you for subscribing.</p>
+              <p className="text-fortress-silver/60 text-xs mt-2">You will hear from us when it matters.</p>
+            </motion.div>
+          ) : (
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              className="flex flex-col sm:flex-row"
+            >
+              <motion.input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email Address"
+                required
+                className="w-full sm:flex-1 px-5 py-3.5 bg-fortress-navy border border-fortress-gold/20 text-fortress-ivory text-sm placeholder:text-fortress-silver/40 focus:outline-none focus:border-fortress-gold/50 transition-colors"
+                whileFocus={{ borderColor: "rgba(201,162,74,0.5)", backgroundColor: "rgba(201,162,74,0.03)" }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.button
+                type="submit"
+                className="w-full sm:w-auto px-8 py-3.5 bg-fortress-gold text-fortress-navy font-bold text-sm tracking-widest"
+                whileHover={{ backgroundColor: "#E6C879", scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              >
+                SUBSCRIBE
+              </motion.button>
+            </form>
+          )}
+
           <p className="text-fortress-silver/30 text-xs mt-4">
-            By subscribing, you agree to receive communications from Fortress Investment Holdings.
-            You may unsubscribe at any time.
+            By subscribing, you agree to receive communications from Fortress Investment Holdings. You may unsubscribe at any time.
           </p>
         </div>
       </div>

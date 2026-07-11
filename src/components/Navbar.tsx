@@ -1,21 +1,43 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { User, Target, Handshake, Newspaper, Menu, X } from "lucide-react";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import gsap from "gsap";
 
-const navLinks = [
-  { label: "About", href: "/about" },
-  { label: "Investment Focus", href: "/investment-focus" },
-  { label: "Approach", href: "/our-approach" },
-  { label: "Partner With Us", href: "/partner-with-us" },
-  { label: "Insights", href: "/insights" },
+const navItems = [
+  { label: "About", href: "/about", icon: User },
+  { label: "Investment Focus", href: "/investment-focus", icon: Target },
+  { label: "Approach", href: "/our-approach", icon: Handshake },
+  { label: "Partner With Us", href: "/partner-with-us", icon: Handshake },
+  { label: "Insights", href: "/insights", icon: Newspaper },
 ];
+
+const NavLink = ({ href, icon: Icon, label }: { href: string; icon: React.ComponentType<{ className?: string }>; label: string }) => (
+  <Link
+    href={href}
+    className="group flex items-center gap-1.5 text-sm font-medium text-fortress-silver hover:text-fortress-gold transition-colors whitespace-nowrap"
+  >
+    <Icon className="w-4 h-4 opacity-70 group-hover:opacity-100" />
+    <span>{label}</span>
+  </Link>
+);
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // GSAP entrance: slide down from above on page load
+  useEffect(() => {
+    gsap.fromTo(
+      headerRef.current,
+      { y: -80, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.9, ease: "power4.out", delay: 0.1 }
+    );
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -23,106 +45,142 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [isMobileMenuOpen]);
+
+  const bgClass = scrolled
+    ? "bg-fortress-navy/95 backdrop-blur-xl shadow-lg"
+    : "bg-fortress-navy/80 backdrop-blur-md";
+
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-xl border-b border-gray-200 shadow-lg"
-          : "bg-white/80 backdrop-blur-md"
-      }`}
-    >
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-20 lg:h-22">
-
-          {/* Center Logo — large screen */}
-          <div className="hidden lg:block absolute left-1/2 -translate-x-1/2">
-            <Link href="/" className="flex items-center group">
-              <Image
-                src="/large-logo.png"
-                alt="Fortress Investment Holdings"
-                width={200}
-                height={60}
-                className="h-12 w-auto object-contain"
-                priority
-              />
-            </Link>
-          </div>
-
-          {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="relative px-4 py-2 text-[13px] font-medium tracking-wide whitespace-nowrap text-gray-600 hover:text-gray-900 transition-colors duration-300 group"
-              >
-                {link.label}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-fortress-gold group-hover:w-3/4 transition-all duration-300" />
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile Logo */}
-          <div className="lg:hidden flex items-center flex-shrink-0">
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/small-logo.png"
-                alt="Fortress Investment Holdings"
-                width={120}
-                height={40}
-                className="h-8 w-auto object-contain"
-                priority
-              />
-            </Link>
-          </div>
-
-          {/* Desktop CTA / Mobile Menu Toggle */}
-          <div className="hidden lg:flex items-center">
-            <Link
-              href="/contact"
-               className="px-7 py-2.5 border border-fortress-gold/40 text-fortress-gold hover:bg-fortress-gold hover:text-white text-[13px] font-semibold tracking-wider transition-all duration-300 whitespace-nowrap rounded-sm"
-            >
-              Contact Us
-            </Link>
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 transition-colors text-gray-600 hover:text-fortress-gold rounded-sm"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+    <>
+      <header ref={headerRef} className="fixed top-0 inset-x-0 z-50 h-16 flex px-0">
+        <div className={`flex-1 h-10 ${bgClass} z-20 relative min-w-0`}>
+          <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+            <line x1="0" y1="39.5" x2="100%" y2="39.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
+            <line x1="0" y1="36.5" x2="100%" y2="36.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
+          </svg>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-200">
-          <div className="px-6 py-8 space-y-6 flex flex-col">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="text-lg font-medium text-gray-700 hover:text-fortress-gold transition-colors"
+        <div className="flex h-16 relative z-10 shrink-0 -ml-px">
+          <div className="w-[50px] h-full relative shrink-0">
+            <div className={`absolute inset-0 ${bgClass}`} style={{ clipPath: "path('M0 0 H50 V64 C25 64 25 40 0 40 Z')" }} />
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 50 64">
+              <path d="M0 39.5 C25 39.5 25 63.5 50 63.5" fill="none" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
+              <path d="M0 36.5 C25 36.5 25 60.5 50 60.5" fill="none" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
+            </svg>
+          </div>
+
+          <div className="flex-1 h-full relative min-w-0 -ml-px">
+            <div className={`absolute inset-0 ${bgClass}`}>
+              <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+                <line x1="0" y1="63.5" x2="100%" y2="63.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
+                <line x1="0" y1="60.5" x2="100%" y2="60.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
+              </svg>
+            </div>
+
+            <div className="relative w-full h-full flex items-end justify-between pb-2 px-4 md:px-8">
+              <nav className="hidden md:flex gap-8 mb-1 shrink-0">
+                {navItems.slice(0, 3).map(item => (
+                  <NavLink key={item.label} {...item} />
+                ))}
+              </nav>
+
+              <button
+                className="md:hidden mb-1 p-1 text-fortress-silver hover:text-fortress-gold transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
               >
-                {link.label}
-              </Link>
-            ))}
-            <div className="pt-6 border-t border-gray-200 flex flex-col gap-4">
+                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+
+              <div className="flex justify-center shrink-0 mx-2 md:mx-4 mt-1">
+                <Link href="/" className="flex items-center group">
+                  <Image
+                    src="/large-logo.png"
+                    alt="Fortress Investment Holdings"
+                    width={160}
+                    height={48}
+                    className="h-10 w-auto object-contain"
+                    priority
+                  />
+                </Link>
+              </div>
+
+              <nav className="hidden md:flex gap-6 items-center shrink-0">
+                {navItems.slice(3).map(item => (
+                  <NavLink key={item.label} {...item} />
+                ))}
+                <div className="flex gap-4 pl-4 border-l border-fortress-gold/20 shrink-0 items-center">
+                  <Link
+                    href="/contact"
+                    className="px-4 py-1.5 text-sm font-medium text-fortress-navy bg-fortress-gold rounded-2xl hover:bg-fortress-champagne transition-colors whitespace-nowrap shadow-sm"
+                  >
+                    Contact Us
+                  </Link>
+                </div>
+              </nav>
+
+
+            </div>
+          </div>
+
+          <div className="w-[50px] h-full relative shrink-0 -ml-px">
+            <div className={`absolute inset-0 ${bgClass}`} style={{ clipPath: "path('M0 0 H50 V40 C25 40 25 64 0 64 Z')" }} />
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 50 64">
+              <path d="M0 63.5 C25 63.5 25 39.5 50 39.5" fill="none" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
+              <path d="M0 60.5 C25 60.5 25 36.5 50 36.5" fill="none" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
+            </svg>
+          </div>
+        </div>
+
+        <div className={`flex-1 h-10 ${bgClass} z-20 relative min-w-0 -ml-px`}>
+          <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+            <line x1="0" y1="39.5" x2="100%" y2="39.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
+            <line x1="0" y1="36.5" x2="100%" y2="36.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
+          </svg>
+        </div>
+      </header>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-x-0 top-16 z-40 bg-fortress-navy border-b border-fortress-gold/10 p-4 md:hidden shadow-lg"
+          >
+            <nav className="flex flex-col gap-2">
+              {navItems.map(item => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-fortress-gold/5 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <item.icon className="w-5 h-5 text-fortress-gold/70" />
+                  <span className="font-medium text-fortress-ivory/90">{item.label}</span>
+                </Link>
+              ))}
+                  <div className="h-px bg-fortress-gold/20 my-2" />
               <Link
                 href="/contact"
-                onClick={() => setMobileOpen(false)}
-                className="block text-center px-6 py-3 border border-fortress-gold/40 text-fortress-gold hover:bg-fortress-gold hover:text-white text-base font-semibold tracking-wider transition-all duration-300 rounded-sm"
+                className="flex items-center justify-center gap-2 p-3 rounded-lg bg-fortress-gold text-fortress-navy font-medium mt-2"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact Us
               </Link>
-            </div>
-          </div>
-        </div>
-      )}
-    </nav>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
