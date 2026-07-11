@@ -37,23 +37,21 @@ const philosophyPoints = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-fortress-navy">
+    <main className="min-h-screen bg-white">
       <Navbar />
 
       {/* Banner */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-fortress-deep" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(201,162,74,0.08),transparent_60%)]" />
-        <div className="relative max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">About Us</p>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-fortress-ivory">Built to Protect. </span>
-              <span className="bg-gradient-to-r from-fortress-gold to-fortress-champagne bg-clip-text text-transparent rounded-sm">
+      <section className="relative pt-24 md:pt-32 pb-12 md:pb-20 overflow-hidden bg-white text-center">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">About Us</p>
+            <h1 className="text-3xl md:text-6xl font-bold mb-4 md:mb-6 leading-tight">
+              <span className="text-fortress-navy">Built to Protect. </span>
+              <span className="bg-gradient-to-r from-fortress-gold to-fortress-champagne bg-clip-text text-transparent">
                 Positioned to Grow.
               </span>
             </h1>
-            <p className="text-fortress-silver text-lg leading-relaxed max-w-2xl">
+            <p className="text-fortress-charcoal/70 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">
               Fortress Investment Holdings brings together disciplined capital, strategic thinking, and long-term vision to build sustainable value across selected businesses, assets, and markets.
             </p>
           </div>
@@ -61,58 +59,42 @@ export default function AboutPage() {
       </section>
 
       {/* Company Introduction */}
-      <section className="py-20 border-t border-fortress-gold/10">
+      <section className="py-12 md:py-20 bg-fortress-navy my-8 md:my-12 sm:mx-4 rounded-2xl">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            <div>
-              <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">About Fortress Investment Holdings</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-fortress-ivory mb-6">
-                A Platform Built for Long-Term Value
-              </h2>
-            </div>
-            <div className="space-y-6 text-fortress-silver leading-relaxed">
-              <p>
-                Fortress Investment Holdings is a diversified investment holding company headquartered in Dubai, United Arab Emirates.
-              </p>
-              <p>
-                We were established with a clear purpose: to identify valuable opportunities, invest responsibly, and support businesses and assets with genuine potential for sustainable growth.
-              </p>
-              <p>
-                What sets us apart is how we think about time. Markets move in cycles. Trends come and go. We evaluate every opportunity on its fundamentals — market position, leadership quality, financial performance, scalability, and risk profile — because fundamentals are what endure.
-              </p>
-              <p>
-                Our role extends well beyond providing capital. Depending on the opportunity, we support strategic planning, business development, operational improvement, market expansion, governance, brand positioning, and access to professional networks that would otherwise take years to build.
-              </p>
-              <p>
-                Through this disciplined, partnership-driven approach, Fortress is building a resilient portfolio of valuable businesses and strategic assets — one carefully chosen opportunity at a time.
-              </p>
-            </div>
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">About Fortress Investment Holdings</p>
+            <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-4 md:mb-6">
+              A Platform Built for Long-Term Value
+            </h2>
+            <p className="text-fortress-silver text-sm md:text-lg leading-relaxed">
+              Fortress Investment Holdings is a diversified investment holding company headquartered in Dubai, United Arab Emirates. We identify valuable opportunities, invest responsibly, and support businesses with genuine potential for sustainable growth.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Vision & Mission */}
-      <section className="py-20 bg-fortress-deep border-t border-fortress-gold/10">
+      <section className="py-12 md:py-20 my-8 md:my-12 sm:mx-4 rounded-2xl bg-white">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-10 rounded-sm">
-              <div className="w-14 h-14 bg-fortress-gold/10 flex items-center justify-center mb-6">
-                <Eye className="w-7 h-7 text-fortress-gold" />
+          <div className="grid md:grid-cols-2 gap-6 md:gap-12">
+            <div className="bg-fortress-navy border border-fortress-gold/10 p-6 md:p-10 rounded-2xl">
+              <div className="w-12 h-12 md:w-14 md:h-14 bg-fortress-gold/10 flex items-center justify-center mb-4 md:mb-6 rounded-sm">
+                <Eye className="w-6 h-6 md:w-7 md:h-7 text-fortress-gold" />
               </div>
               <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-3">Our Vision</p>
-              <h3 className="text-2xl font-bold text-fortress-ivory mb-4">To Build a Globally Respected Investment Group</h3>
-              <p className="text-fortress-silver leading-relaxed">
-                Our vision is to establish Fortress Investment Holdings as a trusted, diversified, and internationally recognised investment group. We measure success not by the size of our portfolio, but by its strength: businesses, assets, and partnerships capable of delivering sustainable performance through changing market cycles.
+              <h3 className="text-lg md:text-2xl font-bold text-fortress-ivory mb-3 md:mb-4">To Build a Globally Respected Investment Group</h3>
+              <p className="text-fortress-silver text-sm md:text-base leading-relaxed">
+                Our vision is to establish Fortress Investment Holdings as a trusted, diversified, and internationally recognised investment group. We measure success by the strength of our portfolio, not its size.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-10 rounded-sm">
-              <div className="w-14 h-14 bg-fortress-gold/10 flex items-center justify-center mb-6">
-                <Target className="w-7 h-7 text-fortress-gold" />
+            <div className="bg-fortress-deep border border-fortress-gold/10 p-6 md:p-10 rounded-2xl">
+              <div className="w-12 h-12 md:w-14 md:h-14 bg-fortress-gold/10 flex items-center justify-center mb-4 md:mb-6 rounded-sm">
+                <Target className="w-6 h-6 md:w-7 md:h-7 text-fortress-gold" />
               </div>
               <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-3">Our Mission</p>
-              <h3 className="text-2xl font-bold text-fortress-ivory mb-4">Investing in Strength. Creating Lasting Value.</h3>
-              <p className="text-fortress-silver leading-relaxed">
-                Our mission is to identify high-potential opportunities, deploy capital responsibly, and support sustainable growth through strategic involvement, strong governance, and long-term partnerships. We seek to create value for our portfolio companies, partners, investors, stakeholders — and the communities in which we operate.
+              <h3 className="text-lg md:text-2xl font-bold text-fortress-ivory mb-3 md:mb-4">Investing in Strength. Creating Lasting Value.</h3>
+              <p className="text-fortress-silver text-sm md:text-base leading-relaxed">
+                Our mission is to identify high-potential opportunities, deploy capital responsibly, and support sustainable growth through strategic involvement, strong governance, and long-term partnerships.
               </p>
             </div>
           </div>
@@ -120,25 +102,24 @@ export default function AboutPage() {
       </section>
 
       {/* Leadership */}
-      <section className="py-20 border-t border-fortress-gold/10">
+      <section className="py-12 md:py-20 bg-fortress-deep my-8 md:my-12 sm:mx-4 rounded-2xl">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">Leadership</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-fortress-ivory mb-2">Leadership Built on Vision and Responsibility</h2>
+          <div className="text-center mb-8 md:mb-12">
+            <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Leadership</p>
+            <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory">Leadership Built on Vision and Responsibility</h2>
           </div>
-          <div className="mt-12 grid lg:grid-cols-2 gap-12 items-start">
-            <div className="bg-gradient-to-br from-fortress-deep to-fortress-charcoal border border-fortress-gold/10 p-10 rounded-sm">
-              <h3 className="text-xl font-bold text-fortress-ivory mb-1">[INSERT FOUNDER / CEO NAME]</h3>
-              <p className="text-fortress-gold text-sm font-medium mb-6">Founder and Chief Executive Officer</p>
-              <div className="space-y-4 text-fortress-silver leading-relaxed">
-                <p>[INSERT FOUNDER / CEO NAME] leads Fortress Investment Holdings with a firm commitment to responsible investment, disciplined growth, and long-term value creation.</p>
-                <p>With experience spanning business development, investment evaluation, strategic partnerships, and commercial operations, [INSERT NAME] provides the leadership and direction behind every investment decision the company makes.</p>
-                <p>[INSERT NAME] approach is grounded in careful decision-making, integrity, and accountability — and in a simple conviction: the best investments are built on strong relationships and clear alignment between all stakeholders.</p>
-                <p>Under [INSERT NAME] leadership, Fortress Investment Holdings is building a diversified portfolio of high-quality businesses and strategic assets across the UAE and selected international markets.</p>
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-12 items-start">
+            <div className="bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 rounded-2xl">
+              <h3 className="text-lg md:text-xl font-bold text-fortress-ivory mb-1 whitespace-nowrap">Yogesh</h3>
+              <p className="text-fortress-gold text-sm font-medium mb-4 md:mb-6">Founder and Chief Executive Officer</p>
+              <div className="space-y-3 md:space-y-4 text-fortress-silver text-sm md:text-base leading-relaxed">
+                <p>Yogesh leads Fortress Investment Holdings with a firm commitment to responsible investment, disciplined growth, and long-term value creation.</p>
+                <p>With experience spanning business development, investment evaluation, and strategic partnerships, Yogesh provides the leadership behind every investment decision.</p>
+                <p>Yogesh&rsquo;s approach is grounded in integrity, accountability, and the conviction that the best investments are built on strong relationships between all stakeholders.</p>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-fortress-deep to-fortress-charcoal border border-fortress-gold/10 p-10 flex items-center rounded-sm">
-              <blockquote className="text-xl md:text-2xl text-fortress-ivory italic leading-relaxed border-l-4 border-fortress-gold pl-6">
+            <div className="bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 flex items-center rounded-2xl">
+              <blockquote className="text-lg md:text-2xl text-fortress-ivory leading-relaxed border-l-4 border-fortress-gold pl-4 md:pl-6">
                 &ldquo;Our objective is not simply to invest capital. It is to build strong foundations, support meaningful growth, and create value that lasts.&rdquo;
               </blockquote>
             </div>
@@ -147,20 +128,20 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-fortress-deep border-t border-fortress-gold/10">
+      <section className="py-12 md:py-20 my-8 md:my-12 sm:mx-4 rounded-2xl bg-white">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">Our Values</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-fortress-ivory">The Principles Behind Every Decision</h2>
+          <div className="text-center mb-10 md:mb-16">
+            <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Our Values</p>
+            <h2 className="text-xl md:text-4xl font-bold text-fortress-navy">The Principles Behind Every Decision</h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {values.map((v) => (
-              <div key={v.title} className="bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-8 hover:border-fortress-gold/30 transition-all duration-300 rounded-sm">
-                <div className="w-12 h-12 bg-fortress-gold/10 flex items-center justify-center mb-5">
-                  <v.icon className="w-6 h-6 text-fortress-gold" />
+              <div key={v.title} className="bg-fortress-navy border border-fortress-gold/10 p-6 md:p-8 hover:border-fortress-gold/30 transition-all duration-300 rounded-2xl">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-fortress-gold/10 flex items-center justify-center mb-4 md:mb-5 rounded-sm">
+                  <v.icon className="w-5 h-5 md:w-6 md:h-6 text-fortress-gold" />
                 </div>
-                <h3 className="text-fortress-ivory font-bold text-lg mb-3">{v.title}</h3>
-                <p className="text-fortress-silver text-sm leading-relaxed">{v.description}</p>
+                <h3 className="text-fortress-ivory font-bold text-base md:text-lg mb-2 md:mb-3">{v.title}</h3>
+                <p className="text-fortress-silver text-xs md:text-sm leading-relaxed">{v.description}</p>
               </div>
             ))}
           </div>
@@ -168,27 +149,21 @@ export default function AboutPage() {
       </section>
 
       {/* Investment Philosophy */}
-      <section className="py-20 border-t border-fortress-gold/10">
+      <section className="py-12 md:py-20 bg-fortress-navy my-8 md:my-12 sm:mx-4 rounded-2xl">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="max-w-4xl">
-            <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">Our Investment Philosophy</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-fortress-ivory mb-4">Disciplined Capital. Strategic Growth.</h2>
-            <p className="text-fortress-silver text-lg leading-relaxed mb-10">
+          <div className="text-center mb-8 md:mb-12">
+            <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Our Investment Philosophy</p>
+            <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-3 md:mb-4">Disciplined Capital. Strategic Growth.</h2>
+            <p className="text-fortress-ivory/80 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">
               Sustainable value begins with strong fundamentals. Everything else is noise.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-3 md:gap-4 max-w-4xl mx-auto">
             {philosophyPoints.map((point, i) => (
-              <div key={i} className="flex items-start gap-4 p-5 bg-gradient-to-br from-fortress-deep to-fortress-charcoal border border-fortress-gold/10 rounded-sm">
-                <div className="w-2 h-2 bg-fortress-gold mt-2 flex-shrink-0" />
-                <p className="text-fortress-silver text-sm leading-relaxed">{point}</p>
+              <div key={i} className="p-4 md:p-5 bg-fortress-deep border border-fortress-gold/10 rounded-sm">
+                <p className="text-fortress-silver text-xs md:text-sm leading-relaxed">{point}</p>
               </div>
             ))}
-          </div>
-          <div className="mt-10 p-8 bg-gradient-to-br from-fortress-deep to-fortress-charcoal border border-fortress-gold/10 rounded-sm">
-            <p className="text-fortress-silver leading-relaxed">
-              We balance ambition with discipline, and opportunity with risk awareness. Rather than following short-term market trends, we back businesses and assets capable of creating meaningful value over time.
-            </p>
           </div>
         </div>
       </section>

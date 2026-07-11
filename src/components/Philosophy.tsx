@@ -56,7 +56,7 @@ export default function Philosophy() {
             ))}
           </div>
 
-          <p className="text-fortress-silver/50 text-sm leading-relaxed text-center max-w-[600px] mx-auto mt-8 md:mt-12 italic">
+          <p className="text-fortress-silver/50 text-sm leading-relaxed text-center max-w-[600px] mx-auto mt-8 md:mt-12">
             If we cannot add value beyond a cheque, it is not an opportunity for Fortress.
           </p>
         </div>

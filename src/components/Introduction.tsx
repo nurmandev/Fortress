@@ -39,7 +39,7 @@ export default function Introduction() {
               opportunities across multiple sectors - but we never spread ourselves thin. Every
               investment we make receives our capital, our strategic attention, and our networks.
             </p>
-            <p className="text-fortress-silver/60 text-sm leading-relaxed italic border-l border-fortress-gold/20 pl-4">
+            <p className="text-fortress-silver/60 text-sm leading-relaxed border-l border-fortress-gold/20 pl-4">
               Our objective is simple to state and demanding to deliver: strengthen the businesses
               we back, improve their market position, and create value that lasts for our partners,
               investors, and stakeholders.

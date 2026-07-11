@@ -99,13 +99,6 @@ export default function WhatWeDo() {
             ))}
           </div>
 
-          <div className="mt-8 md:mt-12 p-6 md:p-8 border-l border-fortress-gold/25 bg-fortress-deep/30">
-            <p className="text-fortress-silver/60 text-sm leading-relaxed italic">
-              Every opportunity passes through a structured evaluation process focused on
-              commercial viability, risk, scalability, and long-term value. If it does not meet
-              our standards, we do not invest. That discipline protects everyone we work with.
-            </p>
-          </div>
         </div>
       </div>
     </section>

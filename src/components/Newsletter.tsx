@@ -39,11 +39,11 @@ export default function Newsletter() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
               required
-              className="w-full sm:flex-1 px-5 py-3.5 bg-fortress-navy border border-fortress-gold/20 text-fortress-ivory text-sm placeholder:text-fortress-silver/40 focus:outline-none focus:border-fortress-gold/50 transition-colors rounded"
+              className="w-full sm:flex-1 px-5 py-3.5 bg-fortress-navy border border-fortress-gold/20 text-fortress-ivory text-sm placeholder:text-fortress-silver/40 focus:outline-none focus:border-fortress-gold/50 transition-colors"
             />
             <button
               type="submit"
-              className="w-full sm:w-auto px-8 py-3.5 bg-fortress-gold text-fortress-navy font-bold text-sm tracking-widest hover:bg-fortress-champagne transition-colors duration-300 rounded-sm"
+              className="w-full sm:w-auto px-8 py-3.5 bg-fortress-gold text-fortress-navy font-bold text-sm tracking-widest hover:bg-fortress-champagne transition-colors duration-300"
             >
               SUBSCRIBE
             </button>

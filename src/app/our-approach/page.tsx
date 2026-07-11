@@ -101,23 +101,21 @@ const principles = [
 
 export default function OurApproachPage() {
   return (
-    <main className="min-h-screen bg-fortress-navy">
+    <main className="min-h-screen bg-white">
       <Navbar />
 
       {/* Banner */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-fortress-deep" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_40%,rgba(201,162,74,0.08),transparent_60%)]" />
-        <div className="relative max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">Our Approach</p>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-fortress-ivory">Disciplined. Strategic. </span>
-              <span className="bg-gradient-to-r from-fortress-gold to-fortress-champagne bg-clip-text text-transparent rounded-sm">
+      <section className="relative pt-24 md:pt-32 pb-12 md:pb-20 overflow-hidden bg-white text-center">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Our Approach</p>
+            <h1 className="text-3xl md:text-6xl font-bold mb-4 md:mb-6">
+              <span className="text-fortress-navy">Disciplined. Strategic. </span>
+              <span className="bg-gradient-to-r from-fortress-gold to-fortress-champagne bg-clip-text text-transparent">
                 Long-Term.
               </span>
             </h1>
-            <p className="text-fortress-silver text-lg leading-relaxed max-w-2xl">
+            <p className="text-fortress-charcoal/70 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">
               Our investment process is designed to identify quality opportunities, manage risk, and build sustainable value through careful evaluation and active strategic involvement.
             </p>
           </div>
@@ -125,23 +123,17 @@ export default function OurApproachPage() {
       </section>
 
       {/* Introduction */}
-      <section className="py-20 border-t border-fortress-gold/10">
+      <section className="py-12 md:py-20 bg-fortress-navy my-8 md:my-12 sm:mx-4 rounded-2xl">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            <div>
-              <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">How We Invest</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-fortress-ivory mb-6">Our Investment Process</h2>
-            </div>
-            <div>
-              <p className="text-fortress-silver text-lg leading-relaxed mb-6">
-                Every opportunity is different. Our standards never are.
-              </p>
-              <p className="text-fortress-silver leading-relaxed">
-                Our decisions follow a consistent framework built on research, discipline, transparency, and long-term alignment.
-                We assess the quality of the opportunity, the capability of the people behind it, the market environment,
-                the financial requirements, the risks involved, and the realistic potential for sustainable value creation.
-              </p>
-            </div>
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">How We Invest</p>
+            <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-4 md:mb-6">Our Investment Process</h2>
+            <p className="text-fortress-ivory/80 text-sm md:text-lg leading-relaxed mb-4 md:mb-6">
+              Every opportunity is different. Our standards never are.
+            </p>
+            <p className="text-fortress-silver text-sm md:text-base leading-relaxed">
+              Our decisions follow a consistent framework built on research, discipline, transparency, and long-term alignment. We assess the quality of the opportunity, the capability of the people behind it, the market environment, the financial requirements, the risks involved, and the realistic potential for sustainable value creation.
+            </p>
           </div>
         </div>
       </section>
@@ -150,33 +142,30 @@ export default function OurApproachPage() {
       {steps.map((step, index) => (
         <section
           key={step.step}
-          className={`py-20 ${index % 2 === 1 ? "bg-fortress-deep" : ""} border-t border-fortress-gold/10`}
+          className={`py-12 md:py-20 my-8 md:my-12 sm:mx-4 rounded-2xl ${index % 2 === 1 ? "bg-fortress-deep" : "bg-white"}`}
         >
           <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-            <div className="flex items-start gap-5 mb-8">
-              <div className="w-14 h-14 bg-fortress-gold/10 flex items-center justify-center flex-shrink-0">
-                <step.icon className="w-7 h-7 text-fortress-gold" />
+            <div className="flex items-start gap-4 md:gap-5 mb-8 md:mb-10">
+              <div className="w-12 h-12 md:w-14 md:h-14 bg-fortress-gold/10 flex items-center justify-center flex-shrink-0 rounded-sm">
+                <step.icon className="w-5 h-5 md:w-7 md:h-7 text-fortress-gold" />
               </div>
-              <div>
-                <div className="flex items-center gap-4 mb-1">
-                  <span className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase">
-                    Step {step.step}
-                  </span>
-                </div>
-                <h2 className="text-3xl font-bold text-fortress-ivory mb-1">{step.title}</h2>
-                <p className="text-fortress-gold text-base">{step.subtitle}</p>
+              <div className="min-w-0">
+                <span className="text-fortress-gold text-[10px] md:text-sm font-medium tracking-[3px] md:tracking-[4px] uppercase">
+                  Step {step.step}
+                </span>
+                <h2 className={`text-xl md:text-3xl font-bold mb-1 break-words ${index % 2 === 1 ? "text-fortress-ivory" : "text-fortress-navy"}`}>{step.title}</h2>
+                <p className="text-fortress-gold text-sm md:text-base">{step.subtitle}</p>
               </div>
             </div>
-            <div className="grid lg:grid-cols-2 gap-10">
+            <div className="grid lg:grid-cols-2 gap-6 md:gap-10">
               <div>
-                <p className="text-fortress-silver leading-relaxed">{step.body}</p>
+                <p className={`text-sm md:text-base leading-relaxed ${index % 2 === 1 ? "text-fortress-silver" : "text-fortress-charcoal/70"}`}>{step.body}</p>
               </div>
               {step.details && (
                 <div>
                   <ul className="space-y-2">
                     {step.details.map((detail, i) => (
-                      <li key={i} className="flex items-start gap-3 text-fortress-silver text-sm">
-                        <span className="w-1.5 h-1.5 bg-fortress-gold mt-2 flex-shrink-0" />
+                      <li key={i} className={`text-xs md:text-sm leading-relaxed ${index % 2 === 1 ? "text-fortress-silver/80" : "text-fortress-charcoal/60"}`}>
                         {detail}
                       </li>
                     ))}
@@ -189,20 +178,19 @@ export default function OurApproachPage() {
       ))}
 
       {/* Evaluation Principles */}
-      <section className="py-20 bg-fortress-deep border-t border-fortress-gold/10">
+      <section className="py-12 md:py-20 bg-fortress-navy my-8 md:my-12 sm:mx-4 rounded-2xl">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">What We Look For</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-fortress-ivory">Our Evaluation Principles</h2>
+          <div className="text-center mb-10 md:mb-16">
+            <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">What We Look For</p>
+            <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory">Our Evaluation Principles</h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 max-w-5xl mx-auto">
             {principles.map((principle, i) => (
               <div
                 key={i}
-                className="flex items-start gap-4 p-6 bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 rounded-sm"
+                className="p-4 md:p-6 bg-fortress-deep border border-fortress-gold/10 rounded-sm"
               >
-                <Target className="w-5 h-5 text-fortress-gold mt-0.5 flex-shrink-0" />
-                <p className="text-fortress-silver text-sm leading-relaxed">{principle}</p>
+                <p className="text-fortress-silver text-xs md:text-sm leading-relaxed">{principle}</p>
               </div>
             ))}
           </div>
@@ -210,19 +198,19 @@ export default function OurApproachPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 border-t border-fortress-gold/10">
+      <section className="py-12 md:py-20 bg-fortress-navy my-8 md:my-12 sm:mx-4 rounded-2xl">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8 text-center">
-          <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">Get in Touch</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-fortress-ivory mb-6">Have an Opportunity That Matches Our Approach?</h2>
-          <p className="text-fortress-silver text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+          <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Get in Touch</p>
+          <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-4 md:mb-6">Have an Opportunity That Matches Our Approach?</h2>
+          <p className="text-fortress-ivory/80 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto mb-6 md:mb-8">
             Present your business, project, asset, or strategic proposal to our investment team. Serious opportunities receive serious attention.
           </p>
           <Link
             href="/partner-with-us"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-fortress-gold to-fortress-champagne text-fortress-navy font-bold text-sm hover:shadow-2xl hover:shadow-fortress-gold/25 transition-all duration-300 hover:scale-105 rounded-sm"
+            className="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-fortress-gold to-fortress-champagne text-fortress-navy font-bold text-xs md:text-sm tracking-widest hover:shadow-2xl hover:shadow-fortress-gold/25 transition-all duration-300 rounded-sm"
           >
             SUBMIT YOUR OPPORTUNITY
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
           </Link>
         </div>
       </section>

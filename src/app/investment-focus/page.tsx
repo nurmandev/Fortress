@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 import {
   Building2, Cpu, Briefcase, TrendingUp, UtensilsCrossed,
   Wifi, Truck, Gem, Handshake, ArrowRight,
@@ -23,33 +24,47 @@ const sectors = [
     icon: Building2,
     title: "Real Estate",
     subtitle: "Building Value Through Strategic Property Investment",
+    image: "/plants-coins.jpg",
+    body: "Real estate in the UAE remains one of the world's most compelling property markets — driven by population growth, investor-friendly regulation, world-class infrastructure, and sustained international demand.",
     items: [
       "Residential — apartments, villas, and communities in high-demand locations",
       "Commercial — offices, retail, and mixed-use assets with reliable income profiles",
       "Hospitality Real Estate — hotels, resorts, and serviced accommodation",
       "Industrial & Logistics — warehousing and supply-chain infrastructure",
-      "Development & Land — projects and plots with strong fundamentals",
+      "Development & Land — projects and plots with strong fundamentals and credible execution plans",
       "Income-Generating Assets — stabilised properties delivering consistent returns",
     ],
-    body: "Real estate in the UAE remains one of the world's most compelling property markets — driven by population growth, investor-friendly regulation, world-class infrastructure, and sustained international demand. We prioritise quality, location, market fundamentals, and responsible development over speculation.",
+    closing: "Our interest spans direct acquisitions, development partnerships, land opportunities, structured investments, and project participation. In every case, we prioritise quality, location, market fundamentals, and responsible development over speculation.",
   },
   {
     icon: Cpu,
     title: "Digital Assets & Blockchain",
     subtitle: "Selective Participation in the Digital Economy",
+    image: "/gold-coins.jpg",
+    body: "Blockchain and digital assets are reshaping how value is created, transferred, and secured. In the UAE — one of the world's most progressive jurisdictions for digital asset regulation — this shift is creating serious, long-term commercial opportunities.\n\nFortress Investment Holdings participates in this space the same way we approach every sector: selectively, responsibly, and with a clear focus on real-world utility over hype.\n\nWe are not traders chasing market cycles. We are long-term investors backing the infrastructure, platforms, and businesses building the digital economy's foundations.",
     items: [
-      "Blockchain Infrastructure — networks, protocols, and enterprise-grade systems",
+      "Blockchain Infrastructure — networks, protocols, and enterprise-grade systems powering secure digital transactions",
       "Digital Asset Platforms — regulated exchanges, custody solutions, and asset-management technology",
       "Tokenisation — real-world asset tokenisation, including real estate, funds, and commodities",
       "Financial Technology (Fintech) — payment systems, digital banking, and blockchain-enabled financial services",
       "Web3 & Enterprise Solutions — businesses applying distributed ledger technology to genuine commercial challenges",
     ],
-    body: "Blockchain and digital assets are reshaping how value is created, transferred, and secured. In the UAE — one of the world's most progressive jurisdictions for digital asset regulation — this shift is creating serious, long-term commercial opportunities. We are long-term investors backing the infrastructure, platforms, and businesses building the digital economy's foundations.",
+    subheading: "How We Evaluate Digital Asset Opportunities",
+    subitems: [
+      "Regulatory Alignment — compliance with UAE frameworks including VARA, and awareness of international standards",
+      "Genuine Utility — technology that solves a real market problem, not a speculative narrative",
+      "Security & Custody — robust cybersecurity, transparent custody arrangements, responsible governance",
+      "Commercial Viability — a clear revenue model, credible leadership, and a realistic path to scale",
+      "Long-Term Relevance — businesses positioned to perform beyond short-term market sentiment",
+    ],
+    disclaimer: "Fortress Investment Holdings does not promote short-term speculation or guarantee returns from digital assets.",
   },
   {
     icon: Briefcase,
     title: "Business Acquisitions",
     subtitle: "Acquiring Businesses With Strong Foundations",
+    image: "/business.jpg",
+    body: "Behind every established business is years of effort, relationships, and hard-won market knowledge. We treat that legacy with the respect it deserves.\n\nWe consider the acquisition of established businesses with proven operations, reliable customer demand, experienced management, and clear opportunities for further growth.",
     items: [
       "Full business acquisitions — complete ownership transitions, handled professionally and discreetly",
       "Majority ownership — control positions with continuing founder or management participation",
@@ -59,12 +74,14 @@ const sectors = [
       "Succession-related transactions — structured solutions for owners planning their exit",
       "Growth capital partnerships — investment paired with expansion support",
     ],
-    body: "Behind every established business is years of effort, relationships, and hard-won market knowledge. We treat that legacy with the respect it deserves. We consider the acquisition of established businesses with proven operations, reliable customer demand, experienced management, and clear opportunities for further growth.",
+    closing: "We are particularly drawn to businesses where our strategic involvement can improve efficiency, expand market reach, strengthen management, or accelerate regional growth across the UAE and GCC.",
   },
   {
     icon: TrendingUp,
     title: "Private Equity",
     subtitle: "Supporting High-Potential Private Companies",
+    image: "/african-man-black-suit.jpg",
+    body: "The most valuable companies of the next decade are private today. Finding them — and helping them grow — is what our private equity activity is built for.",
     items: [
       "Growth capital — funding expansion, product development, and market entry",
       "Strategic support — board-level guidance and commercial direction",
@@ -72,27 +89,31 @@ const sectors = [
       "Governance guidance — structures that build institutional credibility",
       "Business development resources — practical support that accelerates growth",
     ],
-    body: "The most valuable companies of the next decade are private today. Finding them — and helping them grow — is what our private equity activity is built for. We invest selectively in privately held businesses with scalable models, capable leadership, strong market positioning, and clear development potential.",
+    closing: "Our objective is straightforward: build value alongside founders, management teams, and shareholders — not at their expense.",
   },
   {
     icon: UtensilsCrossed,
     title: "Hospitality",
     subtitle: "Investing in Experiences, Tourism, and Lifestyle",
+    image: "/employees.jpg",
+    body: "The UAE welcomes tens of millions of visitors each year, and the region's tourism, dining, and lifestyle economy continues to grow. Few markets in the world offer hospitality investors this combination of demand, infrastructure, and government support.",
     items: [
       "Hotels & Resorts — established assets and credible development projects",
       "Serviced Apartments & Holiday Homes — high-demand short and medium-stay accommodation",
-      "Restaurants & Food Concepts — proven concepts with strong brand identity",
+      "Restaurants & Food Concepts — proven concepts with strong brand identity and unit economics",
       "Leisure & Tourism Experiences — attractions and experiences serving the visitor economy",
       "Wellness Concepts — health, fitness, and wellbeing businesses",
       "Hospitality Technology — platforms improving how hospitality businesses operate",
       "Luxury Lifestyle Services — premium services for residents and visitors",
     ],
-    body: "The UAE welcomes tens of millions of visitors each year, and the region's tourism, dining, and lifestyle economy continues to grow. We focus on concepts with strong market positioning, professional operations, and the ability to deliver consistent customer value — because in hospitality, reputation compounds.",
+    closing: "We focus on concepts with strong market positioning, professional operations, and the ability to deliver consistent customer value — because in hospitality, reputation compounds.",
   },
   {
     icon: Wifi,
     title: "AI & Technology",
     subtitle: "Investing in Innovation With Commercial Purpose",
+    image: "/businessman-reading-good-news-laptop.jpg",
+    body: "Technology creates value when it solves real problems for real customers. That is our entire filter.",
     items: [
       "Artificial Intelligence — practical AI applications with proven customer demand",
       "Business Automation — tools that measurably reduce cost or increase output",
@@ -105,12 +126,14 @@ const sectors = [
       "E-Commerce — digital retail with sustainable unit economics",
       "Enterprise Solutions — technology serving established business needs",
     ],
-    body: "Technology creates value when it solves real problems for real customers. That is our entire filter. We evaluate businesses that use artificial intelligence, automation, software, data, and digital platforms to improve efficiency and create scalable commercial value.",
+    closing: "We prioritise practical innovation, strong execution, responsible use of technology, and a clear path to commercial growth. We do not fund technology in search of a problem.",
   },
   {
     icon: Truck,
     title: "Trading & Distribution",
     subtitle: "Connecting Products With Growing Markets",
+    image: "/discussing-business.jpg",
+    body: "The UAE sits at the crossroads of global trade — a gateway between East and West, with world-class ports, logistics infrastructure, and access to markets serving billions of consumers.",
     items: [
       "Exclusive distribution rights — protected market positions with recognised brands",
       "Strong supplier relationships — reliable, long-standing sourcing partnerships",
@@ -119,12 +142,14 @@ const sectors = [
       "Recognised brands — products customers actively seek out",
       "Regional expansion potential — clear opportunities across the UAE, GCC, and international markets",
     ],
-    body: "The UAE sits at the crossroads of global trade — a gateway between East and West, with world-class ports, logistics infrastructure, and access to markets serving billions of consumers. We evaluate trading, import, export, supply, and distribution businesses with reliable products and established customer networks.",
+    closing: "Depending on the opportunity, we support working capital, market entry, distribution growth, partnerships, and operational development.",
   },
   {
     icon: Gem,
     title: "Luxury Assets",
     subtitle: "Selective Investment in High-Value Assets",
+    image: "/strategy-ideas.jpg",
+    body: "The global luxury market rewards knowledge, patience, and access. We bring all three.\n\nFortress evaluates selected opportunities involving premium and luxury assets with clear market demand and responsible ownership structures.",
     items: [
       "Luxury Real Estate — trophy properties and premium developments",
       "High-Value Vehicles — rare and collectible automobiles",
@@ -134,12 +159,14 @@ const sectors = [
       "Premium Lifestyle Businesses — brands serving high-net-worth clientele",
       "Luxury Rental & Asset-Management Platforms — businesses monetising premium assets",
     ],
-    body: "The global luxury market rewards knowledge, patience, and access. We bring all three. Every opportunity is assessed individually, with careful attention to valuation, liquidity, maintenance, insurance, ownership costs, and realistic return potential.",
+    closing: "Every opportunity is assessed individually, with careful attention to valuation, liquidity, maintenance, insurance, ownership costs, and realistic return potential.",
   },
   {
     icon: Handshake,
     title: "Strategic Partnerships",
     subtitle: "Creating Value Through Collaboration",
+    image: "/discussing-business.jpg",
+    body: "The strongest outcomes are rarely achieved alone. Aligned capital, capabilities, and experience consistently outperform any single party working independently.\n\nWe develop strategic partnerships with investors, business owners, family offices, developers, institutions, advisors, and operating companies.",
     items: [
       "Joint Ventures — shared ownership of new projects and businesses",
       "Co-Investment — investing alongside partners on selected opportunities",
@@ -150,29 +177,27 @@ const sectors = [
       "Business Development Alliances — long-term commercial collaboration",
       "Shared Operating Platforms — building infrastructure that benefits multiple parties",
     ],
-    body: "The strongest outcomes are rarely achieved alone. Aligned capital, capabilities, and experience consistently outperform any single party working independently. We develop strategic partnerships with investors, business owners, family offices, developers, institutions, advisors, and operating companies.",
+    closing: "Every joint venture must demonstrate clear responsibilities, commercial alignment, appropriate governance, and shared long-term objectives — agreed before work begins, not negotiated after problems arise.",
   },
 ];
 
 export default function InvestmentFocusPage() {
   return (
-    <main className="min-h-screen bg-fortress-navy">
+    <main className="min-h-screen bg-white">
       <Navbar />
 
       {/* Banner */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-fortress-deep" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(201,162,74,0.08),transparent_60%)]" />
-        <div className="relative max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">Investment Focus</p>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-fortress-ivory">Investing Across </span>
-              <span className="bg-gradient-to-r from-fortress-gold to-fortress-champagne bg-clip-text text-transparent rounded-sm">
+      <section className="relative pt-24 md:pt-32 pb-12 md:pb-24 overflow-hidden bg-white">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Investment Focus</p>
+            <h1 className="text-3xl md:text-6xl font-bold mb-4 md:mb-6">
+              <span className="text-fortress-navy">Investing Across </span>
+              <span className="bg-gradient-to-r from-fortress-gold to-fortress-champagne bg-clip-text text-transparent">
                 Opportunity
               </span>
             </h1>
-            <p className="text-fortress-silver text-lg leading-relaxed max-w-2xl">
+            <p className="text-fortress-charcoal/70 text-base md:text-xl leading-relaxed max-w-2xl mx-auto">
               Fortress Investment Holdings invests across selected sectors where long-term demand, strong fundamentals, and strategic involvement create sustainable value.
             </p>
           </div>
@@ -180,15 +205,19 @@ export default function InvestmentFocusPage() {
       </section>
 
       {/* Introduction */}
-      <section className="py-20 border-t border-fortress-gold/10">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
+      <section className="py-12 md:py-20 bg-fortress-navy my-8 md:my-12 sm:mx-4 rounded-2xl">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="max-w-3xl">
-            <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">A Diversified Investment Portfolio</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-fortress-ivory mb-6">Sectors We Invest In</h2>
-            <p className="text-fortress-silver text-lg leading-relaxed">
+            <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">A Diversified Investment Portfolio</p>
+            <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-4 md:mb-6">Sectors We Invest In</h2>
+            <p className="text-fortress-ivory/80 text-sm md:text-lg leading-relaxed">
               Diversification is central to our investment strategy — but diversification without discipline is just distraction.
-              We assess opportunities across a deliberate range of industries while maintaining a rigorous selection process.
-              Every investment must demonstrate clear commercial potential, manageable risk, and genuine alignment with our long-term objectives.
+            </p>
+            <p className="text-fortress-silver text-sm md:text-base leading-relaxed mt-3 md:mt-4">
+              We assess opportunities across a deliberate range of industries while maintaining a rigorous selection process. Every investment must demonstrate clear commercial potential, manageable risk, and genuine alignment with the long-term objectives of Fortress Investment Holdings.
+            </p>
+            <p className="text-fortress-silver/70 text-sm md:text-base leading-relaxed mt-3 md:mt-4">
+              These are the sectors where we focus our capital and attention.
             </p>
           </div>
         </div>
@@ -198,29 +227,86 @@ export default function InvestmentFocusPage() {
       {sectors.map((sector, index) => (
         <section
           key={sector.title}
-          className={`py-20 ${index % 2 === 1 ? "bg-fortress-deep" : ""} border-t border-fortress-gold/10`}
+          className={`py-12 md:py-28 my-8 md:my-12 sm:mx-4 rounded-2xl ${index % 2 === 1 ? "bg-fortress-deep" : "bg-white"}`}
         >
-          <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-            <div className="flex items-start gap-5 mb-8">
-              <div className="w-14 h-14 bg-fortress-gold/10 flex items-center justify-center flex-shrink-0">
-                <sector.icon className="w-7 h-7 text-fortress-gold" />
+          <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            {/* Header */}
+            <div className="flex items-start gap-4 md:gap-5 mb-8 md:mb-10">
+              <div className="w-12 h-12 md:w-14 md:h-14 bg-fortress-gold/10 flex items-center justify-center flex-shrink-0 rounded-sm">
+                <sector.icon className="w-5 h-5 md:w-7 md:h-7 text-fortress-gold" />
               </div>
-              <div>
-                <h2 className="text-3xl font-bold text-fortress-ivory mb-1">{sector.title}</h2>
-                <p className="text-fortress-gold text-base">{sector.subtitle}</p>
+              <div className="min-w-0">
+                <p className="text-fortress-gold/50 text-[10px] md:text-xs tracking-[3px] md:tracking-[4px] uppercase font-semibold mb-1">
+                  Sector {String(index + 1).padStart(2, "0")}
+                </p>
+                <h2 className={`text-xl md:text-4xl font-bold mb-1 break-words ${index % 2 === 1 ? "text-fortress-ivory" : "text-fortress-navy"}`}>{sector.title}</h2>
+                <p className="text-fortress-gold text-sm md:text-lg">{sector.subtitle}</p>
               </div>
             </div>
-            <div className="grid lg:grid-cols-2 gap-10">
-              <div>
-                <p className="text-fortress-silver leading-relaxed mb-6">{sector.body}</p>
-                <ul className="space-y-2">
-                  {sector.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-fortress-silver text-sm">
-                      <span className="w-1.5 h-1.5 bg-fortress-gold mt-2 flex-shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+
+            {/* Image + Content Grid */}
+            <div className="grid lg:grid-cols-5 gap-6 lg:gap-12 items-start">
+              {/* Image */}
+              <div className={`lg:col-span-2 ${index % 2 === 0 ? "lg:order-last" : ""}`}>
+                <div className={`relative aspect-[4/3] overflow-hidden border rounded-sm ${index % 2 === 1 ? "border-fortress-gold/10" : "border-fortress-gold/20"}`}>
+                  <Image
+                    src={sector.image}
+                    alt={sector.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${index % 2 === 1 ? "from-fortress-deep/40" : "from-white/40"} to-transparent`} />
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="lg:col-span-3">
+                {sector.body.split("\n\n").map((para, i) => (
+                  <p key={i} className={`text-sm md:text-base leading-relaxed mb-4 md:mb-5 last:mb-0 ${index % 2 === 1 ? "text-fortress-silver" : "text-fortress-charcoal/70"}`}>{para}</p>
+                ))}
+
+                {/* Investment areas list */}
+                <div className="mt-6 md:mt-8">
+                  <p className="text-fortress-gold text-[10px] md:text-xs tracking-[3px] md:tracking-[4px] uppercase font-semibold mb-3 md:mb-4">
+                    {sector.title === "Digital Assets & Blockchain" ? "Where We Focus" : "What We Look For"}
+                  </p>
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
+                    {sector.items.map((item, i) => (
+                      <li key={i} className={`text-xs md:text-sm leading-relaxed ${index % 2 === 1 ? "text-fortress-silver/80" : "text-fortress-charcoal/60"}`}>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Digital Assets evaluation criteria */}
+                {sector.subheading && sector.subitems && (
+                  <div className={`mt-8 md:mt-10 p-5 md:p-8 border-l border-fortress-gold/25 rounded-sm ${index % 2 === 1 ? "bg-fortress-navy" : "bg-fortress-ivory/30"}`}>
+                    <p className="text-fortress-gold text-[10px] md:text-xs tracking-[3px] md:tracking-[4px] uppercase font-semibold mb-3 md:mb-4">
+                      {sector.subheading}
+                    </p>
+                    <ul className="space-y-3">
+                      {sector.subitems.map((item, i) => (
+                        <li key={i} className={`text-xs md:text-sm leading-relaxed ${index % 2 === 1 ? "text-fortress-silver/80" : "text-fortress-charcoal/60"}`}>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    {sector.disclaimer && (
+                      <p className={`text-[10px] md:text-xs leading-relaxed mt-3 md:mt-4 ${index % 2 === 1 ? "text-fortress-silver/50" : "text-fortress-charcoal/40"}`}>
+                        {sector.disclaimer}
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                {/* Closing */}
+                {sector.closing && (
+                  <p className={`text-sm md:text-base leading-relaxed mt-6 md:mt-8 border-t pt-4 md:pt-6 ${index % 2 === 1 ? "text-fortress-silver/70 border-fortress-gold/10" : "text-fortress-charcoal/60 border-fortress-gold/20"}`}>
+                    {sector.closing}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -228,16 +314,16 @@ export default function InvestmentFocusPage() {
       ))}
 
       {/* CTA */}
-      <section className="py-20 border-t border-fortress-gold/10">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-8 text-center">
-          <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-4">Get in Touch</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-fortress-ivory mb-6">Present an Opportunity to Fortress</h2>
-          <p className="text-fortress-silver text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+      <section className="py-12 md:py-28 bg-fortress-navy my-8 md:my-12 sm:mx-4 rounded-2xl">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
+          <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Investment Focus</p>
+          <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-4 md:mb-6">Present an Opportunity to Fortress</h2>
+          <p className="text-fortress-silver/80 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto mb-6 md:mb-8">
             We welcome selected proposals from business owners, founders, advisors, investors, developers, and strategic partners. Every submission is reviewed professionally and treated with discretion.
           </p>
           <Link
             href="/partner-with-us"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-fortress-gold to-fortress-champagne text-fortress-navy font-bold text-sm hover:shadow-2xl hover:shadow-fortress-gold/25 transition-all duration-300 hover:scale-105 rounded-sm"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-fortress-gold to-fortress-champagne text-fortress-navy font-bold text-sm tracking-widest hover:shadow-2xl hover:shadow-fortress-gold/25 transition-all duration-300"
           >
             SUBMIT AN INVESTMENT OPPORTUNITY
             <ArrowRight className="w-4 h-4" />

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -33,15 +34,17 @@ export default function Navbar() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20 lg:h-22">
 
-          {/* Center Logo — always visually centered on desktop via absolute side panels */}
+          {/* Center Logo — large screen */}
           <div className="hidden lg:block absolute left-1/2 -translate-x-1/2">
-            <Link href="/" className="flex flex-col items-center group">
-              <span className="text-lg font-extrabold tracking-[8px] uppercase leading-none text-gray-900 group-hover:text-fortress-gold transition-colors duration-300">
-                FORTRESS <span className="text-fortress-gold group-hover:text-gray-900 transition-colors duration-300">IH</span>
-              </span>
-              <span className="text-[9px] tracking-[5px] uppercase text-fortress-gold/50 mt-1 font-medium">
-                Investment Holdings
-              </span>
+            <Link href="/" className="flex items-center group">
+              <Image
+                src="/large-logo.png"
+                alt="Fortress Investment Holdings"
+                width={200}
+                height={60}
+                className="h-12 w-auto object-contain"
+                priority
+              />
             </Link>
           </div>
 
@@ -61,10 +64,15 @@ export default function Navbar() {
 
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center flex-shrink-0">
-            <Link href="/" className="flex flex-col items-center">
-              <span className="text-lg font-extrabold tracking-[6px] uppercase leading-none text-gray-900">
-                FORTRESS <span className="text-fortress-gold">IH</span>
-              </span>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/small-logo.png"
+                alt="Fortress Investment Holdings"
+                width={120}
+                height={40}
+                className="h-8 w-auto object-contain"
+                priority
+              />
             </Link>
           </div>
 

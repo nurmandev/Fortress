@@ -55,21 +55,21 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-fortress-navy border-t border-fortress-gold/10 py-12">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer className="relative bg-fortress-navy border-t border-fortress-gold/10 py-10 md:py-12">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col items-center gap-6 md:gap-6">
         
         {/* Brand Logo & Copyright */}
-        <div className="flex flex-col items-center md:items-start gap-2">
+        <div className="flex flex-col items-center gap-2">
           <Link href="/" className="text-lg font-extrabold tracking-[6px] text-fortress-ivory uppercase leading-none">
             FORTRESS <span className="text-fortress-gold">IH</span>
           </Link>
-          <p className="text-fortress-silver/40 text-xs">
+          <p className="text-fortress-silver/40 text-[10px] md:text-xs text-center">
             &copy; {new Date().getFullYear()} Fortress Investment Holdings. All Rights Reserved.
           </p>
         </div>
 
         {/* Social Icons */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center justify-center gap-5 md:gap-6 flex-wrap">
           {socialLinks.map((s) => (
             <a
               key={s.label}
@@ -83,12 +83,12 @@ export default function Footer() {
         </div>
 
         {/* Legal Links */}
-        <div className="flex items-center gap-4 text-xs text-fortress-silver/40">
-          <Link href="/privacy-policy" className="hover:text-fortress-gold transition-colors">Privacy Policy</Link>
-          <span>&middot;</span>
-          <Link href="/terms-of-use" className="hover:text-fortress-gold transition-colors">Terms of Use</Link>
-          <span>&middot;</span>
-          <Link href="/investment-disclaimer" className="hover:text-fortress-gold transition-colors">Disclaimer</Link>
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[10px] md:text-xs text-fortress-silver/40">
+          <Link href="/privacy-policy" className="hover:text-fortress-gold transition-colors whitespace-nowrap">Privacy Policy</Link>
+          <span className="text-fortress-silver/20">&middot;</span>
+          <Link href="/terms-of-use" className="hover:text-fortress-gold transition-colors whitespace-nowrap">Terms of Use</Link>
+          <span className="text-fortress-silver/20">&middot;</span>
+          <Link href="/investment-disclaimer" className="hover:text-fortress-gold transition-colors whitespace-nowrap">Disclaimer</Link>
         </div>
       </div>
     </footer>

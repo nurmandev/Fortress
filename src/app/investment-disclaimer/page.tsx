@@ -87,7 +87,7 @@ export default function InvestmentDisclaimerPage() {
               <p>
                 The inclusion of investment-related information on this website does not imply that Fortress Investment Holdings provides regulated financial services unless such services are specifically authorised by the relevant regulatory authority.
               </p>
-              <p className="mt-4 text-fortress-gold text-xs italic">
+              <p className="mt-4 text-fortress-gold text-xs">
                 The final legal wording should accurately reflect the company&apos;s incorporation, licensing, activities, and regulatory permissions, and be reviewed by qualified UAE legal counsel.
               </p>
             </div>
