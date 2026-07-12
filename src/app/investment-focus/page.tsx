@@ -112,7 +112,7 @@ const sectors = [
     icon: Wifi,
     title: "AI & Technology",
     subtitle: "Investing in Innovation With Commercial Purpose",
-    image: "/businessman-reading-good-news-laptop.jpg",
+    image: "/businessman-reading.jpg",
     body: "Technology creates value when it solves real problems for real customers. That is our entire filter.",
     items: [
       "Artificial Intelligence — practical AI applications with proven customer demand",

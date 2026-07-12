@@ -108,13 +108,23 @@ export default function Navbar() {
 
               <div className="flex justify-center shrink-0 mx-2 md:mx-4 mt-1">
                 <Link href="/" className="flex items-center group">
-                  <div className="bg-[#080e1a] rounded-xl px-4 py-1.5 shadow-md">
+                  <div className="bg-[#080e1a] rounded-xl px-4 py-1.5 shadow-md hidden md:block">
                     <Image
                       src="/large-logo.png"
                       alt="Fortress Investment Holdings"
                       width={260}
                       height={72}
                       className="h-12 md:h-[3.75rem] w-auto object-contain"
+                      priority
+                    />
+                  </div>
+                  <div className="block md:hidden">
+                    <Image
+                      src="/phone-logo.png"
+                      alt="Fortress Investment Holdings"
+                      width={140}
+                      height={40}
+                      className="h-8 w-auto object-contain"
                       priority
                     />
                   </div>

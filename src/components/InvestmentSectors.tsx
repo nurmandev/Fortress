@@ -13,7 +13,7 @@ const sectors = [
   { title: "Real Estate", desc: "Residential, commercial, hospitality, and income-generating property investment across Dubai and the wider UAE.", image: "/plants-coins.jpg", className: "md:col-span-2 h-[280px] md:h-[380px]" },
   { title: "Business Acquisitions", desc: "Established businesses with proven operations, stable demand, and clear opportunities for expansion.", image: "/business.jpg", className: "md:col-span-1 h-[280px] md:h-[380px]" },
   { title: "Private Equity", desc: "Strategic investments in privately held companies with strong leadership and scalable business models.", image: "/african-man-black-suit.jpg", className: "md:col-span-1 h-[280px] md:h-[380px]" },
-  { title: "AI & Technology", desc: "Technology-enabled businesses, digital platforms, and innovative solutions solving genuine market problems.", image: "/businessman-reading-good-news-laptop.jpg", className: "md:col-span-2 h-[280px] md:h-[380px]" },
+  { title: "AI & Technology", desc: "Technology-enabled businesses, digital platforms, and innovative solutions solving genuine market problems.", image: "/businessman-reading.jpg", className: "md:col-span-2 h-[280px] md:h-[380px]" },
   { title: "Hospitality", desc: "Hotels, serviced accommodation, tourism, food and beverage, and lifestyle-led businesses in one of the world's leading visitor economies.", image: "/employees.jpg", className: "md:col-span-2 h-[280px] md:h-[380px]" },
   { title: "Trading & Distribution", desc: "Businesses driving regional and international trade, supply, and market expansion across the GCC.", image: "/gold-coins.jpg", className: "md:col-span-1 h-[280px] md:h-[380px]" },
 ];
