@@ -143,7 +143,7 @@ export default function InsightsClient() {
 
   const toggleCategory  = (c: string) => { setSelectedCategories(p => p.includes(c) ? p.filter(x=>x!==c) : [...p,c]); setPage(1); };
   const toggleTag       = (t: string) => { setSelectedTags(p => p.includes(t) ? p.filter(x=>x!==t) : [...p,t]); setPage(1); };
-  const toggleBookmark  = (slug: string) => setBookmarked(p => { const n=new Set(p); n.has(slug)?n.delete(slug):n.add(slug); return n; });
+  const toggleBookmark  = (slug: string) => setBookmarked(p => { const n=new Set(p); if(n.has(slug)){n.delete(slug);}else{n.add(slug);} return n; });
 
   const clearAll = () => {
     setSearch(""); setSelectedCategories([]); setSelectedTags([]);

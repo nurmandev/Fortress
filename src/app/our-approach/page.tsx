@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Search, ClipboardCheck, TrendingUp, BarChart3, Handshake, ArrowRight, Target } from "lucide-react";
+import { Search, ClipboardCheck, TrendingUp, BarChart3, Handshake, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 

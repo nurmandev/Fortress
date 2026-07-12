@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import "./globals.css";
 
@@ -63,20 +64,18 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <head>
         {/* Google Analytics */}
-        <script
-          async
+        <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+          strategy="afterInteractive"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-XXXXXXXXXX');
-            `,
-          }}
-        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXXXX');
+          `}
+        </Script>
         {/* Meta Pixel */}
         <script
           dangerouslySetInnerHTML={{
