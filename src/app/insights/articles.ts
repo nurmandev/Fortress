@@ -40,7 +40,7 @@ export const allArticles: Article[] = [
     category: "Business Acquisitions",
     title: "Understanding the Value of Business Acquisitions",
     excerpt: "The key factors serious investors evaluate before acquiring an established company — and the warning signs that end negotiations early.",
-    date: "Coming Soon",
+    date: "July 2026",
     readTime: "5 min read",
   },
   {
@@ -48,7 +48,7 @@ export const allArticles: Article[] = [
     category: "Market Insights",
     title: "The UAE as a Global Investment Destination",
     excerpt: "Why capital, talent, and businesses continue to choose the UAE: a clear-eyed look at the commercial, regulatory, and strategic advantages.",
-    date: "Coming Soon",
+    date: "July 2026",
     readTime: "6 min read",
   },
   {
@@ -56,7 +56,7 @@ export const allArticles: Article[] = [
     category: "AI & Technology",
     title: "Investing in AI With Commercial Purpose",
     excerpt: "Why practical applications, strong teams, and genuine customer demand matter more than technology trends alone.",
-    date: "Coming Soon",
+    date: "June 2026",
     readTime: "4 min read",
   },
   {
@@ -64,7 +64,7 @@ export const allArticles: Article[] = [
     category: "Real Estate",
     title: "Real Estate Investment Outlook",
     excerpt: "An analysis of current market cycles, emerging opportunities in commercial and residential real estate across key global markets.",
-    date: "Coming Soon",
+    date: "June 2026",
     readTime: "7 min read",
   },
   {
@@ -72,7 +72,7 @@ export const allArticles: Article[] = [
     category: "Private Equity",
     title: "Middle Market Private Equity Opportunities",
     excerpt: "Why the middle market continues to offer compelling risk-adjusted returns for patient capital with operational expertise.",
-    date: "Coming Soon",
+    date: "June 2026",
     readTime: "5 min read",
   },
   {
@@ -80,7 +80,7 @@ export const allArticles: Article[] = [
     category: "Digital Assets & Blockchain",
     title: "Blockchain Beyond Cryptocurrency",
     excerpt: "Exploring enterprise blockchain applications in supply chain, trade finance, and asset tokenisation that are gaining commercial traction.",
-    date: "Coming Soon",
+    date: "May 2026",
     readTime: "6 min read",
   },
   {
@@ -88,7 +88,7 @@ export const allArticles: Article[] = [
     category: "Hospitality",
     title: "Hospitality Sector: Recovery and Reinvention",
     excerpt: "How the hospitality industry is adapting to new traveller expectations and creating opportunities for strategic investment.",
-    date: "Coming Soon",
+    date: "May 2026",
     readTime: "4 min read",
   },
   {
@@ -96,7 +96,7 @@ export const allArticles: Article[] = [
     category: "Trading & Distribution",
     title: "Trading and Distribution in the UAE",
     excerpt: "An overview of the UAE's position as a global trading hub and what it means for distribution-focused investments.",
-    date: "Coming Soon",
+    date: "April 2026",
     readTime: "5 min read",
   },
   {
@@ -104,7 +104,7 @@ export const allArticles: Article[] = [
     category: "Strategic Partnerships",
     title: "The Power of Strategic Partnerships",
     excerpt: "How well-structured partnerships can accelerate growth, reduce risk, and create value that neither party could achieve alone.",
-    date: "Coming Soon",
+    date: "April 2026",
     readTime: "4 min read",
   },
   {
@@ -112,7 +112,7 @@ export const allArticles: Article[] = [
     category: "Company News",
     title: "Fortress Investment Holdings Welcomes Yogesh",
     excerpt: "An announcement about the latest addition to the Fortress leadership team and what it means for our strategic direction.",
-    date: "Coming Soon",
+    date: "March 2026",
     readTime: "3 min read",
   },
 ];

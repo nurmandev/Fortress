@@ -5,10 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Search, X, Filter, ChevronDown, Grid3X3, List, Clock, Eye,
-  Bookmark, Share2, ArrowRight, TrendingUp, Star, BookOpen,
+  Bookmark, Share2, ArrowRight, Star, BookOpen,
   Building2, Briefcase, Cpu, UtensilsCrossed, Truck,
   LineChart, Newspaper, Handshake, Check, SlidersHorizontal,
-  MessageSquare, Mail, Crown, FileText, Users, ChevronLeft, ChevronRight, Zap
+  MessageSquare, Mail, Crown, FileText, Users, ChevronLeft, ChevronRight, Zap, TrendingUp
 } from "lucide-react";
 import { allArticles, categories as rawCategories } from "./articles";
 
@@ -341,8 +341,8 @@ export default function InsightsClient() {
   const GridCard = ({ article }: { article: EnrichedArticle }) => (
     <article className="group bg-white border border-gray-200 hover:border-[#C9A24A]/30 hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden">
       {/* Image */}
-      <div className="relative h-52 overflow-hidden shrink-0">
-        <Image src={article.image} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:768px)100vw,33vw" />
+      <div className="relative h-48 sm:h-52 overflow-hidden shrink-0">
+        <Image src={article.image} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
         <div className="absolute top-0 left-0 right-0 flex items-center justify-between p-3">
           <span className={`text-[10px] font-bold px-2.5 py-1 border backdrop-blur-sm ${CAT_COLORS[article.category]||"bg-white/90 text-gray-700 border-gray-200"}`}>
@@ -354,22 +354,17 @@ export default function InsightsClient() {
             </span>
           )}
         </div>
-        {article.trending && (
-          <div className="absolute bottom-3 left-3 flex items-center gap-1 bg-orange-500 text-white text-[10px] font-bold px-2 py-1">
-            <TrendingUp className="w-2.5 h-2.5" /> Trending
-          </div>
-        )}
       </div>
 
       {/* Body */}
-      <div className="p-5 flex flex-col flex-1">
+      <div className="p-4 sm:p-5 flex flex-col flex-1">
         <div className="flex items-center gap-2 mb-3">
           <DifficultyBadge level={article.difficulty||"Beginner"} />
           <span className="text-[10px] text-gray-400 flex items-center gap-1 ml-auto"><Clock className="w-3 h-3" /> {article.readTime}</span>
           <span className="text-[10px] text-gray-400 flex items-center gap-1"><Eye className="w-3 h-3" /> {(article.views||0).toLocaleString()}</span>
         </div>
 
-        <h3 className="font-bold text-gray-900 text-[15px] leading-snug mb-2 group-hover:text-[#C9A24A] transition-colors line-clamp-2">
+        <h3 className="font-bold text-gray-900 text-sm sm:text-[15px] leading-snug mb-2 group-hover:text-[#C9A24A] transition-colors line-clamp-2">
           {article.title}
         </h3>
         <p className="text-gray-500 text-sm leading-relaxed mb-4 flex-1 line-clamp-3">{article.excerpt}</p>
@@ -382,16 +377,16 @@ export default function InsightsClient() {
 
         {/* Footer */}
         <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 min-w-0">
             <div className={`w-7 h-7 rounded-full ${article.author?.color} flex items-center justify-center text-white text-[10px] font-bold shrink-0`}>
               {article.author?.initials}
             </div>
-            <div>
-              <p className="text-[11px] font-semibold text-gray-800 leading-tight">{article.author?.name}</p>
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold text-gray-800 leading-tight truncate">{article.author?.name}</p>
               <p className="text-[10px] text-gray-400">{article.date}</p>
             </div>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 shrink-0">
             <button onClick={()=>toggleBookmark(article.slug)}
               className={`p-1.5 transition-colors ${bookmarked.has(article.slug)?"text-[#C9A24A] bg-[#C9A24A]/10":"text-gray-400 hover:text-[#C9A24A] hover:bg-gray-50"}`} aria-label="Bookmark">
               <Bookmark className="w-3.5 h-3.5" />
@@ -410,44 +405,41 @@ export default function InsightsClient() {
   /* ═══════════════════ LIST CARD ═══════════════════ */
   const ListCard = ({ article }: { article: EnrichedArticle }) => (
     <article className="group bg-white border border-gray-200 hover:border-[#C9A24A]/30 hover:shadow-lg transition-all duration-300 flex overflow-hidden">
-      <div className="relative w-52 shrink-0 hidden sm:block overflow-hidden">
-        <Image src={article.image} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="208px" />
+      <div className="relative w-40 sm:w-52 shrink-0 overflow-hidden">
+        <Image src={article.image} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:640px)160px,208px" />
         {article.isPremium && (
-          <div className="absolute top-3 left-3">
+          <div className="absolute top-2 left-2">
             <span className="text-[10px] font-bold px-2 py-1 bg-[#C9A24A] text-white flex items-center gap-1"><Crown className="w-2.5 h-2.5" /> Premium</span>
           </div>
         )}
       </div>
-      <div className="p-5 flex flex-col flex-1 min-w-0">
+      <div className="p-4 sm:p-5 flex flex-col flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-2 flex-wrap">
           <span className={`text-[10px] font-semibold px-2.5 py-1 border ${CAT_COLORS[article.category]||"bg-gray-50 text-gray-600 border-gray-200"}`}>{article.category}</span>
           <DifficultyBadge level={article.difficulty||"Beginner"} />
-          {article.trending && <span className="text-[10px] text-orange-500 font-semibold flex items-center gap-1"><TrendingUp className="w-3 h-3" /> Trending</span>}
         </div>
         <h3 className="font-bold text-gray-900 text-base leading-snug mb-1.5 group-hover:text-[#C9A24A] transition-colors line-clamp-2">{article.title}</h3>
         <p className="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-2 flex-1">{article.excerpt}</p>
-        <div className="flex flex-wrap gap-1 mb-3">
-          {(article.tags||[]).map(tag=>(
+        <div className="hidden sm:flex flex-wrap gap-1 mb-3">
+          {(article.tags||[]).slice(0,3).map(tag=>(
             <span key={tag} className="text-[10px] px-2 py-0.5 bg-gray-50 border border-gray-200 text-gray-500">{tag}</span>
           ))}
         </div>
-        <div className="flex items-center gap-4 text-[11px] text-gray-400 mb-3">
+        <div className="flex items-center gap-3 text-[11px] text-gray-400 mb-3 flex-wrap">
           <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{article.readTime}</span>
           <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{(article.views||0).toLocaleString()}</span>
-          <span className="flex items-center gap-1"><MessageSquare className="w-3 h-3" />{article.comments}</span>
-          <span className="flex items-center gap-1"><Star className="w-3 h-3 text-amber-400 fill-amber-400" />{article.rating}</span>
+          <span className="hidden sm:flex items-center gap-1"><MessageSquare className="w-3 h-3" />{article.comments}</span>
+          <span className="hidden sm:flex items-center gap-1"><Star className="w-3 h-3 text-amber-400 fill-amber-400" />{article.rating}</span>
         </div>
-        <div className="flex items-center justify-between mt-auto">
-          <div className="flex items-center gap-2">
-            <div className={`w-6 h-6 rounded-full ${article.author?.color} flex items-center justify-center text-white text-[9px] font-bold`}>{article.author?.initials}</div>
-            <span className="text-[11px] text-gray-600 font-medium">{article.author?.name}</span>
-            <span className="text-gray-300">·</span>
-            <span className="text-[11px] text-gray-400">{article.date}</span>
+        <div className="flex items-center justify-between mt-auto gap-2">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <div className={`w-6 h-6 rounded-full ${article.author?.color} flex items-center justify-center text-white text-[9px] font-bold shrink-0`}>{article.author?.initials}</div>
+            <span className="text-[11px] text-gray-600 font-medium truncate">{article.author?.name}</span>
+            <span className="text-[11px] text-gray-400">• {article.date}</span>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 shrink-0">
             <button onClick={()=>toggleBookmark(article.slug)} className={`p-1.5 transition-colors ${bookmarked.has(article.slug)?"text-[#C9A24A] bg-[#C9A24A]/10":"text-gray-400 hover:text-[#C9A24A] hover:bg-gray-50"}`} aria-label="Bookmark"><Bookmark className="w-3.5 h-3.5" /></button>
-            <button className="p-1.5 text-gray-400 hover:text-[#C9A24A] hover:bg-gray-50 transition-colors" aria-label="Share"><Share2 className="w-3.5 h-3.5" /></button>
-            <Link href={`/insights/${article.slug}`} className="ml-1 px-4 py-1.5 bg-[#07111D] hover:bg-[#C9A24A] text-white hover:text-[#07111D] text-xs font-bold transition-all duration-200 flex items-center gap-1.5">
+            <Link href={`/insights/${article.slug}`} className="px-3 py-1.5 bg-[#07111D] hover:bg-[#C9A24A] text-white hover:text-[#07111D] text-xs font-bold transition-all duration-200 flex items-center gap-1">
               Read <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
@@ -462,26 +454,26 @@ export default function InsightsClient() {
   return (
     <>
       {/* ══ HERO ══ */}
-      <section className="relative pt-28 pb-16 bg-[#07111D] overflow-hidden">
+      <section className="relative pt-24 sm:pt-28 pb-12 sm:pb-16 bg-[#07111D] overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage:"radial-gradient(#C9A24A 1px,transparent 1px)", backgroundSize:"32px 32px" }} />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#07111D]" />
-        <div className="relative max-w-[1400px] mx-auto px-6 lg:px-12 text-center">
-          <p className="inline-flex items-center gap-2 text-[#C9A24A] text-xs font-semibold tracking-[4px] uppercase mb-5 bg-[#C9A24A]/10 border border-[#C9A24A]/20 px-4 py-2">
+        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
+          <p className="inline-flex items-center gap-2 text-[#C9A24A] text-[10px] sm:text-xs font-semibold tracking-[3px] sm:tracking-[4px] uppercase mb-4 sm:mb-5 bg-[#C9A24A]/10 border border-[#C9A24A]/20 px-3 sm:px-4 py-1.5 sm:py-2">
             <BookOpen className="w-3.5 h-3.5" /> Knowledge Hub
           </p>
-          <h1 className="text-white text-4xl md:text-6xl font-bold mb-5 leading-tight">
+          <h1 className="text-white text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-5 leading-tight">
             Insights &amp; <span className="bg-gradient-to-r from-[#C9A24A] to-[#E6C879] bg-clip-text text-transparent">Resources</span>
           </h1>
-          <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2">
             Investment perspectives, market analysis, and strategic commentary from Fortress Investment Holdings.
           </p>
           {/* Search bar */}
-          <div className="max-w-2xl mx-auto mb-8 relative">
-            <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <div className="max-w-2xl mx-auto mb-6 sm:mb-8 relative">
+            <Search className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-400" />
             <input type="text" value={search} onChange={e=>{setSearch(e.target.value);setPage(1);}}
-              placeholder="Search articles, categories, topics…"
-              className="w-full pl-14 pr-14 py-[18px] bg-white/5 border border-white/10 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-[#C9A24A]/50 transition-all backdrop-blur-sm" />
-            {search && <button onClick={()=>setSearch("")} className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"><X className="w-4 h-4" /></button>}
+              placeholder="Search articles…"
+              className="w-full pl-11 sm:pl-14 pr-11 sm:pr-14 py-4 sm:py-[18px] bg-white/5 border border-white/10 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-[#C9A24A]/50 transition-all backdrop-blur-sm" />
+            {search && <button onClick={()=>setSearch("")} className="absolute right-4 sm:right-5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"><X className="w-4 h-4" /></button>}
           </div>
           {/* Popular tags */}
           <div className="flex flex-wrap items-center justify-center gap-2">
@@ -497,8 +489,8 @@ export default function InsightsClient() {
       </section>
 
       {/* ══ MAIN LAYOUT ══ */}
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-12 py-10">
-        <div className="flex gap-8 items-start">
+      <div className="max-w-[1400px] mx-auto px-3 sm:px-4 md:px-6 lg:px-12 py-6 sm:py-10">
+        <div className="flex gap-6 lg:gap-8 items-start">
 
           {/* Sidebar desktop */}
           <div className="hidden lg:block w-64 shrink-0 sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-4">
@@ -506,16 +498,16 @@ export default function InsightsClient() {
           </div>
 
           {/* Content */}
-          <div ref={resultsRef} className="flex-1 min-w-0">
+          <div ref={resultsRef} className="flex-1 min-w-0 w-full">
 
             {/* Mobile filter bar */}
-            <div className="lg:hidden flex items-center gap-3 mb-5">
+            <div className="lg:hidden flex items-center gap-2 mb-4">
               <button onClick={()=>setMobileDrawerOpen(true)}
-                className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 text-sm font-medium text-gray-700 shadow-sm hover:border-[#C9A24A]/50 transition-all">
+                className="flex items-center gap-1.5 px-3 py-2.5 bg-white border border-gray-200 text-sm font-medium text-gray-700 shadow-sm hover:border-[#C9A24A]/50 transition-all shrink-0">
                 <Filter className="w-4 h-4" /> Filters
                 {activeFilterCount>0&&<span className="bg-[#C9A24A] text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center">{activeFilterCount}</span>}
               </button>
-              <div className="flex-1 relative">
+              <div className="flex-1 relative min-w-0">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input type="text" value={search} onChange={e=>{setSearch(e.target.value);setPage(1);}}
                   placeholder="Search…" className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-[#C9A24A]/60 transition-all shadow-sm" />
@@ -524,7 +516,7 @@ export default function InsightsClient() {
 
             {/* ── FEATURED ── */}
             {!loading && featured && filtered.length > 0 && (
-              <section className="mb-10">
+              <section className="mb-8 sm:mb-10">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="h-px flex-1 bg-gray-200" />
                   <span className="text-[10px] font-bold text-gray-400 tracking-widest uppercase flex items-center gap-1.5">
@@ -534,37 +526,37 @@ export default function InsightsClient() {
                 </div>
                 <article className="group bg-white border border-gray-200 hover:border-[#C9A24A]/30 hover:shadow-2xl transition-all duration-300 overflow-hidden">
                   <div className="flex flex-col md:flex-row">
-                    <div className="md:w-[48%] relative h-64 md:h-auto shrink-0 overflow-hidden">
-                      <Image src={featured.image} alt={featured.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="50vw" />
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/20" />
-                      <div className="absolute top-4 left-4 flex items-center gap-2">
-                        <span className={`text-xs font-semibold px-3 py-1.5 border backdrop-blur-sm ${CAT_COLORS[featured.category]||"bg-white/90 text-gray-700 border-gray-200"}`}>{featured.category}</span>
-                        {featured.isPremium&&<span className="text-xs font-bold px-2.5 py-1.5 bg-[#C9A24A] text-white flex items-center gap-1"><Crown className="w-3 h-3" /> Premium</span>}
+                    <div className="md:w-[48%] relative h-56 sm:h-64 md:h-auto md:min-h-[320px] shrink-0 overflow-hidden">
+                      <Image src={featured.image} alt={featured.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:768px)100vw,50vw" />
+                      <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent to-black/20" />
+                      <div className="absolute top-3 left-3 flex items-center gap-2 flex-wrap">
+                        <span className={`text-[10px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 border backdrop-blur-sm ${CAT_COLORS[featured.category]||"bg-white/90 text-gray-700 border-gray-200"}`}>{featured.category}</span>
+                        {featured.isPremium&&<span className="text-[10px] font-bold px-2 py-1 bg-[#C9A24A] text-white flex items-center gap-1"><Crown className="w-2.5 h-2.5" /> Premium</span>}
                       </div>
                     </div>
-                    <div className="p-8 md:p-10 flex flex-col justify-center flex-1">
-                      <div className="flex items-center gap-3 mb-4">
+                    <div className="p-5 sm:p-8 md:p-10 flex flex-col justify-center flex-1">
+                      <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 flex-wrap">
                         <DifficultyBadge level={featured.difficulty||"Beginner"} />
                         <span className="text-xs text-gray-400 flex items-center gap-1"><Clock className="w-3 h-3" /> {featured.readTime}</span>
                         <span className="text-xs text-gray-400 flex items-center gap-1"><Eye className="w-3 h-3" /> {(featured.views||0).toLocaleString()}</span>
                       </div>
-                      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 leading-snug group-hover:text-[#C9A24A] transition-colors">{featured.title}</h2>
-                      <p className="text-gray-500 leading-relaxed mb-5">{featured.excerpt}</p>
-                      <div className="flex flex-wrap gap-1.5 mb-6">
+                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 leading-snug group-hover:text-[#C9A24A] transition-colors">{featured.title}</h2>
+                      <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-4 sm:mb-5 line-clamp-3 md:line-clamp-none">{featured.excerpt}</p>
+                      <div className="hidden sm:flex flex-wrap gap-1.5 mb-5 sm:mb-6">
                         {(featured.tags||[]).map(tag=>(
                           <span key={tag} className="text-xs px-2.5 py-1 bg-gray-50 border border-gray-200 text-gray-500">{tag}</span>
                         ))}
                       </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-9 h-9 rounded-full ${featured.author?.color} flex items-center justify-center text-white text-xs font-bold`}>{featured.author?.initials}</div>
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <div className="flex items-center gap-2.5">
+                          <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full ${featured.author?.color} flex items-center justify-center text-white text-xs font-bold shrink-0`}>{featured.author?.initials}</div>
                           <div>
                             <p className="text-sm font-semibold text-gray-900">{featured.author?.name}</p>
                             <p className="text-xs text-gray-400">{featured.author?.role} · {featured.date}</p>
                           </div>
                         </div>
                         <Link href={`/insights/${featured.slug}`}
-                          className="inline-flex items-center gap-2 px-6 py-3 bg-[#07111D] hover:bg-[#C9A24A] text-white hover:text-[#07111D] text-sm font-bold transition-all duration-200 shadow-lg">
+                          className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-[#07111D] hover:bg-[#C9A24A] text-white hover:text-[#07111D] text-sm font-bold transition-all duration-200 shadow-lg w-full sm:w-auto justify-center">
                           Read Article <ArrowRight className="w-4 h-4" />
                         </Link>
                       </div>
@@ -575,25 +567,28 @@ export default function InsightsClient() {
             )}
 
             {/* ── TOOLBAR ── */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-5 py-3 border-t border-b border-gray-200">
-              <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 mb-4 sm:mb-5 py-3 border-t border-b border-gray-200">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-sm text-gray-500"><span className="font-bold text-gray-900">{rest.length}</span> articles</span>
                 {activeFilterCount>0&&(
-                  <button onClick={clearAll} className="flex items-center gap-1.5 text-xs text-red-500 font-medium bg-red-50 px-3 py-1.5 border border-red-100 transition-colors hover:bg-red-100">
-                    <X className="w-3 h-3" /> Clear filters ({activeFilterCount})
+                  <button onClick={clearAll} className="flex items-center gap-1 text-xs text-red-500 font-medium bg-red-50 px-2.5 py-1.5 border border-red-100">
+                    <X className="w-3 h-3" /> Clear ({activeFilterCount})
                   </button>
                 )}
-                {selectedCategories.map(c=>(
-                  <span key={c} className="flex items-center gap-1 text-[11px] bg-[#C9A24A]/10 text-[#C9A24A] border border-[#C9A24A]/20 px-2.5 py-1 font-medium">
-                    {c}<button onClick={()=>toggleCategory(c)}><X className="w-2.5 h-2.5" /></button>
+                {selectedCategories.slice(0,2).map(c=>(
+                  <span key={c} className="flex items-center gap-1 text-[10px] bg-[#C9A24A]/10 text-[#C9A24A] border border-[#C9A24A]/20 px-2 py-1 font-medium max-w-[100px] truncate">
+                    {c}<button onClick={()=>toggleCategory(c)} className="shrink-0"><X className="w-2.5 h-2.5" /></button>
                   </span>
                 ))}
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 self-end sm:self-auto">
                 <div className="relative">
                   <button onClick={()=>setShowSortDropdown(!showSortDropdown)}
-                    className="flex items-center gap-2 px-3.5 py-2 bg-white border border-gray-200 text-sm text-gray-700 hover:border-gray-300 transition-all shadow-sm">
-                    <SlidersHorizontal className="w-3.5 h-3.5 text-gray-400" />{sortBy}<ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+                    className="flex items-center gap-1.5 px-3 py-2 bg-white border border-gray-200 text-xs sm:text-sm text-gray-700 hover:border-gray-300 transition-all shadow-sm">
+                    <SlidersHorizontal className="w-3.5 h-3.5 text-gray-400" />
+                    <span className="hidden sm:inline">{sortBy}</span>
+                    <span className="sm:hidden">Sort</span>
+                    <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                   </button>
                   {showSortDropdown&&(
                     <div className="absolute right-0 top-full mt-1 bg-white border border-gray-100 shadow-xl z-30 min-w-[160px] py-1">
@@ -615,34 +610,34 @@ export default function InsightsClient() {
 
             {/* ── ARTICLES ── */}
             {loading ? (
-              <div className={`grid gap-5 ${viewMode==="grid"?"grid-cols-1 sm:grid-cols-2 xl:grid-cols-3":"grid-cols-1"}`}>
+              <div className={`grid gap-4 sm:gap-5 ${viewMode==="grid"?"grid-cols-1 sm:grid-cols-2 xl:grid-cols-3":"grid-cols-1"}`}>
                 {Array.from({length:3}).map((_,i)=><SkeletonCard key={i} />)}
               </div>
             ) : paginated.length===0 ? (
-              <div className="flex flex-col items-center justify-center py-24 text-center">
-                <div className="w-20 h-20 bg-gray-100 flex items-center justify-center mb-5">
-                  <Search className="w-8 h-8 text-gray-300" />
+              <div className="flex flex-col items-center justify-center py-16 sm:py-24 text-center px-4">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 flex items-center justify-center mb-4 sm:mb-5">
+                  <Search className="w-7 h-7 sm:w-8 sm:h-8 text-gray-300" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">No articles found</h3>
-                <p className="text-gray-400 text-sm mb-6 max-w-xs">Try adjusting your search or removing some filters to discover more content.</p>
-                <button onClick={clearAll} className="px-6 py-3 bg-[#07111D] text-white text-sm font-bold hover:bg-[#C9A24A] hover:text-[#07111D] transition-all duration-200">Clear All Filters</button>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">No articles found</h3>
+                <p className="text-gray-400 text-sm mb-5 sm:mb-6 max-w-xs">Try adjusting your search or removing some filters.</p>
+                <button onClick={clearAll} className="px-5 sm:px-6 py-2.5 sm:py-3 bg-[#07111D] text-white text-sm font-bold hover:bg-[#C9A24A] hover:text-[#07111D] transition-all duration-200">Clear All Filters</button>
               </div>
             ) : (
-              <div className={viewMode==="grid"?"grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5":"flex flex-col gap-4"}>
+              <div className={viewMode==="grid"?"grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5":"flex flex-col gap-3 sm:gap-4"}>
                 {paginated.map(a=>viewMode==="grid"?<GridCard key={a.slug} article={a}/>:<ListCard key={a.slug} article={a}/>)}
               </div>
             )}
 
             {/* ── PAGINATION ── */}
             {!loading && totalPages>1 && (
-              <div className="flex items-center justify-center gap-2 mt-10">
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-8 sm:mt-10 flex-wrap">
                 <button onClick={()=>{setPage(p=>Math.max(1,p-1));resultsRef.current?.scrollIntoView({behavior:"smooth",block:"start"});}}
                   disabled={page===1} className="p-2.5 border border-gray-200 text-gray-500 hover:border-[#C9A24A]/50 hover:text-[#C9A24A] disabled:opacity-30 disabled:cursor-not-allowed transition-all bg-white shadow-sm">
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 {Array.from({length:totalPages}).map((_,i)=>(
                   <button key={i} onClick={()=>{setPage(i+1);resultsRef.current?.scrollIntoView({behavior:"smooth",block:"start"});}}
-                    className={`w-10 h-10 text-sm font-semibold transition-all border shadow-sm ${page===i+1?"bg-[#07111D] text-white border-[#07111D]":"bg-white text-gray-600 border-gray-200 hover:border-[#C9A24A]/50 hover:text-[#C9A24A]"}`}>
+                    className={`w-9 h-9 sm:w-10 sm:h-10 text-xs sm:text-sm font-semibold transition-all border shadow-sm ${page===i+1?"bg-[#07111D] text-white border-[#07111D]":"bg-white text-gray-600 border-gray-200 hover:border-[#C9A24A]/50 hover:text-[#C9A24A]"}`}>
                     {i+1}
                   </button>
                 ))}
