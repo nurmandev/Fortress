@@ -313,13 +313,24 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* 3 Pillars */}
-          <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 lg:gap-14">
+          {/* 3 Pillars — icons only, text on hover */}
+          <div className="flex flex-row gap-6 sm:gap-10 lg:gap-14">
             {pillars.map((p) => (
-              <div key={p.title} className="flex items-center gap-3">
+              <div key={p.title} className="group relative flex items-center justify-center">
+                {/* Tooltip */}
+                <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">
+                  <div className="bg-[#0f1a2e] border border-[#C9A24A]/30 rounded px-3 py-2 shadow-xl whitespace-nowrap">
+                    <p className="text-white text-[11px] font-bold tracking-[2px] uppercase leading-tight text-center">
+                      {p.title}
+                    </p>
+                    <p className="text-[#8fa0b8] text-[10px] leading-snug mt-0.5 text-center">
+                      {p.sub}
+                    </p>
+                  </div>
+                  <div className="w-2 h-2 bg-[#0f1a2e] border-r border-b border-[#C9A24A]/30 rotate-45 mx-auto -mt-1" />
+                </div>
                 {/* Hexagon-bordered icon */}
                 <div className="relative flex items-center justify-center w-11 h-11 shrink-0">
-                  {/* Hexagon SVG border */}
                   <svg viewBox="0 0 44 44" className="absolute inset-0 w-full h-full" fill="none">
                     <polygon
                       points="22,2 40,12 40,32 22,42 4,32 4,12"
@@ -329,14 +340,6 @@ export default function Footer() {
                     />
                   </svg>
                   <span className="text-[#C9A24A]/80">{p.icon}</span>
-                </div>
-                <div>
-                  <p className="text-white text-[11px] font-bold tracking-[2px] uppercase leading-tight">
-                    {p.title}
-                  </p>
-                  <p className="text-[#8fa0b8]/60 text-[10px] leading-snug mt-0.5 max-w-[130px]">
-                    {p.sub}
-                  </p>
                 </div>
               </div>
             ))}
