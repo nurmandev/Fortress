@@ -8,7 +8,7 @@ import {
   Bookmark, Share2, ArrowRight, Star, BookOpen,
   Building2, Briefcase, Cpu, UtensilsCrossed, Truck,
   LineChart, Newspaper, Handshake, Check, SlidersHorizontal,
-  MessageSquare, Mail, Crown, FileText, Users, ChevronLeft, ChevronRight, Zap, TrendingUp
+  MessageSquare, Mail, Crown, FileText, Users, ChevronLeft, ChevronRight, TrendingUp
 } from "lucide-react";
 import { allArticles, categories as rawCategories } from "./articles";
 
@@ -83,9 +83,7 @@ const CAT_COLORS: Record<string, string> = {
   "Strategic Partnerships": "bg-teal-50 text-teal-700 border-teal-200",
 };
 
-const SORT_OPTIONS = ["Latest","Oldest","Trending","Most Popular","Most Viewed","Highest Rated"];
-const DIFFICULTY_OPTIONS = ["Beginner","Intermediate","Advanced"];
-const READ_TIME_OPTIONS = ["Under 5 min","5–10 min","10–20 min","20+ min"];
+const SORT_OPTIONS = ["Latest","Oldest","Most Popular","Most Viewed","Highest Rated"];
 const POPULAR_TAGS = ["UAE","Dubai","Finance","Strategy","Growth","AI","ESG","Blockchain","Real Estate","Equity"];
 const ARTICLES_PER_PAGE = 3;
 
@@ -133,8 +131,6 @@ export default function InsightsClient() {
   const [search, setSearch]                   = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags]       = useState<string[]>([]);
-  const [difficulty, setDifficulty]           = useState<string[]>([]);
-  const [readTime, setReadTime]               = useState<string[]>([]);
   const [sortBy, setSortBy]                   = useState("Latest");
   const [viewMode, setViewMode]               = useState<"grid"|"list">("grid");
   const [page, setPage]                       = useState(1);
@@ -150,18 +146,14 @@ export default function InsightsClient() {
 
   const toggleCategory  = (c: string) => { setSelectedCategories(p => p.includes(c) ? p.filter(x=>x!==c) : [...p,c]); setPage(1); };
   const toggleTag       = (t: string) => { setSelectedTags(p => p.includes(t) ? p.filter(x=>x!==t) : [...p,t]); setPage(1); };
-  const toggleDifficulty = (d: string) => { setDifficulty(p => p.includes(d) ? p.filter(x=>x!==d) : [...p,d]); setPage(1); };
-  const toggleReadTime  = (r: string) => { setReadTime(p => p.includes(r) ? p.filter(x=>x!==r) : [...p,r]); setPage(1); };
   const toggleBookmark  = (slug: string) => setBookmarked(p => { const n=new Set(p); n.has(slug)?n.delete(slug):n.add(slug); return n; });
 
   const clearAll = () => {
     setSearch(""); setSelectedCategories([]); setSelectedTags([]);
-    setDifficulty([]); setReadTime([]);
     setSortBy("Latest"); setPage(1);
   };
 
-  const activeFilterCount = selectedCategories.length + selectedTags.length + difficulty.length +
-    readTime.length + (search ? 1 : 0);
+  const activeFilterCount = selectedCategories.length + selectedTags.length + (search ? 1 : 0);
 
   /* ── Filter + sort ── */
   const filtered = useMemo(() => {
@@ -174,17 +166,11 @@ export default function InsightsClient() {
     );
     if (selectedCategories.length) list = list.filter(a => selectedCategories.includes(a.category));
     if (selectedTags.length) list = list.filter(a => (a.tags||[]).some(t=>selectedTags.includes(t)));
-    if (difficulty.length) list = list.filter(a=>difficulty.includes(a.difficulty||""));
-    if (readTime.length) list = list.filter(a=>{
-      const m=parseInt(a.readTime);
-      return readTime.some(r=>r==="Under 5 min"?m<5:r==="5–10 min"?m>=5&&m<=10:r==="10–20 min"?m>10&&m<=20:m>20);
-    });
     if (sortBy==="Oldest") list=list.reverse();
-    if (sortBy==="Trending") list=[...list].sort((a,b)=>(b.trending?1:0)-(a.trending?1:0));
     if (sortBy==="Most Popular"||sortBy==="Most Viewed") list=[...list].sort((a,b)=>(b.views||0)-(a.views||0));
     if (sortBy==="Highest Rated") list=[...list].sort((a,b)=>(b.rating||0)-(a.rating||0));
     return list;
-  }, [search, selectedCategories, selectedTags, difficulty, readTime, sortBy]);
+  }, [search, selectedCategories, selectedTags, sortBy]);
 
   const featured       = filtered.find(a=>a.featured) || filtered[0];
   const rest           = filtered.filter(a=>a.slug!==featured?.slug);
@@ -227,42 +213,6 @@ export default function InsightsClient() {
               className={`flex items-center justify-between px-2 py-2 text-sm transition-all border-l-2 ${selectedCategories.includes(cat.label)?"border-[#C9A24A] text-[#C9A24A] font-semibold bg-amber-50/50":"border-transparent text-gray-600 hover:bg-gray-50"}`}>
               <span className="flex items-center gap-2">{CAT_ICONS[cat.label]}<span className="truncate">{cat.label}</span></span>
               <span className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 shrink-0">{catCounts[cat.label]||0}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Difficulty */}
-      <div className="bg-white border border-gray-200 p-4">
-        <h3 className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3 flex items-center gap-1.5">
-          <Zap className="w-3 h-3 text-[#C9A24A]" /> Difficulty
-        </h3>
-        <div className="flex flex-col gap-1">
-          {DIFFICULTY_OPTIONS.map(d=>(
-            <button key={d} onClick={()=>toggleDifficulty(d)}
-              className={`flex items-center gap-2.5 px-2 py-2 text-sm transition-all ${difficulty.includes(d)?"text-[#C9A24A] font-semibold":"text-gray-600 hover:bg-gray-50"}`}>
-              <div className={`w-4 h-4 border-2 flex items-center justify-center shrink-0 ${difficulty.includes(d)?"bg-[#C9A24A] border-[#C9A24A]":"border-gray-300"}`}>
-                {difficulty.includes(d)&&<Check className="w-2.5 h-2.5 text-white" />}
-              </div>
-              {d}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Reading Time */}
-      <div className="bg-white border border-gray-200 p-4">
-        <h3 className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3 flex items-center gap-1.5">
-          <Clock className="w-3 h-3 text-[#C9A24A]" /> Reading Time
-        </h3>
-        <div className="flex flex-col gap-1">
-          {READ_TIME_OPTIONS.map(r=>(
-            <button key={r} onClick={()=>toggleReadTime(r)}
-              className={`flex items-center gap-2.5 px-2 py-2 text-sm transition-all ${readTime.includes(r)?"text-[#C9A24A] font-semibold":"text-gray-600 hover:bg-gray-50"}`}>
-              <div className={`w-4 h-4 border-2 flex items-center justify-center shrink-0 ${readTime.includes(r)?"bg-[#C9A24A] border-[#C9A24A]":"border-gray-300"}`}>
-                {readTime.includes(r)&&<Check className="w-2.5 h-2.5 text-white" />}
-              </div>
-              {r}
             </button>
           ))}
         </div>
