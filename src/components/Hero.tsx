@@ -25,12 +25,12 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen pt-20 pb-12 md:pt-28 md:pb-16 px-5 sm:px-6 lg:px-12 flex flex-col items-center justify-center overflow-hidden bg-fortress-navy"
+      className="relative min-h-[85vh] md:min-h-screen pt-20 pb-12 md:pt-28 md:pb-16 px-5 sm:px-6 lg:px-12 flex flex-col items-center justify-center overflow-hidden bg-fortress-navy"
     >
       {/* Background image with layered gradient overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/home-image.jpg"
+          src="/Hero-Background.png"
           alt="Fortress Investment Holdings"
           fill
           className="object-cover object-center"

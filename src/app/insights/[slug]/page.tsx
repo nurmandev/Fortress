@@ -1,15 +1,42 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Newsletter from "@/components/Newsletter";
-import { allArticles, categoryColors } from "@/app/insights/articles";
-import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import { allArticles } from "@/app/insights/articles";
+import { ArrowLeft, Calendar, Clock, Eye, Star, BookOpen } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
+
+/* ─── Image map matching InsightsClient ─────────────────────── */
+const CAT_IMAGES: Record<string, string> = {
+  "Real Estate": "/business.jpg",
+  "Business Acquisitions": "/black-men-cafe-have-business.jpg",
+  "Private Equity": "/plants-coins.jpg",
+  "AI & Technology": "/businessman-reading.jpg",
+  "Digital Assets & Blockchain": "/gold-coins.jpg",
+  "Hospitality": "/employees.jpg",
+  "Trading & Distribution": "/discussing-business.jpg",
+  "Market Insights": "/strategy-ideas.jpg",
+  "Company News": "/african-man-black-suit.jpg",
+  "Strategic Partnerships": "/portrait-smiling.jpg",
+};
+
+const CAT_COLORS: Record<string, string> = {
+  "Real Estate": "bg-amber-50 text-amber-700 border-amber-200",
+  "Business Acquisitions": "bg-blue-50 text-blue-700 border-blue-200",
+  "Private Equity": "bg-emerald-50 text-emerald-700 border-emerald-200",
+  "AI & Technology": "bg-purple-50 text-purple-700 border-purple-200",
+  "Digital Assets & Blockchain": "bg-orange-50 text-orange-700 border-orange-200",
+  "Hospitality": "bg-pink-50 text-pink-700 border-pink-200",
+  "Trading & Distribution": "bg-cyan-50 text-cyan-700 border-cyan-200",
+  "Market Insights": "bg-indigo-50 text-indigo-700 border-indigo-200",
+  "Company News": "bg-red-50 text-red-700 border-red-200",
+  "Strategic Partnerships": "bg-teal-50 text-teal-700 border-teal-200",
+};
 
 export async function generateStaticParams() {
   return allArticles.map((a) => ({ slug: a.slug }));
@@ -20,8 +47,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = allArticles.find((a) => a.slug === slug);
   if (!article) return { title: "Article Not Found" };
   return {
-    title: article.title,
+    title: `${article.title} | Fortress Investment Holdings`,
     description: article.excerpt,
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      type: "article",
+    },
   };
 }
 
@@ -30,73 +62,131 @@ export default async function ArticlePage({ params }: Props) {
   const article = allArticles.find((a) => a.slug === slug);
   if (!article) notFound();
 
+  const related = allArticles.filter((a) => a.slug !== slug).slice(0, 3);
+  const heroImage = CAT_IMAGES[article.category] || "/business.jpg";
+
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
 
-      <section className="relative pt-24 md:pt-32 pb-12 md:pb-20 overflow-hidden bg-white">
-        <div className="max-w-[860px] mx-auto px-6 lg:px-8">
+      {/* ── Hero image banner ── */}
+      <div className="relative h-[420px] md:h-[520px] w-full overflow-hidden mt-16">
+        <Image
+          src={heroImage}
+          alt={article.title}
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#07111D] via-[#07111D]/60 to-[#07111D]/20" />
+        {/* Category + breadcrumb */}
+        <div className="absolute bottom-0 left-0 right-0 max-w-[860px] mx-auto px-6 lg:px-8 pb-10">
           <Link
             href="/insights"
-            className="inline-flex items-center gap-2 text-fortress-charcoal/50 hover:text-fortress-gold text-sm font-medium transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-white/60 hover:text-[#C9A24A] text-sm font-medium transition-colors mb-5"
           >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Insights
+            <ArrowLeft className="w-4 h-4" /> Back to Insights
           </Link>
-
-          <p className="text-fortress-gold text-xs md:text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">
-            {article.category}
-          </p>
-          <h1 className="text-3xl md:text-5xl font-bold text-fortress-navy mb-6 leading-tight">
+          <div className="flex items-center gap-3 mb-4">
+            <span className={`text-[11px] font-bold px-3 py-1.5 border backdrop-blur-sm ${CAT_COLORS[article.category] || "bg-white/90 text-gray-700 border-gray-200"}`}>
+              {article.category}
+            </span>
+            <span className="text-white/40 text-xs flex items-center gap-1.5">
+              <BookOpen className="w-3.5 h-3.5" /> Article
+            </span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight max-w-3xl">
             {article.title}
           </h1>
-          <div className="flex items-center gap-6 text-fortress-charcoal/40 text-sm mb-8">
-            <span className="flex items-center gap-2">
-              <Calendar className="w-4 h-4" />
-              {article.date}
-            </span>
-            <span className="flex items-center gap-2">
-              <Clock className="w-4 h-4" />
-              {article.readTime}
-            </span>
-          </div>
-          <p className="text-fortress-charcoal/70 text-lg leading-relaxed border-l-4 border-fortress-gold pl-6">
+        </div>
+      </div>
+
+      {/* ── Meta bar ── */}
+      <div className="border-b border-gray-200 bg-white">
+        <div className="max-w-[860px] mx-auto px-6 lg:px-8 py-4 flex flex-wrap items-center gap-5 text-sm text-gray-400">
+          <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-[#C9A24A]" /> {article.date}</span>
+          <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-[#C9A24A]" /> {article.readTime}</span>
+          <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5 text-[#C9A24A]" /> 1,842 views</span>
+          <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" /> 4.6 rating</span>
+        </div>
+      </div>
+
+      {/* ── Article body ── */}
+      <section className="py-14 md:py-20 bg-white">
+        <div className="max-w-[860px] mx-auto px-6 lg:px-8">
+          {/* Excerpt / pull quote */}
+          <p className="text-xl md:text-2xl text-gray-700 leading-relaxed border-l-4 border-[#C9A24A] pl-6 mb-10 font-light">
             {article.excerpt}
           </p>
-        </div>
-      </section>
 
-      <section className="py-12 md:py-20 bg-white my-4 md:my-6 sm:mx-4 rounded-2xl">
-        <div className="max-w-[860px] mx-auto px-6 lg:px-8">
-          <div className="prose prose-gray max-w-none text-fortress-charcoal/70 leading-relaxed space-y-6">
+          {/* Placeholder body */}
+          <div className="prose prose-gray max-w-none text-gray-600 leading-relaxed space-y-6 text-base">
             <p>
-              This article is currently being written. Please check back soon for the full version.
+              This article is currently being prepared by the Fortress Investment Holdings research team.
+              Our team carefully crafts each insight to ensure it delivers genuine, actionable value to our
+              partners and investors.
             </p>
             <p>
-              At Fortress Investment Holdings, we believe in sharing thoughtful, well-researched content that helps our partners and investors make informed decisions. Each article in our Insights series is carefully prepared to provide genuine value.
+              At Fortress Investment Holdings, we are committed to sharing thoughtful, well-researched commentary
+              on the sectors and markets we invest in — including real estate, private equity, technology, and
+              hospitality across the UAE and beyond.
             </p>
             <p>
-              In the meantime, feel free to explore other articles or reach out to our team directly with any questions about your specific investment interests.
+              Please check back soon for the full version of this article. In the meantime, you are welcome to
+              explore related insights or reach out to our team directly with any questions about your specific
+              investment interests.
             </p>
+          </div>
+
+          {/* Back link */}
+          <div className="mt-14 pt-8 border-t border-gray-200">
+            <Link
+              href="/insights"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#07111D] hover:bg-[#C9A24A] text-white hover:text-[#07111D] text-sm font-bold transition-all duration-200"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back to All Insights
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-fortress-gold/10 bg-fortress-navy my-8 md:my-12 sm:mx-4 rounded-2xl py-12 md:py-20">
+      {/* ── Related articles ── */}
+      <section className="bg-[#F8F9FB] border-t border-gray-200 py-16">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <p className="text-fortress-gold text-xs md:text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4 text-center">Continue Reading</p>
-          <h2 className="text-xl md:text-3xl font-bold text-fortress-ivory mb-8 md:mb-12 text-center">More Insights</h2>
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            {allArticles.filter((a) => a.slug !== slug).slice(0, 3).map((a) => (
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-px flex-1 bg-gray-200" />
+            <p className="text-[10px] font-bold text-gray-400 tracking-widest uppercase">Continue Reading</p>
+            <div className="h-px flex-1 bg-gray-200" />
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">More Insights</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {related.map((a) => (
               <Link key={a.slug} href={`/insights/${a.slug}`} className="group">
-                <article className="bg-fortress-charcoal border border-fortress-gold/10 hover:border-fortress-gold/30 transition-all duration-300 flex flex-col rounded-2xl h-full">
-                  <div className={`border-l-4 ${categoryColors[a.category] || "border-l-fortress-gold"} rounded-tl-2xl p-6 md:p-8 flex flex-col flex-1`}>
-                    <span className="text-fortress-gold text-xs font-medium tracking-[3px] uppercase mb-3">{a.category}</span>
-                    <h3 className="text-fortress-ivory font-bold text-base md:text-lg mb-3 leading-snug group-hover:text-fortress-gold transition-colors">{a.title}</h3>
-                    <p className="text-fortress-silver/60 text-sm leading-relaxed mb-4 flex-1">{a.excerpt}</p>
-                    <div className="flex items-center gap-4 text-fortress-silver/40 text-xs">
-                      <span className="flex items-center gap-1"><Calendar className="w-3 h-3" />{a.date}</span>
-                      <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{a.readTime}</span>
+                <article className="bg-white border border-gray-200 hover:border-[#C9A24A]/40 hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col h-full">
+                  <div className="relative h-44 overflow-hidden shrink-0">
+                    <Image
+                      src={CAT_IMAGES[a.category] || "/business.jpg"}
+                      alt={a.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width:768px)100vw,33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <div className="absolute top-3 left-3">
+                      <span className={`text-[10px] font-bold px-2.5 py-1 border backdrop-blur-sm ${CAT_COLORS[a.category] || "bg-white/90 text-gray-700 border-gray-200"}`}>
+                        {a.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-5 flex flex-col flex-1">
+                    <h3 className="font-bold text-gray-900 text-sm leading-snug mb-2 group-hover:text-[#C9A24A] transition-colors flex-1">
+                      {a.title}
+                    </h3>
+                    <p className="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-2">{a.excerpt}</p>
+                    <div className="flex items-center gap-3 text-[11px] text-gray-400 pt-3 border-t border-gray-100">
+                      <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {a.date}</span>
+                      <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {a.readTime}</span>
                     </div>
                   </div>
                 </article>
@@ -104,10 +194,6 @@ export default async function ArticlePage({ params }: Props) {
             ))}
           </div>
         </div>
-      </section>
-
-      <section className="border-t border-fortress-gold/10">
-        <Newsletter />
       </section>
 
       <Footer />

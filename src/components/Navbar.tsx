@@ -18,9 +18,9 @@ const navItems = [
 const NavLink = ({ href, icon: Icon, label }: { href: string; icon: React.ComponentType<{ className?: string }>; label: string }) => (
   <Link
     href={href}
-    className="group flex items-center gap-1.5 text-sm font-medium text-fortress-silver hover:text-fortress-gold transition-colors whitespace-nowrap"
+    className="group flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-fortress-gold transition-colors whitespace-nowrap"
   >
-    <Icon className="w-4 h-4 opacity-70 group-hover:opacity-100" />
+    <Icon className="w-4 h-4 opacity-60 group-hover:opacity-100" />
     <span>{label}</span>
   </Link>
 );
@@ -55,8 +55,8 @@ export default function Navbar() {
   }, [isMobileMenuOpen]);
 
   const bgClass = scrolled
-    ? "bg-fortress-navy/95 backdrop-blur-xl shadow-lg"
-    : "bg-fortress-navy/80 backdrop-blur-md";
+    ? "bg-white shadow-md"
+    : "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100";
 
   return (
     <>
@@ -93,7 +93,7 @@ export default function Navbar() {
               </nav>
 
               <button
-                className="md:hidden mb-1 p-1 text-fortress-silver hover:text-fortress-gold transition-colors"
+                className="md:hidden mb-1 p-1 text-gray-600 hover:text-fortress-gold transition-colors"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle menu"
               >
@@ -102,14 +102,16 @@ export default function Navbar() {
 
               <div className="flex justify-center shrink-0 mx-2 md:mx-4 mt-1">
                 <Link href="/" className="flex items-center group">
-                  <Image
-                    src="/large-logo.png"
-                    alt="Fortress Investment Holdings"
-                    width={160}
-                    height={48}
-                    className="h-10 w-auto object-contain"
-                    priority
-                  />
+                  <div className="bg-[#080e1a] rounded-xl px-4 py-1.5 shadow-md">
+                    <Image
+                      src="/large-logo.png"
+                      alt="Fortress Investment Holdings"
+                      width={260}
+                      height={72}
+                      className="h-12 md:h-[3.75rem] w-auto object-contain"
+                      priority
+                    />
+                  </div>
                 </Link>
               </div>
 
@@ -155,7 +157,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-16 z-40 bg-fortress-navy border-b border-fortress-gold/10 p-4 md:hidden shadow-lg"
+            className="fixed inset-x-0 top-16 z-40 bg-white border-b border-gray-100 p-4 md:hidden shadow-lg"
           >
             <nav className="flex flex-col gap-2">
               {navItems.map(item => (
@@ -166,7 +168,7 @@ export default function Navbar() {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <item.icon className="w-5 h-5 text-fortress-gold/70" />
-                  <span className="font-medium text-fortress-ivory/90">{item.label}</span>
+                  <span className="font-medium text-gray-700">{item.label}</span>
                 </Link>
               ))}
                   <div className="h-px bg-fortress-gold/20 my-2" />
