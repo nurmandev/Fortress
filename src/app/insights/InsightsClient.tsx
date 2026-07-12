@@ -8,7 +8,7 @@ import {
   Bookmark, Share2, ArrowRight, Star, BookOpen,
   Building2, Briefcase, Cpu, UtensilsCrossed, Truck,
   LineChart, Newspaper, Handshake, Check, SlidersHorizontal,
-  MessageSquare, Mail, Crown, FileText, Users, ChevronLeft, ChevronRight, Zap, TrendingUp
+  MessageSquare, Mail, ChevronLeft, ChevronRight, Zap, TrendingUp
 } from "lucide-react";
 import { allArticles, categories as rawCategories } from "./articles";
 
@@ -47,7 +47,6 @@ const DIFFICULTIES: Array<"Beginner"|"Intermediate"|"Advanced"> = ["Beginner","I
 const enrichedArticles: EnrichedArticle[] = allArticles.map((a, i) => ({
   ...a,
   image: CAT_IMAGES[a.category] || "/business.jpg",
-  isPremium: i % 3 === 0,
   difficulty: DIFFICULTIES[i % 3],
   tags: TAGS_POOL.slice(i % TAGS_POOL.length, (i % TAGS_POOL.length) + 3),
   author: AUTHORS[i % AUTHORS.length],
@@ -134,7 +133,6 @@ export default function InsightsClient() {
   const [search, setSearch]                   = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags]       = useState<string[]>([]);
-  const [articleType, setArticleType]         = useState<"All"|"Free"|"Premium">("All");
   const [difficulty, setDifficulty]           = useState<string[]>([]);
   const [readTime, setReadTime]               = useState<string[]>([]);
   const [sortBy, setSortBy]                   = useState("Latest");
@@ -158,12 +156,12 @@ export default function InsightsClient() {
 
   const clearAll = () => {
     setSearch(""); setSelectedCategories([]); setSelectedTags([]);
-    setArticleType("All"); setDifficulty([]); setReadTime([]);
+    setDifficulty([]); setReadTime([]);
     setSortBy("Latest"); setPage(1);
   };
 
   const activeFilterCount = selectedCategories.length + selectedTags.length + difficulty.length +
-    readTime.length + (articleType !== "All" ? 1 : 0) + (search ? 1 : 0);
+    readTime.length + (search ? 1 : 0);
 
   /* ── Filter + sort ── */
   const filtered = useMemo(() => {
@@ -176,8 +174,6 @@ export default function InsightsClient() {
     );
     if (selectedCategories.length) list = list.filter(a => selectedCategories.includes(a.category));
     if (selectedTags.length) list = list.filter(a => (a.tags||[]).some(t=>selectedTags.includes(t)));
-    if (articleType==="Free") list = list.filter(a=>!a.isPremium);
-    if (articleType==="Premium") list = list.filter(a=>a.isPremium);
     if (difficulty.length) list = list.filter(a=>difficulty.includes(a.difficulty||""));
     if (readTime.length) list = list.filter(a=>{
       const m=parseInt(a.readTime);
@@ -188,7 +184,7 @@ export default function InsightsClient() {
     if (sortBy==="Most Popular"||sortBy==="Most Viewed") list=[...list].sort((a,b)=>(b.views||0)-(a.views||0));
     if (sortBy==="Highest Rated") list=[...list].sort((a,b)=>(b.rating||0)-(a.rating||0));
     return list;
-  }, [search, selectedCategories, selectedTags, articleType, difficulty, readTime, sortBy]);
+  }, [search, selectedCategories, selectedTags, difficulty, readTime, sortBy]);
 
   const featured       = filtered.find(a=>a.featured) || filtered[0];
   const rest           = filtered.filter(a=>a.slug!==featured?.slug);
@@ -231,21 +227,6 @@ export default function InsightsClient() {
               className={`flex items-center justify-between px-2 py-2 text-sm transition-all border-l-2 ${selectedCategories.includes(cat.label)?"border-[#C9A24A] text-[#C9A24A] font-semibold bg-amber-50/50":"border-transparent text-gray-600 hover:bg-gray-50"}`}>
               <span className="flex items-center gap-2">{CAT_ICONS[cat.label]}<span className="truncate">{cat.label}</span></span>
               <span className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 shrink-0">{catCounts[cat.label]||0}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Article Type */}
-      <div className="bg-white border border-gray-200 p-4">
-        <h3 className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3 flex items-center gap-1.5">
-          <FileText className="w-3 h-3 text-[#C9A24A]" /> Article Type
-        </h3>
-        <div className="flex flex-col">
-          {(["All","Free","Premium"] as const).map(type=>(
-            <button key={type} onClick={()=>{setArticleType(type);setPage(1);}}
-              className={`flex items-center gap-2 px-2 py-2 text-sm transition-all border-l-2 ${articleType===type?"border-[#C9A24A] text-[#C9A24A] font-semibold bg-amber-50/50":"border-transparent text-gray-600 hover:bg-gray-50"}`}>
-              {type==="Premium"&&<Crown className="w-3.5 h-3.5 text-[#C9A24A]" />}{type}
             </button>
           ))}
         </div>
@@ -348,11 +329,6 @@ export default function InsightsClient() {
           <span className={`text-[10px] font-bold px-2.5 py-1 border backdrop-blur-sm ${CAT_COLORS[article.category]||"bg-white/90 text-gray-700 border-gray-200"}`}>
             {article.category}
           </span>
-          {article.isPremium && (
-            <span className="text-[10px] font-bold px-2 py-1 bg-[#C9A24A] text-white flex items-center gap-1">
-              <Crown className="w-2.5 h-2.5" /> Premium
-            </span>
-          )}
         </div>
       </div>
 
@@ -407,11 +383,6 @@ export default function InsightsClient() {
     <article className="group bg-white border border-gray-200 hover:border-[#C9A24A]/30 hover:shadow-lg transition-all duration-300 flex overflow-hidden">
       <div className="relative w-40 sm:w-52 shrink-0 overflow-hidden">
         <Image src={article.image} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:640px)160px,208px" />
-        {article.isPremium && (
-          <div className="absolute top-2 left-2">
-            <span className="text-[10px] font-bold px-2 py-1 bg-[#C9A24A] text-white flex items-center gap-1"><Crown className="w-2.5 h-2.5" /> Premium</span>
-          </div>
-        )}
       </div>
       <div className="p-4 sm:p-5 flex flex-col flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-2 flex-wrap">
@@ -531,7 +502,6 @@ export default function InsightsClient() {
                       <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent to-black/20" />
                       <div className="absolute top-3 left-3 flex items-center gap-2 flex-wrap">
                         <span className={`text-[10px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 border backdrop-blur-sm ${CAT_COLORS[featured.category]||"bg-white/90 text-gray-700 border-gray-200"}`}>{featured.category}</span>
-                        {featured.isPremium&&<span className="text-[10px] font-bold px-2 py-1 bg-[#C9A24A] text-white flex items-center gap-1"><Crown className="w-2.5 h-2.5" /> Premium</span>}
                       </div>
                     </div>
                     <div className="p-5 sm:p-8 md:p-10 flex flex-col justify-center flex-1">

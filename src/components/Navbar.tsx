@@ -15,12 +15,16 @@ const navItems = [
   { label: "Insights", href: "/insights", icon: Newspaper },
 ];
 
-const NavLink = ({ href, icon: Icon, label }: { href: string; icon: React.ComponentType<{ className?: string }>; label: string }) => (
+const NavLink = ({ href, icon: Icon, label, scrolled }: { href: string; icon: React.ComponentType<{ className?: string }>; label: string; scrolled: boolean }) => (
   <Link
     href={href}
-    className="group flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-fortress-gold transition-colors whitespace-nowrap"
+    className={`group flex items-center gap-1.5 text-sm font-medium transition-colors whitespace-nowrap ${
+      scrolled
+        ? "text-gray-600 hover:text-fortress-gold"
+        : "text-white/80 hover:text-[#C9A24A]"
+    }`}
   >
-    <Icon className="w-4 h-4 opacity-60 group-hover:opacity-100" />
+    <Icon className="w-4 h-4 opacity-70 group-hover:opacity-100" />
     <span>{label}</span>
   </Link>
 );
@@ -56,7 +60,7 @@ export default function Navbar() {
 
   const bgClass = scrolled
     ? "bg-white shadow-md"
-    : "bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100";
+    : "bg-[#07111D]/95 backdrop-blur-md border-b border-white/5";
 
   return (
     <>
@@ -88,12 +92,14 @@ export default function Navbar() {
             <div className="relative w-full h-full flex items-end justify-between pb-2 px-4 md:px-8">
               <nav className="hidden md:flex gap-8 mb-1 shrink-0">
                 {navItems.slice(0, 3).map(item => (
-                  <NavLink key={item.label} {...item} />
+                  <NavLink key={item.label} {...item} scrolled={scrolled} />
                 ))}
               </nav>
 
               <button
-                className="md:hidden mb-1 p-1 text-gray-600 hover:text-fortress-gold transition-colors"
+                className={`md:hidden mb-1 p-1 transition-colors ${
+                  scrolled ? "text-gray-600 hover:text-fortress-gold" : "text-white/80 hover:text-[#C9A24A]"
+                }`}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle menu"
               >
@@ -117,12 +123,14 @@ export default function Navbar() {
 
               <nav className="hidden md:flex gap-6 items-center shrink-0">
                 {navItems.slice(3).map(item => (
-                  <NavLink key={item.label} {...item} />
+                  <NavLink key={item.label} {...item} scrolled={scrolled} />
                 ))}
-                <div className="flex gap-4 pl-4 border-l border-fortress-gold/20 shrink-0 items-center">
+                <div className={`flex gap-4 pl-4 shrink-0 items-center border-l ${
+                  scrolled ? "border-fortress-gold/20" : "border-white/10"
+                }`}>
                   <Link
                     href="/contact"
-                    className="px-4 py-1.5 text-sm font-medium text-fortress-navy bg-fortress-gold rounded-2xl hover:bg-fortress-champagne transition-colors whitespace-nowrap shadow-sm"
+                    className="px-4 py-1.5 text-sm font-medium text-fortress-navy bg-fortress-gold hover:bg-fortress-champagne transition-colors whitespace-nowrap shadow-sm"
                   >
                     Contact Us
                   </Link>
@@ -157,24 +165,24 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-16 z-40 bg-white border-b border-gray-100 p-4 md:hidden shadow-lg"
+            className="fixed inset-x-0 top-16 z-40 bg-[#07111D] border-b border-white/10 p-4 md:hidden shadow-2xl"
           >
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-1">
               {navItems.map(item => (
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-fortress-gold/5 transition-colors"
+                  className="flex items-center gap-3 p-3 hover:bg-white/5 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <item.icon className="w-5 h-5 text-fortress-gold/70" />
-                  <span className="font-medium text-gray-700">{item.label}</span>
+                  <item.icon className="w-5 h-5 text-[#C9A24A]/80" />
+                  <span className="font-medium text-white/80">{item.label}</span>
                 </Link>
               ))}
-                  <div className="h-px bg-fortress-gold/20 my-2" />
+              <div className="h-px bg-white/10 my-2" />
               <Link
                 href="/contact"
-                className="flex items-center justify-center gap-2 p-3 rounded-lg bg-fortress-gold text-fortress-navy font-medium mt-2"
+                className="flex items-center justify-center gap-2 p-3 bg-[#C9A24A] text-[#07111D] font-bold mt-1"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact Us
