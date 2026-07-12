@@ -4,10 +4,10 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Search, X, Filter, ChevronDown, Grid3X3, List, Clock, Eye,
+  Search, X, Filter, Grid3X3, List, Clock, Eye,
   Bookmark, Share2, ArrowRight, Star, BookOpen,
   Building2, Briefcase, Cpu, UtensilsCrossed, Truck,
-  LineChart, Newspaper, Handshake, Check, SlidersHorizontal,
+  LineChart, Newspaper, Handshake, Check,
   MessageSquare, Mail, Crown, FileText, Users, ChevronLeft, ChevronRight, TrendingUp
 } from "lucide-react";
 import { allArticles, categories as rawCategories } from "./articles";
@@ -83,7 +83,6 @@ const CAT_COLORS: Record<string, string> = {
   "Strategic Partnerships": "bg-teal-50 text-teal-700 border-teal-200",
 };
 
-const SORT_OPTIONS = ["Latest","Oldest","Most Popular","Most Viewed","Highest Rated"];
 const POPULAR_TAGS = ["UAE","Dubai","Finance","Strategy","Growth","AI","ESG","Blockchain","Real Estate","Equity"];
 const ARTICLES_PER_PAGE = 3;
 
@@ -131,13 +130,11 @@ export default function InsightsClient() {
   const [search, setSearch]                   = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags]       = useState<string[]>([]);
-  const [sortBy, setSortBy]                   = useState("Latest");
   const [viewMode, setViewMode]               = useState<"grid"|"list">("grid");
   const [page, setPage]                       = useState(1);
   const [loading, setLoading]                 = useState(true);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [bookmarked, setBookmarked]           = useState<Set<string>>(new Set());
-  const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [email, setEmail]                     = useState("");
   const [subscribed, setSubscribed]           = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -150,7 +147,7 @@ export default function InsightsClient() {
 
   const clearAll = () => {
     setSearch(""); setSelectedCategories([]); setSelectedTags([]);
-    setSortBy("Latest"); setPage(1);
+    setPage(1);
   };
 
   const activeFilterCount = selectedCategories.length + selectedTags.length + (search ? 1 : 0);
@@ -166,11 +163,8 @@ export default function InsightsClient() {
     );
     if (selectedCategories.length) list = list.filter(a => selectedCategories.includes(a.category));
     if (selectedTags.length) list = list.filter(a => (a.tags||[]).some(t=>selectedTags.includes(t)));
-    if (sortBy==="Oldest") list=list.reverse();
-    if (sortBy==="Most Popular"||sortBy==="Most Viewed") list=[...list].sort((a,b)=>(b.views||0)-(a.views||0));
-    if (sortBy==="Highest Rated") list=[...list].sort((a,b)=>(b.rating||0)-(a.rating||0));
     return list;
-  }, [search, selectedCategories, selectedTags, sortBy]);
+  }, [search, selectedCategories, selectedTags]);
 
   const featured       = filtered.find(a=>a.featured) || filtered[0];
   const rest           = filtered.filter(a=>a.slug!==featured?.slug);
@@ -213,21 +207,6 @@ export default function InsightsClient() {
               className={`flex items-center justify-between px-2 py-2 text-sm transition-all border-l-2 ${selectedCategories.includes(cat.label)?"border-[#C9A24A] text-[#C9A24A] font-semibold bg-amber-50/50":"border-transparent text-gray-600 hover:bg-gray-50"}`}>
               <span className="flex items-center gap-2">{CAT_ICONS[cat.label]}<span className="truncate">{cat.label}</span></span>
               <span className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 shrink-0">{catCounts[cat.label]||0}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Sort */}
-      <div className="bg-white border border-gray-200 p-4">
-        <h3 className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3 flex items-center gap-1.5">
-          <SlidersHorizontal className="w-3 h-3 text-[#C9A24A]" /> Sort By
-        </h3>
-        <div className="flex flex-col">
-          {SORT_OPTIONS.map(s=>(
-            <button key={s} onClick={()=>setSortBy(s)}
-              className={`flex items-center justify-between px-2 py-2 text-sm transition-all ${sortBy===s?"text-[#C9A24A] font-semibold bg-amber-50/50":"text-gray-600 hover:bg-gray-50"}`}>
-              {s} {sortBy===s&&<Check className="w-3.5 h-3.5" />}
             </button>
           ))}
         </div>
@@ -502,25 +481,6 @@ export default function InsightsClient() {
                 ))}
               </div>
               <div className="flex items-center gap-2 self-end sm:self-auto">
-                <div className="relative">
-                  <button onClick={()=>setShowSortDropdown(!showSortDropdown)}
-                    className="flex items-center gap-1.5 px-3 py-2 bg-white border border-gray-200 text-xs sm:text-sm text-gray-700 hover:border-gray-300 transition-all shadow-sm">
-                    <SlidersHorizontal className="w-3.5 h-3.5 text-gray-400" />
-                    <span className="hidden sm:inline">{sortBy}</span>
-                    <span className="sm:hidden">Sort</span>
-                    <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
-                  </button>
-                  {showSortDropdown&&(
-                    <div className="absolute right-0 top-full mt-1 bg-white border border-gray-100 shadow-xl z-30 min-w-[160px] py-1">
-                      {SORT_OPTIONS.map(s=>(
-                        <button key={s} onClick={()=>{setSortBy(s);setShowSortDropdown(false);}}
-                          className={`flex items-center justify-between w-full px-4 py-2.5 text-sm transition-colors ${sortBy===s?"text-[#C9A24A] bg-[#C9A24A]/5 font-semibold":"text-gray-700 hover:bg-gray-50"}`}>
-                          {s}{sortBy===s&&<Check className="w-3.5 h-3.5" />}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
                 <div className="flex bg-white border border-gray-200 overflow-hidden shadow-sm">
                   <button onClick={()=>setViewMode("grid")} className={`p-2.5 transition-colors ${viewMode==="grid"?"bg-[#07111D] text-white":"text-gray-400 hover:text-gray-700"}`} aria-label="Grid view"><Grid3X3 className="w-4 h-4" /></button>
                   <button onClick={()=>setViewMode("list")} className={`p-2.5 transition-colors ${viewMode==="list"?"bg-[#07111D] text-white":"text-gray-400 hover:text-gray-700"}`} aria-label="List view"><List className="w-4 h-4" /></button>
