@@ -8,7 +8,7 @@ import {
   Bookmark, Share2, ArrowRight, Star, BookOpen,
   Building2, Briefcase, Cpu, UtensilsCrossed, Truck,
   LineChart, Newspaper, Handshake, Check, SlidersHorizontal,
-  MessageSquare, Mail, Crown, ChevronLeft, ChevronRight, Zap, TrendingUp
+  MessageSquare, Mail, Crown, FileText, Users, ChevronLeft, ChevronRight, Zap, TrendingUp
 } from "lucide-react";
 import { allArticles, categories as rawCategories } from "./articles";
 
