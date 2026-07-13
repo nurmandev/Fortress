@@ -48,7 +48,7 @@ export default function Newsletter() {
             Receive Fortress Insights
           </h2>
           <p ref={subRef} className="text-fortress-silver/60 leading-relaxed mb-8">
-            Selected market developments, investment perspectives, and company updates — delivered occasionally, and only when worth your time.
+            Selected market developments, investment perspectives, and company updates  delivered occasionally, and only when worth your time.
           </p>
 
           {submitted ? (

@@ -59,7 +59,7 @@ export default function PartnershipCTA() {
               We welcome selected opportunities from business owners, entrepreneurs, investors, developers, advisors, and strategic partners.
             </p>
             <p className="text-fortress-silver/70 text-sm leading-relaxed mb-8 md:mb-12 max-w-[600px] mx-auto">
-              Whether you are seeking investment, presenting a business for acquisition, proposing a joint venture, or exploring a long-term partnership — our team is ready to review your opportunity with professionalism and discretion.
+              Whether you are seeking investment, presenting a business for acquisition, proposing a joint venture, or exploring a long-term partnership  our team is ready to review your opportunity with professionalism and discretion.
             </p>
           </div>
           <div ref={btnsRef} className="flex flex-col sm:flex-row gap-5 justify-center">

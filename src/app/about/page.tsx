@@ -15,24 +15,24 @@ export const metadata: Metadata = {
 };
 
 const values = [
-  { icon: Shield, title: "Integrity", description: "We conduct business honestly, responsibly, and transparently — in every transaction, without exception." },
+  { icon: Shield, title: "Integrity", description: "We conduct business honestly, responsibly, and transparently  in every transaction, without exception." },
   { icon: Hexagon, title: "Strength", description: "We make decisions with discipline, confidence, and careful consideration. Conviction matters; so does knowing when to walk away." },
   { icon: Eye, title: "Vision", description: "We look beyond immediate returns to identify long-term value and future potential others may overlook." },
   { icon: Users, title: "Partnership", description: "We build relationships based on trust, respect, alignment, and shared objectives. Our partners' success is our success." },
   { icon: Award, title: "Excellence", description: "We hold ourselves to high standards across every investment, partnership, and business interaction." },
   { icon: Scale, title: "Accountability", description: "We take full responsibility for our decisions, commitments, and performance. We do what we say." },
-  { icon: Lock, title: "Confidentiality", description: "We protect the information, interests, and privacy of our partners and stakeholders — always." },
+  { icon: Lock, title: "Confidentiality", description: "We protect the information, interests, and privacy of our partners and stakeholders  always." },
 ];
 
 const philosophyPoints = [
-  "Genuine market demand — customers who need the product, not a story that needs customers",
-  "Clear commercial potential — a realistic path to profitable growth",
-  "Responsible leadership — capable, ethical management teams",
-  "Scalable operations — the ability to grow without breaking",
-  "Defensible competitive advantages — reasons the business wins, and keeps winning",
-  "Transparent financial information — clean numbers, honestly presented",
-  "Realistic growth opportunities — ambition anchored in evidence",
-  "Alignment between stakeholders — everyone pulling in the same direction",
+  "Genuine market demand  customers who need the product, not a story that needs customers",
+  "Clear commercial potential  a realistic path to profitable growth",
+  "Responsible leadership  capable, ethical management teams",
+  "Scalable operations  the ability to grow without breaking",
+  "Defensible competitive advantages  reasons the business wins, and keeps winning",
+  "Transparent financial information  clean numbers, honestly presented",
+  "Realistic growth opportunities  ambition anchored in evidence",
+  "Alignment between stakeholders  everyone pulling in the same direction",
 ];
 
 export default function AboutPage() {

@@ -39,7 +39,7 @@ export default function InvestmentDisclaimerPage() {
             <div>
               <h2 className="text-xl font-bold text-fortress-navy mb-4">Investment Risk</h2>
               <p>
-                All investments involve risk. The value of investments — including businesses, real estate, private companies, digital assets, and luxury assets — may increase or decrease. Investors may lose part or all of the capital invested.
+                All investments involve risk. The value of investments  including businesses, real estate, private companies, digital assets, and luxury assets  may increase or decrease. Investors may lose part or all of the capital invested.
               </p>
               <p className="mt-4">
                 Past performance is not a guarantee or reliable indicator of future results.

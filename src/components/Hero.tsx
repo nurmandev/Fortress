@@ -51,7 +51,7 @@ export default function Hero() {
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Content — centred on mobile, left-aligned on md+ */}
+      {/* Content  centred on mobile, left-aligned on md+ */}
       <div className="relative z-10 w-full max-w-[1280px] mx-auto flex flex-col items-center text-center md:items-start md:text-left">
         <span ref={badgeRef} className="block text-fortress-gold text-[10px] sm:text-xs md:text-sm tracking-[4px] md:tracking-[6px] uppercase font-semibold mb-4 md:mb-6">
           Fortress Investment Holdings

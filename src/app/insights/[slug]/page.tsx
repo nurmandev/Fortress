@@ -129,7 +129,7 @@ export default async function ArticlePage({ params }: Props) {
             </p>
             <p>
               At Fortress Investment Holdings, we are committed to sharing thoughtful, well-researched commentary
-              on the sectors and markets we invest in — including real estate, private equity, technology, and
+              on the sectors and markets we invest in  including real estate, private equity, technology, and
               hospitality across the UAE and beyond.
             </p>
             <p>

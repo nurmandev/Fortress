@@ -59,7 +59,7 @@ export default function WhatWeDo() {
         <div ref={headerRef} className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6">
           <div>
             <span className="block text-fortress-gold text-xs tracking-[6px] uppercase mb-4 font-semibold">
-              02 — What We Do
+              02  What We Do
             </span>
             <h2 className="text-2xl md:text-5xl font-light text-fortress-ivory leading-tight uppercase tracking-tight">
               Strategic Investment. Sustainable Growth.

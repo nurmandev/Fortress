@@ -39,7 +39,7 @@ export const allArticles: Article[] = [
     slug: "value-of-business-acquisitions",
     category: "Business Acquisitions",
     title: "Understanding the Value of Business Acquisitions",
-    excerpt: "The key factors serious investors evaluate before acquiring an established company — and the warning signs that end negotiations early.",
+    excerpt: "The key factors serious investors evaluate before acquiring an established company  and the warning signs that end negotiations early.",
     date: "July 2026",
     readTime: "5 min read",
   },

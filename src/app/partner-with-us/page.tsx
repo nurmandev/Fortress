@@ -45,7 +45,7 @@ export default function PartnerWithUsPage() {
             <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Build the Next Opportunity With Fortress</p>
             <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-4 md:mb-6">Investment and Growth Support</h2>
             <p className="text-fortress-silver text-sm md:text-lg leading-relaxed">
-              Behind every submission to Fortress is someone&rsquo;s business, project, or vision. We treat each one accordingly — with professionalism, discretion, and a genuine review. Fortress Investment Holdings welcomes selected proposals from individuals and organisations seeking capital, acquisitions, joint ventures, strategic support, or long-term investment partnerships.
+              Behind every submission to Fortress is someone&rsquo;s business, project, or vision. We treat each one accordingly  with professionalism, discretion, and a genuine review. Fortress Investment Holdings welcomes selected proposals from individuals and organisations seeking capital, acquisitions, joint ventures, strategic support, or long-term investment partnerships.
             </p>
           </div>
         </div>

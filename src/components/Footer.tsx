@@ -191,7 +191,7 @@ export default function Footer() {
 
       {/* ══════════════ UPPER SECTION ══════════════ */}
       <div className="relative">
-        {/* Background image — right half visible, left fades out */}
+        {/* Background image  right half visible, left fades out */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/Hero-Background.png"
@@ -201,7 +201,7 @@ export default function Footer() {
             sizes="100vw"
             aria-hidden="true"
           />
-          {/* Strong overlay — heavy left, lighter right so skyline peeks through */}
+          {/* Strong overlay  heavy left, lighter right so skyline peeks through */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#080e1a] via-[#080e1a]/92 to-[#080e1a]/65" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080e1a] via-transparent to-[#080e1a]/40" />
         </div>
@@ -313,7 +313,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* 3 Pillars — icons only, text on hover */}
+          {/* 3 Pillars  icons only, text on hover */}
           <div className="flex flex-row gap-6 sm:gap-10 lg:gap-14">
             {pillars.map((p) => (
               <div key={p.title} className="group relative flex items-center justify-center">
