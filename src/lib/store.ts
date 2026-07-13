@@ -239,7 +239,7 @@ const defaultSettings: SiteSettings = {
     { platform: "X (Twitter)", url: "#" },
     { platform: "YouTube", url: "#" },
   ],
-  footerContent: "A Dubai-based diversified investment holding company identifying, acquiring, and growing high-potential businesses across real estate, private equity, technology, and hospitality.",
+  footerContent: "A Dubai-based diversified investment holding company focused on identifying, acquiring, and growing high-potential opportunities across real estate, private equity, technology, digital assets, energy, commodities, and hospitality.",
   logo: "/large-logo.png",
   favicon: "",
 };

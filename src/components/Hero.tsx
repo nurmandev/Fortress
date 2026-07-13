@@ -65,7 +65,7 @@ export default function Hero() {
         </h1>
 
         <p ref={subRef} className="text-fortress-silver/90 text-sm sm:text-base md:text-lg lg:text-xl max-w-sm sm:max-w-xl md:max-w-3xl leading-relaxed mb-8 md:mb-10 font-light">
-          A Dubai-based diversified investment holding company identifying, acquiring, and growing high-potential businesses across real estate, private equity, technology, and hospitality.
+          A Dubai-based diversified investment holding company focused on identifying, acquiring, and growing high-potential opportunities across real estate, private equity, technology, digital assets, energy, commodities, and hospitality.
         </p>
 
         <div ref={btnsRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">

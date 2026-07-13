@@ -229,9 +229,7 @@ export default function Footer() {
 
             {/* Description */}
             <p className="text-[#8fa0b8] text-sm leading-relaxed max-w-[230px]">
-              A Dubai-based diversified investment holding company identifying,
-              acquiring, and growing high-potential businesses across real estate,
-              private equity, technology, and hospitality.
+              A Dubai-based diversified investment holding company focused on identifying, acquiring, and growing high-potential opportunities across real estate, private equity, technology, digital assets, energy, commodities, and hospitality.
             </p>
 
             {/* Download Brochure button */}

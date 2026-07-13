@@ -1,6 +1,7 @@
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Shield, Eye, Target, Award, Users, Scale, Lock, Hexagon } from "lucide-react";
+import { Shield, Eye, Target, Award, Users, Scale, Lock, Hexagon, Heart } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ const values = [
   { icon: Award, title: "Excellence", description: "We hold ourselves to high standards across every investment, partnership, and business interaction." },
   { icon: Scale, title: "Accountability", description: "We take full responsibility for our decisions, commitments, and performance. We do what we say." },
   { icon: Lock, title: "Confidentiality", description: "We protect the information, interests, and privacy of our partners and stakeholders  always." },
+  { icon: Heart, title: "Client-Centricity", description: "We place clients at the centre of every decision, focusing on trust, transparency, and long-term value creation." },
 ];
 
 const philosophyPoints = [
@@ -82,9 +84,9 @@ export default function AboutPage() {
                 <Eye className="w-6 h-6 md:w-7 md:h-7 text-fortress-gold" />
               </div>
               <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-3">Our Vision</p>
-              <h3 className="text-lg md:text-2xl font-bold text-fortress-ivory mb-3 md:mb-4">To Build a Globally Respected Investment Group</h3>
+              <h3 className="text-lg md:text-2xl font-bold text-fortress-ivory mb-3 md:mb-4">To Build a Globally Respected, Client-Centric Investment Group</h3>
               <p className="text-fortress-silver text-sm md:text-base leading-relaxed">
-                Our vision is to establish Fortress Investment Holdings as a trusted, diversified, and internationally recognised investment group. We measure success by the strength of our portfolio, not its size.
+                Our vision is to establish Fortress Investment Holdings as a trusted, diversified, and internationally recognised investment group built around client confidence, disciplined growth, and long-term value creation. We measure success by the strength of our portfolio and the trust we build with every client and partner.
               </p>
             </div>
             <div className="bg-fortress-deep border border-fortress-gold/10 p-6 md:p-10 rounded-2xl">
@@ -92,9 +94,9 @@ export default function AboutPage() {
                 <Target className="w-6 h-6 md:w-7 md:h-7 text-fortress-gold" />
               </div>
               <p className="text-fortress-gold text-sm font-medium tracking-[4px] uppercase mb-3">Our Mission</p>
-              <h3 className="text-lg md:text-2xl font-bold text-fortress-ivory mb-3 md:mb-4">Investing in Strength. Creating Lasting Value.</h3>
+              <h3 className="text-lg md:text-2xl font-bold text-fortress-ivory mb-3 md:mb-4">Investing with Strength. Serving with Trust. Creating Lasting Value.</h3>
               <p className="text-fortress-silver text-sm md:text-base leading-relaxed">
-                Our mission is to identify high-potential opportunities, deploy capital responsibly, and support sustainable growth through strategic involvement, strong governance, and long-term partnerships.
+                Our mission is to identify high-potential opportunities, deploy capital responsibly, and support sustainable growth through strategic involvement, strong governance, and long-term partnerships. We place clients at the centre of every decision, focusing on transparency, trust, and value-driven outcomes.
               </p>
             </div>
           </div>
@@ -110,18 +112,28 @@ export default function AboutPage() {
           </div>
           <div className="grid lg:grid-cols-2 gap-6 md:gap-12 items-start">
             <div className="bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 rounded-2xl">
-              <h3 className="text-lg md:text-xl font-bold text-fortress-ivory mb-1 whitespace-nowrap">Yogesh</h3>
+              <div className="relative w-full aspect-[4/5] mb-6 overflow-hidden rounded-lg">
+                <Image src="/Azzam-El-Khatib.jpeg" alt="Azzam El-Khatib" fill className="object-cover" loading="lazy" sizes="(max-width: 768px) 100vw, 50vw" />
+              </div>
+              <h3 className="text-lg md:text-xl font-bold text-fortress-ivory mb-1">Azzam El-Khatib</h3>
               <p className="text-fortress-gold text-sm font-medium mb-4 md:mb-6">Founder and Chief Executive Officer</p>
               <div className="space-y-3 md:space-y-4 text-fortress-silver text-sm md:text-base leading-relaxed">
-                <p>Yogesh leads Fortress Investment Holdings with a firm commitment to responsible investment, disciplined growth, and long-term value creation.</p>
-                <p>With experience spanning business development, investment evaluation, and strategic partnerships, Yogesh provides the leadership behind every investment decision.</p>
-                <p>Yogesh&rsquo;s approach is grounded in integrity, accountability, and the conviction that the best investments are built on strong relationships between all stakeholders.</p>
+                <p>Azzam El-Khatib leads Fortress Investment Holdings with a strong commitment to disciplined growth, client service, and responsible investment management.</p>
+                <p>With an extensive network across the UAE, GCC and international markets, Azzam plays a central role in building strategic relationships, identifying investment opportunities, and driving the company&rsquo;s long-term vision.</p>
+                <p>His leadership is defined by discipline, accountability, and a client-first approach. He is committed to protecting clients&rsquo; interests, creating sustainable value, and delivering strong, well-considered returns on every investment.</p>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 flex items-center rounded-2xl">
-              <blockquote className="text-lg md:text-2xl text-fortress-ivory leading-relaxed border-l-4 border-fortress-gold pl-4 md:pl-6">
-                &ldquo;Our objective is not simply to invest capital. It is to build strong foundations, support meaningful growth, and create value that lasts.&rdquo;
-              </blockquote>
+            <div className="bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 rounded-2xl">
+              <div className="relative w-full aspect-[4/5] mb-6 overflow-hidden rounded-lg">
+                <Image src="/Serhii-Pohrebniak.jpeg" alt="Serhii Pohrebniak" fill className="object-cover" loading="lazy" sizes="(max-width: 768px) 100vw, 50vw" />
+              </div>
+              <h3 className="text-lg md:text-xl font-bold text-fortress-ivory mb-1">Serhii Pohrebniak</h3>
+              <p className="text-fortress-gold text-sm font-medium mb-4 md:mb-6">Business Strategist</p>
+              <div className="space-y-3 md:space-y-4 text-fortress-silver text-sm md:text-base leading-relaxed">
+                <p>Serhii Pohrebniak is a key member of Fortress Investment Holdings and one of the strategic minds behind the company&rsquo;s vision and direction. With a military background, he brings discipline, resilience, structure, and a strong sense of responsibility to every aspect of the business.</p>
+                <p>His diverse life and business experiences allow him to approach challenges with clarity, practical thinking, and a long-term perspective. Serhii plays an important role in shaping business strategies, identifying opportunities, and supporting the company&rsquo;s growth.</p>
+                <p>He strongly believes that meaningful goals are achieved through consistency, discipline, and focused action. This philosophy forms the foundation of his approach to both business and life.</p>
+              </div>
             </div>
           </div>
         </div>

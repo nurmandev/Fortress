@@ -13,7 +13,7 @@ const benefits = [
   { title: "Diversified Expertise", desc: "Our multi-sector approach means we understand how different industries, asset classes, and market cycles behave - and how to position investments accordingly." },
   { title: "Strategic Involvement", desc: "Where it adds value, we contribute far more than capital: strategic guidance, business development, governance, and access to established professional networks." },
   { title: "Trusted Partnerships", desc: "We build relationships on transparency, confidentiality, alignment, and mutual benefit. Our reputation is our most carefully protected asset." },
-  { title: "UAE Market Access", desc: "Based in Dubai, we operate at the heart of one of the world's most dynamic investment environments - with direct access to regional capital, talent, regulators, and opportunity flow." },
+  { title: "UAE Market Access", desc: "Based in Dubai, we operate at the crossroads of regional and global investment flows, with access to capital, talent, regulators, and high-value opportunities across the UAE, GCC, and international markets." },
 ];
 
 export default function WhyChooseUs() {

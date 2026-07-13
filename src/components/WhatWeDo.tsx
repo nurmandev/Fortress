@@ -11,7 +11,7 @@ const activities = [
   { title: "Direct Investments", desc: "Deploying capital into businesses and assets with clear commercial fundamentals.", className: "md:col-span-2" },
   { title: "Business Acquisitions", desc: "Acquiring established companies with proven operations and room to grow.", className: "md:col-span-1" },
   { title: "Private Equity Participation", desc: "Backing privately held companies with scalable models and capable leadership.", className: "md:col-span-1" },
-  { title: "Real Estate Investments", desc: "Residential, commercial, hospitality, and income-generating property across the UAE.", className: "md:col-span-2" },
+  { title: "Real Estate Investments", desc: "Strategic real estate investments across residential, commercial, hospitality, and income-generating assets in the UAE, GCC, and global markets.", className: "md:col-span-2" },
   { title: "Joint Ventures & Strategic Partnerships", desc: "Combining strengths with partners who share our standards.", className: "md:col-span-2" },
   { title: "Business Expansion Support", desc: "Helping portfolio companies enter new markets and scale operations.", className: "md:col-span-1" },
   { title: "Trading & Distribution", desc: "Connecting reliable products with growing regional demand.", className: "md:col-span-1" },
