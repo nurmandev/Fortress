@@ -75,9 +75,9 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-white flex">
       <AdminSidebar active="Dashboard" />
-      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen pt-12 md:pt-0">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen">
         <div className="bg-fortress-deep border-b border-fortress-charcoal">
-          <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 pl-14 md:pl-6">
             <div className="flex items-center justify-between h-14">
               <h1 className="text-lg font-bold text-fortress-ivory tracking-tight">Dashboard</h1>
               <div className="flex items-center gap-2">
