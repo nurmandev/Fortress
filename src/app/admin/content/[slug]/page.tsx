@@ -3,7 +3,7 @@
 import { useEffect, useState, use } from "react";
 import Link from "next/link";
 import AdminSidebar from "@/components/AdminSidebar";
-import { ArrowLeft, Save } from "lucide-react";
+import { ArrowLeft, Save, Eye } from "lucide-react";
 import RichTextEditor from "@/components/RichTextEditor";
 
 const pageLabels: Record<string, string> = {
@@ -48,50 +48,53 @@ export default function PageEditor({ params }: { params: Promise<{ slug: string 
   }
 
   return (
-    <div className="min-h-screen bg-fortress-navy flex">
+    <div className="min-h-screen bg-white flex">
       <AdminSidebar active="Content" />
       <main className="flex-1 overflow-auto min-h-screen pt-12 md:pt-0">
-        <div className="max-w-3xl mx-auto px-4 md:px-5 py-4 md:py-5">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <Link href="/admin/content" className="flex items-center gap-1 text-fortress-silver/50 hover:text-fortress-gold text-xs transition-colors mb-1">
-                <ArrowLeft className="w-3 h-3" /> Back to Content
+              <Link href="/admin/content" className="flex items-center gap-1.5 text-fortress-silver/50 hover:text-fortress-gold text-xs transition-colors mb-2">
+                <ArrowLeft className="w-3.5 h-3.5" /> Back to Content
               </Link>
-              <h1 className="text-xl font-bold text-fortress-ivory">{pageLabels[slug] || slug}</h1>
+              <h1 className="text-2xl font-bold text-fortress-navy tracking-tight">{pageLabels[slug] || slug}</h1>
             </div>
             <div className="flex items-center gap-2">
-              {saved && <span className="text-xs text-green-400">Saved</span>}
+              {saved && <span className="text-xs text-fortress-gold font-medium">Saved</span>}
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex items-center gap-1.5 px-4 py-2 bg-fortress-gold text-fortress-navy text-sm font-bold hover:bg-fortress-champagne transition-colors disabled:opacity-50"
+                className="flex items-center gap-2 px-5 py-2.5 bg-fortress-gold text-fortress-navy text-sm font-bold hover:bg-fortress-champagne transition-colors disabled:opacity-50 rounded-lg"
               >
                 <Save className="w-4 h-4" />
-                {saving ? "Saving..." : "Save"}
+                {saving ? "Saving..." : "Save Changes"}
               </button>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <div>
-              <label className="block text-fortress-silver text-xs font-medium mb-1">Page Title</label>
+          <div className="space-y-5">
+            <div className="bg-fortress-navy border-t-2 border-t-fortress-gold/30 p-5 rounded-lg">
+              <label className="block text-fortress-silver text-xs font-medium mb-2 tracking-wide">Page Title</label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-2.5 focus:outline-none focus:border-fortress-gold/50 transition-colors"
+                className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 transition-colors rounded-lg"
               />
             </div>
 
-            <div>
-              <label className="block text-fortress-silver text-xs font-medium mb-1">Content</label>
+            <div className="bg-fortress-navy border-t-2 border-t-fortress-gold/30 p-5 rounded-lg">
+              <label className="block text-fortress-silver text-xs font-medium mb-2 tracking-wide">Content</label>
               <RichTextEditor value={content} onChange={setContent} />
             </div>
 
-            <div>
-              <label className="block text-fortress-silver text-xs font-medium mb-1">Preview</label>
-              <div className="border border-white/5 p-4 bg-fortress-deep">
-                <div className="prose prose-invert max-w-none text-fortress-ivory text-sm" dangerouslySetInnerHTML={{ __html: content }} />
+            <div className="bg-fortress-navy border-t-2 border-t-fortress-gold/30 p-5 rounded-lg">
+              <div className="flex items-center gap-2 mb-3">
+                <Eye className="w-4 h-4 text-fortress-gold" />
+                <label className="text-fortress-silver text-xs font-medium tracking-wide">Preview</label>
+              </div>
+              <div className="border border-white/5 p-5 bg-fortress-deep rounded-lg">
+                <div className="prose max-w-none text-fortress-ivory text-sm" dangerouslySetInnerHTML={{ __html: content }} />
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import AdminSidebar from "@/components/AdminSidebar";
-import { FileText, Edit3 } from "lucide-react";
+import { FileText, ChevronRight } from "lucide-react";
 
 interface PageItem {
   slug: string;
@@ -31,38 +31,34 @@ export default function ContentList() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-fortress-navy flex">
+    <div className="min-h-screen bg-white flex">
       <AdminSidebar active="Content" />
       <main className="flex-1 overflow-auto min-h-screen pt-12 md:pt-0">
-        <div className="max-w-3xl mx-auto px-4 md:px-5 py-4 md:py-5">
-          <div className="mb-4">
-            <h1 className="text-xl font-bold text-fortress-ivory">Content Management</h1>
-            <p className="text-fortress-silver text-xs mt-0.5">
-              Manage all static website pages from one place
-            </p>
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
+          <div className="mb-6">
+            <h1 className="text-2xl font-bold text-fortress-navy tracking-tight">Content Management</h1>
+            <p className="text-fortress-silver text-sm mt-1">Manage all static website pages</p>
           </div>
 
-          <div className="grid gap-1.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {pages.map((page) => (
               <Link
                 key={page.slug}
                 href={`/admin/content/${page.slug}`}
-                className="flex items-center justify-between p-4 bg-fortress-deep border border-white/5 hover:border-white/10 transition-colors group"
+                className="flex flex-col p-5 bg-fortress-navy border border-white/5 hover:border-fortress-gold/30 transition-all group rounded-lg"
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-fortress-charcoal flex items-center justify-center">
-                    <FileText className="w-4 h-4 text-fortress-gold" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-fortress-ivory">{page.title}</p>
-                    <p className="text-[10px] text-fortress-silver/40">
-                      Updated {timeAgo(page.updatedAt)}
-                    </p>
-                  </div>
+                <div className="w-10 h-10 bg-fortress-deep flex items-center justify-center rounded-lg mb-4">
+                  <FileText className="w-4 h-4 text-fortress-gold" />
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-fortress-silver/30 group-hover:text-fortress-gold transition-colors">Edit</span>
-                  <Edit3 className="w-3.5 h-3.5 text-fortress-silver/30 group-hover:text-fortress-gold transition-colors" />
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-fortress-ivory group-hover:text-fortress-gold transition-colors">{page.title}</p>
+                  <p className="text-[11px] text-fortress-silver/40 mt-1">
+                    Updated {timeAgo(page.updatedAt)}
+                  </p>
+                </div>
+                <div className="flex items-center gap-1 mt-3 pt-3 border-t border-fortress-charcoal">
+                  <span className="text-xs text-fortress-silver/30 group-hover:text-fortress-gold/60 transition-colors">Edit</span>
+                  <ChevronRight className="w-3.5 h-3.5 text-fortress-silver/20 group-hover:text-fortress-gold/50 transition-colors" />
                 </div>
               </Link>
             ))}

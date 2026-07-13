@@ -55,14 +55,14 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
   }, [onChange]);
 
   return (
-    <div className="border border-white/10">
-      <div className="flex items-center gap-0.5 p-1.5 bg-fortress-charcoal border-b border-white/10 flex-wrap">
+    <div className="border border-white/10 rounded-lg overflow-hidden">
+      <div className="flex items-center gap-0.5 p-1.5 bg-fortress-deep border-b border-white/10 flex-wrap">
         {tools.map((t) => (
           <button
             key={t.cmd + (t.value || "")}
             type="button"
             onMouseDown={(e) => { e.preventDefault(); exec(t.cmd, t.value); }}
-            className="p-1.5 text-fortress-silver hover:text-fortress-ivory hover:bg-white/5 transition-colors"
+            className="p-1.5 text-fortress-silver hover:text-fortress-ivory hover:bg-fortress-charcoal transition-colors rounded-md"
             title={t.label}
           >
             <t.icon className="w-4 h-4" />
@@ -72,7 +72,7 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
         <button
           type="button"
           onClick={handleImageUpload}
-          className="p-1.5 text-fortress-silver hover:text-fortress-ivory hover:bg-white/5 transition-colors"
+          className="p-1.5 text-fortress-silver hover:text-fortress-ivory hover:bg-fortress-charcoal transition-colors rounded-md"
           title="Insert Image"
         >
           <Image className="w-4 h-4" />
@@ -81,7 +81,7 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
         <button
           type="button"
           onMouseDown={(e) => { e.preventDefault(); document.execCommand("undo"); if (editorRef.current) onChange(editorRef.current.innerHTML); }}
-          className="p-1.5 text-fortress-silver hover:text-fortress-ivory hover:bg-white/5 transition-colors"
+          className="p-1.5 text-fortress-silver hover:text-fortress-ivory hover:bg-fortress-charcoal transition-colors rounded-md"
           title="Undo"
         >
           <Undo className="w-4 h-4" />
@@ -89,7 +89,7 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
         <button
           type="button"
           onMouseDown={(e) => { e.preventDefault(); document.execCommand("redo"); if (editorRef.current) onChange(editorRef.current.innerHTML); }}
-          className="p-1.5 text-fortress-silver hover:text-fortress-ivory hover:bg-white/5 transition-colors"
+          className="p-1.5 text-fortress-silver hover:text-fortress-ivory hover:bg-fortress-charcoal transition-colors rounded-md"
           title="Redo"
         >
           <Redo className="w-4 h-4" />
@@ -99,7 +99,7 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
         ref={editorRef}
         contentEditable
         suppressContentEditableWarning
-        className="min-h-[300px] p-4 text-fortress-ivory text-sm focus:outline-none prose prose-invert max-w-none"
+        className="min-h-[300px] p-4 bg-fortress-charcoal text-fortress-ivory text-sm focus:outline-none prose prose-invert max-w-none"
         dangerouslySetInnerHTML={{ __html: value }}
         onInput={() => {
           if (editorRef.current) onChange(editorRef.current.innerHTML);

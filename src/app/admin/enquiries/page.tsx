@@ -5,6 +5,10 @@ import {
   Download,
   Trash2,
   CheckCheck,
+  Mail,
+  Phone,
+  Building2,
+  TrendingUp,
 } from "lucide-react";
 import AdminSidebar from "@/components/AdminSidebar";
 
@@ -24,8 +28,6 @@ interface EnquiryItem {
     fileName?: string;
   };
 }
-
-
 
 function timeAgo(dateStr: string) {
   const diff = Date.now() - new Date(dateStr).getTime();
@@ -66,18 +68,18 @@ export default function EnquiriesPage() {
   const unread = enquiries.filter((e) => !e.read).length;
 
   return (
-    <div className="min-h-screen bg-fortress-navy flex">
+    <div className="min-h-screen bg-white flex">
       <AdminSidebar active="Enquiries" />
       <main className="flex-1 overflow-auto min-h-screen pt-12 md:pt-0 flex flex-col md:flex-row">
-        <div className={`w-full md:w-[420px] border-b md:border-b-0 md:border-r border-white/5 flex flex-col ${selected ? "hidden md:flex" : ""}`}>
-          <div className="p-4 border-b border-white/5">
+        <div className={`w-full md:w-[420px] border-b md:border-b-0 md:border-r border-fortress-charcoal flex flex-col bg-white ${selected ? "hidden md:flex" : ""}`}>
+          <div className="p-4 border-b border-fortress-charcoal">
             <div className="flex items-center justify-between mb-3">
-              <h1 className="text-lg font-bold text-fortress-ivory">Enquiries</h1>
-              {unread > 0 && <span className="text-[10px] bg-fortress-gold text-fortress-navy font-bold px-2 py-0.5">{unread} unread</span>}
+              <h1 className="text-lg font-bold text-fortress-navy tracking-tight">Enquiries</h1>
+              {unread > 0 && <span className="text-[10px] bg-fortress-gold/15 text-fortress-gold font-bold px-2 py-0.5 rounded-full tracking-wide">{unread} unread</span>}
             </div>
-            <div className="flex gap-1">
+            <div className="flex gap-1 p-1 bg-fortress-deep rounded-lg">
               {(["all", "contact", "submission"] as const).map((f) => (
-                <button key={f} onClick={() => setFilter(f)} className={`px-3 py-1.5 text-xs font-medium transition-colors ${filter === f ? "bg-fortress-gold text-fortress-navy" : "bg-fortress-charcoal text-fortress-silver hover:text-fortress-ivory"}`}>
+                <button key={f} onClick={() => setFilter(f)} className={`flex-1 px-3 py-1.5 text-xs font-medium transition-colors tracking-wide rounded-md ${filter === f ? "bg-fortress-navy text-fortress-ivory shadow-sm" : "text-fortress-silver hover:text-fortress-ivory hover:bg-fortress-charcoal"}`}>
                   {f === "all" ? "All" : f === "contact" ? "Contacts" : "Submissions"}
                 </button>
               ))}
@@ -88,76 +90,98 @@ export default function EnquiriesPage() {
               <button
                 key={e.id}
                 onClick={() => setSelected(e)}
-                className={`w-full text-left p-3 transition-colors ${selected?.id === e.id ? "bg-fortress-charcoal" : "hover:bg-fortress-charcoal/60"} ${!e.read ? "border-l-2 border-fortress-gold" : "border-l-2 border-transparent"}`}
+                className={`w-full text-left p-3 transition-all rounded-lg ${selected?.id === e.id ? "bg-fortress-navy border-l-2 border-fortress-gold" : "hover:bg-fortress-deep/30 border-l-2 border-transparent"} ${!e.read ? "border-fortress-gold" : ""}`}
               >
                 <div className="flex items-center justify-between gap-2">
-                  <p className="text-sm font-medium text-fortress-ivory truncate">{e.name}</p>
-                  <span className="text-[10px] text-fortress-silver/40 whitespace-nowrap">{timeAgo(e.createdAt)}</span>
+                  <p className={`text-sm truncate ${selected?.id === e.id ? "font-semibold text-fortress-ivory" : !e.read ? "font-semibold text-fortress-navy" : "font-medium text-fortress-navy/70"}`}>{e.name}</p>
+                  <span className="text-[10px] text-fortress-silver whitespace-nowrap">{timeAgo(e.createdAt)}</span>
                 </div>
-                <p className="text-xs text-fortress-silver/60 truncate mt-0.5">{e.subject}</p>
-                <p className="text-[10px] text-fortress-silver/30 mt-0.5 capitalize">{e.type}</p>
+                <p className={`text-xs truncate mt-0.5 ${selected?.id === e.id ? "text-fortress-silver" : "text-fortress-navy/50"}`}>{e.subject}</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className={`text-[10px] uppercase tracking-wider ${selected?.id === e.id ? "text-fortress-silver/60" : "text-fortress-silver"}`}>{e.type}</span>
+                  {!e.read && <span className="w-1.5 h-1.5 bg-fortress-gold rounded-full" />}
+                </div>
               </button>
             ))}
-            {filtered.length === 0 && <p className="text-center text-fortress-silver/40 text-xs py-8">No enquiries</p>}
+            {filtered.length === 0 && <p className="text-center text-fortress-silver text-xs py-10">No enquiries found</p>}
           </div>
         </div>
 
-        <div className={`flex-1 p-4 md:p-6 overflow-auto ${!selected ? "hidden md:block" : ""}`}>
+        <div className={`flex-1 p-5 md:p-8 overflow-auto bg-white ${!selected ? "hidden md:flex md:items-center md:justify-center" : ""}`}>
           {selected ? (
-            <div className="space-y-5">
-              <button onClick={() => setSelected(null)} className="md:hidden flex items-center gap-1 text-fortress-silver/50 hover:text-fortress-gold text-xs transition-colors mb-2">
-                <svg className="w-3 h-3 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
+            <div className="max-w-2xl mx-auto space-y-6 w-full">
+              <button onClick={() => setSelected(null)} className="md:hidden flex items-center gap-1.5 text-fortress-silver hover:text-fortress-navy text-xs transition-colors mb-3 rounded-md">
+                <svg className="w-3.5 h-3.5 rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
                 Back to list
               </button>
+
               <div className="flex items-start justify-between">
                 <div>
-                  <h2 className="text-lg font-bold text-fortress-ivory">{selected.name}</h2>
-                  <a href={`mailto:${selected.email}`} className="text-fortress-gold text-xs hover:underline">{selected.email}</a>
-                  <p className="text-fortress-silver/40 text-[10px] mt-0.5 capitalize">{selected.type} &middot; {selected.subject}</p>
+                  <h2 className="text-2xl font-bold text-fortress-navy tracking-tight">{selected.name}</h2>
+                  <a href={`mailto:${selected.email}`} className="text-fortress-gold text-sm hover:text-fortress-champagne inline-flex items-center gap-1.5 mt-1">
+                    <Mail className="w-4 h-4" /> {selected.email}
+                  </a>
+                  <p className="text-fortress-silver text-xs mt-3 capitalize flex items-center gap-2">
+                    <span className="px-2 py-1 bg-fortress-deep border border-fortress-charcoal rounded-md text-fortress-silver text-[10px] font-medium tracking-wide">{selected.type}</span>
+                    {selected.subject}
+                  </p>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 bg-fortress-deep border border-fortress-charcoal rounded-lg p-1">
                   {!selected.read && (
-                    <button onClick={() => handleMarkRead(selected.id)} className="p-2 text-fortress-silver/40 hover:text-green-400 transition-colors" title="Mark as read">
+                    <button onClick={() => handleMarkRead(selected.id)} className="p-2 text-fortress-silver hover:text-fortress-champagne transition-colors rounded-md hover:bg-fortress-charcoal" title="Mark as read">
                       <CheckCheck className="w-4 h-4" />
                     </button>
                   )}
-                  <button onClick={() => handleDelete(selected.id)} className="p-2 text-fortress-silver/40 hover:text-red-400 transition-colors" title="Delete">
+                  <button onClick={() => handleDelete(selected.id)} className="p-2 text-fortress-silver hover:text-fortress-champagne transition-colors rounded-md hover:bg-fortress-charcoal" title="Delete">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               </div>
 
-              {selected.details?.phone && (
-                <div className="text-xs text-fortress-silver/60">
-                  Phone: <span className="text-fortress-ivory">{selected.details.phone}</span>
-                </div>
-              )}
-              {selected.details?.company && (
-                <div className="text-xs text-fortress-silver/60">
-                  Company: <span className="text-fortress-ivory">{selected.details.company}</span>
-                </div>
-              )}
-              {selected.details?.investmentRange && (
-                <div className="text-xs text-fortress-silver/60">
-                  Investment Range: <span className="text-fortress-ivory">{selected.details.investmentRange}</span>
-                </div>
-              )}
+              <div className="flex flex-wrap gap-3">
+                {selected.details?.phone && (
+                  <div className="flex items-center gap-2 text-xs text-fortress-silver bg-fortress-deep border border-fortress-charcoal rounded-lg px-3 py-2">
+                    <Phone className="w-3.5 h-3.5 text-fortress-gold" />
+                    <span className="text-fortress-ivory font-medium">{selected.details.phone}</span>
+                  </div>
+                )}
+                {selected.details?.company && (
+                  <div className="flex items-center gap-2 text-xs text-fortress-silver bg-fortress-deep border border-fortress-charcoal rounded-lg px-3 py-2">
+                    <Building2 className="w-3.5 h-3.5 text-fortress-gold" />
+                    <span className="text-fortress-ivory font-medium">{selected.details.company}</span>
+                  </div>
+                )}
+                {selected.details?.investmentRange && (
+                  <div className="flex items-center gap-2 text-xs text-fortress-silver bg-fortress-deep border border-fortress-charcoal rounded-lg px-3 py-2">
+                    <TrendingUp className="w-3.5 h-3.5 text-fortress-gold" />
+                    <span className="text-fortress-ivory font-medium">{selected.details.investmentRange}</span>
+                  </div>
+                )}
+              </div>
 
-              <div className="bg-fortress-deep border border-white/5 p-4">
-                <p className="text-fortress-ivory text-sm whitespace-pre-wrap">{selected.message}</p>
+              <div className="bg-fortress-navy border border-fortress-charcoal rounded-xl p-6">
+                <p className="text-fortress-silver text-sm leading-relaxed whitespace-pre-wrap">{selected.message}</p>
               </div>
 
               {selected.details?.fileName && (
-                <div className="flex items-center gap-3 p-3 bg-fortress-deep border border-white/5">
-                  <Download className="w-4 h-4 text-fortress-gold" />
-                  <span className="text-sm text-fortress-ivory">{selected.details.fileName}</span>
-                  <span className="text-xs text-fortress-silver/40">(uploaded document)</span>
+                <div className="flex items-center gap-3 p-4 bg-fortress-deep border border-fortress-charcoal rounded-xl hover:border-fortress-gold/30 transition-colors cursor-pointer">
+                  <div className="w-8 h-8 rounded-lg bg-fortress-navy flex items-center justify-center shrink-0">
+                    <Download className="w-4 h-4 text-fortress-gold" />
+                  </div>
+                  <div>
+                    <span className="block text-sm font-medium text-fortress-ivory">{selected.details.fileName}</span>
+                    <span className="block text-xs text-fortress-silver/60 mt-0.5">Uploaded document</span>
+                  </div>
                 </div>
               )}
             </div>
           ) : (
-            <div className="flex items-center justify-center h-full text-fortress-silver/30 text-sm">
-              Select an enquiry to view
+            <div className="text-center max-w-sm mx-auto">
+              <div className="w-16 h-16 bg-fortress-deep border border-fortress-charcoal rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Mail className="w-8 h-8 text-fortress-gold/40" />
+              </div>
+              <h3 className="text-fortress-navy font-medium mb-1">No enquiry selected</h3>
+              <p className="text-fortress-silver text-sm">Select an enquiry from the list to view its details</p>
             </div>
           )}
         </div>
