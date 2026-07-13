@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { User, Target, Handshake, Newspaper, Menu, X } from "lucide-react";
+import { User, Target, Handshake, Newspaper, Menu, X, Shield } from "lucide-react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
@@ -139,6 +139,13 @@ export default function Navbar() {
                   scrolled ? "border-fortress-gold/20" : "border-white/10"
                 }`}>
                   <Link
+                    href="/admin-login"
+                    className="text-fortress-silver/40 hover:text-fortress-gold transition-colors"
+                    title="Admin Login"
+                  >
+                    <Shield className="w-4 h-4" />
+                  </Link>
+                  <Link
                     href="/contact"
                     className="px-4 py-1.5 text-sm font-medium text-fortress-navy bg-fortress-gold hover:bg-fortress-champagne transition-colors whitespace-nowrap shadow-sm"
                   >
@@ -190,6 +197,14 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="h-px bg-white/10 my-2" />
+              <Link
+                href="/admin-login"
+                className="flex items-center gap-3 p-3 hover:bg-white/5 transition-colors text-fortress-silver/50 text-sm"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <Shield className="w-4 h-4" />
+                <span>Admin</span>
+              </Link>
               <Link
                 href="/contact"
                 className="flex items-center justify-center gap-2 p-3 bg-[#C9A24A] text-[#07111D] font-bold mt-1"
