@@ -33,7 +33,7 @@ export default function ContentList() {
   return (
     <div className="min-h-screen bg-white flex">
       <AdminSidebar active="Content" />
-      <main className="flex-1 overflow-auto min-h-screen pt-12 md:pt-0">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen pt-12 md:pt-0">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-fortress-navy tracking-tight">Content Management</h1>

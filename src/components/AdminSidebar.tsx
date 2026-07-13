@@ -47,7 +47,7 @@ export default function AdminSidebar({ active }: AdminSidebarProps) {
       )}
 
       <aside
-        className={`fixed md:relative top-0 left-0 z-40 w-64 bg-fortress-navy flex flex-col shrink-0 h-screen transition-transform duration-200 md:translate-x-0 border-r border-fortress-charcoal ${
+        className={`fixed md:sticky top-0 left-0 z-40 w-64 bg-fortress-navy flex flex-col shrink-0 h-screen transition-transform duration-200 md:translate-x-0 border-r border-fortress-charcoal ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >

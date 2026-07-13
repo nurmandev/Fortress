@@ -70,7 +70,7 @@ export default function EnquiriesPage() {
   return (
     <div className="min-h-screen bg-white flex">
       <AdminSidebar active="Enquiries" />
-      <main className="flex-1 overflow-auto min-h-screen pt-12 md:pt-0 flex flex-col md:flex-row">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen pt-12 md:pt-0 flex flex-col md:flex-row">
         <div className={`w-full md:w-[420px] border-b md:border-b-0 md:border-r border-fortress-charcoal flex flex-col bg-white ${selected ? "hidden md:flex" : ""}`}>
           <div className="p-4 border-b border-fortress-charcoal">
             <div className="flex items-center justify-between mb-3">

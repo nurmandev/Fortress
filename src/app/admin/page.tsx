@@ -14,6 +14,7 @@ import {
   ChevronRight,
   FileText,
   BarChart3,
+  Settings,
 } from "lucide-react";
 
 interface Activity {
@@ -66,7 +67,7 @@ export default function AdminDashboard() {
   if (!stats) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-fortress-gold border-t-transparent animate-spin" />
+        <div className="w-8 h-8 border-2 border-fortress-gold border-t-transparent animate-spin rounded-full" />
       </div>
     );
   }
@@ -74,15 +75,26 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-white flex">
       <AdminSidebar active="Dashboard" />
-      <main className="flex-1 overflow-auto min-h-screen pt-12 md:pt-0">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h1 className="text-2xl font-bold text-fortress-navy tracking-tight">Dashboard</h1>
-              <p className="text-fortress-silver text-sm mt-1">Welcome back, Admin</p>
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen pt-12 md:pt-0">
+        <div className="bg-fortress-deep border-b border-fortress-charcoal">
+          <div className="max-w-7xl mx-auto px-4 md:px-6">
+            <div className="flex items-center justify-between h-14">
+              <h1 className="text-lg font-bold text-fortress-ivory tracking-tight">Dashboard</h1>
+              <div className="flex items-center gap-2">
+                <Link href="/admin/settings" className="p-2 text-fortress-silver hover:text-fortress-champagne transition-colors rounded-lg hover:bg-fortress-charcoal">
+                  <Settings className="w-4 h-4" />
+                </Link>
+                <div className="ml-1 pl-2 border-l border-fortress-charcoal flex items-center gap-2">
+                  <div className="w-7 h-7 bg-fortress-gold rounded-full flex items-center justify-center">
+                    <span className="text-[10px] font-bold text-fortress-navy">A</span>
+                  </div>
+                  <span className="text-xs text-fortress-silver hidden sm:inline">Admin</span>
+                </div>
+              </div>
             </div>
           </div>
-
+        </div>
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
             {statCards.map((card) => (
               <div key={card.key} className="bg-fortress-navy rounded-xl shadow-lg">
