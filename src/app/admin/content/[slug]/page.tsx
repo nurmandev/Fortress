@@ -3,6 +3,7 @@
 import { useEffect, useState, use } from "react";
 import Link from "next/link";
 import AdminSidebar from "@/components/AdminSidebar";
+import AdminNavbar from "@/components/AdminNavbar";
 import { ArrowLeft, Save, Eye } from "lucide-react";
 import RichTextEditor from "@/components/RichTextEditor";
 
@@ -50,14 +51,14 @@ export default function PageEditor({ params }: { params: Promise<{ slug: string 
   return (
     <div className="min-h-screen bg-white flex">
       <AdminSidebar active="Content" />
-      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen pt-12 md:pt-0">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen">
+        <AdminNavbar title={pageLabels[slug] || slug} />
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
           <div className="flex items-center justify-between mb-6">
             <div>
               <Link href="/admin/content" className="flex items-center gap-1.5 text-fortress-silver/50 hover:text-fortress-gold text-xs transition-colors mb-2">
                 <ArrowLeft className="w-3.5 h-3.5" /> Back to Content
               </Link>
-              <h1 className="text-2xl font-bold text-fortress-navy tracking-tight">{pageLabels[slug] || slug}</h1>
             </div>
             <div className="flex items-center gap-2">
               {saved && <span className="text-xs text-fortress-gold font-medium">Saved</span>}

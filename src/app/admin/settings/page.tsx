@@ -12,6 +12,7 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 import AdminSidebar from "@/components/AdminSidebar";
+import AdminNavbar from "@/components/AdminNavbar";
 
 interface SocialLink {
   platform: string;
@@ -146,12 +147,12 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen bg-white flex">
       <AdminSidebar active="Settings" />
-      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen pt-12 md:pt-0">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen">
+        <AdminNavbar title="Settings" />
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-2xl font-bold text-fortress-navy tracking-tight">Settings</h1>
-              <p className="text-gray-400 text-sm mt-1">General website configuration</p>
+              <p className="text-gray-400 text-sm">General website configuration</p>
             </div>
             <div className="flex items-center gap-2">
               {saved && <span className="text-xs text-fortress-gold font-medium">Saved</span>}

@@ -11,6 +11,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import AdminSidebar from "@/components/AdminSidebar";
+import AdminNavbar from "@/components/AdminNavbar";
 
 interface EnquiryItem {
   id: string;
@@ -70,11 +71,12 @@ export default function EnquiriesPage() {
   return (
     <div className="min-h-screen bg-white flex">
       <AdminSidebar active="Enquiries" />
-      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen pt-12 md:pt-0 flex flex-col md:flex-row">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen">
+        <AdminNavbar title="Enquiries" />
+        <div className="flex flex-col md:flex-row flex-1 min-h-0">
         <div className={`w-full md:w-[420px] border-b md:border-b-0 md:border-r border-fortress-charcoal flex flex-col bg-white ${selected ? "hidden md:flex" : ""}`}>
           <div className="p-4 border-b border-fortress-charcoal">
             <div className="flex items-center justify-between mb-3">
-              <h1 className="text-lg font-bold text-fortress-navy tracking-tight">Enquiries</h1>
               {unread > 0 && <span className="text-[10px] bg-fortress-gold/15 text-fortress-gold font-bold px-2 py-0.5 rounded-full tracking-wide">{unread} unread</span>}
             </div>
             <div className="flex gap-1 p-1 bg-fortress-deep rounded-lg">
@@ -184,6 +186,7 @@ export default function EnquiriesPage() {
               <p className="text-fortress-silver text-sm">Select an enquiry from the list to view its details</p>
             </div>
           )}
+        </div>
         </div>
       </main>
     </div>

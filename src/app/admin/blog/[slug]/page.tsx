@@ -10,6 +10,7 @@ import {
   Eye,
 } from "lucide-react";
 import AdminSidebar from "@/components/AdminSidebar";
+import AdminNavbar from "@/components/AdminNavbar";
 import RichTextEditor from "@/components/RichTextEditor";
 
 const categories = [
@@ -102,14 +103,14 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
   return (
     <div className="min-h-screen bg-white flex">
       <AdminSidebar active="Blog Posts" />
-      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen pt-12 md:pt-0">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen">
+        <AdminNavbar title={isNew ? "New Article" : "Edit Article"} />
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
           <div className="flex items-center justify-between mb-6">
             <div>
               <Link href="/admin/blog" className="flex items-center gap-1.5 text-fortress-silver/50 hover:text-fortress-gold text-xs transition-colors mb-2">
                 <ArrowLeft className="w-3.5 h-3.5" /> Back to Blog
               </Link>
-              <h1 className="text-2xl font-bold text-fortress-navy tracking-tight">{isNew ? "New Article" : "Edit Article"}</h1>
             </div>
             <div className="flex items-center gap-2">
               {saved && <span className="text-xs text-fortress-gold font-medium">Saved</span>}

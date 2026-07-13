@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import AdminSidebar from "@/components/AdminSidebar";
+import AdminNavbar from "@/components/AdminNavbar";
 import {
   Newspaper,
   MessageCircle,
@@ -14,7 +15,6 @@ import {
   ChevronRight,
   FileText,
   BarChart3,
-  Settings,
 } from "lucide-react";
 
 interface Activity {
@@ -76,24 +76,7 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-white flex">
       <AdminSidebar active="Dashboard" />
       <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen">
-        <div className="bg-fortress-deep border-b border-fortress-charcoal">
-          <div className="max-w-7xl mx-auto px-4 md:px-6 pl-14 md:pl-6">
-            <div className="flex items-center justify-between h-14">
-              <h1 className="text-lg font-bold text-fortress-ivory tracking-tight">Dashboard</h1>
-              <div className="flex items-center gap-2">
-                <Link href="/admin/settings" className="p-2 text-fortress-silver hover:text-fortress-champagne transition-colors rounded-lg hover:bg-fortress-charcoal">
-                  <Settings className="w-4 h-4" />
-                </Link>
-                <div className="ml-1 pl-2 border-l border-fortress-charcoal flex items-center gap-2">
-                  <div className="w-7 h-7 bg-fortress-gold rounded-full flex items-center justify-center">
-                    <span className="text-[10px] font-bold text-fortress-navy">A</span>
-                  </div>
-                  <span className="text-xs text-fortress-silver hidden sm:inline">Admin</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <AdminNavbar title="Dashboard" />
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
             {statCards.map((card) => (
