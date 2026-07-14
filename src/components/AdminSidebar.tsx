@@ -53,7 +53,7 @@ export default function AdminSidebar({ active }: AdminSidebarProps) {
       >
         <div className="p-4 border-b border-fortress-charcoal">
           <div className="flex items-center justify-between">
-            <Image src="/large-logo.png" alt="Fortress" width={160} height={44} className="h-8 w-auto" />
+            <Image src="/large-logo.png" alt="Fortress" width={200} height={56} className="h-12 w-auto" />
             <button
               onClick={() => setOpen(false)}
               className="md:hidden text-fortress-silver hover:text-fortress-champagne"

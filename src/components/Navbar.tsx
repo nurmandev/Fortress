@@ -89,15 +89,15 @@ export default function Navbar() {
               </svg>
             </div>
 
-            <div className="relative w-full h-full flex items-end justify-between pb-2 px-4 md:px-8">
-              <nav className="hidden md:flex gap-8 mb-1 shrink-0">
+            <div className="relative w-full h-full flex items-center justify-between px-4 md:px-8">
+              <nav className="hidden md:flex gap-8 shrink-0">
                 {navItems.slice(0, 3).map(item => (
                   <NavLink key={item.label} {...item} scrolled={scrolled} />
                 ))}
               </nav>
 
               <button
-                className={`md:hidden mb-1 p-1 transition-colors ${
+                className={`md:hidden p-1 transition-colors ${
                   scrolled ? "text-gray-600 hover:text-fortress-gold" : "text-white/80 hover:text-[#C9A24A]"
                 }`}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -106,15 +106,15 @@ export default function Navbar() {
                 {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
 
-              <div className="flex justify-center shrink-0 mx-2 md:mx-4 mt-1">
+              <div className="flex justify-center shrink-0 mx-2 md:mx-4">
                 <Link href="/" className="flex items-center group">
                   <div className="bg-[#080e1a] rounded-xl px-4 py-1.5 shadow-md hidden md:block">
                     <Image
                       src="/large-logo.png"
                       alt="Fortress Investment Holdings"
-                      width={260}
-                      height={72}
-                      className="h-12 md:h-[5rem] w-auto object-contain"
+                      width={320}
+                      height={96}
+                      className="h-14 md:h-24 w-auto object-contain"
                       priority
                     />
                   </div>
@@ -122,9 +122,9 @@ export default function Navbar() {
                     <Image
                       src="/phone-logo.png"
                       alt="Fortress Investment Holdings"
-                      width={160}
-                      height={48}
-                      className="h-10 w-auto object-contain"
+                      width={200}
+                      height={60}
+                      className="h-14 w-auto object-contain"
                       priority
                     />
                   </div>

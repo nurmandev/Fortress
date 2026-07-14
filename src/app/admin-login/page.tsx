@@ -47,9 +47,9 @@ export default function AdminLoginPage() {
           <Image
             src="/large-logo.png"
             alt="Fortress Investment Holdings"
-            width={260}
-            height={72}
-            className="h-14 w-auto mx-auto mb-6"
+            width={320}
+            height={96}
+            className="h-24 w-auto mx-auto mb-6"
           />
           <div className="flex items-center justify-center gap-2 text-fortress-gold mb-2">
             <Shield className="w-5 h-5" />

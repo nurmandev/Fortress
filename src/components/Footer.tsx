@@ -221,9 +221,9 @@ export default function Footer() {
               <Image
                 src="/large-logo.png"
                 alt="Fortress Investment Holdings"
-                width={260}
-                height={80}
-                className="h-[5.5rem] w-auto object-contain drop-shadow-lg"
+                width={320}
+                height={96}
+                className="h-24 w-auto object-contain drop-shadow-lg"
               />
             </Link>
 
