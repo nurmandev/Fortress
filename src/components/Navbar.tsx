@@ -114,7 +114,7 @@ export default function Navbar() {
                       alt="Fortress Investment Holdings"
                       width={260}
                       height={72}
-                      className="h-12 md:h-[3.75rem] w-auto object-contain"
+                      className="h-12 md:h-[5rem] w-auto object-contain"
                       priority
                     />
                   </div>
@@ -122,9 +122,9 @@ export default function Navbar() {
                     <Image
                       src="/phone-logo.png"
                       alt="Fortress Investment Holdings"
-                      width={140}
-                      height={40}
-                      className="h-8 w-auto object-contain"
+                      width={160}
+                      height={48}
+                      className="h-10 w-auto object-contain"
                       priority
                     />
                   </div>

@@ -96,7 +96,6 @@ const principles = [
   "Responsible governance  structures that protect all stakeholders",
   "Manageable risk  downside we can understand and absorb",
   "Sustainable growth potential  value that compounds over time",
-  "Strategic alignment  a genuine fit with the Fortress portfolio",
 ];
 
 export default function OurApproachPage() {
