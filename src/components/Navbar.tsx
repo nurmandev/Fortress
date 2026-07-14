@@ -108,7 +108,7 @@ export default function Navbar() {
 
               <div className="flex justify-center shrink-0 mx-2 md:mx-4">
                 <Link href="/" className="flex items-center group">
-                  <div className="bg-[#080e1a] rounded-xl px-4 py-1.5 shadow-md hidden md:block">
+                  <div className={`rounded-xl px-4 py-1.5 hidden md:block ${scrolled ? "bg-white shadow-md" : "bg-[#07111D]/95 backdrop-blur-md"}`}>
                     <Image
                       src="/large-logo.png"
                       alt="Fortress Investment Holdings"
