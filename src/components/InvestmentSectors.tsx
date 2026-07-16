@@ -10,12 +10,15 @@ import { motion } from "framer-motion";
 gsap.registerPlugin(ScrollTrigger);
 
 const sectors = [
-  { title: "Real Estate", desc: "Residential, commercial, hospitality, and income-generating property investment across Dubai and the wider UAE.", image: "/plants-coins.jpg", className: "md:col-span-2 h-[280px] md:h-[380px]" },
-  { title: "Business Acquisitions", desc: "Established businesses with proven operations, stable demand, and clear opportunities for expansion.", image: "/business.jpg", className: "md:col-span-1 h-[280px] md:h-[380px]" },
-  { title: "Private Equity", desc: "Strategic investments in privately held companies with strong leadership and scalable business models.", image: "/african-man-black-suit.jpg", className: "md:col-span-1 h-[280px] md:h-[380px]" },
-  { title: "AI & Technology", desc: "Technology-enabled businesses, digital platforms, and innovative solutions solving genuine market problems.", image: "/businessman-reading.jpg", className: "md:col-span-2 h-[280px] md:h-[380px]" },
-  { title: "Hospitality", desc: "Hotels, serviced accommodation, tourism, food and beverage, and lifestyle-led businesses in one of the world's leading visitor economies.", image: "/employees.jpg", className: "md:col-span-2 h-[280px] md:h-[380px]" },
-  { title: "Trading & Distribution", desc: "Businesses driving regional and international trade, supply, and market expansion across the GCC.", image: "/gold-coins.jpg", className: "md:col-span-1 h-[280px] md:h-[380px]" },
+  { title: "Real Estate", desc: "Residential, commercial, hospitality, and income-generating property investment across Dubai and the wider UAE.", image: "/1.png", className: "md:col-span-2 h-[280px] md:h-[380px]" },
+  { title: "Business Acquisitions", desc: "Established businesses with proven operations, stable demand, and clear opportunities for expansion.", image: "/3.png", className: "md:col-span-1 h-[280px] md:h-[380px]" },
+  { title: "Private Equity", desc: "Strategic investments in privately held companies with strong leadership and scalable business models.", image: "/4.png", className: "md:col-span-1 h-[280px] md:h-[380px]" },
+  { title: "AI & Emerging Technology", desc: "Technology-enabled businesses, digital platforms, and innovative solutions solving genuine market problems.", image: "/6.png", className: "md:col-span-2 h-[280px] md:h-[380px]" },
+  { title: "Hospitality", desc: "Hotels, serviced accommodation, tourism, food and beverage, and lifestyle-led businesses in one of the world's leading visitor economies.", image: "/5.png", className: "md:col-span-2 h-[280px] md:h-[380px]" },
+  { title: "Digital Assets & Blockchain", desc: "Selective participation in blockchain infrastructure, digital asset platforms, tokenisation, and fintech innovation.", image: "/2.png", className: "md:col-span-1 h-[280px] md:h-[380px]" },
+  { title: "Energy & Physical Commodities", desc: "Investments in energy products, physical commodities, and supply and distribution networks driving regional and global trade.", image: "/7.png", className: "md:col-span-1 h-[280px] md:h-[380px]" },
+  { title: "Luxury Assets", desc: "Premium real estate, high-value vehicles, yachts, aviation, collectibles, and luxury lifestyle businesses.", image: "/8.png", className: "md:col-span-2 h-[280px] md:h-[380px]" },
+  { title: "Strategic Partnerships", desc: "Joint ventures, co-investments, and strategic alliances with aligned partners and institutions.", image: "/9.png", className: "md:col-span-3 h-[280px] md:h-[380px]" },
 ];
 
 export default function InvestmentSectors() {
