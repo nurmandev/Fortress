@@ -71,7 +71,7 @@ export default function Introduction() {
               transition={{ type: "spring", stiffness: 200, damping: 25 }}
             >
               <Image
-                src="/discussing-business.jpg"
+                src="/website image.png"
                 alt="Fortress Investment Holdings leadership"
                 fill
                 className="object-cover"

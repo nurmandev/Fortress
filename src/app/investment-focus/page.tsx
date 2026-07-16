@@ -33,17 +33,17 @@ const sectors = [
     title: "Real Estate",
     subtitle: "Building Value Through Strategic Property Investment",
     image: "/1.png",
-    body: "Real estate in the UAE remains one of the world's most compelling property markets  driven by population growth, investor-friendly regulation, world-class infrastructure, and sustained international demand.",
+    body: "The UAE remains our primary real estate market, supported by strong population growth, investor-friendly regulations, world-class infrastructure, and sustained international demand. While our main focus is on identifying high-quality opportunities across the UAE, we also consider selected real estate investments in established and emerging international markets where the fundamentals, growth potential, and risk profile align with our investment strategy.",
     items: [
-      "Residential  apartments, villas, and communities in high-demand locations",
-      "Commercial  offices, retail, and mixed-use assets with reliable income profiles",
-      "Hospitality Real Estate  hotels, resorts, and serviced accommodation",
-      "Industrial & Logistics  warehousing and supply-chain infrastructure",
-      "Development & Land  projects and plots with strong fundamentals and credible execution plans",
-      "Income-Generating Assets  stabilised properties delivering consistent returns",
+      { heading: "Residential Real Estate", desc: "Apartments, villas, and communities in high-demand locations across the UAE and selected global markets." },
+      { heading: "Commercial Real Estate", desc: "Offices, retail spaces, and mixed-use assets with strong occupancy potential and reliable income profiles." },
+      { heading: "Hospitality Real Estate", desc: "Hotels, resorts, serviced residences, and hospitality-led developments in strategic destinations." },
+      { heading: "Industrial & Logistics", desc: "Warehousing, distribution facilities, logistics hubs, and supply-chain infrastructure." },
+      { heading: "Development & Land", desc: "Well-positioned land parcels and development projects supported by strong fundamentals and credible execution plans." },
+      { heading: "Income-Generating Assets", desc: "Stabilised properties capable of delivering consistent rental income and long-term value." },
     ],
     closing:
-      "Our interest spans direct acquisitions, development partnerships, land opportunities, structured investments, and project participation. In every case, we prioritise quality, location, market fundamentals, and responsible development over speculation.",
+      "Our real estate interests include direct acquisitions, development partnerships, land opportunities, structured investments, and project participation. The UAE remains at the centre of our strategy, while carefully selected international opportunities allow us to diversify and access additional growth markets. In every investment, we prioritise quality, location, market fundamentals, responsible development, and sustainable long-term returns over short-term speculation.",
   },
   {
     icon: Cpu,
@@ -73,20 +73,20 @@ const sectors = [
     icon: Briefcase,
     title: "Business Acquisitions",
     subtitle:
-      "We focus on businesses where our strategic involvement can improve efficiency, expand market reach, strengthen management, and accelerate long-term growth across the UAE, GCC, and global markets.",
+      "We acquire and invest in established businesses with strong foundations and clear potential for sustainable growth.",
     image: "/3.png",
-    body: "Behind every established business is years of effort, relationships, and hard-won market knowledge. We treat that legacy with the respect it deserves.\n\nWe consider the acquisition of established businesses with proven operations, reliable customer demand, experienced management, and clear opportunities for further growth.",
+    body: "Behind every established business is years of effort, relationships, and market knowledge. We respect that legacy and approach every transaction with professionalism, discretion, and long-term intent.\n\nWe consider businesses with proven operations, reliable customer demand, experienced management, and opportunities to improve performance or expand into new markets.",
     items: [
-      "Full business acquisitions  complete ownership transitions, handled professionally and discreetly",
-      "Majority ownership  control positions with continuing founder or management participation",
-      "Minority strategic investments  meaningful stakes with active support",
-      "Management buyouts  backing capable teams to own the businesses they run",
-      "Joint acquisitions  partnering with co-investors on larger opportunities",
-      "Succession-related transactions  structured solutions for owners planning their exit",
-      "Growth capital partnerships  investment paired with expansion support",
+      { heading: "Full Business Acquisitions", desc: "Complete ownership transitions managed professionally and discreetly." },
+      { heading: "Majority Ownership", desc: "Controlling positions with continued founder or management participation." },
+      { heading: "Minority Strategic Investments", desc: "Meaningful stakes supported by active strategic involvement." },
+      { heading: "Management Buyouts", desc: "Backing capable leadership teams to acquire and grow the businesses they manage." },
+      { heading: "Joint Acquisitions", desc: "Partnerships with co-investors on larger or specialised opportunities." },
+      { heading: "Succession Transactions", desc: "Structured solutions for owners planning a responsible and orderly exit." },
+      { heading: "Growth Capital Partnerships", desc: "Investment combined with strategic support for expansion and development." },
     ],
     closing:
-      "We focus on businesses where our strategic involvement can improve efficiency, expand market reach, strengthen management, and accelerate long-term growth across the UAE, GCC, and global markets.",
+      "Our primary focus is the UAE, while we also evaluate selected opportunities across the GCC and international markets. Through active involvement, disciplined management, and strategic support, we aim to strengthen operations, expand market reach, and create lasting value for all stakeholders.",
   },
   {
     icon: TrendingUp,
@@ -129,19 +129,17 @@ const sectors = [
     image: "/6.png",
     body: "We invest in artificial intelligence and emerging technology companies that have the potential to transform industries, improve efficiency, and create scalable commercial value.\n\nOur focus is on practical, high-growth technologies that solve real business problems, support digital transformation, and create long-term value across the UAE, GCC, and global markets.",
     items: [
-      "Artificial Intelligence — AI platforms, automation systems, machine learning solutions, and intelligent tools with clear commercial use",
-      "Business Automation — technologies that improve productivity, reduce operational costs, and enhance business performance",
-      "Software & SaaS Platforms — scalable software solutions with recurring revenue models and strong market demand",
-      "Property Technology (PropTech)  innovation serving the region's real estate sector",
-      "Financial Technology (FinTech)  payments, lending, and financial infrastructure",
-      "Marketing Technology  platforms driving measurable commercial results",
-      "Cybersecurity  protecting the digital economy's foundations",
-      "Data Analytics  turning information into decisions",
-      "E-Commerce  digital retail with sustainable unit economics",
-      "Enterprise Solutions  technology serving established business needs",
+      { heading: "Artificial Intelligence", desc: "AI platforms, automation systems, machine learning solutions, and intelligent tools with clear commercial use." },
+      { heading: "Business Automation", desc: "Technologies that improve productivity, reduce operational costs, and enhance business performance." },
+      { heading: "Software & SaaS Platforms", desc: "Scalable software businesses with recurring revenue models and strong market demand." },
+      { heading: "FinTech", desc: "Digital payment solutions, lending platforms, financial infrastructure, and technology improving access to financial services." },
+      { heading: "PropTech", desc: "Real estate technology supporting smarter property investment, sales, leasing, management, and market intelligence." },
+      { heading: "Cybersecurity", desc: "Solutions that protect businesses, data, digital infrastructure, and online transactions." },
+      { heading: "Data Analytics", desc: "Platforms that turn data into insights, helping businesses make faster and better decisions." },
+      { heading: "Digital Commerce", desc: "E-commerce, marketplace platforms, and technology-driven retail businesses with growth potential." },
     ],
     closing:
-      "We prioritise practical innovation, strong execution, responsible use of technology, and a clear path to commercial growth. We do not fund technology in search of a problem.",
+      "We invest in technology with purpose — businesses that combine innovation, strong execution, market demand, and a clear path to long-term commercial growth.",
   },
   {
     icon: Truck,
@@ -168,13 +166,13 @@ const sectors = [
     image: "/8.png",
     body: "Fortress Investment Holdings invests in selected luxury asset opportunities with strong market demand, long-term value potential, and clear ownership or commercial structures.\n\nOur focus is on premium assets and luxury-linked businesses that can generate value through appreciation, income, rental demand, brand strength, or strategic market positioning.",
     items: [
-      "Luxury Real Estate  trophy properties, premium developments, branded residences, and high-value real estate assets in prime locations",
-      "High-Value Vehicles  rare, collectible, and premium automobiles with strong demand, scarcity value, or rental income potential",
-      "Yachts & Marine Assets  yacht ownership, charter opportunities, marine services, and asset-management platforms connected to the luxury lifestyle market",
-      "Aviation-Related Assets  private aviation opportunities, aircraft-related services, aviation support businesses, and premium mobility solutions",
-      "Collectibles & Fine Art  selected collectibles, fine art, watches, jewellery, and rare assets with established provenance and market depth",
-      "Premium Lifestyle Businesses  luxury brands and service businesses catering to high-net-worth clients, tourists, executives, and premium lifestyle consumers",
-      "Luxury Rental & Asset-Management Platforms  businesses that monetise premium assets through rentals, leasing, management, memberships, or curated client access",
+      { heading: "Luxury Real Estate", desc: "Trophy properties, premium developments, branded residences, and high-value real estate assets in prime locations." },
+      { heading: "High-Value Vehicles", desc: "Rare, collectible, and premium automobiles with strong demand, scarcity value, or rental income potential." },
+      { heading: "Yachts & Marine Assets", desc: "Yacht ownership, charter opportunities, marine services, and asset-management platforms connected to the luxury lifestyle market." },
+      { heading: "Aviation-Related Assets", desc: "Private aviation opportunities, aircraft-related services, aviation support businesses, and premium mobility solutions." },
+      { heading: "Collectibles & Fine Art", desc: "Selected collectibles, fine art, watches, jewellery, and rare assets with established provenance and market depth." },
+      { heading: "Premium Lifestyle Businesses", desc: "Luxury brands and service businesses catering to high-net-worth clients, tourists, executives, and premium lifestyle consumers." },
+      { heading: "Luxury Rental & Asset-Management Platforms", desc: "Businesses that monetise premium assets through rentals, leasing, management, memberships, or curated client access." },
     ],
     closing:
       "We invest selectively in luxury assets and premium lifestyle opportunities where valuation, demand, liquidity, ownership costs, and long-term return potential are carefully assessed.",
@@ -191,7 +189,7 @@ const sectors = [
       "Market Expansion  helping partners enter the UAE and GCC markets",
       "Project Development  combining capital with execution capability",
       "Cross-Border Investment  connecting international capital with regional opportunity",
-      "Distribution Partnerships  bringing products to new markets",
+      "Business Development Alliances  long-term commercial collaborations focused on creating shared value and sustainable growth",
     ],
     closing:
       "Every joint venture must demonstrate clear responsibilities, commercial alignment, appropriate governance, and shared long-term objectives  agreed before work begins, not negotiated after problems arise.",
@@ -319,6 +317,8 @@ export default function InvestmentFocusPage() {
                   <p className="text-fortress-gold text-[10px] md:text-xs tracking-[3px] md:tracking-[4px] uppercase font-semibold mb-3 md:mb-4">
                     {sector.title === "Digital Assets & Blockchain"
                       ? "Where We Focus"
+                      : sector.title === "AI & Emerging Technology" || sector.title === "Luxury Assets"
+                      ? "What We Invest In"
                       : "What We Look For"}
                   </p>
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">

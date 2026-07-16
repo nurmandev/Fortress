@@ -111,11 +111,11 @@ export default function AboutPage() {
             <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory">Leadership Built on Vision and Responsibility</h2>
           </div>
           <div className="grid lg:grid-cols-2 gap-6 md:gap-12 items-start">
-            <div className="bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 rounded-2xl">
+            <div className="group bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 rounded-2xl transition-all duration-500 hover:border-fortress-gold/40 hover:shadow-2xl hover:shadow-fortress-gold/10 hover:-translate-y-1">
               <div className="relative w-full aspect-[4/5] mb-6 overflow-hidden rounded-lg">
-                <Image src="/Azzam-El-Khatib.jpeg" alt="Azzam El-Khatib" fill className="object-cover" loading="lazy" sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src="/Azzam-El-Khatib.jpeg" alt="Azzam El-Khatib" fill className="object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" sizes="(max-width: 768px) 100vw, 50vw" />
               </div>
-              <h3 className="text-lg md:text-xl font-bold text-fortress-ivory mb-1">Azzam El-Khatib</h3>
+              <h3 className="text-lg md:text-xl font-bold text-fortress-ivory mb-1 transition-colors duration-500 group-hover:text-fortress-gold">Azzam El-Khatib</h3>
               <p className="text-fortress-gold text-sm font-medium mb-4 md:mb-6">Founder and Chief Executive Officer</p>
               <div className="space-y-3 md:space-y-4 text-fortress-silver text-sm md:text-base leading-relaxed">
                 <p>Azzam El-Khatib leads Fortress Investment Holdings with a strong commitment to disciplined growth, client service, and responsible investment management.</p>
@@ -123,11 +123,11 @@ export default function AboutPage() {
                 <p>His leadership is defined by discipline, accountability, and a client-first approach. He is committed to protecting clients&rsquo; interests, creating sustainable value, and delivering strong, well-considered returns on every investment.</p>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 rounded-2xl">
+            <div className="group bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 rounded-2xl transition-all duration-500 hover:border-fortress-gold/40 hover:shadow-2xl hover:shadow-fortress-gold/10 hover:-translate-y-1">
               <div className="relative w-full aspect-[4/5] mb-6 overflow-hidden rounded-lg">
-                <Image src="/Serhii-Pohrebniak.jpeg" alt="Serhii Pohrebniak" fill className="object-cover" loading="lazy" sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image src="/Serhii-Pohrebniak.jpeg" alt="Serhii Pohrebniak" fill className="object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" sizes="(max-width: 768px) 100vw, 50vw" />
               </div>
-              <h3 className="text-lg md:text-xl font-bold text-fortress-ivory mb-1">Serhii Pohrebniak</h3>
+              <h3 className="text-lg md:text-xl font-bold text-fortress-ivory mb-1 transition-colors duration-500 group-hover:text-fortress-gold">Serhii Pohrebniak</h3>
               <p className="text-fortress-gold text-sm font-medium mb-4 md:mb-6">Business Strategist</p>
               <div className="space-y-3 md:space-y-4 text-fortress-silver text-sm md:text-base leading-relaxed">
                 <p>Serhii Pohrebniak is a key member of Fortress Investment Holdings and one of the strategic minds behind the company&rsquo;s vision and direction. With a military background, he brings discipline, resilience, structure, and a strong sense of responsibility to every aspect of the business.</p>
