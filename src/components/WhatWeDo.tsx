@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, Variants } from "framer-motion";
@@ -19,15 +20,15 @@ import {
 gsap.registerPlugin(ScrollTrigger);
 
 const sectors = [
-  { icon: Building2, title: "Real Estate" },
-  { icon: Cpu, title: "Digital Assets & Blockchain" },
-  { icon: Briefcase, title: "Business Acquisitions" },
-  { icon: TrendingUp, title: "Private Equity" },
-  { icon: UtensilsCrossed, title: "Hospitality" },
-  { icon: Wifi, title: "AI & Technology" },
-  { icon: Truck, title: "Energy & Physical Commodities" },
-  { icon: Gem, title: "Luxury Assets" },
-  { icon: Handshake, title: "Strategic Partnerships" },
+  { icon: Building2, title: "Real Estate", href: "/investment-focus#real-estate" },
+  { icon: Cpu, title: "Digital Assets & Blockchain", href: "/investment-focus#digital-assets" },
+  { icon: Briefcase, title: "Business Acquisitions", href: "/investment-focus#business-acquisitions" },
+  { icon: TrendingUp, title: "Private Equity", href: "/investment-focus#private-equity" },
+  { icon: UtensilsCrossed, title: "Hospitality", href: "/investment-focus#hospitality" },
+  { icon: Wifi, title: "AI & Technology", href: "/investment-focus#ai-technology" },
+  { icon: Truck, title: "Energy & Physical Commodities", href: "/investment-focus#energy-commodities" },
+  { icon: Gem, title: "Luxury Assets", href: "/investment-focus#luxury-assets" },
+  { icon: Handshake, title: "Strategic Partnerships", href: "/investment-focus#strategic-partnerships" },
 ];
 
 const cardVariants: Variants = {
@@ -89,23 +90,25 @@ export default function WhatWeDo() {
               variants={cardVariants}
               initial="rest"
               whileHover="hover"
-              className="group p-6 md:p-10 border bg-fortress-deep cursor-default rounded-sm"
+              className="group p-6 md:p-10 border bg-fortress-deep cursor-pointer rounded-sm"
             >
-              <div className="w-12 h-12 md:w-14 md:h-14 bg-fortress-gold/10 flex items-center justify-center mb-5 rounded-sm">
-                <sector.icon className="w-5 h-5 md:w-7 md:h-7 text-fortress-gold" />
-              </div>
-              <span className="text-fortress-gold/45 text-[10px] tracking-[4px] uppercase font-semibold block mb-2">
-                Sector {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="text-xl font-semibold text-fortress-ivory">
-                {sector.title}
-              </h3>
-              <motion.div
-                className="h-px bg-gradient-to-r from-fortress-gold/60 to-transparent mt-6"
-                initial={{ scaleX: 0, transformOrigin: "left" }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              />
+              <Link href={sector.href} className="block">
+                <div className="w-12 h-12 md:w-14 md:h-14 bg-fortress-gold/10 flex items-center justify-center mb-5 rounded-sm">
+                  <sector.icon className="w-5 h-5 md:w-7 md:h-7 text-fortress-gold" />
+                </div>
+                <span className="text-fortress-gold/45 text-[10px] tracking-[4px] uppercase font-semibold block mb-2">
+                  Sector {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-xl font-semibold text-fortress-ivory">
+                  {sector.title}
+                </h3>
+                <motion.div
+                  className="h-px bg-gradient-to-r from-fortress-gold/60 to-transparent mt-6"
+                  initial={{ scaleX: 0, transformOrigin: "left" }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                />
+              </Link>
             </motion.div>
           ))}
         </div>

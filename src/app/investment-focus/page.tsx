@@ -29,6 +29,7 @@ export const metadata: Metadata = {
 
 const sectors = [
   {
+    id: "real-estate",
     icon: Building2,
     title: "Real Estate",
     subtitle: "Building Value Through Strategic Property Investment",
@@ -46,6 +47,7 @@ const sectors = [
       "Our real estate interests include direct acquisitions, development partnerships, land opportunities, structured investments, and project participation. The UAE remains at the centre of our strategy, while carefully selected international opportunities allow us to diversify and access additional growth markets. In every investment, we prioritise quality, location, market fundamentals, responsible development, and sustainable long-term returns over short-term speculation.",
   },
   {
+    id: "digital-assets",
     icon: Cpu,
     title: "Digital Assets & Blockchain",
     subtitle: "Selective Participation in the Digital Economy",
@@ -70,6 +72,7 @@ const sectors = [
       "Fortress Investment Holdings does not promote short-term speculation or guarantee returns from digital assets.",
   },
   {
+    id: "business-acquisitions",
     icon: Briefcase,
     title: "Business Acquisitions",
     subtitle:
@@ -89,6 +92,7 @@ const sectors = [
       "Our primary focus is the UAE, while we also evaluate selected opportunities across the GCC and international markets. Through active involvement, disciplined management, and strategic support, we aim to strengthen operations, expand market reach, and create lasting value for all stakeholders.",
   },
   {
+    id: "private-equity",
     icon: TrendingUp,
     title: "Private Equity",
     subtitle: "Supporting High-Potential Private Companies",
@@ -105,6 +109,7 @@ const sectors = [
       "Our objective is straightforward: build value alongside founders, management teams, and shareholders  not at their expense.",
   },
   {
+    id: "hospitality",
     icon: UtensilsCrossed,
     title: "Hospitality",
     subtitle: "Investing in Experiences, Tourism, and Lifestyle",
@@ -123,6 +128,7 @@ const sectors = [
       "We focus on hospitality concepts with strong market positioning, professional operations, and the ability to deliver consistent customer value across the UAE, with potential for GCC and global expansion.",
   },
   {
+    id: "ai-technology",
     icon: Wifi,
     title: "AI & Emerging Technology",
     subtitle: "Investing in the Future of Intelligent Innovation",
@@ -142,6 +148,7 @@ const sectors = [
       "We invest in technology with purpose — businesses that combine innovation, strong execution, market demand, and a clear path to long-term commercial growth.",
   },
   {
+    id: "energy-commodities",
     icon: Truck,
     title: "Energy & Physical Commodities",
     subtitle: "Investing in Essential Resources and Global Trade Flow",
@@ -159,6 +166,7 @@ const sectors = [
       "We focus on physical commodity opportunities backed by real demand, reliable supply chains, disciplined execution, and strong regional or global market potential.",
   },
   {
+    id: "luxury-assets",
     icon: Gem,
     title: "Luxury Assets",
     subtitle:
@@ -178,6 +186,7 @@ const sectors = [
       "We invest selectively in luxury assets and premium lifestyle opportunities where valuation, demand, liquidity, ownership costs, and long-term return potential are carefully assessed.",
   },
   {
+    id: "strategic-partnerships",
     icon: Handshake,
     title: "Strategic Partnerships",
     subtitle: "Creating Value Through Collaboration",
@@ -255,6 +264,7 @@ export default function InvestmentFocusPage() {
       {sectors.map((sector, index) => (
         <section
           key={sector.title}
+          id={sector.id}
           className={`py-12 md:py-28 my-8 md:my-12 sm:mx-4 rounded-2xl ${index % 2 === 1 ? "bg-fortress-deep" : "bg-white"}`}
         >
           <div className="max-w-[1400px] mx-auto px-6 lg:px-12">

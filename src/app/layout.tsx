@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import CustomCursor from "@/components/CustomCursor";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -95,8 +96,9 @@ export default function RootLayout({
         />
       </head>
       <body
-        className="antialiased bg-fortress-navy text-fortress-silver"
+        className="antialiased bg-fortress-navy text-fortress-silver cursor-none"
       >
+        <CustomCursor />
         {children}
         <WhatsAppButton />
       </body>
