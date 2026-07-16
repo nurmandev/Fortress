@@ -111,13 +111,13 @@ const sectors = [
     image: "/5.png",
     body: "The UAE remains our primary focus, supported by selective opportunities across the GCC and global markets. With strong tourism demand, world-class infrastructure, and a growing lifestyle economy, the region continues to offer attractive hospitality investment potential.",
     items: [
-      "Hotels & Resorts  established hospitality assets and credible development projects with strong location, demand, and operational potential",
-      "Serviced Apartments & Holiday Homes  high-demand short and medium-stay accommodation opportunities, especially in markets with strong tourism and business travel",
-      "Restaurants & Food Concepts  proven dining concepts with strong brand identity, clear unit economics, and potential for expansion",
-      "Leisure & Tourism Experiences  attractions, experiences, and tourism-related businesses serving residents, visitors, and international travellers",
-      "Wellness Concepts  health, fitness, spa, and wellbeing businesses with strong customer demand and repeat revenue potential",
-      "Hospitality Technology  technology platforms that improve how hospitality businesses operate, serve customers, manage bookings, and increase efficiency",
-      "Luxury Lifestyle Services  premium services for residents, tourists, business travellers, and high-net-worth clients",
+      { heading: "Hotels & Resorts", desc: "Established hospitality assets and credible development projects with strong location, demand, and operational potential." },
+      { heading: "Serviced Apartments & Holiday Homes", desc: "High-demand short and medium-stay accommodation opportunities, especially in markets with strong tourism and business travel." },
+      { heading: "Restaurants & Food Concepts", desc: "Proven dining concepts with strong brand identity, clear unit economics, and potential for expansion." },
+      { heading: "Leisure & Tourism Experiences", desc: "Attractions, experiences, and tourism-related businesses serving residents, visitors, and international travellers." },
+      { heading: "Wellness Concepts", desc: "Health, fitness, spa, and wellbeing businesses with strong customer demand and repeat revenue potential." },
+      { heading: "Hospitality Technology", desc: "Technology platforms that improve how hospitality businesses operate, serve customers, manage bookings, and increase efficiency." },
+      { heading: "Luxury Lifestyle Services", desc: "Premium services for residents, tourists, business travellers, and high-net-worth clients." },
     ],
     closing:
       "We focus on hospitality concepts with strong market positioning, professional operations, and the ability to deliver consistent customer value across the UAE, with potential for GCC and global expansion.",
@@ -321,13 +321,23 @@ export default function InvestmentFocusPage() {
                       ? "Where We Focus"
                       : "What We Look For"}
                   </p>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
                     {sector.items.map((item, i) => (
-                      <li
-                        key={i}
-                        className={`text-xs md:text-sm leading-relaxed ${index % 2 === 1 ? "text-fortress-silver/80" : "text-fortress-charcoal/60"}`}
-                      >
-                        {item}
+                      <li key={i}>
+                        {typeof item === "string" ? (
+                          <span className={`text-xs md:text-sm leading-relaxed ${index % 2 === 1 ? "text-fortress-silver/80" : "text-fortress-charcoal/60"}`}>
+                            {item}
+                          </span>
+                        ) : (
+                          <div>
+                            <p className={`text-sm md:text-base font-semibold ${index % 2 === 1 ? "text-fortress-ivory" : "text-fortress-navy"}`}>
+                              {item.heading}
+                            </p>
+                            <p className={`text-xs md:text-sm leading-relaxed mt-0.5 ${index % 2 === 1 ? "text-fortress-silver/70" : "text-fortress-charcoal/60"}`}>
+                              {item.desc}
+                            </p>
+                          </div>
+                        )}
                       </li>
                     ))}
                   </ul>

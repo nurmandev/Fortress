@@ -4,18 +4,30 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, Variants } from "framer-motion";
+import {
+  Building2,
+  Cpu,
+  Briefcase,
+  TrendingUp,
+  UtensilsCrossed,
+  Wifi,
+  Truck,
+  Gem,
+  Handshake,
+} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const activities = [
-  { title: "Direct Investments", desc: "Deploying capital into businesses and assets with clear commercial fundamentals.", className: "md:col-span-2" },
-  { title: "Business Acquisitions", desc: "Acquiring established companies with proven operations and room to grow.", className: "md:col-span-1" },
-  { title: "Private Equity Participation", desc: "Backing privately held companies with scalable models and capable leadership.", className: "md:col-span-1" },
-  { title: "Real Estate Investments", desc: "Strategic real estate investments across residential, commercial, hospitality, and income-generating assets in the UAE, GCC, and global markets.", className: "md:col-span-2" },
-  { title: "Joint Ventures & Strategic Partnerships", desc: "Combining strengths with partners who share our standards.", className: "md:col-span-2" },
-  { title: "Business Expansion Support", desc: "Helping portfolio companies enter new markets and scale operations.", className: "md:col-span-1" },
-  { title: "Trading & Distribution", desc: "Connecting reliable products with growing regional demand.", className: "md:col-span-1" },
-  { title: "Technology & Innovation", desc: "Investing in practical, commercially driven technology businesses.", className: "md:col-span-2" },
+const sectors = [
+  { icon: Building2, title: "Real Estate" },
+  { icon: Cpu, title: "Digital Assets & Blockchain" },
+  { icon: Briefcase, title: "Business Acquisitions" },
+  { icon: TrendingUp, title: "Private Equity" },
+  { icon: UtensilsCrossed, title: "Hospitality" },
+  { icon: Wifi, title: "AI & Technology" },
+  { icon: Truck, title: "Energy & Physical Commodities" },
+  { icon: Gem, title: "Luxury Assets" },
+  { icon: Handshake, title: "Strategic Partnerships" },
 ];
 
 const cardVariants: Variants = {
@@ -71,28 +83,25 @@ export default function WhatWeDo() {
         </div>
 
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {activities.map((item, i) => (
+          {sectors.map((sector, i) => (
             <motion.div
               key={i}
               variants={cardVariants}
               initial="rest"
               whileHover="hover"
-              className={`group p-6 md:p-10 border bg-fortress-deep flex flex-col justify-between min-h-[180px] md:min-h-[220px] cursor-default ${item.className} rounded-sm`}
+              className="group p-6 md:p-10 border bg-fortress-deep cursor-default rounded-sm"
             >
-              <div>
-                <span className="text-fortress-gold/45 text-[10px] tracking-[4px] uppercase font-semibold block mb-4">
-                  Activity {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="text-xl font-semibold text-fortress-ivory mb-3">
-                  {item.title}
-                </h3>
+              <div className="w-12 h-12 md:w-14 md:h-14 bg-fortress-gold/10 flex items-center justify-center mb-5 rounded-sm">
+                <sector.icon className="w-5 h-5 md:w-7 md:h-7 text-fortress-gold" />
               </div>
-              <p className="text-fortress-silver/70 text-sm leading-relaxed max-w-xl">
-                {item.desc}
-              </p>
-              {/* Hover gold accent line */}
+              <span className="text-fortress-gold/45 text-[10px] tracking-[4px] uppercase font-semibold block mb-2">
+                Sector {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="text-xl font-semibold text-fortress-ivory">
+                {sector.title}
+              </h3>
               <motion.div
-                className="h-px bg-gradient-to-r from-fortress-gold/60 to-transparent mt-4"
+                className="h-px bg-gradient-to-r from-fortress-gold/60 to-transparent mt-6"
                 initial={{ scaleX: 0, transformOrigin: "left" }}
                 whileHover={{ scaleX: 1 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
