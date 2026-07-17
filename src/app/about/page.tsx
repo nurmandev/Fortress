@@ -110,7 +110,7 @@ export default function AboutPage() {
             <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Leadership</p>
             <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory">Leadership Built on Vision and Responsibility</h2>
           </div>
-          <div className="grid lg:grid-cols-2 gap-6 md:gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-12">
             <div className="group bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 rounded-2xl transition-all duration-500 hover:border-fortress-gold/40 hover:shadow-2xl hover:shadow-fortress-gold/10 hover:-translate-y-1">
               <div className="relative w-full aspect-[4/5] mb-6 overflow-hidden rounded-lg">
                 <Image src="/Azzam-El-Khatib.jpeg" alt="Azzam El-Khatib" fill className="object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" sizes="(max-width: 768px) 100vw, 50vw" />
@@ -148,7 +148,7 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {values.map((v) => (
-              <div key={v.title} className="bg-fortress-navy border border-fortress-gold/10 p-6 md:p-8 hover:border-fortress-gold/30 transition-all duration-300 rounded-2xl">
+              <div key={v.title} className="bg-fortress-navy border border-fortress-gold/10 p-6 md:p-8 hover:border-fortress-gold/30 hover:shadow-xl hover:shadow-fortress-gold/5 hover:-translate-y-1 transition-all duration-300 rounded-2xl">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-fortress-gold/10 flex items-center justify-center mb-4 md:mb-5 rounded-sm">
                   <v.icon className="w-5 h-5 md:w-6 md:h-6 text-fortress-gold" />
                 </div>
@@ -172,7 +172,7 @@ export default function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 gap-3 md:gap-4 max-w-4xl mx-auto">
             {philosophyPoints.map((point, i) => (
-              <div key={i} className="p-4 md:p-5 bg-fortress-deep border border-fortress-gold/10 rounded-sm">
+              <div key={i} className="p-4 md:p-5 bg-fortress-deep border border-fortress-gold/10 rounded-sm transition-all duration-300 hover:border-fortress-gold/30 hover:shadow-lg hover:shadow-fortress-gold/5 hover:-translate-y-0.5">
                 <p className="text-fortress-silver text-xs md:text-sm leading-relaxed">{point}</p>
               </div>
             ))}

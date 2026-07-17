@@ -47,31 +47,6 @@ const sectors = [
       "Our real estate interests include direct acquisitions, development partnerships, land opportunities, structured investments, and project participation. The UAE remains at the centre of our strategy, while carefully selected international opportunities allow us to diversify and access additional growth markets. In every investment, we prioritise quality, location, market fundamentals, responsible development, and sustainable long-term returns over short-term speculation.",
   },
   {
-    id: "digital-assets",
-    icon: Cpu,
-    title: "Digital Assets & Blockchain",
-    subtitle: "Selective Participation in the Digital Economy",
-    image: "/2.png",
-    body: "Blockchain and digital assets are reshaping how value is created, transferred, and secured. In the UAE  one of the world's most progressive jurisdictions for digital asset regulation  this shift is creating serious, long-term commercial opportunities.\n\nFortress Investment Holdings participates in this space the same way we approach every sector: selectively, responsibly, and with a clear focus on real-world utility over hype.\n\nWe are not traders chasing market cycles. We are long-term investors backing the infrastructure, platforms, and businesses building the digital economy's foundations.",
-    items: [
-      "Blockchain Infrastructure  networks, protocols, and enterprise-grade systems powering secure digital transactions",
-      "Digital Asset Platforms  regulated exchanges, custody solutions, and asset-management technology",
-      "Tokenisation  real-world asset tokenisation, including real estate, funds, and commodities",
-      "Financial Technology (Fintech)  payment systems, digital banking, and blockchain-enabled financial services",
-      "Web3 & Enterprise Solutions  businesses applying distributed ledger technology to genuine commercial challenges",
-    ],
-    subheading: "How We Evaluate Digital Asset Opportunities",
-    subitems: [
-      "Regulatory Alignment  compliance with UAE frameworks including VARA, and awareness of international standards",
-      "Genuine Utility  technology that solves a real market problem, not a speculative narrative",
-      "Security & Custody  robust cybersecurity, transparent custody arrangements, responsible governance",
-      "Commercial Viability  a clear revenue model, credible leadership, and a realistic path to scale",
-      "Long-Term Relevance  businesses positioned to perform beyond short-term market sentiment",
-    ],
-    disclaimer:
-      "Fortress Investment Holdings does not promote short-term speculation or guarantee returns from digital assets.",
-  },
-  {
     id: "business-acquisitions",
     icon: Briefcase,
     title: "Business Acquisitions",
@@ -109,6 +84,26 @@ const sectors = [
       "Our objective is straightforward: build value alongside founders, management teams, and shareholders  not at their expense.",
   },
   {
+    id: "ai-technology",
+    icon: Wifi,
+    title: "AI & Emerging Technology",
+    subtitle: "Investing in the Future of Intelligent Innovation",
+    image: "/6.png",
+    body: "We invest in artificial intelligence and emerging technology companies that have the potential to transform industries, improve efficiency, and create scalable commercial value.\n\nOur focus is on practical, high-growth technologies that solve real business problems, support digital transformation, and create long-term value across the UAE, GCC, and global markets.",
+    items: [
+      { heading: "Artificial Intelligence", desc: "AI platforms, automation systems, machine learning solutions, and intelligent tools with clear commercial use." },
+      { heading: "Business Automation", desc: "Technologies that improve productivity, reduce operational costs, and enhance business performance." },
+      { heading: "Software & SaaS Platforms", desc: "Scalable software businesses with recurring revenue models and strong market demand." },
+      { heading: "FinTech", desc: "Digital payment solutions, lending platforms, financial infrastructure, and technology improving access to financial services." },
+      { heading: "PropTech", desc: "Real estate technology supporting smarter property investment, sales, leasing, management, and market intelligence." },
+      { heading: "Cybersecurity", desc: "Solutions that protect businesses, data, digital infrastructure, and online transactions." },
+      { heading: "Data Analytics", desc: "Platforms that turn data into insights, helping businesses make faster and better decisions." },
+      { heading: "Digital Commerce", desc: "E-commerce, marketplace platforms, and technology-driven retail businesses with growth potential." },
+    ],
+    closing:
+      "We invest in technology with purpose — businesses that combine innovation, strong execution, market demand, and a clear path to long-term commercial growth.",
+  },
+  {
     id: "hospitality",
     icon: UtensilsCrossed,
     title: "Hospitality",
@@ -128,24 +123,29 @@ const sectors = [
       "We focus on hospitality concepts with strong market positioning, professional operations, and the ability to deliver consistent customer value across the UAE, with potential for GCC and global expansion.",
   },
   {
-    id: "ai-technology",
-    icon: Wifi,
-    title: "AI & Emerging Technology",
-    subtitle: "Investing in the Future of Intelligent Innovation",
-    image: "/6.png",
-    body: "We invest in artificial intelligence and emerging technology companies that have the potential to transform industries, improve efficiency, and create scalable commercial value.\n\nOur focus is on practical, high-growth technologies that solve real business problems, support digital transformation, and create long-term value across the UAE, GCC, and global markets.",
+    id: "digital-assets",
+    icon: Cpu,
+    title: "Digital Assets & Blockchain",
+    subtitle: "Selective Participation in the Digital Economy",
+    image: "/2.png",
+    body: "Blockchain and digital assets are reshaping how value is created, transferred, and secured. In the UAE  one of the world's most progressive jurisdictions for digital asset regulation  this shift is creating serious, long-term commercial opportunities.\n\nFortress Investment Holdings participates in this space the same way we approach every sector: selectively, responsibly, and with a clear focus on real-world utility over hype.\n\nWe are not traders chasing market cycles. We are long-term investors backing the infrastructure, platforms, and businesses building the digital economy's foundations.",
     items: [
-      { heading: "Artificial Intelligence", desc: "AI platforms, automation systems, machine learning solutions, and intelligent tools with clear commercial use." },
-      { heading: "Business Automation", desc: "Technologies that improve productivity, reduce operational costs, and enhance business performance." },
-      { heading: "Software & SaaS Platforms", desc: "Scalable software businesses with recurring revenue models and strong market demand." },
-      { heading: "FinTech", desc: "Digital payment solutions, lending platforms, financial infrastructure, and technology improving access to financial services." },
-      { heading: "PropTech", desc: "Real estate technology supporting smarter property investment, sales, leasing, management, and market intelligence." },
-      { heading: "Cybersecurity", desc: "Solutions that protect businesses, data, digital infrastructure, and online transactions." },
-      { heading: "Data Analytics", desc: "Platforms that turn data into insights, helping businesses make faster and better decisions." },
-      { heading: "Digital Commerce", desc: "E-commerce, marketplace platforms, and technology-driven retail businesses with growth potential." },
+      "Blockchain Infrastructure  networks, protocols, and enterprise-grade systems powering secure digital transactions",
+      "Digital Asset Platforms  regulated exchanges, custody solutions, and asset-management technology",
+      "Tokenisation  real-world asset tokenisation, including real estate, funds, and commodities",
+      "Financial Technology (Fintech)  payment systems, digital banking, and blockchain-enabled financial services",
+      "Web3 & Enterprise Solutions  businesses applying distributed ledger technology to genuine commercial challenges",
     ],
-    closing:
-      "We invest in technology with purpose — businesses that combine innovation, strong execution, market demand, and a clear path to long-term commercial growth.",
+    subheading: "How We Evaluate Digital Asset Opportunities",
+    subitems: [
+      "Regulatory Alignment  compliance with UAE frameworks including VARA, and awareness of international standards",
+      "Genuine Utility  technology that solves a real market problem, not a speculative narrative",
+      "Security & Custody  robust cybersecurity, transparent custody arrangements, responsible governance",
+      "Commercial Viability  a clear revenue model, credible leadership, and a realistic path to scale",
+      "Long-Term Relevance  businesses positioned to perform beyond short-term market sentiment",
+    ],
+    disclaimer:
+      "Fortress Investment Holdings does not promote short-term speculation or guarantee returns from digital assets.",
   },
   {
     id: "energy-commodities",
@@ -325,11 +325,17 @@ export default function InvestmentFocusPage() {
                 {/* Investment areas list */}
                 <div className="mt-6 md:mt-8">
                   <p className="text-fortress-gold text-[10px] md:text-xs tracking-[3px] md:tracking-[4px] uppercase font-semibold mb-3 md:mb-4">
-                    {sector.title === "Digital Assets & Blockchain"
-                      ? "Where We Focus"
-                      : sector.title === "AI & Emerging Technology" || sector.title === "Luxury Assets"
-                      ? "What We Invest In"
-                      : "What We Look For"}
+                    {{
+                      "Real Estate": "OUR REAL ESTATE INVESTMENT FOCUS",
+                      "Business Acquisitions": "OUR BUSINESS ACQUISITION FOCUS",
+                      "Private Equity": "OUR PRIVATE EQUITY INVESTMENT FOCUS",
+                      "AI & Emerging Technology": "OUR AI & EMERGING TECHNOLOGY INVESTMENT FOCUS",
+                      "Hospitality": "OUR HOSPITALITY INVESTMENT FOCUS",
+                      "Digital Assets & Blockchain": "OUR DIGITAL ASSET INVESTMENT FOCUS",
+                      "Energy & Physical Commodities": "OUR ENERGY & PHYSICAL COMMODITIES INVESTMENT FOCUS",
+                      "Luxury Assets": "OUR LUXURY ASSET INVESTMENT FOCUS",
+                      "Strategic Partnerships": "OUR STRATEGIC PARTNERSHIP FOCUS"
+                    }[sector.title]}
                   </p>
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
                     {sector.items.map((item, i) => (

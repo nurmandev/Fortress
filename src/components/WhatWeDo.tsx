@@ -21,11 +21,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 const sectors = [
   { icon: Building2, title: "Real Estate", href: "/investment-focus#real-estate" },
-  { icon: Cpu, title: "Digital Assets & Blockchain", href: "/investment-focus#digital-assets" },
   { icon: Briefcase, title: "Business Acquisitions", href: "/investment-focus#business-acquisitions" },
   { icon: TrendingUp, title: "Private Equity", href: "/investment-focus#private-equity" },
+  { icon: Wifi, title: "AI & Emerging Technology", href: "/investment-focus#ai-technology" },
   { icon: UtensilsCrossed, title: "Hospitality", href: "/investment-focus#hospitality" },
-  { icon: Wifi, title: "AI & Technology", href: "/investment-focus#ai-technology" },
+  { icon: Cpu, title: "Digital Assets & Blockchain", href: "/investment-focus#digital-assets" },
   { icon: Truck, title: "Energy & Physical Commodities", href: "/investment-focus#energy-commodities" },
   { icon: Gem, title: "Luxury Assets", href: "/investment-focus#luxury-assets" },
   { icon: Handshake, title: "Strategic Partnerships", href: "/investment-focus#strategic-partnerships" },
