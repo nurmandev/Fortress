@@ -35,10 +35,8 @@ const columns = [
   {
     heading: "Partnerships",
     links: [
-      { label: "Partner With Us", href: "/partner-with-us" },
-      { label: "Strategic Partners", href: "/partner-with-us#strategic" },
-      { label: "Investment Criteria", href: "/partner-with-us#criteria" },
-      { label: "Value Creation", href: "/partner-with-us#value" },
+      { label: "Invest With Fortress", href: "/invest-with-fortress" },
+      { label: "Investment Focus", href: "/investment-focus" },
     ],
   },
   {

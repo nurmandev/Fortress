@@ -416,7 +416,7 @@ export default function InvestmentFocusPage() {
             submission is reviewed professionally and treated with discretion.
           </p>
           <Link
-            href="/partner-with-us"
+            href="/invest-with-fortress"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-fortress-gold to-fortress-champagne text-fortress-navy font-bold text-sm tracking-widest hover:shadow-2xl hover:shadow-fortress-gold/25 transition-all duration-300"
           >
             SUBMIT AN INVESTMENT OPPORTUNITY

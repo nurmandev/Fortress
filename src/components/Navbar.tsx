@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { User, Target, Handshake, Newspaper, Menu, X, Shield } from "lucide-react";
+import { User, Target, Handshake, Newspaper, TrendingUp, Menu, X, Shield } from "lucide-react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
@@ -11,7 +11,7 @@ const navItems = [
   { label: "About", href: "/about", icon: User },
   { label: "Investment Focus", href: "/investment-focus", icon: Target },
   { label: "Approach", href: "/our-approach", icon: Handshake },
-  { label: "Partner With Us", href: "/partner-with-us", icon: Handshake },
+  { label: "Invest With Fortress", href: "/invest-with-fortress", icon: TrendingUp },
   { label: "Insights", href: "/insights", icon: Newspaper },
 ];
 

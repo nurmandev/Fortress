@@ -559,7 +559,7 @@ export default function InsightsClient() {
             ))}
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link href="/partner-with-us" className="px-8 py-4 bg-[#C9A24A] hover:bg-[#E6C879] text-[#07111D] font-bold text-sm transition-all shadow-xl hover:-translate-y-0.5">Become a Member</Link>
+            <Link href="/invest-with-fortress" className="px-8 py-4 bg-[#C9A24A] hover:bg-[#E6C879] text-[#07111D] font-bold text-sm transition-all shadow-xl hover:-translate-y-0.5">Become a Member</Link>
             <Link href="/contact" className="px-8 py-4 border border-white/20 hover:border-white/40 text-white font-bold text-sm transition-all hover:bg-white/5">Talk to Our Team</Link>
           </div>
         </div>

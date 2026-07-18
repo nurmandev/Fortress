@@ -205,7 +205,7 @@ export default function OurApproachPage() {
             Present your business, project, asset, or strategic proposal to our investment team. Serious opportunities receive serious attention.
           </p>
           <Link
-            href="/partner-with-us"
+            href="/invest-with-fortress"
             className="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-fortress-gold to-fortress-champagne text-fortress-navy font-bold text-xs md:text-sm tracking-widest hover:shadow-2xl hover:shadow-fortress-gold/25 transition-all duration-300 rounded-sm"
           >
             SUBMIT YOUR OPPORTUNITY

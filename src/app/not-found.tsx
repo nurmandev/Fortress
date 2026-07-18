@@ -15,10 +15,15 @@ export default function NotFound() {
           </p>
           <Link
             href="/"
-            className="inline-flex items-center px-8 py-3 bg-fortress-gold text-fortress-navy font-semibold text-sm tracking-wider hover:bg-fortress-champagne transition-colors rounded-xl"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-fortress-gold to-fortress-champagne text-fortress-navy font-bold text-sm tracking-widest hover:shadow-2xl hover:shadow-fortress-gold/25 transition-all duration-300 rounded-sm"
           >
             Back to Home
           </Link>
+          <div className="mt-16 max-w-lg mx-auto bg-fortress-navy p-8 md:p-10 rounded-2xl">
+            <p className="text-fortress-silver text-sm md:text-base leading-relaxed">
+              If you believe this is an error, please <Link href="/contact" className="text-fortress-gold hover:underline">contact us</Link>.
+            </p>
+          </div>
         </div>
       </section>
       <Footer />

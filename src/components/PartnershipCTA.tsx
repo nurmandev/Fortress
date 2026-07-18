@@ -69,7 +69,7 @@ export default function PartnershipCTA() {
               transition={{ type: "spring", stiffness: 380, damping: 22 }}
             >
               <Link
-                href="/partner-with-us"
+                href="/invest-with-fortress"
                 className="block px-8 py-3.5 bg-gradient-to-r from-fortress-gold to-fortress-champagne text-fortress-navy font-bold text-sm tracking-widest shadow-lg rounded-sm hover:opacity-90 transition-opacity"
               >
                 SUBMIT AN OPPORTUNITY
