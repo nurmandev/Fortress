@@ -88,7 +88,7 @@ export default function AdminDashboard() {
             {/* Header section */}
             <div className="mb-10">
               <h2 className="text-2xl font-bold text-fortress-ivory tracking-tight mb-2">Welcome back, Admin</h2>
-              <p className="text-sm text-fortress-silver/70 font-light">Here's what's happening with your platform today.</p>
+              <p className="text-sm text-fortress-silver/70 font-light">Here&apos;s what&apos;s happening with your platform today.</p>
             </div>
 
             {/* Stats Grid */}
