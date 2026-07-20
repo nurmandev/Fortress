@@ -1,30 +1,64 @@
 import { NextResponse } from "next/server";
+import { connectDB } from "@/lib/db";
+import Admin from "@/models/Admin";
+import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
+const FALLBACK_USERNAME = process.env.ADMIN_USERNAME || "admin";
+const FALLBACK_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
 
 export async function POST(request: Request) {
   try {
     const { username, password } = await request.json();
 
-    if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
+    if (!username || !password) {
       return NextResponse.json(
-        { success: false, message: "Invalid credentials" },
-        { status: 401 }
+        { success: false, message: "Username and password are required" },
+        { status: 400 }
       );
     }
 
-    const cookieStore = await cookies();
-    cookieStore.set("admin_session", "authenticated", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/admin",
-      maxAge: 60 * 60 * 24,
-    });
+    try {
+      await connectDB();
+      const admin = await Admin.findOne({
+        $or: [{ email: username.toLowerCase() }, { name: username }],
+      });
 
-    return NextResponse.json({ success: true });
+      if (admin) {
+        const valid = await bcrypt.compare(password, admin.password);
+        if (valid) {
+          await Admin.findByIdAndUpdate(admin._id, { lastLogin: new Date() });
+          const cookieStore = await cookies();
+          cookieStore.set("admin_session", "authenticated", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            path: "/",
+            maxAge: 60 * 60 * 24,
+          });
+          return NextResponse.json({ success: true });
+        }
+      }
+    } catch {
+      // DB not available, fall through to fallback
+    }
+
+    if (username === FALLBACK_USERNAME && password === FALLBACK_PASSWORD) {
+      const cookieStore = await cookies();
+      cookieStore.set("admin_session", "authenticated", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+        maxAge: 60 * 60 * 24,
+      });
+      return NextResponse.json({ success: true });
+    }
+
+    return NextResponse.json(
+      { success: false, message: "Invalid credentials" },
+      { status: 401 }
+    );
   } catch {
     return NextResponse.json(
       { success: false, message: "Invalid request" },

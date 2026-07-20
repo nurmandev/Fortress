@@ -10,9 +10,14 @@ import {
   LineChart, Newspaper, Handshake, Check,
   MessageSquare, Mail, Crown, FileText, Users, ChevronLeft, ChevronRight, TrendingUp
 } from "lucide-react";
-import { allArticles, categories as rawCategories } from "./articles";
+import { categories as rawCategories } from "./articles";
 
 /* ─── Types ──────────────────────────────────────────────────── */
+interface ArticleRaw {
+  slug: string; category: string; title: string; excerpt: string;
+  date: string; readTime: string; featuredImage?: string;
+}
+
 interface EnrichedArticle {
   slug: string; category: string; title: string; excerpt: string;
   date: string; readTime: string; image: string;
@@ -20,42 +25,6 @@ interface EnrichedArticle {
   tags?: string[]; author?: { name: string; role: string; initials: string; color: string };
   views?: number; comments?: number; rating?: number; trending?: boolean; featured?: boolean;
 }
-
-/* ─── Image map (category → public image) ───────────────────── */
-const CAT_IMAGES: Record<string, string> = {
-  "Real Estate": "/business.jpg",
-  "Business Acquisitions": "/black-men-cafe-have-business.jpg",
-  "Private Equity": "/plants-coins.jpg",
-  "AI & Technology": "/businessman-reading.jpg",
-  "Digital Assets & Blockchain": "/gold-coins.jpg",
-  "Hospitality": "/employees.jpg",
-  "Trading & Distribution": "/discussing-business.jpg",
-  "Market Insights": "/strategy-ideas.jpg",
-  "Company News": "/african-man-black-suit.jpg",
-  "Strategic Partnerships": "/portrait-smiling.jpg",
-};
-
-const AUTHORS = [
-  { name: "James Whitmore",    role: "Senior Analyst",       initials: "JW", color: "bg-blue-600"    },
-  { name: "Sara Al Mansoori",  role: "Investment Director",  initials: "SM", color: "bg-amber-600"   },
-  { name: "David Chen",        role: "Research Lead",        initials: "DC", color: "bg-emerald-600" },
-  { name: "Priya Nair",        role: "Market Strategist",    initials: "PN", color: "bg-purple-600"  },
-];
-const TAGS_POOL = ["UAE","Dubai","Finance","Strategy","Growth","AI","ESG","Blockchain","Real Estate","Equity"];
-const DIFFICULTIES: Array<"Beginner"|"Intermediate"|"Advanced"> = ["Beginner","Intermediate","Advanced"];
-
-const enrichedArticles: EnrichedArticle[] = allArticles.map((a, i) => ({
-  ...a,
-  image: CAT_IMAGES[a.category] || "/business.jpg",
-  difficulty: DIFFICULTIES[i % 3],
-  tags: TAGS_POOL.slice(i % TAGS_POOL.length, (i % TAGS_POOL.length) + 3),
-  author: AUTHORS[i % AUTHORS.length],
-  views: 1200 + i * 347,
-  comments: 4 + i * 3,
-  rating: +(4.2 + (i % 8) * 0.1).toFixed(1),
-  trending: i < 3,
-  featured: i === 0,
-}));
 
 /* ─── Category helpers ───────────────────────────────────────── */
 const CAT_ICONS: Record<string, React.ReactNode> = {
@@ -123,10 +92,49 @@ function DifficultyBadge({ level }: { level: string }) {
   );
 }
 
+/* ─── Image map (category → public image) ───────────────────── */
+const CAT_IMAGES: Record<string, string> = {
+  "Real Estate": "/business.jpg",
+  "Business Acquisitions": "/black-men-cafe-have-business.jpg",
+  "Private Equity": "/plants-coins.jpg",
+  "AI & Technology": "/businessman-reading.jpg",
+  "Digital Assets & Blockchain": "/gold-coins.jpg",
+  "Hospitality": "/employees.jpg",
+  "Trading & Distribution": "/discussing-business.jpg",
+  "Market Insights": "/strategy-ideas.jpg",
+  "Company News": "/african-man-black-suit.jpg",
+  "Strategic Partnerships": "/portrait-smiling.jpg",
+};
+
+const AUTHORS = [
+  { name: "James Whitmore",    role: "Senior Analyst",       initials: "JW", color: "bg-blue-600"    },
+  { name: "Sara Al Mansoori",  role: "Investment Director",  initials: "SM", color: "bg-amber-600"   },
+  { name: "David Chen",        role: "Research Lead",        initials: "DC", color: "bg-emerald-600" },
+  { name: "Priya Nair",        role: "Market Strategist",    initials: "PN", color: "bg-purple-600"  },
+];
+const TAGS_POOL = ["UAE","Dubai","Finance","Strategy","Growth","AI","ESG","Blockchain","Real Estate","Equity"];
+const DIFFICULTIES: Array<"Beginner"|"Intermediate"|"Advanced"> = ["Beginner","Intermediate","Advanced"];
+
+function enrichArticles(articles: ArticleRaw[]): EnrichedArticle[] {
+  return articles.map((a, i) => ({
+    ...a,
+    image: CAT_IMAGES[a.category] || "/business.jpg",
+    difficulty: DIFFICULTIES[i % 3],
+    tags: TAGS_POOL.slice(i % TAGS_POOL.length, (i % TAGS_POOL.length) + 3),
+    author: AUTHORS[i % AUTHORS.length],
+    views: 1200 + i * 347,
+    comments: 4 + i * 3,
+    rating: +(4.2 + (i % 8) * 0.1).toFixed(1),
+    trending: i < 3,
+    featured: i === 0,
+  }));
+}
+
 /* ═══════════════════════════════════════════════════════════════
    MAIN COMPONENT
 ═══════════════════════════════════════════════════════════════ */
 export default function InsightsClient() {
+  const [articles, setArticles]               = useState<EnrichedArticle[]>([]);
   const [search, setSearch]                   = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags]       = useState<string[]>([]);
@@ -139,7 +147,17 @@ export default function InsightsClient() {
   const [subscribed, setSubscribed]           = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => { const t = setTimeout(() => setLoading(false), 700); return () => clearTimeout(t); }, []);
+  useEffect(() => {
+    fetch("/api/blog")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.data?.posts) {
+          setArticles(enrichArticles(data.data.posts));
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, []);
 
   const toggleCategory  = (c: string) => { setSelectedCategories(p => p.includes(c) ? p.filter(x=>x!==c) : [...p,c]); setPage(1); };
   const toggleTag       = (t: string) => { setSelectedTags(p => p.includes(t) ? p.filter(x=>x!==t) : [...p,t]); setPage(1); };
@@ -154,7 +172,7 @@ export default function InsightsClient() {
 
   /* ── Filter + sort ── */
   const filtered = useMemo(() => {
-    let list = [...enrichedArticles];
+    let list = [...articles];
     const q = search.toLowerCase().trim();
     if (q) list = list.filter(a =>
       a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q) ||
@@ -172,7 +190,7 @@ export default function InsightsClient() {
   const paginated      = rest.slice((page-1)*ARTICLES_PER_PAGE, page*ARTICLES_PER_PAGE);
 
   const catCounts = useMemo(() =>
-    rawCategories.reduce((acc,cat)=>{ acc[cat.label]=enrichedArticles.filter(a=>a.category===cat.label).length; return acc; }, {} as Record<string,number>)
+    rawCategories.reduce((acc,cat)=>{ acc[cat.label]=articles.filter(a=>a.category===cat.label).length; return acc; }, {} as Record<string,number>)
   ,[]);
 
   /* ═══════════════════ SIDEBAR ═══════════════════ */
@@ -200,7 +218,7 @@ export default function InsightsClient() {
           <button onClick={()=>{setSelectedCategories([]);setPage(1);}}
             className={`flex items-center justify-between px-2 py-2 text-sm transition-all border-l-2 ${selectedCategories.length===0?"border-[#C9A24A] text-[#C9A24A] font-semibold bg-amber-50/50":"border-transparent text-gray-600 hover:bg-gray-50"}`}>
             <span className="flex items-center gap-2"><Grid3X3 className="w-3.5 h-3.5" /> All</span>
-            <span className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5">{enrichedArticles.length}</span>
+            <span className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5">{articles.length}</span>
           </button>
           {rawCategories.map(cat=>(
             <button key={cat.label} onClick={()=>toggleCategory(cat.label)}

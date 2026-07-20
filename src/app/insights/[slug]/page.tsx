@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { allArticles } from "@/app/insights/articles";
 import { ArrowLeft, Calendar, Clock, Eye, Star, BookOpen } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,7 +10,6 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-/* ─── Image map matching InsightsClient ─────────────────────── */
 const CAT_IMAGES: Record<string, string> = {
   "Real Estate": "/business.jpg",
   "Business Acquisitions": "/black-men-cafe-have-business.jpg",
@@ -38,13 +36,55 @@ const CAT_COLORS: Record<string, string> = {
   "Strategic Partnerships": "bg-teal-50 text-teal-700 border-teal-200",
 };
 
+const AUTHORS = [
+  { name: "James Whitmore", role: "Senior Analyst", initials: "JW", color: "bg-blue-600" },
+  { name: "Sara Al Mansoori", role: "Investment Director", initials: "SM", color: "bg-amber-600" },
+  { name: "David Chen", role: "Research Lead", initials: "DC", color: "bg-emerald-600" },
+  { name: "Priya Nair", role: "Market Strategist", initials: "PN", color: "bg-purple-600" },
+];
+
+interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  readTime: string;
+  featuredImage: string;
+  content: string;
+}
+
+async function getPost(slug: string): Promise<BlogPost | null> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/api/blog?slug=${slug}`, { cache: "no-store" });
+    if (!res.ok) return null;
+    const json = await res.json();
+    return json.data || null;
+  } catch {
+    return null;
+  }
+}
+
+async function getAllPosts(): Promise<BlogPost[]> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/api/blog`, { cache: "no-store" });
+    if (!res.ok) return [];
+    const json = await res.json();
+    return json.data?.posts || [];
+  } catch {
+    return [];
+  }
+}
+
 export async function generateStaticParams() {
-  return allArticles.map((a) => ({ slug: a.slug }));
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article = allArticles.find((a) => a.slug === slug);
+  const article = await getPost(slug);
   if (!article) return { title: "Article Not Found" };
   return {
     title: `${article.title} | Fortress Investment Holdings`,
@@ -59,17 +99,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
-  const article = allArticles.find((a) => a.slug === slug);
+  const article = await getPost(slug);
   if (!article) notFound();
 
-  const related = allArticles.filter((a) => a.slug !== slug).slice(0, 3);
-  const heroImage = CAT_IMAGES[article.category] || "/business.jpg";
+  const allPosts = await getAllPosts();
+  const related = allPosts.filter((a) => a.slug !== slug).slice(0, 3);
+  const heroImage = article.featuredImage || CAT_IMAGES[article.category] || "/business.jpg";
+  const author = AUTHORS[Math.floor(Math.random() * AUTHORS.length)];
+  const views = Math.floor(Math.random() * 2000) + 500;
+  const rating = (4 + Math.random()).toFixed(1);
 
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
 
-      {/* ── Hero image banner ── */}
       <div className="relative h-[420px] md:h-[520px] w-full overflow-hidden mt-16">
         <Image
           src={heroImage}
@@ -80,7 +123,6 @@ export default async function ArticlePage({ params }: Props) {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#07111D] via-[#07111D]/60 to-[#07111D]/20" />
-        {/* Category + breadcrumb */}
         <div className="absolute bottom-0 left-0 right-0 max-w-[860px] mx-auto px-6 lg:px-8 pb-10">
           <Link
             href="/insights"
@@ -102,44 +144,26 @@ export default async function ArticlePage({ params }: Props) {
         </div>
       </div>
 
-      {/* ── Meta bar ── */}
       <div className="border-b border-gray-200 bg-white">
         <div className="max-w-[860px] mx-auto px-6 lg:px-8 py-4 flex flex-wrap items-center gap-5 text-sm text-gray-400">
           <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-[#C9A24A]" /> {article.date}</span>
           <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-[#C9A24A]" /> {article.readTime}</span>
-          <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5 text-[#C9A24A]" /> 1,842 views</span>
-          <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" /> 4.6 rating</span>
+          <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5 text-[#C9A24A]" /> {views.toLocaleString()} views</span>
+          <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" /> {rating} rating</span>
         </div>
       </div>
 
-      {/* ── Article body ── */}
       <section className="py-14 md:py-20 bg-white">
         <div className="max-w-[860px] mx-auto px-6 lg:px-8">
-          {/* Excerpt / pull quote */}
           <p className="text-xl md:text-2xl text-gray-700 leading-relaxed border-l-4 border-[#C9A24A] pl-6 mb-10 font-light">
             {article.excerpt}
           </p>
 
-          {/* Placeholder body */}
-          <div className="prose prose-gray max-w-none text-gray-600 leading-relaxed space-y-6 text-base">
-            <p>
-              This article is currently being prepared by the Fortress Investment Holdings research team.
-              Our team carefully crafts each insight to ensure it delivers genuine, actionable value to our
-              partners and investors.
-            </p>
-            <p>
-              At Fortress Investment Holdings, we are committed to sharing thoughtful, well-researched commentary
-              on the sectors and markets we invest in  including real estate, private equity, technology, and
-              hospitality across the UAE and beyond.
-            </p>
-            <p>
-              Please check back soon for the full version of this article. In the meantime, you are welcome to
-              explore related insights or reach out to our team directly with any questions about your specific
-              investment interests.
-            </p>
-          </div>
+          <div
+            className="prose prose-gray max-w-none text-gray-600 leading-relaxed space-y-6 text-base"
+            dangerouslySetInnerHTML={{ __html: article.content }}
+          />
 
-          {/* Back link */}
           <div className="mt-14 pt-8 border-t border-gray-200">
             <Link
               href="/insights"
@@ -151,50 +175,51 @@ export default async function ArticlePage({ params }: Props) {
         </div>
       </section>
 
-      {/* ── Related articles ── */}
-      <section className="bg-[#F8F9FB] border-t border-gray-200 py-16">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="h-px flex-1 bg-gray-200" />
-            <p className="text-[10px] font-bold text-gray-400 tracking-widest uppercase">Continue Reading</p>
-            <div className="h-px flex-1 bg-gray-200" />
-          </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">More Insights</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {related.map((a) => (
-              <Link key={a.slug} href={`/insights/${a.slug}`} className="group">
-                <article className="bg-white border border-gray-200 hover:border-[#C9A24A]/40 hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col h-full">
-                  <div className="relative h-44 overflow-hidden shrink-0">
-                    <Image
-                      src={CAT_IMAGES[a.category] || "/business.jpg"}
-                      alt={a.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      sizes="(max-width:768px)100vw,33vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                    <div className="absolute top-3 left-3">
-                      <span className={`text-[10px] font-bold px-2.5 py-1 border backdrop-blur-sm ${CAT_COLORS[a.category] || "bg-white/90 text-gray-700 border-gray-200"}`}>
-                        {a.category}
-                      </span>
+      {related.length > 0 && (
+        <section className="bg-[#F8F9FB] border-t border-gray-200 py-16">
+          <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="h-px flex-1 bg-gray-200" />
+              <p className="text-[10px] font-bold text-gray-400 tracking-widest uppercase">Continue Reading</p>
+              <div className="h-px flex-1 bg-gray-200" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">More Insights</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {related.map((a) => (
+                <Link key={a.slug} href={`/insights/${a.slug}`} className="group">
+                  <article className="bg-white border border-gray-200 hover:border-[#C9A24A]/40 hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col h-full">
+                    <div className="relative h-44 overflow-hidden shrink-0">
+                      <Image
+                        src={a.featuredImage || CAT_IMAGES[a.category] || "/business.jpg"}
+                        alt={a.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        sizes="(max-width:768px)100vw,33vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                      <div className="absolute top-3 left-3">
+                        <span className={`text-[10px] font-bold px-2.5 py-1 border backdrop-blur-sm ${CAT_COLORS[a.category] || "bg-white/90 text-gray-700 border-gray-200"}`}>
+                          {a.category}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-5 flex flex-col flex-1">
-                    <h3 className="font-bold text-gray-900 text-sm leading-snug mb-2 group-hover:text-[#C9A24A] transition-colors flex-1">
-                      {a.title}
-                    </h3>
-                    <p className="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-2">{a.excerpt}</p>
-                    <div className="flex items-center gap-3 text-[11px] text-gray-400 pt-3 border-t border-gray-100">
-                      <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {a.date}</span>
-                      <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {a.readTime}</span>
+                    <div className="p-5 flex flex-col flex-1">
+                      <h3 className="font-bold text-gray-900 text-sm leading-snug mb-2 group-hover:text-[#C9A24A] transition-colors flex-1">
+                        {a.title}
+                      </h3>
+                      <p className="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-2">{a.excerpt}</p>
+                      <div className="flex items-center gap-3 text-[11px] text-gray-400 pt-3 border-t border-gray-100">
+                        <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {a.date}</span>
+                        <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {a.readTime}</span>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              </Link>
-            ))}
+                  </article>
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <Footer />
     </main>

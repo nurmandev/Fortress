@@ -2,19 +2,33 @@ import { NextRequest } from "next/server";
 import { enquiryService } from "@/services";
 import { contactEnquirySchema, formatZodErrors } from "@/validators";
 import { rateLimit } from "@/utils/rate-limit";
-import { sendEnquiryNotification } from "@/lib/email";
 import {
   successResponse,
-  validationErrorResponse,
   errorResponse,
+  validationErrorResponse,
   serverErrorResponse,
 } from "@/utils/api-response";
 import { handleError } from "@/utils/errors";
 
+export async function GET(request: NextRequest) {
+  try {
+    const status = request.nextUrl.searchParams.get("status") || undefined;
+    const type = request.nextUrl.searchParams.get("type") || undefined;
+    const page = parseInt(request.nextUrl.searchParams.get("page") || "1");
+    const limit = parseInt(request.nextUrl.searchParams.get("limit") || "20");
+
+    const result = await enquiryService.getEnquiries({ status, type, page, limit });
+    return successResponse(result);
+  } catch (error) {
+    const { message } = handleError(error);
+    return serverErrorResponse(message);
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown";
-    const rateCheck = rateLimit(`contact:${ip}`, 5, 60000);
+    const rateCheck = rateLimit(`enquiry:${ip}`, 5, 60000);
     if (!rateCheck.allowed) {
       return errorResponse("Too many requests. Please try again later.", 429);
     }
@@ -27,11 +41,6 @@ export async function POST(request: NextRequest) {
     }
 
     const enquiry = await enquiryService.createEnquiry(parsed.data);
-
-    sendEnquiryNotification(parsed.data).catch((err) =>
-      console.error("Failed to send notification email:", err)
-    );
-
     return successResponse(enquiry, "Enquiry submitted successfully", 201);
   } catch (error) {
     const { message } = handleError(error);

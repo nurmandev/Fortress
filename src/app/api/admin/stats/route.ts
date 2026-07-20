@@ -1,33 +1,47 @@
 import { NextResponse } from "next/server";
-import { allArticles } from "@/app/insights/articles";
-import { getContacts, getSubmissions } from "@/lib/store";
+import { connectDB } from "@/lib/db";
+import Blog from "@/models/Blog";
+import Enquiry from "@/models/Enquiry";
 
 export async function GET() {
-  const contacts = getContacts();
-  const submissions = getSubmissions();
-  const blogPosts = allArticles.length;
+  try {
+    await connectDB();
+    const blogPosts = await Blog.countDocuments();
+    const totalContacts = await Enquiry.countDocuments({ type: "Contact" });
+    const totalSubmissions = await Enquiry.countDocuments({
+      type: { $in: ["Investment Opportunity", "Business Acquisition", "Joint Venture", "Strategic Partnership"] },
+    });
 
-  const activities = [
-    ...contacts.slice(0, 5).map((c) => ({
-      id: c.id,
-      type: "contact" as const,
-      title: c.name,
-      description: c.subject,
-      time: c.createdAt,
-    })),
-    ...submissions.slice(0, 5).map((s) => ({
-      id: s.id,
-      type: "submission" as const,
-      title: `${s.firstName} ${s.lastName}`,
-      description: s.opportunityType,
-      time: s.createdAt,
-    })),
-  ].sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
+    const recentEnquiries = await Enquiry.find()
+      .sort({ createdAt: -1 })
+      .limit(5)
+      .lean();
 
-  return NextResponse.json({
-    blogPosts,
-    totalContacts: contacts.length,
-    totalSubmissions: submissions.length,
-    activities,
-  });
+    const recentBlogs = await Blog.find()
+      .sort({ createdAt: -1 })
+      .limit(5)
+      .lean();
+
+    const activities = [
+      ...recentEnquiries.map((e) => ({
+        id: e._id.toString(),
+        type: (e.type === "Contact" ? "contact" : "submission") as "contact" | "submission",
+        title: e.name,
+        description: e.subject || e.type,
+        time: e.createdAt,
+      })),
+    ].sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
+
+    return NextResponse.json({
+      blogPosts,
+      totalContacts,
+      totalSubmissions,
+      activities,
+    });
+  } catch {
+    return NextResponse.json(
+      { blogPosts: 0, totalContacts: 0, totalSubmissions: 0, activities: [] },
+      { status: 200 }
+    );
+  }
 }

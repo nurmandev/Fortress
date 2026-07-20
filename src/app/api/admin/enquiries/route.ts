@@ -1,34 +1,28 @@
 import { NextResponse } from "next/server";
-import { getContacts, getSubmissions } from "@/lib/store";
+import { connectDB } from "@/lib/db";
+import Enquiry from "@/models/Enquiry";
 
 export async function GET() {
-  const contacts = getContacts().map((c) => ({
-    id: c.id,
-    type: "contact" as const,
-    name: c.name,
-    email: c.email,
-    subject: c.subject,
-    message: c.message,
-    read: c.read,
-    createdAt: c.createdAt,
-    details: { phone: c.phone },
-  }));
-
-  const submissions = getSubmissions().map((s) => ({
-    id: s.id,
-    type: "submission" as const,
-    name: `${s.firstName} ${s.lastName}`,
-    email: s.email,
-    subject: s.opportunityType,
-    message: s.message,
-    read: s.read,
-    createdAt: s.createdAt,
-    details: { phone: s.phone, company: s.company, investmentRange: s.investmentRange, fileName: s.fileName },
-  }));
-
-  const all = [...contacts, ...submissions].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
-
-  return NextResponse.json(all);
+  try {
+    await connectDB();
+    const enquiries = await Enquiry.find().sort({ createdAt: -1 }).lean();
+    const result = enquiries.map((e) => ({
+      id: e._id.toString(),
+      type: (e.type === "Contact" ? "contact" : "submission") as "contact" | "submission",
+      name: e.name,
+      email: e.email,
+      subject: e.subject || e.type,
+      message: e.message,
+      read: e.status !== "new",
+      createdAt: e.createdAt,
+      details: {
+        phone: e.phone,
+        company: e.company,
+        type: e.type,
+      },
+    }));
+    return NextResponse.json(result);
+  } catch {
+    return NextResponse.json([], { status: 200 });
+  }
 }

@@ -14,7 +14,7 @@ import { handleError } from "@/utils/errors";
 export async function POST(request: NextRequest) {
   try {
     const ip = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown";
-    const rateCheck = rateLimit(`contact:${ip}`, 5, 60000);
+    const rateCheck = rateLimit(`opportunity:${ip}`, 3, 60000);
     if (!rateCheck.allowed) {
       return errorResponse("Too many requests. Please try again later.", 429);
     }
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
       console.error("Failed to send notification email:", err)
     );
 
-    return successResponse(enquiry, "Enquiry submitted successfully", 201);
+    return successResponse(enquiry, "Investment opportunity submitted successfully", 201);
   } catch (error) {
     const { message } = handleError(error);
     return serverErrorResponse(message);
