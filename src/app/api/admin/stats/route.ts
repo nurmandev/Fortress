@@ -2,8 +2,11 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import Blog from "@/models/Blog";
 import Enquiry from "@/models/Enquiry";
+import { getCurrentUser } from "@/lib/auth-utils";
 
 export async function GET() {
+  const user = await getCurrentUser();
+  if (!user) return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
   try {
     await connectDB();
     const blogPosts = await Blog.countDocuments();

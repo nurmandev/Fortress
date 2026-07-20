@@ -69,12 +69,12 @@ export default function EnquiriesPage() {
   const unread = enquiries.filter((e) => !e.read).length;
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-[#03080e] flex selection:bg-fortress-gold/20 selection:text-fortress-champagne font-sans">
       <AdminSidebar active="Enquiries" />
-      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen relative">
         <AdminNavbar title="Enquiries" />
-        <div className="flex flex-col md:flex-row flex-1 min-h-0">
-        <div className={`w-full md:w-[420px] border-b md:border-b-0 md:border-r border-fortress-charcoal flex flex-col bg-white ${selected ? "hidden md:flex" : ""}`}>
+        <div className="flex flex-col md:flex-row flex-1 min-h-[calc(100vh-64px)] relative z-10">
+        <div className={`w-full md:w-[420px] border-b md:border-b-0 md:border-r border-fortress-gold/10 flex flex-col bg-[#07111D]/80 backdrop-blur-xl ${selected ? "hidden md:flex" : ""}`}>
           <div className="p-4 border-b border-fortress-charcoal">
             <div className="flex items-center justify-between mb-3">
               {unread > 0 && <span className="text-[10px] bg-fortress-gold/15 text-fortress-gold font-bold px-2 py-0.5 rounded-full tracking-wide">{unread} unread</span>}
@@ -109,7 +109,7 @@ export default function EnquiriesPage() {
           </div>
         </div>
 
-        <div className={`flex-1 p-5 md:p-8 overflow-auto bg-white ${!selected ? "hidden md:flex md:items-center md:justify-center" : ""}`}>
+        <div className={`flex-1 p-5 md:p-8 overflow-auto bg-[#03080e] ${!selected ? "hidden md:flex md:items-center md:justify-center" : ""}`}>
           {selected ? (
             <div className="max-w-2xl mx-auto space-y-6 w-full">
               <button onClick={() => setSelected(null)} className="md:hidden flex items-center gap-1.5 text-fortress-silver hover:text-fortress-navy text-xs transition-colors mb-3 rounded-md">

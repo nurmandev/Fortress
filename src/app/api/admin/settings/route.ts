@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import Settings from "@/models/Settings";
+import { getCurrentUser } from "@/lib/auth-utils";
 
 const DEFAULT_SETTINGS = {
   companyName: "Fortress Investment Holdings",
@@ -23,7 +24,15 @@ const DEFAULT_SETTINGS = {
   footer: "",
 };
 
+async function checkAuth() {
+  const user = await getCurrentUser();
+  if (!user) return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+  return null;
+}
+
 export async function GET() {
+  const authError = await checkAuth();
+  if (authError) return authError;
   try {
     await connectDB();
     let settings = await Settings.findOne().lean();
@@ -39,6 +48,8 @@ export async function GET() {
 }
 
 export async function PUT(request: Request) {
+  const authError = await checkAuth();
+  if (authError) return authError;
   try {
     await connectDB();
     const data = await request.json();

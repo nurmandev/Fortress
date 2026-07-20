@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Shield, Eye, EyeOff, Lock, User } from "lucide-react";
 import Image from "next/image";
@@ -12,6 +12,21 @@ export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [checking, setChecking] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/admin-session")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.authenticated) {
+          router.replace("/admin");
+        }
+      })
+      .catch(() => {})
+      .finally(() => setChecking(false));
+  }, [router]);
+
+  if (checking) return null;
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();

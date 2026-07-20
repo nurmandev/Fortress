@@ -29,7 +29,7 @@ export async function POST(request: Request) {
         if (valid) {
           await Admin.findByIdAndUpdate(admin._id, { lastLogin: new Date() });
           const cookieStore = await cookies();
-          cookieStore.set("admin_session", "authenticated", {
+          cookieStore.set("admin_email", admin.email, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
 
     if (username === FALLBACK_USERNAME && password === FALLBACK_PASSWORD) {
       const cookieStore = await cookies();
-      cookieStore.set("admin_session", "authenticated", {
+      cookieStore.set("admin_email", FALLBACK_USERNAME, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",

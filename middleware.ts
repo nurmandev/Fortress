@@ -14,9 +14,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const sessionCookie = request.cookies.get("admin_session")?.value
-    || request.cookies.get("better-auth.session")?.value
-    || request.cookies.get("__Secure-better-auth.session")?.value;
+  const sessionCookie = request.cookies.get("admin_email")?.value;
 
   if (!sessionCookie) {
     const loginUrl = new URL("/admin-login", request.url);

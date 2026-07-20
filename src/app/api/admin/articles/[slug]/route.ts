@@ -1,8 +1,17 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import Blog from "@/models/Blog";
+import { getCurrentUser } from "@/lib/auth-utils";
+
+async function checkAuth() {
+  const user = await getCurrentUser();
+  if (!user) return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+  return null;
+}
 
 export async function GET(_request: Request, { params }: { params: Promise<{ slug: string }> }) {
+  const authError = await checkAuth();
+  if (authError) return authError;
   try {
     await connectDB();
     const { slug } = await params;
@@ -28,6 +37,8 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
 }
 
 export async function PUT(request: Request, { params }: { params: Promise<{ slug: string }> }) {
+  const authError = await checkAuth();
+  if (authError) return authError;
   try {
     await connectDB();
     const { slug } = await params;
@@ -56,6 +67,8 @@ export async function PUT(request: Request, { params }: { params: Promise<{ slug
 }
 
 export async function DELETE(_request: Request, { params }: { params: Promise<{ slug: string }> }) {
+  const authError = await checkAuth();
+  if (authError) return authError;
   try {
     await connectDB();
     const { slug } = await params;

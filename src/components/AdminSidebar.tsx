@@ -47,23 +47,23 @@ export default function AdminSidebar({ active }: AdminSidebarProps) {
       )}
 
       <aside
-        className={`fixed md:sticky top-0 left-0 z-40 w-64 bg-fortress-navy flex flex-col shrink-0 h-screen transition-transform duration-200 md:translate-x-0 border-r border-fortress-charcoal ${
+        className={`fixed md:sticky top-0 left-0 z-40 w-64 bg-[#03080e]/95 backdrop-blur-xl flex flex-col shrink-0 h-screen transition-transform duration-300 md:translate-x-0 border-r border-fortress-gold/10 shadow-[4px_0_24px_rgba(0,0,0,0.5)] ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="p-4 border-b border-fortress-charcoal">
+        <div className="p-6 border-b border-fortress-gold/10">
           <div className="flex items-center justify-between">
-            <Image src="/large-logo.png" alt="Fortress" width={200} height={56} className="h-12 w-auto" />
+            <Image src="/large-logo.png" alt="Fortress" width={200} height={56} className="h-10 w-auto object-contain brightness-110 drop-shadow-md" />
             <button
               onClick={() => setOpen(false)}
-              className="md:hidden text-fortress-silver hover:text-fortress-champagne"
+              className="md:hidden text-fortress-silver hover:text-fortress-champagne transition-colors"
               aria-label="Close menu"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
         </div>
-        <nav className="flex-1 p-3 space-y-1 overflow-auto">
+        <nav className="flex-1 p-4 space-y-1.5 overflow-auto">
           {links.map((link) => {
             const isActive = link.label === active;
             return (
@@ -71,26 +71,27 @@ export default function AdminSidebar({ active }: AdminSidebarProps) {
                 key={link.label}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`flex items-center gap-3 px-3 py-2.5 text-sm transition-all rounded-md ${
+                className={`flex items-center gap-3 px-4 py-3 text-sm transition-all duration-300 rounded-xl relative group overflow-hidden ${
                   isActive
-                    ? "text-fortress-champagne bg-fortress-gold/10 font-semibold"
-                    : "text-fortress-ivory/70 hover:text-fortress-champagne hover:bg-fortress-deep"
+                    ? "text-fortress-gold font-medium bg-gradient-to-r from-fortress-gold/10 to-transparent border border-fortress-gold/10 shadow-sm"
+                    : "text-fortress-silver hover:text-fortress-ivory hover:bg-fortress-gold/5"
                 }`}
               >
-                <link.icon className="w-4 h-4 shrink-0" />
-                <span>{link.label}</span>
+                {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-gradient-to-b from-fortress-champagne to-fortress-gold rounded-r-full shadow-[0_0_8px_rgba(201,162,74,0.6)]" />}
+                <link.icon className={`w-4 h-4 shrink-0 transition-transform duration-300 ${isActive ? "scale-110" : "group-hover:scale-110 group-hover:text-fortress-gold"}`} />
+                <span className="tracking-wide">{link.label}</span>
               </Link>
             );
           })}
         </nav>
-        <div className="p-3 border-t border-fortress-charcoal">
+        <div className="p-4 border-t border-fortress-gold/10">
           <Link
             href="/admin-login"
             onClick={() => setOpen(false)}
-            className="flex items-center gap-3 px-3 py-2.5 text-sm text-fortress-silver/50 hover:text-fortress-champagne transition-colors hover:bg-fortress-deep rounded-md"
+            className="flex items-center gap-3 px-4 py-3 text-sm text-fortress-silver/60 hover:text-fortress-champagne transition-all duration-300 hover:bg-fortress-gold/5 rounded-xl group"
           >
-            <LogOut className="w-4 h-4 shrink-0" />
-            <span>Sign Out</span>
+            <LogOut className="w-4 h-4 shrink-0 group-hover:-translate-x-1 transition-transform" />
+            <span className="tracking-wide">Sign Out</span>
           </Link>
         </div>
       </aside>

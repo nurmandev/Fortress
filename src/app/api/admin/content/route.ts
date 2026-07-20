@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import Page from "@/models/Page";
+import { getCurrentUser } from "@/lib/auth-utils";
 
 const DEFAULT_PAGES = [
   "home", "about", "investment-focus", "our-approach",
@@ -8,7 +9,15 @@ const DEFAULT_PAGES = [
   "terms-of-use", "investment-disclaimer",
 ];
 
+async function checkAuth() {
+  const user = await getCurrentUser();
+  if (!user) return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+  return null;
+}
+
 export async function GET(request: Request) {
+  const authError = await checkAuth();
+  if (authError) return authError;
   try {
     await connectDB();
     const { searchParams } = new URL(request.url);
@@ -35,6 +44,8 @@ export async function GET(request: Request) {
 }
 
 export async function PUT(request: Request) {
+  const authError = await checkAuth();
+  if (authError) return authError;
   try {
     await connectDB();
     const { slug, title, content } = await request.json();
