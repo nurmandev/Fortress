@@ -32,6 +32,7 @@ export async function GET(request: Request) {
         readTime: article.excerpt ? `${Math.max(1, Math.ceil(article.content.length / 2000))} min read` : "1 min read",
         featuredImage: article.featuredImage || "",
         status: article.status,
+        updatedAt: article.updatedAt || article.createdAt,
         seo: article.seo || { title: article.title, description: article.excerpt || "" },
       });
     }
@@ -49,6 +50,7 @@ export async function GET(request: Request) {
         readTime: a.excerpt ? `${Math.max(1, Math.ceil(a.content.length / 2000))} min read` : "1 min read",
         featuredImage: a.featuredImage || "",
         status: a.status,
+        updatedAt: a.updatedAt || a.createdAt,
         seo: a.seo || { title: a.title, description: a.excerpt || "" },
       }))
     );
