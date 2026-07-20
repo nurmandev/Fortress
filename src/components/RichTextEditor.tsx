@@ -75,6 +75,7 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
           className="p-1.5 text-fortress-silver hover:text-fortress-ivory hover:bg-fortress-charcoal transition-colors rounded-md"
           title="Insert Image"
         >
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <Image className="w-4 h-4" />
         </button>
         <span className="w-px h-5 bg-white/10 mx-1" />

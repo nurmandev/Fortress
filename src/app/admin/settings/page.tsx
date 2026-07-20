@@ -138,18 +138,22 @@ export default function SettingsPage() {
 
   if (!data) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
+      <div className="min-h-screen bg-[#03080e] flex items-center justify-center">
         <div className="w-8 h-8 border-2 border-fortress-gold border-t-transparent animate-spin rounded-full" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-[#03080e] flex selection:bg-fortress-gold/20 selection:text-fortress-champagne font-sans">
       <AdminSidebar active="Settings" />
-      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen relative">
+        {/* Ambient background glows */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-fortress-gold/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-fortress-navy/50 rounded-full blur-[150px] pointer-events-none" />
+        
         <AdminNavbar title="Settings" />
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6 relative z-10">
           <div className="flex items-center justify-between mb-6">
             <div>
               <p className="text-gray-400 text-sm">General website configuration</p>
@@ -278,6 +282,7 @@ export default function SettingsPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-fortress-silver text-xs font-medium mb-2 tracking-wide">Logo</label>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       {data.logo && <div className="mb-2 p-4 bg-fortress-deep border border-white/5 flex items-center justify-center rounded-lg"><img src={data.logo} alt="" className="h-12 w-auto object-contain" /></div>}
                       <label className="flex items-center justify-center gap-2 px-4 py-3.5 bg-fortress-deep border border-dashed border-white/10 text-fortress-silver text-xs hover:border-fortress-gold/40 cursor-pointer transition-colors rounded-lg">
                         <input type="file" accept="image/*" onChange={handleLogoUpload} className="hidden" />
@@ -286,6 +291,7 @@ export default function SettingsPage() {
                     </div>
                     <div>
                       <label className="block text-fortress-silver text-xs font-medium mb-2 tracking-wide">Favicon</label>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       {data.favicon && <div className="mb-2 p-4 bg-fortress-deep border border-white/5 flex items-center justify-center rounded-lg"><img src={data.favicon} alt="" className="h-10 w-auto object-contain" /></div>}
                       <label className="flex items-center justify-center gap-2 px-4 py-3.5 bg-fortress-deep border border-dashed border-white/10 text-fortress-silver text-xs hover:border-fortress-gold/40 cursor-pointer transition-colors rounded-lg">
                         <input type="file" accept="image/*" onChange={handleFaviconUpload} className="hidden" />

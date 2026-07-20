@@ -105,6 +105,7 @@ export default async function ArticlePage({ params }: Props) {
   const allPosts = await getAllPosts();
   const related = allPosts.filter((a) => a.slug !== slug).slice(0, 3);
   const heroImage = article.featuredImage || CAT_IMAGES[article.category] || "/business.jpg";
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const author = AUTHORS[Math.floor(Math.random() * AUTHORS.length)];
   const views = Math.floor(Math.random() * 2000) + 500;
   const rating = (4 + Math.random()).toFixed(1);

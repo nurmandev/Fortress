@@ -8,6 +8,18 @@ import Philosophy from "@/components/Philosophy";
 import PartnershipCTA from "@/components/PartnershipCTA";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description:
+    "Fortress Investment Holdings is a leading Dubai-based investment firm specializing in real estate, private equity, business acquisitions, AI & technology, and hospitality.",
+  openGraph: {
+    title: "Home | Fortress Investment Holdings",
+    description:
+      "Leading Dubai-based investment firm specializing in real estate, private equity, and business acquisitions.",
+  },
+};
 
 export default function Home() {
   return (

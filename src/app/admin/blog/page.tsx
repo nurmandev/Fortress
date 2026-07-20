@@ -48,11 +48,15 @@ export default function BlogList() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-[#03080e] flex selection:bg-fortress-gold/20 selection:text-fortress-champagne font-sans">
       <AdminSidebar active="Blog Posts" />
-      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen relative">
+        {/* Ambient background glows */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-fortress-gold/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-fortress-navy/50 rounded-full blur-[150px] pointer-events-none" />
+        
         <AdminNavbar title="Blog Posts" />
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6 relative z-10">
           <div className="flex items-center justify-between mb-6">
             <div>
               <p className="text-gray-400 text-sm">Manage the Insights section</p>
@@ -73,7 +77,7 @@ export default function BlogList() {
           ) : (
             <div className="space-y-2">
               {articles.map((a) => (
-                <div key={a.slug} className="flex items-center justify-between p-4 bg-fortress-navy border border-white/5 hover:border-fortress-gold/30 transition-all group rounded-lg">
+                <div key={a.slug} className="flex items-center justify-between p-5 bg-[#07111D]/80 backdrop-blur-xl border border-fortress-gold/10 hover:border-fortress-gold/30 hover:-translate-y-0.5 shadow-xl shadow-black/20 transition-all duration-300 group rounded-xl mb-3">
                   <div className="flex items-center gap-4 min-w-0 flex-1">
                     <div className="w-10 h-10 bg-fortress-deep flex items-center justify-center shrink-0 rounded-lg">
                       <Newspaper className="w-4 h-4 text-fortress-gold" />

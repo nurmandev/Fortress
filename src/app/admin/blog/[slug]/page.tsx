@@ -101,11 +101,15 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
   }
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-[#03080e] flex selection:bg-fortress-gold/20 selection:text-fortress-champagne font-sans">
       <AdminSidebar active="Blog Posts" />
-      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-screen relative">
+        {/* Ambient background glows */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-fortress-gold/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-fortress-navy/50 rounded-full blur-[150px] pointer-events-none" />
+        
         <AdminNavbar title={isNew ? "New Article" : "Edit Article"} />
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6 relative z-10">
           <div className="flex items-center justify-between mb-6">
             <div>
               <Link href="/admin/blog" className="flex items-center gap-1.5 text-fortress-silver/50 hover:text-fortress-gold text-xs transition-colors mb-2">
@@ -160,6 +164,7 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
                     <label className="block text-fortress-silver text-xs font-medium mb-1.5 tracking-wide">Featured Image</label>
                     {featuredImage && (
                       <div className="mb-2">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={featuredImage} alt="" className="w-full h-28 object-cover border border-white/10 rounded-lg" />
                       </div>
                     )}

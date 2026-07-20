@@ -2,11 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import Admin from "@/models/Admin";
 
-const MONGODB_URI = process.env.MONGODB_URI!;
-
-if (!MONGODB_URI) {
-  throw new Error("Please define the MONGODB_URI environment variable");
-}
+const getMongoUri = () => process.env.MONGODB_URI!;
 
 interface MongooseCache {
   conn: typeof mongoose | null;
@@ -45,12 +41,17 @@ async function seedAdmin() {
 }
 
 export async function connectDB(): Promise<typeof mongoose> {
+  const uri = getMongoUri();
+  if (!uri) {
+    throw new Error("Please define the MONGODB_URI environment variable");
+  }
+
   if (cached.conn) {
     return cached.conn;
   }
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI, {
+    cached.promise = mongoose.connect(uri, {
       bufferCommands: false,
     });
   }

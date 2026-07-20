@@ -20,10 +20,7 @@ export async function GET() {
       .limit(5)
       .lean();
 
-    const recentBlogs = await Blog.find()
-      .sort({ createdAt: -1 })
-      .limit(5)
-      .lean();
+
 
     const activities = [
       ...recentEnquiries.map((e) => ({

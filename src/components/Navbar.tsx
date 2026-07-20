@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { User, Target, Handshake, Newspaper, TrendingUp, Menu, X, Shield } from "lucide-react";
+import { User, Target, Handshake, Newspaper, TrendingUp, Menu, X } from "lucide-react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";

@@ -182,7 +182,7 @@ export default function InsightsClient() {
     if (selectedCategories.length) list = list.filter(a => selectedCategories.includes(a.category));
     if (selectedTags.length) list = list.filter(a => (a.tags||[]).some(t=>selectedTags.includes(t)));
     return list;
-  }, [search, selectedCategories, selectedTags]);
+  }, [search, selectedCategories, selectedTags, articles]);
 
   const featured       = filtered.find(a=>a.featured) || filtered[0];
   const rest           = filtered.filter(a=>a.slug!==featured?.slug);
@@ -191,7 +191,7 @@ export default function InsightsClient() {
 
   const catCounts = useMemo(() =>
     rawCategories.reduce((acc,cat)=>{ acc[cat.label]=articles.filter(a=>a.category===cat.label).length; return acc; }, {} as Record<string,number>)
-  ,[]);
+  ,[articles]);
 
   /* ═══════════════════ SIDEBAR ═══════════════════ */
   const Sidebar = () => (

@@ -40,6 +40,7 @@ export async function GET() {
       const created = await Settings.create(DEFAULT_SETTINGS);
       settings = created.toObject();
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { _id, createdAt, updatedAt, ...data } = settings as Record<string, unknown>;
     return NextResponse.json(data);
   } catch {
