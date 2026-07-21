@@ -59,12 +59,12 @@ export default function Navbar() {
   }, [isMobileMenuOpen]);
 
   const bgClass = scrolled
-    ? "bg-white shadow-md"
+    ? "bg-white"
     : "bg-[#07111D]/95 backdrop-blur-md border-b border-white/5";
 
   return (
     <>
-      <header ref={headerRef} className="fixed top-0 inset-x-0 z-50 h-24 flex px-0">
+      <header ref={headerRef} className={`fixed top-0 inset-x-0 z-50 h-24 flex px-0 transition-colors duration-300 ${scrolled ? "bg-white shadow-md" : "bg-transparent"}`}>
         <div className={`flex-1 h-10 ${bgClass} z-20 relative min-w-0`}>
           <svg className={`absolute inset-0 w-full h-full ${scrolled ? 'opacity-0' : ''}`} preserveAspectRatio="none">
             <line x1="0" y1="39.5" x2="100%" y2="39.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />

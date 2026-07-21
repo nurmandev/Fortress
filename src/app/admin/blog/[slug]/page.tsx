@@ -578,8 +578,8 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
                 </div>
                 <div className="p-4">
                   {featuredImage ? (
-                    <div className="relative group rounded-lg overflow-hidden border border-white/10">
-                      <Image src={featuredImage} alt="" fill className="object-cover" sizes="288px" style={{ position: "relative", height: "160px", width: "100%" }} />
+                    <div className="relative group rounded-lg overflow-hidden border border-white/10 h-40">
+                      <Image src={featuredImage} alt="" fill className="object-cover" sizes="288px" />
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
                         <label className="p-2 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-colors" title="Change image">
                           <Upload className="w-4 h-4 text-white" />
