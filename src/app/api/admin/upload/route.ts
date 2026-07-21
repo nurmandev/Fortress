@@ -3,12 +3,17 @@ import { getCurrentUser } from "@/lib/auth-utils";
 import { uploadFile } from "@/services/media.service";
 
 export async function POST(request: Request) {
-  const user = await getCurrentUser();
-  if (!user) return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
   try {
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+    }
+
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
-    if (!file) return NextResponse.json({ error: "No file" }, { status: 400 });
+    if (!file) {
+      return NextResponse.json({ error: "No file provided" }, { status: 400 });
+    }
 
     const result = await uploadFile(file, "fortress/blog");
 
