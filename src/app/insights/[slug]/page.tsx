@@ -46,7 +46,8 @@ function computeReadTime(content: string) {
   return `${Math.max(1, Math.ceil((content || "").length / 2000))} min read`;
 }
 
-function mapPost(post: Record<string, unknown>) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function mapPost(post: Record<string, unknown>): any {
   return {
     ...post,
     date: formatDate((post.publishedAt as string | undefined) || (post.createdAt as string | undefined)),

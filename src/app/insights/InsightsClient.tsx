@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Search, X, Filter, Grid3X3, List, Clock,
-  Bookmark, Share2, ArrowRight, BookOpen, Star,
+  Bookmark, ArrowRight, BookOpen, Star,
   Building2, Briefcase, Cpu, UtensilsCrossed, Truck,
   LineChart, Newspaper, Handshake, Check,
   Mail, Crown, FileText, Users, ChevronLeft, ChevronRight, TrendingUp
@@ -32,19 +32,19 @@ const CAT_ICONS: Record<string, React.ReactNode> = {
   "Strategic Partnerships": <Handshake className="w-3.5 h-3.5" />,
 };
 const CAT_COLORS: Record<string, string> = {
-  "Real Estate": "bg-amber-50 text-amber-700 border-amber-200",
-  "Business Acquisitions": "bg-blue-50 text-blue-700 border-blue-200",
-  "Private Equity": "bg-emerald-50 text-emerald-700 border-emerald-200",
-  "AI & Technology": "bg-purple-50 text-purple-700 border-purple-200",
-  "Digital Assets & Blockchain": "bg-orange-50 text-orange-700 border-orange-200",
-  "Hospitality": "bg-pink-50 text-pink-700 border-pink-200",
-  "Trading & Distribution": "bg-cyan-50 text-cyan-700 border-cyan-200",
-  "Market Insights": "bg-indigo-50 text-indigo-700 border-indigo-200",
-  "Company News": "bg-red-50 text-red-700 border-red-200",
-  "Strategic Partnerships": "bg-teal-50 text-teal-700 border-teal-200",
+  "Real Estate": "bg-amber-500/10 text-amber-400 border-amber-500/20",
+  "Business Acquisitions": "bg-blue-500/10 text-blue-400 border-blue-500/20",
+  "Private Equity": "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+  "AI & Technology": "bg-purple-500/10 text-purple-400 border-purple-500/20",
+  "Digital Assets & Blockchain": "bg-orange-500/10 text-orange-400 border-orange-500/20",
+  "Hospitality": "bg-pink-500/10 text-pink-400 border-pink-500/20",
+  "Trading & Distribution": "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
+  "Market Insights": "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
+  "Company News": "bg-red-500/10 text-red-400 border-red-500/20",
+  "Strategic Partnerships": "bg-teal-500/10 text-teal-400 border-teal-500/20",
 };
 
-const ARTICLES_PER_PAGE = 3;
+const ARTICLES_PER_PAGE = 6;
 
 /* ─── Skeleton ───────────────────────────────────────────────── */
 function SkeletonCard() {
@@ -220,13 +220,13 @@ export default function InsightsClient() {
   const GridCard = ({ article }: { article: Article }) => {
     const image = article.featuredImage || CAT_IMAGES[article.category] || "/business.jpg";
     return (
-    <article className="group bg-white border border-gray-200 hover:border-[#C9A24A]/30 hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden">
+    <article className="group bg-[#07111D]/60 backdrop-blur-xl border border-white/5 rounded-xl overflow-hidden hover:border-[#C9A24A]/30 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300 flex flex-col">
       {/* Image */}
       <div className="relative h-48 sm:h-52 overflow-hidden shrink-0">
         <Image src={image} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-        <div className="absolute top-0 left-0 right-0 flex items-center justify-between p-3">
-          <span className={`text-[10px] font-bold px-2.5 py-1 border backdrop-blur-sm ${CAT_COLORS[article.category]||"bg-white/90 text-gray-700 border-gray-200"}`}>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#07111D] via-[#07111D]/40 to-transparent" />
+        <div className="absolute top-3 left-3">
+          <span className={`text-[10px] font-semibold px-2.5 py-1 border rounded-full ${CAT_COLORS[article.category]||"bg-white/5 text-gray-400 border-white/10"}`}>
             {article.category}
           </span>
         </div>
@@ -234,35 +234,28 @@ export default function InsightsClient() {
 
       {/* Body */}
       <div className="p-4 sm:p-5 flex flex-col flex-1">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-[10px] text-gray-400 flex items-center gap-1"><Clock className="w-3 h-3" /> {article.readTime}</span>
-        </div>
-
-        <h3 className="font-bold text-gray-900 text-sm sm:text-[15px] leading-snug mb-2 group-hover:text-[#C9A24A] transition-colors line-clamp-2">
+        <h3 className="font-bold text-[#F5F0E8] text-sm sm:text-[15px] leading-snug mb-2 group-hover:text-[#C9A24A] transition-colors line-clamp-2">
           {article.title}
         </h3>
-        <p className="text-gray-500 text-sm leading-relaxed mb-4 flex-1 line-clamp-3">{article.excerpt}</p>
+        <p className="text-[#A0A0A0] text-sm leading-relaxed mb-3 flex-1 line-clamp-2">{article.excerpt}</p>
 
         <div className="flex flex-wrap gap-1 mb-4">
           {(article.tags||[]).slice(0,3).map(tag=>(
-            <span key={tag} className="text-[10px] px-2 py-0.5 bg-gray-50 border border-gray-200 text-gray-500">{tag}</span>
+            <span key={tag} className="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 text-gray-400 rounded">{tag}</span>
           ))}
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-          <span className="text-[11px] text-gray-400">{article.date}</span>
-          <div className="flex items-center gap-1 shrink-0">
-            <button onClick={()=>toggleBookmark(article.slug)}
-              className={`p-1.5 transition-colors ${bookmarked.has(article.slug)?"text-[#C9A24A] bg-[#C9A24A]/10":"text-gray-400 hover:text-[#C9A24A] hover:bg-gray-50"}`} aria-label="Bookmark">
-              <Bookmark className="w-3.5 h-3.5" />
-            </button>
+        <div className="flex items-center justify-between pt-3 border-t border-white/5">
+          <div className="flex items-center gap-3 text-[11px] text-[#A0A0A0]">
+            <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {article.readTime}</span>
+            <span>{article.date}</span>
           </div>
+          <Link href={`/insights/${article.slug}`}
+            className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#C9A24A]/10 text-[#C9A24A] border border-[#C9A24A]/20 text-[11px] font-semibold rounded-lg hover:bg-[#C9A24A] hover:text-[#07111D] transition-all">
+            Read <ArrowRight className="w-3 h-3" />
+          </Link>
         </div>
-        <Link href={`/insights/${article.slug}`}
-          className="mt-3 inline-flex items-center justify-center gap-2 py-2.5 bg-[#07111D] hover:bg-[#C9A24A] text-white hover:text-[#07111D] text-xs font-bold transition-all duration-200">
-          Read Article <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
       </div>
     </article>
   );};
@@ -271,29 +264,28 @@ export default function InsightsClient() {
   const ListCard = ({ article }: { article: Article }) => {
     const image = article.featuredImage || CAT_IMAGES[article.category] || "/business.jpg";
     return (
-    <article className="group bg-white border border-gray-200 hover:border-[#C9A24A]/30 hover:shadow-lg transition-all duration-300 flex overflow-hidden">
-      <div className="relative w-40 sm:w-52 shrink-0 overflow-hidden">
-        <Image src={image} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:640px)160px,208px" />
+    <article className="group bg-[#07111D]/60 backdrop-blur-xl border border-white/5 rounded-xl overflow-hidden hover:border-[#C9A24A]/30 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300 flex flex-col sm:flex-row">
+      <div className="relative w-full sm:w-52 h-40 sm:h-auto shrink-0 overflow-hidden">
+        <Image src={image} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:640px)100vw,208px" />
       </div>
       <div className="p-4 sm:p-5 flex flex-col flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-2 flex-wrap">
-          <span className={`text-[10px] font-semibold px-2.5 py-1 border ${CAT_COLORS[article.category]||"bg-gray-50 text-gray-600 border-gray-200"}`}>{article.category}</span>
+          <span className={`text-[10px] font-semibold px-2.5 py-1 border rounded-full ${CAT_COLORS[article.category]||"bg-white/5 text-gray-400 border-white/10"}`}>{article.category}</span>
         </div>
-        <h3 className="font-bold text-gray-900 text-base leading-snug mb-1.5 group-hover:text-[#C9A24A] transition-colors line-clamp-2">{article.title}</h3>
-        <p className="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-2 flex-1">{article.excerpt}</p>
-        <div className="hidden sm:flex flex-wrap gap-1 mb-3">
+        <h3 className="font-bold text-[#F5F0E8] text-sm sm:text-base leading-snug mb-1.5 group-hover:text-[#C9A24A] transition-colors line-clamp-2">{article.title}</h3>
+        <p className="text-[#A0A0A0] text-sm leading-relaxed mb-3 line-clamp-2 flex-1">{article.excerpt}</p>
+        <div className="flex flex-wrap gap-1 mb-3">
           {(article.tags||[]).slice(0,3).map(tag=>(
-            <span key={tag} className="text-[10px] px-2 py-0.5 bg-gray-50 border border-gray-200 text-gray-500">{tag}</span>
+            <span key={tag} className="text-[10px] px-2 py-0.5 bg-white/5 border border-white/10 text-gray-400 rounded">{tag}</span>
           ))}
         </div>
-        <div className="flex items-center gap-3 text-[11px] text-gray-400 mb-3 flex-wrap">
-          <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{article.readTime}</span>
-        </div>
         <div className="flex items-center justify-between mt-auto gap-2">
-          <span className="text-[11px] text-gray-400">{article.date}</span>
+          <div className="flex items-center gap-3 text-[11px] text-[#A0A0A0]">
+            <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{article.readTime}</span>
+            <span className="hidden sm:inline">{article.date}</span>
+          </div>
           <div className="flex items-center gap-1 shrink-0">
-            <button onClick={()=>toggleBookmark(article.slug)} className={`p-1.5 transition-colors ${bookmarked.has(article.slug)?"text-[#C9A24A] bg-[#C9A24A]/10":"text-gray-400 hover:text-[#C9A24A] hover:bg-gray-50"}`} aria-label="Bookmark"><Bookmark className="w-3.5 h-3.5" /></button>
-            <Link href={`/insights/${article.slug}`} className="px-3 py-1.5 bg-[#07111D] hover:bg-[#C9A24A] text-white hover:text-[#07111D] text-xs font-bold transition-all duration-200 flex items-center gap-1">
+            <Link href={`/insights/${article.slug}`} className="px-3 py-1.5 bg-[#C9A24A]/10 text-[#C9A24A] border border-[#C9A24A]/20 text-[11px] font-semibold rounded-lg hover:bg-[#C9A24A] hover:text-[#07111D] transition-all flex items-center gap-1">
               Read <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
@@ -357,51 +349,51 @@ export default function InsightsClient() {
             {/* Mobile filter bar */}
             <div className="lg:hidden flex items-center gap-2 mb-4">
               <button onClick={()=>setMobileDrawerOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-2.5 bg-white border border-gray-200 text-sm font-medium text-gray-700 shadow-sm hover:border-[#C9A24A]/50 transition-all shrink-0">
+                className="flex items-center gap-1.5 px-3 py-2.5 bg-[#07111D]/60 border border-white/10 text-sm font-medium text-[#A0A0A0] hover:border-[#C9A24A]/50 hover:text-[#C9A24A] transition-all rounded-lg shrink-0">
                 <Filter className="w-4 h-4" /> Filters
-                {activeFilterCount>0&&<span className="bg-[#C9A24A] text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center">{activeFilterCount}</span>}
+                {activeFilterCount>0&&<span className="bg-[#C9A24A] text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded">{activeFilterCount}</span>}
               </button>
               <div className="flex-1 relative min-w-0">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A0A0A0]" />
                 <input type="text" value={search} onChange={e=>{setSearch(e.target.value);setPage(1);}}
-                  placeholder="Search…" className="w-full pl-9 pr-3 py-2.5 bg-white border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-[#C9A24A]/60 transition-all shadow-sm" />
+                  placeholder="Search…" className="w-full pl-9 pr-3 py-2.5 bg-[#07111D]/60 border border-white/10 text-sm text-[#F5F0E8] placeholder:text-[#A0A0A0] focus:outline-none focus:border-[#C9A24A]/60 transition-all rounded-lg" />
               </div>
             </div>
 
-            {/* ── FEATURED ── */}
+            {/* ── LATEST ARTICLE ── */}
             {!loading && filtered.length > 0 && (
               <section className="mb-8 sm:mb-10">
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="h-px flex-1 bg-gray-200" />
-                  <span className="text-[10px] font-bold text-gray-400 tracking-widest uppercase flex items-center gap-1.5">
+                  <div className="h-px flex-1 bg-white/5" />
+                  <span className="text-[10px] font-bold text-[#A0A0A0] tracking-widest uppercase flex items-center gap-1.5">
                     <BookOpen className="w-3.5 h-3.5 text-[#C9A24A]" /> Latest Article
                   </span>
-                  <div className="h-px flex-1 bg-gray-200" />
+                  <div className="h-px flex-1 bg-white/5" />
                 </div>
-                <article className="group bg-white border border-gray-200 hover:border-[#C9A24A]/30 hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                <article className="group bg-[#07111D]/60 backdrop-blur-xl border border-white/5 rounded-xl overflow-hidden hover:border-[#C9A24A]/30 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300">
                   <div className="flex flex-col md:flex-row">
                     <div className="md:w-[48%] relative h-56 sm:h-64 md:h-auto md:min-h-[320px] shrink-0 overflow-hidden">
                       <Image src={filtered[0].featuredImage || CAT_IMAGES[filtered[0].category] || "/business.jpg"} alt={filtered[0].title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:768px)100vw,50vw" />
-                      <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent to-black/20" />
+                      <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#07111D] to-transparent" />
                       <div className="absolute top-3 left-3 flex items-center gap-2 flex-wrap">
-                        <span className={`text-[10px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 border backdrop-blur-sm ${CAT_COLORS[filtered[0].category]||"bg-white/90 text-gray-700 border-gray-200"}`}>{filtered[0].category}</span>
+                        <span className={`text-[10px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 border rounded-full ${CAT_COLORS[filtered[0].category]||"bg-white/5 text-gray-400 border-white/10"}`}>{filtered[0].category}</span>
                       </div>
                     </div>
                     <div className="p-5 sm:p-8 md:p-10 flex flex-col justify-center flex-1">
                       <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 flex-wrap">
-                        <span className="text-xs text-gray-400 flex items-center gap-1"><Clock className="w-3 h-3" /> {filtered[0].readTime}</span>
+                        <span className="text-xs text-[#A0A0A0] flex items-center gap-1"><Clock className="w-3 h-3" /> {filtered[0].readTime}</span>
                       </div>
-                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 leading-snug group-hover:text-[#C9A24A] transition-colors">{filtered[0].title}</h2>
-                      <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-4 sm:mb-5 line-clamp-3 md:line-clamp-none">{filtered[0].excerpt}</p>
-                      <div className="hidden sm:flex flex-wrap gap-1.5 mb-5 sm:mb-6">
+                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#F5F0E8] mb-2 sm:mb-3 leading-snug group-hover:text-[#C9A24A] transition-colors">{filtered[0].title}</h2>
+                      <p className="text-[#A0A0A0] text-sm sm:text-base leading-relaxed mb-4 sm:mb-5 line-clamp-3 md:line-clamp-none">{filtered[0].excerpt}</p>
+                      <div className="flex flex-wrap gap-1.5 mb-5 sm:mb-6">
                         {(filtered[0].tags||[]).map(tag=>(
-                          <span key={tag} className="text-xs px-2.5 py-1 bg-gray-50 border border-gray-200 text-gray-500">{tag}</span>
+                          <span key={tag} className="text-xs px-2.5 py-1 bg-white/5 border border-white/10 text-gray-400 rounded">{tag}</span>
                         ))}
                       </div>
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                        <span className="text-xs text-gray-400">{filtered[0].date}</span>
+                        <span className="text-xs text-[#A0A0A0]">{filtered[0].date}</span>
                         <Link href={`/insights/${filtered[0].slug}`}
-                          className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-[#07111D] hover:bg-[#C9A24A] text-white hover:text-[#07111D] text-sm font-bold transition-all duration-200 shadow-lg w-full sm:w-auto justify-center">
+                          className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-[#C9A24A]/10 text-[#C9A24A] border border-[#C9A24A]/20 text-sm font-semibold rounded-lg hover:bg-[#C9A24A] hover:text-[#07111D] transition-all w-full sm:w-auto justify-center">
                           Read Article <ArrowRight className="w-4 h-4" />
                         </Link>
                       </div>
@@ -412,24 +404,24 @@ export default function InsightsClient() {
             )}
 
             {/* ── TOOLBAR ── */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 mb-4 sm:mb-5 py-3 border-t border-b border-gray-200">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 mb-4 sm:mb-5 py-3 border-t border-b border-white/5">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-sm text-gray-500"><span className="font-bold text-gray-900">{filtered.length}</span> articles</span>
+                <span className="text-sm text-[#A0A0A0]"><span className="font-bold text-[#F5F0E8]">{filtered.length}</span> articles</span>
                 {activeFilterCount>0&&(
-                  <button onClick={clearAll} className="flex items-center gap-1 text-xs text-red-500 font-medium bg-red-50 px-2.5 py-1.5 border border-red-100">
+                  <button onClick={clearAll} className="flex items-center gap-1 text-xs text-red-400 font-medium bg-red-500/10 px-2.5 py-1.5 border border-red-500/20 rounded">
                     <X className="w-3 h-3" /> Clear ({activeFilterCount})
                   </button>
                 )}
                 {selectedCategories.slice(0,2).map(c=>(
-                  <span key={c} className="flex items-center gap-1 text-[10px] bg-[#C9A24A]/10 text-[#C9A24A] border border-[#C9A24A]/20 px-2 py-1 font-medium max-w-[100px] truncate">
+                  <span key={c} className="flex items-center gap-1 text-[10px] bg-[#C9A24A]/10 text-[#C9A24A] border border-[#C9A24A]/20 px-2 py-1 font-medium max-w-[100px] truncate rounded">
                     {c}<button onClick={()=>toggleCategory(c)} className="shrink-0"><X className="w-2.5 h-2.5" /></button>
                   </span>
                 ))}
               </div>
               <div className="flex items-center gap-2 self-end sm:self-auto">
-                <div className="flex bg-white border border-gray-200 overflow-hidden shadow-sm">
-                  <button onClick={()=>setViewMode("grid")} className={`p-2.5 transition-colors ${viewMode==="grid"?"bg-[#07111D] text-white":"text-gray-400 hover:text-gray-700"}`} aria-label="Grid view"><Grid3X3 className="w-4 h-4" /></button>
-                  <button onClick={()=>setViewMode("list")} className={`p-2.5 transition-colors ${viewMode==="list"?"bg-[#07111D] text-white":"text-gray-400 hover:text-gray-700"}`} aria-label="List view"><List className="w-4 h-4" /></button>
+                <div className="flex bg-white/5 border border-white/10 overflow-hidden rounded-lg">
+                  <button onClick={()=>setViewMode("grid")} className={`p-2.5 transition-colors ${viewMode==="grid"?"bg-[#C9A24A]/20 text-[#C9A24A]":"text-[#A0A0A0] hover:text-[#F5F0E8]"}`} aria-label="Grid view"><Grid3X3 className="w-4 h-4" /></button>
+                  <button onClick={()=>setViewMode("list")} className={`p-2.5 transition-colors ${viewMode==="list"?"bg-[#C9A24A]/20 text-[#C9A24A]":"text-[#A0A0A0] hover:text-[#F5F0E8]"}`} aria-label="List view"><List className="w-4 h-4" /></button>
                 </div>
               </div>
             </div>
@@ -441,12 +433,12 @@ export default function InsightsClient() {
               </div>
             ) : paginated.length===0 ? (
               <div className="flex flex-col items-center justify-center py-16 sm:py-24 text-center px-4">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 flex items-center justify-center mb-4 sm:mb-5">
-                  <Search className="w-7 h-7 sm:w-8 sm:h-8 text-gray-300" />
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/5 flex items-center justify-center mb-4 sm:mb-5 rounded-2xl">
+                  <Search className="w-7 h-7 sm:w-8 sm:h-8 text-[#A0A0A0]/30" />
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2">No articles found</h3>
-                <p className="text-gray-400 text-sm mb-5 sm:mb-6 max-w-xs">Try adjusting your search or removing some filters.</p>
-                <button onClick={clearAll} className="px-5 sm:px-6 py-2.5 sm:py-3 bg-[#07111D] text-white text-sm font-bold hover:bg-[#C9A24A] hover:text-[#07111D] transition-all duration-200">Clear All Filters</button>
+                <h3 className="text-lg sm:text-xl font-bold text-[#F5F0E8] mb-2">No articles found</h3>
+                <p className="text-[#A0A0A0] text-sm mb-5 sm:mb-6 max-w-xs">Try adjusting your search or removing some filters.</p>
+                <button onClick={clearAll} className="px-5 sm:px-6 py-2.5 sm:py-3 bg-[#C9A24A]/10 text-[#C9A24A] border border-[#C9A24A]/20 text-sm font-semibold rounded-lg hover:bg-[#C9A24A] hover:text-[#07111D] transition-all">Clear All Filters</button>
               </div>
             ) : (
               <div className={viewMode==="grid"?"grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5":"flex flex-col gap-3 sm:gap-4"}>
@@ -458,17 +450,17 @@ export default function InsightsClient() {
             {!loading && totalPages>1 && (
               <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-8 sm:mt-10 flex-wrap">
                 <button onClick={()=>{setPage(p=>Math.max(1,p-1));resultsRef.current?.scrollIntoView({behavior:"smooth",block:"start"});}}
-                  disabled={page===1} className="p-2.5 border border-gray-200 text-gray-500 hover:border-[#C9A24A]/50 hover:text-[#C9A24A] disabled:opacity-30 disabled:cursor-not-allowed transition-all bg-white shadow-sm">
+                  disabled={page===1} className="p-2.5 border border-white/10 text-[#A0A0A0] hover:border-[#C9A24A]/50 hover:text-[#C9A24A] disabled:opacity-30 disabled:cursor-not-allowed transition-all bg-[#07111D]/60 rounded-lg">
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 {Array.from({length:totalPages}).map((_,i)=>(
                   <button key={i} onClick={()=>{setPage(i+1);resultsRef.current?.scrollIntoView({behavior:"smooth",block:"start"});}}
-                    className={`w-9 h-9 sm:w-10 sm:h-10 text-xs sm:text-sm font-semibold transition-all border shadow-sm ${page===i+1?"bg-[#07111D] text-white border-[#07111D]":"bg-white text-gray-600 border-gray-200 hover:border-[#C9A24A]/50 hover:text-[#C9A24A]"}`}>
+                    className={`w-9 h-9 sm:w-10 sm:h-10 text-xs sm:text-sm font-semibold transition-all border rounded-lg ${page===i+1?"bg-[#C9A24A]/20 text-[#C9A24A] border-[#C9A24A]/30":"bg-[#07111D]/60 text-[#A0A0A0] border-white/10 hover:border-[#C9A24A]/50 hover:text-[#C9A24A]"}`}>
                     {i+1}
                   </button>
                 ))}
                 <button onClick={()=>{setPage(p=>Math.min(totalPages,p+1));resultsRef.current?.scrollIntoView({behavior:"smooth",block:"start"});}}
-                  disabled={page===totalPages} className="p-2.5 border border-gray-200 text-gray-500 hover:border-[#C9A24A]/50 hover:text-[#C9A24A] disabled:opacity-30 disabled:cursor-not-allowed transition-all bg-white shadow-sm">
+                  disabled={page===totalPages} className="p-2.5 border border-white/10 text-[#A0A0A0] hover:border-[#C9A24A]/50 hover:text-[#C9A24A] disabled:opacity-30 disabled:cursor-not-allowed transition-all bg-[#07111D]/60 rounded-lg">
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
@@ -514,22 +506,22 @@ export default function InsightsClient() {
       {/* ══ MOBILE DRAWER ══ */}
       {mobileDrawerOpen&&(
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={()=>setMobileDrawerOpen(false)} />
-          <div className="absolute left-0 top-0 bottom-0 w-[320px] bg-[#F8F9FB] overflow-y-auto shadow-2xl">
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-white sticky top-0 z-10">
-              <h2 className="font-bold text-gray-900 flex items-center gap-2">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={()=>setMobileDrawerOpen(false)} />
+          <div className="absolute left-0 top-0 bottom-0 w-[300px] bg-[#03080e] overflow-y-auto shadow-2xl border-r border-white/5">
+            <div className="flex items-center justify-between p-4 border-b border-white/5 bg-[#07111D] sticky top-0 z-10">
+              <h2 className="font-bold text-[#F5F0E8] flex items-center gap-2">
                 <Filter className="w-4 h-4 text-[#C9A24A]" /> Filters
-                {activeFilterCount>0&&<span className="bg-[#C9A24A] text-white text-[10px] font-bold px-2 py-0.5">{activeFilterCount}</span>}
+                {activeFilterCount>0&&<span className="bg-[#C9A24A] text-[#07111D] text-[10px] font-bold px-2 py-0.5 rounded">{activeFilterCount}</span>}
               </h2>
               <div className="flex items-center gap-2">
-                {activeFilterCount>0&&<button onClick={clearAll} className="text-xs text-red-500 font-medium">Clear all</button>}
-                <button onClick={()=>setMobileDrawerOpen(false)} className="p-1.5 hover:bg-gray-100 text-gray-500 transition-colors"><X className="w-5 h-5" /></button>
+                {activeFilterCount>0&&<button onClick={clearAll} className="text-xs text-red-400 font-medium">Clear all</button>}
+                <button onClick={()=>setMobileDrawerOpen(false)} className="p-1.5 hover:bg-white/5 text-[#A0A0A0] transition-colors rounded"><X className="w-5 h-5" /></button>
               </div>
             </div>
             <div className="p-4 flex flex-col gap-4"><Sidebar /></div>
-            <div className="sticky bottom-0 p-4 bg-white border-t border-gray-200">
+            <div className="sticky bottom-0 p-4 bg-[#07111D] border-t border-white/5">
               <button onClick={()=>setMobileDrawerOpen(false)}
-                className="w-full py-3 bg-[#07111D] text-white font-bold text-sm hover:bg-[#C9A24A] hover:text-[#07111D] transition-all">
+                className="w-full py-3 bg-[#C9A24A]/10 text-[#C9A24A] border border-[#C9A24A]/20 text-sm font-semibold rounded-lg hover:bg-[#C9A24A] hover:text-[#07111D] transition-all">
                 Show {filtered.length} Articles
               </button>
             </div>

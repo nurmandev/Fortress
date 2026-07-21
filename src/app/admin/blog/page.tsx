@@ -270,25 +270,18 @@ export default function BlogList() {
               </div>
             </div>
 
-            {/* Table header */}
-            <div className="hidden md:grid grid-cols-[56px_2fr_1fr_1fr_1fr_auto] gap-4 px-5 py-3 border-b border-white/5">
-              <p className="text-[10px] font-bold text-fortress-silver/30 uppercase tracking-widest">Image</p>
-              <p className="text-[10px] font-bold text-fortress-silver/30 uppercase tracking-widest flex items-center gap-1.5"><FileText className="w-3 h-3" /> Article</p>
-              <p className="text-[10px] font-bold text-fortress-silver/30 uppercase tracking-widest flex items-center gap-1.5"><Tag className="w-3 h-3" /> Category</p>
-              <p className="text-[10px] font-bold text-fortress-silver/30 uppercase tracking-widest flex items-center gap-1.5"><TrendingUp className="w-3 h-3" /> Status</p>
-              <p className="text-[10px] font-bold text-fortress-silver/30 uppercase tracking-widest flex items-center gap-1.5"><Clock className="w-3 h-3" /> Updated</p>
-              <p className="text-[10px] font-bold text-fortress-silver/30 uppercase tracking-widest">Actions</p>
-            </div>
+
 
             {/* Body */}
             {loading ? (
-              <div className="divide-y divide-white/5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <div key={i} className="px-5 py-4 animate-pulse flex items-center gap-4">
-                    <div className="w-14 h-10 bg-white/5 rounded-lg shrink-0" />
-                    <div className="flex-1 space-y-2">
-                      <div className="h-3.5 bg-white/5 rounded w-2/3" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 p-5">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="animate-pulse bg-white/5 rounded-xl overflow-hidden">
+                    <div className="aspect-[16/9] bg-white/5" />
+                    <div className="p-4 space-y-3">
                       <div className="h-3 bg-white/5 rounded w-1/3" />
+                      <div className="h-4 bg-white/5 rounded w-full" />
+                      <div className="h-4 bg-white/5 rounded w-2/3" />
                     </div>
                   </div>
                 ))}
@@ -311,104 +304,50 @@ export default function BlogList() {
                 )}
               </div>
             ) : (
-              <div className="divide-y divide-white/5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 p-5">
                 {filtered.map((a) => (
-                  <div key={a.slug} className="group px-5 py-3.5 hover:bg-white/[0.02] transition-colors">
-                    {/* Mobile layout */}
-                    <div className="md:hidden flex items-start justify-between gap-3">
-                      <div className="flex items-start gap-3 min-w-0 flex-1">
-                        {/* Thumbnail */}
-                        <div className="relative w-16 h-11 rounded-lg overflow-hidden border border-white/10 shrink-0 bg-white/5">
-                          {a.featuredImage ? (
-                            <Image src={a.featuredImage} alt={a.title} fill className="object-cover" sizes="64px" />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center">
-                              <ImageOff className="w-4 h-4 text-fortress-silver/20" />
-                            </div>
-                          )}
+                  <article key={a.slug} className="group bg-white/[0.03] border border-white/5 rounded-xl overflow-hidden hover:border-fortress-gold/30 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300 flex flex-col">
+                    {/* Image */}
+                    <Link href={`/admin/blog/${a.slug}`} className="relative aspect-[16/9] overflow-hidden block">
+                      {a.featuredImage ? (
+                        <Image src={a.featuredImage} alt={a.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-white/5">
+                          <ImageOff className="w-8 h-8 text-fortress-silver/20" />
                         </div>
-                        <div className="min-w-0">
-                          <p className="text-sm font-semibold text-fortress-ivory group-hover:text-fortress-gold transition-colors truncate">{a.title}</p>
-                          <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-                            <span className={`text-[10px] font-semibold px-2 py-0.5 border rounded-full ${CAT_COLORS[a.category] || "bg-white/5 text-fortress-silver border-white/10"}`}>{a.category}</span>
-                            <span className={`text-[10px] font-semibold px-2 py-0.5 border rounded-full ${a.status === "published" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-amber-500/10 text-amber-400 border-amber-500/20"}`}>
-                              {a.status === "published" ? "Published" : "Draft"}
-                            </span>
-                            <span className="text-[10px] text-fortress-silver/30">{timeAgo(a.updatedAt)}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-1 shrink-0">
-                        <Link href={`/admin/blog/${a.slug}`} className="p-2 text-fortress-silver/30 hover:text-fortress-gold transition-colors rounded-lg hover:bg-fortress-gold/10">
-                          <Edit3 className="w-3.5 h-3.5" />
-                        </Link>
-                        <button onClick={() => setDeleteTarget(a)} className="p-2 text-fortress-silver/30 hover:text-red-400 transition-colors rounded-lg hover:bg-red-500/10">
-                          <Trash2 className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Desktop layout */}
-                    <div className="hidden md:grid grid-cols-[56px_2fr_1fr_1fr_1fr_auto] gap-4 items-center">
-                      {/* Thumbnail */}
-                      <div className="relative w-14 h-10 rounded-lg overflow-hidden border border-white/10 bg-white/5 shrink-0">
-                        {a.featuredImage ? (
-                          <Image src={a.featuredImage} alt={a.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="56px" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <ImageOff className="w-3.5 h-3.5 text-fortress-silver/20" />
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="min-w-0">
-                        <p className="text-sm font-semibold text-fortress-ivory group-hover:text-fortress-gold transition-colors truncate">{a.title}</p>
-                        {a.excerpt && <p className="text-[11px] text-fortress-silver/30 truncate mt-0.5">{a.excerpt}</p>}
-                      </div>
-
-                      <div>
-                        <span className={`text-[10px] font-semibold px-2.5 py-1 border rounded-full ${CAT_COLORS[a.category] || "bg-white/5 text-fortress-silver border-white/10"}`}>
-                          {a.category}
-                        </span>
-                      </div>
-
-                      <div>
-                        <span className={`inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 border rounded-full ${a.status === "published" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-amber-500/10 text-amber-400 border-amber-500/20"}`}>
-                          {a.status === "published" ? <CheckCircle2 className="w-3 h-3" /> : <Circle className="w-3 h-3" />}
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#07111D]/80 via-transparent to-transparent" />
+                      <div className="absolute top-3 left-3 flex items-center gap-2">
+                        <span className={`text-[10px] font-semibold px-2 py-0.5 border rounded-full backdrop-blur-sm ${CAT_COLORS[a.category] || "bg-white/5 text-fortress-silver border-white/10"}`}>{a.category}</span>
+                        <span className={`text-[10px] font-semibold px-2 py-0.5 border rounded-full backdrop-blur-sm ${a.status === "published" ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30" : "bg-amber-500/20 text-amber-300 border-amber-500/30"}`}>
                           {a.status === "published" ? "Published" : "Draft"}
                         </span>
                       </div>
+                    </Link>
 
-                      <div>
-                        <p className="text-[11px] text-fortress-silver/40">{timeAgo(a.updatedAt)}</p>
-                      </div>
+                    {/* Body */}
+                    <div className="p-4 flex flex-col flex-1">
+                      <Link href={`/admin/blog/${a.slug}`}>
+                        <h3 className="font-bold text-fortress-ivory text-sm leading-snug mb-1.5 group-hover:text-fortress-gold transition-colors line-clamp-2">{a.title}</h3>
+                      </Link>
+                      {a.excerpt && <p className="text-[11px] text-fortress-silver/30 leading-relaxed mb-3 line-clamp-2">{a.excerpt}</p>}
 
-                      <div className="flex items-center gap-1">
-                        <Link
-                          href={`/insights/${a.slug}`}
-                          target="_blank"
-                          className="p-2 text-fortress-silver/30 hover:text-fortress-ivory transition-colors rounded-lg hover:bg-white/5"
-                          title="Preview live"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </Link>
-                        <Link
-                          href={`/admin/blog/${a.slug}`}
-                          className="p-2 text-fortress-silver/30 hover:text-fortress-gold transition-colors rounded-lg hover:bg-fortress-gold/10"
-                          title="Edit"
-                        >
-                          <Edit3 className="w-3.5 h-3.5" />
-                        </Link>
-                        <button
-                          onClick={() => setDeleteTarget(a)}
-                          className="p-2 text-fortress-silver/30 hover:text-red-400 transition-colors rounded-lg hover:bg-red-500/10"
-                          title="Delete"
-                        >
-                          <Trash2 className="w-3.5 h-3.5" />
-                        </button>
+                      <div className="mt-auto flex items-center justify-between pt-3 border-t border-white/5">
+                        <span className="text-[10px] text-fortress-silver/40">{timeAgo(a.updatedAt)}</span>
+                        <div className="flex items-center gap-0.5">
+                          <Link href={`/insights/${a.slug}`} target="_blank" className="p-1.5 text-fortress-silver/30 hover:text-fortress-ivory transition-colors rounded-lg hover:bg-white/5" title="Preview">
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </Link>
+                          <Link href={`/admin/blog/${a.slug}`} className="p-1.5 text-fortress-silver/30 hover:text-fortress-gold transition-colors rounded-lg hover:bg-fortress-gold/10" title="Edit">
+                            <Edit3 className="w-3.5 h-3.5" />
+                          </Link>
+                          <button onClick={() => setDeleteTarget(a)} className="p-1.5 text-fortress-silver/30 hover:text-red-400 transition-colors rounded-lg hover:bg-red-500/10" title="Delete">
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             )}
