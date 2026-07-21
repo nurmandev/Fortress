@@ -15,14 +15,10 @@ const navItems = [
   { label: "Insights", href: "/insights", icon: Newspaper },
 ];
 
-const NavLink = ({ href, icon: Icon, label, scrolled }: { href: string; icon: React.ComponentType<{ className?: string }>; label: string; scrolled: boolean }) => (
+const NavLink = ({ href, icon: Icon, label }: { href: string; icon: React.ComponentType<{ className?: string }>; label: string }) => (
   <Link
     href={href}
-    className={`group flex items-center gap-1.5 text-sm font-medium transition-colors whitespace-nowrap ${
-      scrolled
-        ? "text-gray-600 hover:text-fortress-gold"
-        : "text-white/80 hover:text-[#C9A24A]"
-    }`}
+    className="group flex items-center gap-1.5 text-sm font-medium transition-colors whitespace-nowrap text-white/80 hover:text-[#C9A24A]"
   >
     <Icon className="w-4 h-4 opacity-70 group-hover:opacity-100" />
     <span>{label}</span>
@@ -58,15 +54,13 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [isMobileMenuOpen]);
 
-  const bgClass = scrolled
-    ? "bg-white"
-    : "bg-[#07111D]/95 backdrop-blur-md border-b border-white/5";
+  const bgClass = "bg-[#07111D]/95 backdrop-blur-md border-b border-white/5";
 
   return (
     <>
-      <header ref={headerRef} className={`fixed top-0 inset-x-0 z-50 h-24 flex px-0 transition-colors duration-300 ${scrolled ? "bg-white shadow-md" : "bg-transparent"}`}>
+      <header ref={headerRef} className="fixed top-0 inset-x-0 z-50 h-24 flex px-0">
         <div className={`flex-1 h-10 ${bgClass} z-20 relative min-w-0`}>
-          <svg className={`absolute inset-0 w-full h-full ${scrolled ? 'opacity-0' : ''}`} preserveAspectRatio="none">
+          <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
             <line x1="0" y1="39.5" x2="100%" y2="39.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
             <line x1="0" y1="36.5" x2="100%" y2="36.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
           </svg>
@@ -75,7 +69,7 @@ export default function Navbar() {
         <div className="flex h-24 relative z-10 shrink-0 -ml-px">
           <div className="w-[50px] h-full relative shrink-0">
             <div className={`absolute inset-0 ${bgClass}`} style={{ clipPath: "path('M0 0 H50 V96 C25 96 25 40 0 40 Z')" }} />
-            <svg className={`absolute inset-0 w-full h-full pointer-events-none ${scrolled ? 'opacity-0' : ''}`} viewBox="0 0 50 96">
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 50 96">
               <path d="M0 39.5 C25 39.5 25 95.5 50 95.5" fill="none" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
               <path d="M0 36.5 C25 36.5 25 91 50 91" fill="none" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
             </svg>
@@ -83,7 +77,7 @@ export default function Navbar() {
 
           <div className="flex-1 h-full relative min-w-0 -ml-px">
             <div className={`absolute inset-0 ${bgClass}`}>
-              <svg className={`absolute inset-0 w-full h-full pointer-events-none ${scrolled ? 'opacity-0' : ''}`} viewBox="0 0 100 96" preserveAspectRatio="none">
+              <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 96" preserveAspectRatio="none">
                 <line x1="0" y1="95.5" x2="100%" y2="95.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
                 <line x1="0" y1="91" x2="100%" y2="91" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
               </svg>
@@ -92,7 +86,7 @@ export default function Navbar() {
             <div className="relative w-full h-full flex items-center justify-between px-4 md:px-8">
               <nav className="hidden md:flex gap-8 shrink-0">
                 {navItems.slice(0, 3).map(item => (
-                  <NavLink key={item.label} {...item} scrolled={scrolled} />
+                  <NavLink key={item.label} {...item} />
                 ))}
               </nav>
 
@@ -131,7 +125,7 @@ export default function Navbar() {
 
               <nav className="hidden md:flex gap-6 items-center shrink-0">
                 {navItems.slice(3).map(item => (
-                  <NavLink key={item.label} {...item} scrolled={scrolled} />
+                  <NavLink key={item.label} {...item} />
                 ))}
                 <div className={`flex gap-4 pl-4 shrink-0 items-center border-l ${
                   scrolled ? "border-fortress-gold/20" : "border-white/10"
@@ -151,7 +145,7 @@ export default function Navbar() {
 
           <div className="w-[50px] h-full relative shrink-0 -ml-px">
             <div className={`absolute inset-0 ${bgClass}`} style={{ clipPath: "path('M0 0 H50 V40 C25 40 25 96 0 96 Z')" }} />
-            <svg className={`absolute inset-0 w-full h-full pointer-events-none ${scrolled ? 'opacity-0' : ''}`} viewBox="0 0 50 96">
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 50 96">
               <path d="M0 95.5 C25 95.5 25 39.5 50 39.5" fill="none" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
               <path d="M0 91 C25 91 25 36.5 50 36.5" fill="none" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
             </svg>
@@ -159,7 +153,7 @@ export default function Navbar() {
         </div>
 
         <div className={`flex-1 h-10 ${bgClass} z-20 relative min-w-0 -ml-px`}>
-          <svg className={`absolute inset-0 w-full h-full ${scrolled ? 'opacity-0' : ''}`} preserveAspectRatio="none">
+          <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
             <line x1="0" y1="39.5" x2="100%" y2="39.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
             <line x1="0" y1="36.5" x2="100%" y2="36.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
           </svg>

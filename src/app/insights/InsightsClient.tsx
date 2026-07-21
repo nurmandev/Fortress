@@ -51,7 +51,7 @@ const formatDate = (dateString?: string) => {
   try {
     const d = new Date(dateString);
     if (isNaN(d.getTime())) return dateString;
-    return new Intl.DateTimeFormat("en-US", { year: 'numeric', month: 'short', day: 'numeric' }).format(d);
+    return new Intl.DateTimeFormat("en-US", { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(d);
   } catch {
     return dateString;
   }
@@ -107,7 +107,10 @@ export default function InsightsClient() {
       .then((res) => res.json())
       .then((data) => {
         if (data?.data?.posts) {
-          setArticles(data.data.posts);
+          setArticles(data.data.posts.map((p: Record<string, unknown>) => ({
+            ...p,
+            date: p.publishedAt || p.createdAt,
+          }) as Article));
         }
       })
       .catch(() => {})
