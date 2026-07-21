@@ -140,7 +140,7 @@ export default async function ArticlePage({ params }: Props) {
         <div className="max-w-[860px] mx-auto px-6 lg:px-8 py-4 flex flex-wrap items-center gap-5 text-sm text-gray-400">
           <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-[#C9A24A]" /> {article.date}</span>
           <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-[#C9A24A]" /> {article.readTime}</span>
-          {(article.tags as string[] | undefined)?.length > 0 && (
+          {article.tags && (article.tags as string[]).length > 0 && (
             <span className="flex items-center gap-1.5"><Tag className="w-3.5 h-3.5 text-[#C9A24A]" /> {(article.tags as string[]).join(", ")}</span>
           )}
         </div>

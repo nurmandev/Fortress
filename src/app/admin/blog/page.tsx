@@ -200,12 +200,12 @@ export default function BlogList() {
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 relative z-10 space-y-6">
 
           {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
             <div>
-              <h1 className="text-xl font-bold text-fortress-ivory tracking-tight">Content Management</h1>
-              <p className="text-fortress-silver/50 text-sm mt-0.5">Manage and publish your insights & articles</p>
+              <h1 className="text-lg sm:text-xl font-bold text-fortress-ivory tracking-tight">Content Management</h1>
+              <p className="text-fortress-silver/50 text-xs sm:text-sm mt-0.5">Manage and publish your insights & articles</p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <button
                 onClick={load}
                 className="p-2.5 border border-white/10 text-fortress-silver/50 hover:text-fortress-gold hover:border-fortress-gold/30 transition-all rounded-lg"
@@ -215,7 +215,7 @@ export default function BlogList() {
               </button>
               <Link
                 href="/admin/blog/new"
-                className="flex items-center gap-2 px-5 py-2.5 bg-fortress-gold text-fortress-navy text-sm font-bold hover:bg-fortress-champagne transition-all rounded-lg shadow-lg shadow-fortress-gold/10"
+                className="flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-fortress-gold text-fortress-navy text-sm font-bold hover:bg-fortress-champagne transition-all rounded-lg shadow-lg shadow-fortress-gold/10"
               >
                 <Plus className="w-4 h-4" /> New Article
               </Link>
@@ -251,7 +251,7 @@ export default function BlogList() {
                   className="w-full pl-9 pr-4 py-2 bg-white/5 border border-white/10 text-fortress-ivory text-sm rounded-lg placeholder:text-fortress-silver/30 focus:outline-none focus:border-fortress-gold/40 transition-colors"
                 />
               </div>
-              <div className="flex items-center gap-1 bg-white/5 rounded-lg p-1">
+              <div className="flex items-center gap-1 bg-white/5 rounded-lg p-1 overflow-x-auto w-full sm:w-auto">
                 {(["all", "published", "draft"] as const).map((f) => (
                   <button
                     key={f}
@@ -333,14 +333,14 @@ export default function BlogList() {
                       <div className="mt-auto flex items-center justify-between pt-3 border-t border-white/5">
                         <span className="text-[10px] text-fortress-silver/40">{timeAgo(a.updatedAt)}</span>
                         <div className="flex items-center gap-0.5">
-                          <Link href={`/insights/${a.slug}`} target="_blank" className="p-1.5 text-fortress-silver/30 hover:text-fortress-ivory transition-colors rounded-lg hover:bg-white/5" title="Preview">
-                            <ExternalLink className="w-3.5 h-3.5" />
+                          <Link href={`/insights/${a.slug}`} target="_blank" className="p-2 sm:p-1.5 text-fortress-silver/30 hover:text-fortress-ivory transition-colors rounded-lg hover:bg-white/5" title="Preview">
+                            <ExternalLink className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
                           </Link>
-                          <Link href={`/admin/blog/${a.slug}`} className="p-1.5 text-fortress-silver/30 hover:text-fortress-gold transition-colors rounded-lg hover:bg-fortress-gold/10" title="Edit">
-                            <Edit3 className="w-3.5 h-3.5" />
+                          <Link href={`/admin/blog/${a.slug}`} className="p-2 sm:p-1.5 text-fortress-silver/30 hover:text-fortress-gold transition-colors rounded-lg hover:bg-fortress-gold/10" title="Edit">
+                            <Edit3 className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
                           </Link>
-                          <button onClick={() => setDeleteTarget(a)} className="p-1.5 text-fortress-silver/30 hover:text-red-400 transition-colors rounded-lg hover:bg-red-500/10" title="Delete">
-                            <Trash2 className="w-3.5 h-3.5" />
+                          <button onClick={() => setDeleteTarget(a)} className="p-2 sm:p-1.5 text-fortress-silver/30 hover:text-red-400 transition-colors rounded-lg hover:bg-red-500/10" title="Delete">
+                            <Trash2 className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
                           </button>
                         </div>
                       </div>
