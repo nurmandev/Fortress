@@ -49,14 +49,14 @@ const ARTICLES_PER_PAGE = 6;
 /* ─── Skeleton ───────────────────────────────────────────────── */
 function SkeletonCard() {
   return (
-    <div className="bg-white border border-gray-100 animate-pulse overflow-hidden">
-      <div className="h-52 bg-gray-100" />
+    <div className="bg-[#07111D]/60 border border-white/5 animate-pulse rounded-xl overflow-hidden">
+      <div className="h-52 bg-white/5" />
       <div className="p-5 space-y-3">
-        <div className="h-3 bg-gray-100 w-1/3" />
-        <div className="h-5 bg-gray-200 w-full" />
-        <div className="h-5 bg-gray-200 w-3/4" />
-        <div className="h-4 bg-gray-100 w-full" />
-        <div className="h-4 bg-gray-100 w-5/6" />
+        <div className="h-3 bg-white/5 w-1/3 rounded" />
+        <div className="h-5 bg-white/5 w-full rounded" />
+        <div className="h-5 bg-white/5 w-3/4 rounded" />
+        <div className="h-4 bg-white/5 w-full rounded" />
+        <div className="h-4 bg-white/5 w-5/6 rounded" />
       </div>
     </div>
   );
@@ -145,33 +145,33 @@ export default function InsightsClient() {
     <aside className="flex flex-col gap-4">
 
       {/* Search */}
-      <div className="bg-white border border-gray-200 p-4">
+      <div className="bg-[#07111D]/60 backdrop-blur-xl border border-white/5 p-4 rounded-xl">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A0A0A0]" />
           <input type="text" value={search} onChange={e=>{setSearch(e.target.value);setPage(1);}}
             placeholder="Search articles…"
-            className="w-full pl-9 pr-8 py-2.5 bg-gray-50 border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-[#C9A24A]/60 transition-all"
+            className="w-full pl-9 pr-8 py-2.5 bg-white/5 border border-white/10 text-sm text-[#F5F0E8] placeholder:text-[#A0A0A0] focus:outline-none focus:border-[#C9A24A]/60 transition-all rounded-lg"
           />
-          {search && <button onClick={()=>setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"><X className="w-3.5 h-3.5" /></button>}
+          {search && <button onClick={()=>setSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A0A0A0] hover:text-white"><X className="w-3.5 h-3.5" /></button>}
         </div>
       </div>
 
       {/* Categories */}
-      <div className="bg-white border border-gray-200 p-4">
-        <h3 className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3 flex items-center gap-1.5">
+      <div className="bg-[#07111D]/60 backdrop-blur-xl border border-white/5 p-4 rounded-xl">
+        <h3 className="text-[10px] font-bold text-[#A0A0A0] tracking-widest uppercase mb-3 flex items-center gap-1.5">
           <BookOpen className="w-3 h-3 text-[#C9A24A]" /> Categories
         </h3>
         <div className="flex flex-col">
           <button onClick={()=>{setSelectedCategories([]);setPage(1);}}
-            className={`flex items-center justify-between px-2 py-2 text-sm transition-all border-l-2 ${selectedCategories.length===0?"border-[#C9A24A] text-[#C9A24A] font-semibold bg-amber-50/50":"border-transparent text-gray-600 hover:bg-gray-50"}`}>
+            className={`flex items-center justify-between px-2 py-2 text-sm transition-all border-l-2 ${selectedCategories.length===0?"border-[#C9A24A] text-[#C9A24A] font-semibold bg-[#C9A24A]/5":"border-transparent text-[#A0A0A0] hover:text-white hover:bg-white/5"}`}>
             <span className="flex items-center gap-2"><Grid3X3 className="w-3.5 h-3.5" /> All</span>
-            <span className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5">{articles.length}</span>
+            <span className="text-[10px] bg-white/10 text-[#A0A0A0] px-1.5 py-0.5 rounded">{articles.length}</span>
           </button>
           {rawCategories.map(cat=>(
             <button key={cat.label} onClick={()=>toggleCategory(cat.label)}
-              className={`flex items-center justify-between px-2 py-2 text-sm transition-all border-l-2 ${selectedCategories.includes(cat.label)?"border-[#C9A24A] text-[#C9A24A] font-semibold bg-amber-50/50":"border-transparent text-gray-600 hover:bg-gray-50"}`}>
+              className={`flex items-center justify-between px-2 py-2 text-sm transition-all border-l-2 ${selectedCategories.includes(cat.label)?"border-[#C9A24A] text-[#C9A24A] font-semibold bg-[#C9A24A]/5":"border-transparent text-[#A0A0A0] hover:text-white hover:bg-white/5"}`}>
               <span className="flex items-center gap-2">{CAT_ICONS[cat.label]}<span className="truncate">{cat.label}</span></span>
-              <span className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 shrink-0">{catCounts[cat.label]||0}</span>
+              <span className="text-[10px] bg-white/10 text-[#A0A0A0] px-1.5 py-0.5 shrink-0 rounded">{catCounts[cat.label]||0}</span>
             </button>
           ))}
         </div>
@@ -179,12 +179,12 @@ export default function InsightsClient() {
 
       {/* Tags */}
       {allTags.length > 0 && (
-        <div className="bg-white border border-gray-200 p-4">
-          <h3 className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3"># Tags</h3>
+        <div className="bg-[#07111D]/60 backdrop-blur-xl border border-white/5 p-4 rounded-xl">
+          <h3 className="text-[10px] font-bold text-[#A0A0A0] tracking-widest uppercase mb-3"># Tags</h3>
           <div className="flex flex-wrap gap-1.5">
             {allTags.map(tag=>(
               <button key={tag} onClick={()=>toggleTag(tag)}
-                className={`text-[11px] px-2.5 py-1 border font-medium transition-all ${selectedTags.includes(tag)?"bg-[#C9A24A] text-white border-[#C9A24A]":"bg-white text-gray-500 border-gray-200 hover:border-[#C9A24A]/50 hover:text-[#C9A24A]"}`}>
+                className={`text-[11px] px-2.5 py-1 border font-medium transition-all rounded ${selectedTags.includes(tag)?"bg-[#C9A24A] text-[#07111D] border-[#C9A24A]":"bg-white/5 text-[#A0A0A0] border-white/10 hover:border-[#C9A24A]/50 hover:text-[#C9A24A]"}`}>
                 {tag}
               </button>
             ))}
