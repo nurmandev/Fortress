@@ -132,6 +132,7 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
   const [imageUploading, setImageUploading] = useState(false);
   const [loadError, setLoadError] = useState(false);
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [uploadError, setUploadError] = useState("");
 
   useEffect(() => {
     if (isNew) {
@@ -211,14 +212,16 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
     const file = e.target.files?.[0];
     if (!file) return;
     setImageUploading(true);
+    setUploadError("");
     try {
       const formData = new FormData();
       formData.append("file", file);
       const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Upload failed");
       if (data.url) setFeaturedImage(data.url);
-    } catch {
-      // fail silently
+    } catch (err) {
+      setUploadError(err instanceof Error ? err.message : "Upload failed");
     } finally {
       setImageUploading(false);
     }
@@ -610,6 +613,9 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
                       )}
                       <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={imageUploading} />
                     </label>
+                  )}
+                  {uploadError && (
+                    <p className="text-[10px] text-red-400 mt-2">{uploadError}</p>
                   )}
                   {featuredImage && (
                     <p className="text-[10px] text-fortress-silver/30 mt-2 truncate">{featuredImage}</p>

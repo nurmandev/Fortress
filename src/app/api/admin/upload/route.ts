@@ -1,10 +1,6 @@
 import { NextResponse } from "next/server";
-import { writeFile } from "fs/promises";
-import path from "path";
 import { getCurrentUser } from "@/lib/auth-utils";
-
-const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif"];
-const MAX_SIZE = 5 * 1024 * 1024;
+import { uploadFile } from "@/services/media.service";
 
 export async function POST(request: Request) {
   const user = await getCurrentUser();
@@ -14,22 +10,11 @@ export async function POST(request: Request) {
     const file = formData.get("file") as File | null;
     if (!file) return NextResponse.json({ error: "No file" }, { status: 400 });
 
-    if (!ALLOWED_TYPES.includes(file.type)) {
-      return NextResponse.json({ error: "Invalid file type" }, { status: 400 });
-    }
+    const result = await uploadFile(file, "fortress/blog");
 
-    if (file.size > MAX_SIZE) {
-      return NextResponse.json({ error: "File too large" }, { status: 400 });
-    }
-
-    const ext = file.name.split(".").pop();
-    const filename = `${Date.now()}.${ext}`;
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const uploadDir = path.join(process.cwd(), "public", "admin-uploads");
-    await writeFile(path.join(uploadDir, filename), buffer);
-
-    return NextResponse.json({ url: `/admin-uploads/${filename}` });
-  } catch {
-    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
+    return NextResponse.json({ url: result.secureUrl, publicId: result.publicId });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "Upload failed";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
