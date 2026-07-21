@@ -117,6 +117,8 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("Market Insights");
   const [readTime, setReadTime] = useState("5 min read");
+  const [tags, setTags] = useState<string[]>([]);
+  const [tagInput, setTagInput] = useState("");
   const [featuredImage, setFeaturedImage] = useState("");
   const [status, setStatus] = useState<"draft" | "published">("draft");
   const [seoTitle, setSeoTitle] = useState("");
@@ -149,6 +151,7 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
         setContent(a.content || "");
         setCategory(a.category || "Market Insights");
         setReadTime(a.readTime || "5 min read");
+        setTags(a.tags || []);
         setFeaturedImage(a.featuredImage || "");
         setStatus(a.status || "draft");
         setSeoTitle(a.seo?.title || "");
@@ -175,7 +178,7 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          slug: articleSlug, title, excerpt, content, category,
+          slug: articleSlug, title, excerpt, content, category, tags,
           readTime, featuredImage, status,
           seo: { title: seoTitle || title, description: seoDescription || excerpt },
         }),
@@ -458,6 +461,46 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
                             onChange={(e) => setReadTime(e.target.value)}
                             className="w-full bg-white/5 border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/40 transition-colors rounded-lg"
                           />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="flex items-center gap-1.5 text-[10px] font-bold text-fortress-silver/40 uppercase tracking-widest mb-2"><Tag className="w-3 h-3" /> Tags</label>
+                        <div className="flex flex-wrap gap-1.5 mb-2">
+                          {tags.map((tag, i) => (
+                            <span key={i} className="flex items-center gap-1 text-[11px] bg-fortress-gold/10 text-fortress-gold border border-fortress-gold/20 px-2 py-1 rounded">
+                              {tag}
+                              <button onClick={() => setTags(tags.filter((_, j) => j !== i))} className="hover:text-red-400 transition-colors">
+                                <X className="w-3 h-3" />
+                              </button>
+                            </span>
+                          ))}
+                        </div>
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            value={tagInput}
+                            onChange={(e) => setTagInput(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" && tagInput.trim()) {
+                                e.preventDefault();
+                                setTags([...tags, tagInput.trim()]);
+                                setTagInput("");
+                              }
+                            }}
+                            placeholder="Type a tag and press Enter"
+                            className="flex-1 bg-white/5 border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/40 transition-colors rounded-lg placeholder:text-fortress-silver/20"
+                          />
+                          <button
+                            onClick={() => {
+                              if (tagInput.trim()) {
+                                setTags([...tags, tagInput.trim()]);
+                                setTagInput("");
+                              }
+                            }}
+                            className="px-4 py-3 bg-fortress-gold/20 text-fortress-gold text-sm font-semibold border border-fortress-gold/30 rounded-lg hover:bg-fortress-gold/30 transition-colors"
+                          >
+                            Add
+                          </button>
                         </div>
                       </div>
                       <div className="sm:hidden">

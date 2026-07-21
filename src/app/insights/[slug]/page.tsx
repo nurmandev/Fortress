@@ -1,10 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowLeft, Calendar, Clock, Eye, Star, BookOpen } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Tag, BookOpen } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { blogService } from "@/services";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -36,43 +37,36 @@ const CAT_COLORS: Record<string, string> = {
   "Strategic Partnerships": "bg-teal-50 text-teal-700 border-teal-200",
 };
 
-const AUTHORS = [
-  { name: "James Whitmore", role: "Senior Analyst", initials: "JW", color: "bg-blue-600" },
-  { name: "Sara Al Mansoori", role: "Investment Director", initials: "SM", color: "bg-amber-600" },
-  { name: "David Chen", role: "Research Lead", initials: "DC", color: "bg-emerald-600" },
-  { name: "Priya Nair", role: "Market Strategist", initials: "PN", color: "bg-purple-600" },
-];
-
-interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  readTime: string;
-  featuredImage: string;
-  content: string;
+function formatDate(date: Date | string | undefined) {
+  if (!date) return "";
+  return new Date(date).toLocaleDateString("en-US", { year: "numeric", month: "long" });
 }
 
-async function getPost(slug: string): Promise<BlogPost | null> {
+function computeReadTime(content: string) {
+  return `${Math.max(1, Math.ceil((content || "").length / 2000))} min read`;
+}
+
+function mapPost(post: Record<string, unknown>) {
+  return {
+    ...post,
+    date: formatDate((post.publishedAt as string | undefined) || (post.createdAt as string | undefined)),
+    readTime: computeReadTime(post.content as string),
+  };
+}
+
+async function getPost(slug: string) {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/api/blog?slug=${slug}`, { cache: "no-store" });
-    if (!res.ok) return null;
-    const json = await res.json();
-    return json.data || null;
+    const post = await blogService.getBlogBySlug(slug);
+    return mapPost(post as Record<string, unknown>);
   } catch {
     return null;
   }
 }
 
-async function getAllPosts(): Promise<BlogPost[]> {
+async function getAllPosts() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/api/blog`, { cache: "no-store" });
-    if (!res.ok) return [];
-    const json = await res.json();
-    return json.data?.posts || [];
+    const { posts } = await blogService.getBlogs({});
+    return posts.map((p) => mapPost(p as Record<string, unknown>));
   } catch {
     return [];
   }
@@ -105,10 +99,6 @@ export default async function ArticlePage({ params }: Props) {
   const allPosts = await getAllPosts();
   const related = allPosts.filter((a) => a.slug !== slug).slice(0, 3);
   const heroImage = article.featuredImage || CAT_IMAGES[article.category] || "/business.jpg";
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const author = AUTHORS[Math.floor(Math.random() * AUTHORS.length)];
-  const views = Math.floor(Math.random() * 2000) + 500;
-  const rating = (4 + Math.random()).toFixed(1);
 
   return (
     <main className="min-h-screen bg-white">
@@ -149,8 +139,9 @@ export default async function ArticlePage({ params }: Props) {
         <div className="max-w-[860px] mx-auto px-6 lg:px-8 py-4 flex flex-wrap items-center gap-5 text-sm text-gray-400">
           <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-[#C9A24A]" /> {article.date}</span>
           <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-[#C9A24A]" /> {article.readTime}</span>
-          <span className="flex items-center gap-1.5"><Eye className="w-3.5 h-3.5 text-[#C9A24A]" /> {views.toLocaleString()} views</span>
-          <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" /> {rating} rating</span>
+          {(article.tags as string[] | undefined)?.length > 0 && (
+            <span className="flex items-center gap-1.5"><Tag className="w-3.5 h-3.5 text-[#C9A24A]" /> {(article.tags as string[]).join(", ")}</span>
+          )}
         </div>
       </div>
 

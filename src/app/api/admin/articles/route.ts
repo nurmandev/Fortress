@@ -26,6 +26,7 @@ export async function GET(request: Request) {
         excerpt: article.excerpt,
         content: article.content,
         category: article.category,
+        tags: article.tags || [],
         date: article.publishedAt
           ? new Date(article.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long" })
           : new Date(article.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "long" }),
@@ -44,6 +45,7 @@ export async function GET(request: Request) {
         title: a.title,
         excerpt: a.excerpt,
         category: a.category,
+        tags: a.tags || [],
         date: a.publishedAt
           ? new Date(a.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long" })
           : new Date(a.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "long" }),
@@ -76,6 +78,7 @@ export async function POST(request: Request) {
           excerpt: body.excerpt || "",
           content: body.content || "",
           category: body.category || "Market Insights",
+          tags: body.tags || [],
           featuredImage: body.featuredImage || "",
           status: body.status || "draft",
           seo: body.seo || { title: body.title, description: body.excerpt || "" },
@@ -108,6 +111,7 @@ export async function PUT(request: Request) {
           excerpt: body.excerpt ?? existing.excerpt,
           content: body.content ?? existing.content,
           category: body.category ?? existing.category,
+          tags: body.tags ?? existing.tags,
           featuredImage: body.featuredImage ?? existing.featuredImage,
           status: body.status ?? existing.status,
           seo: body.seo ?? existing.seo,

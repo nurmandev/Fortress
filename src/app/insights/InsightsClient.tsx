@@ -4,26 +4,18 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  Search, X, Filter, Grid3X3, List, Clock, Eye,
-  Bookmark, Share2, ArrowRight, Star, BookOpen,
+  Search, X, Filter, Grid3X3, List, Clock,
+  Bookmark, Share2, ArrowRight, BookOpen, Star,
   Building2, Briefcase, Cpu, UtensilsCrossed, Truck,
   LineChart, Newspaper, Handshake, Check,
-  MessageSquare, Mail, Crown, FileText, Users, ChevronLeft, ChevronRight, TrendingUp
+  Mail, Crown, FileText, Users, ChevronLeft, ChevronRight, TrendingUp
 } from "lucide-react";
 import { categories as rawCategories } from "./articles";
 
-/* ─── Types ──────────────────────────────────────────────────── */
-interface ArticleRaw {
+interface Article {
   slug: string; category: string; title: string; excerpt: string;
-  date: string; readTime: string; featuredImage?: string;
-}
-
-interface EnrichedArticle {
-  slug: string; category: string; title: string; excerpt: string;
-  date: string; readTime: string; image: string;
-  isPremium?: boolean; difficulty?: "Beginner" | "Intermediate" | "Advanced";
-  tags?: string[]; author?: { name: string; role: string; initials: string; color: string };
-  views?: number; comments?: number; rating?: number; trending?: boolean; featured?: boolean;
+  date: string; readTime: string; tags?: string[];
+  featuredImage?: string;
 }
 
 /* ─── Category helpers ───────────────────────────────────────── */
@@ -52,7 +44,6 @@ const CAT_COLORS: Record<string, string> = {
   "Strategic Partnerships": "bg-teal-50 text-teal-700 border-teal-200",
 };
 
-const POPULAR_TAGS = ["UAE","Dubai","Finance","Strategy","Growth","AI","ESG","Blockchain","Real Estate","Equity"];
 const ARTICLES_PER_PAGE = 3;
 
 /* ─── Skeleton ───────────────────────────────────────────────── */
@@ -66,29 +57,8 @@ function SkeletonCard() {
         <div className="h-5 bg-gray-200 w-3/4" />
         <div className="h-4 bg-gray-100 w-full" />
         <div className="h-4 bg-gray-100 w-5/6" />
-        <div className="flex gap-3 pt-2">
-          <div className="h-7 w-7 bg-gray-100 rounded-full" />
-          <div className="flex-1 space-y-1.5">
-            <div className="h-3 bg-gray-100 w-1/2" />
-            <div className="h-3 bg-gray-100 w-1/3" />
-          </div>
-        </div>
       </div>
     </div>
-  );
-}
-
-/* ─── Difficulty badge ───────────────────────────────────────── */
-function DifficultyBadge({ level }: { level: string }) {
-  const map: Record<string, string> = {
-    Beginner: "bg-emerald-50 text-emerald-600 border-emerald-200",
-    Intermediate: "bg-blue-50 text-blue-600 border-blue-200",
-    Advanced: "bg-red-50 text-red-600 border-red-200",
-  };
-  return (
-    <span className={`text-[10px] font-semibold px-2 py-0.5 border ${map[level] || "bg-gray-50 text-gray-500 border-gray-200"}`}>
-      {level}
-    </span>
   );
 }
 
@@ -106,35 +76,11 @@ const CAT_IMAGES: Record<string, string> = {
   "Strategic Partnerships": "/portrait-smiling.jpg",
 };
 
-const AUTHORS = [
-  { name: "James Whitmore",    role: "Senior Analyst",       initials: "JW", color: "bg-blue-600"    },
-  { name: "Sara Al Mansoori",  role: "Investment Director",  initials: "SM", color: "bg-amber-600"   },
-  { name: "David Chen",        role: "Research Lead",        initials: "DC", color: "bg-emerald-600" },
-  { name: "Priya Nair",        role: "Market Strategist",    initials: "PN", color: "bg-purple-600"  },
-];
-const TAGS_POOL = ["UAE","Dubai","Finance","Strategy","Growth","AI","ESG","Blockchain","Real Estate","Equity"];
-const DIFFICULTIES: Array<"Beginner"|"Intermediate"|"Advanced"> = ["Beginner","Intermediate","Advanced"];
-
-function enrichArticles(articles: ArticleRaw[]): EnrichedArticle[] {
-  return articles.map((a, i) => ({
-    ...a,
-    image: CAT_IMAGES[a.category] || "/business.jpg",
-    difficulty: DIFFICULTIES[i % 3],
-    tags: TAGS_POOL.slice(i % TAGS_POOL.length, (i % TAGS_POOL.length) + 3),
-    author: AUTHORS[i % AUTHORS.length],
-    views: 1200 + i * 347,
-    comments: 4 + i * 3,
-    rating: +(4.2 + (i % 8) * 0.1).toFixed(1),
-    trending: i < 3,
-    featured: i === 0,
-  }));
-}
-
 /* ═══════════════════════════════════════════════════════════════
    MAIN COMPONENT
 ═══════════════════════════════════════════════════════════════ */
 export default function InsightsClient() {
-  const [articles, setArticles]               = useState<EnrichedArticle[]>([]);
+  const [articles, setArticles]               = useState<Article[]>([]);
   const [search, setSearch]                   = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags]       = useState<string[]>([]);
@@ -152,7 +98,7 @@ export default function InsightsClient() {
       .then((res) => res.json())
       .then((data) => {
         if (data?.data?.posts) {
-          setArticles(enrichArticles(data.data.posts));
+          setArticles(data.data.posts);
         }
       })
       .catch(() => {})
@@ -176,22 +122,25 @@ export default function InsightsClient() {
     const q = search.toLowerCase().trim();
     if (q) list = list.filter(a =>
       a.title.toLowerCase().includes(q) || a.excerpt.toLowerCase().includes(q) ||
-      a.category.toLowerCase().includes(q) || (a.tags||[]).some(t=>t.toLowerCase().includes(q)) ||
-      (a.author?.name||"").toLowerCase().includes(q)
+      a.category.toLowerCase().includes(q) || (a.tags||[]).some(t=>t.toLowerCase().includes(q))
     );
     if (selectedCategories.length) list = list.filter(a => selectedCategories.includes(a.category));
     if (selectedTags.length) list = list.filter(a => (a.tags||[]).some(t=>selectedTags.includes(t)));
     return list;
   }, [search, selectedCategories, selectedTags, articles]);
 
-  const featured       = filtered.find(a=>a.featured) || filtered[0];
-  const rest           = filtered.filter(a=>a.slug!==featured?.slug);
-  const totalPages     = Math.ceil(rest.length / ARTICLES_PER_PAGE);
-  const paginated      = rest.slice((page-1)*ARTICLES_PER_PAGE, page*ARTICLES_PER_PAGE);
+  const totalPages     = Math.ceil(filtered.length / ARTICLES_PER_PAGE);
+  const paginated      = filtered.slice((page-1)*ARTICLES_PER_PAGE, page*ARTICLES_PER_PAGE);
 
   const catCounts = useMemo(() =>
     rawCategories.reduce((acc,cat)=>{ acc[cat.label]=articles.filter(a=>a.category===cat.label).length; return acc; }, {} as Record<string,number>)
   ,[articles]);
+
+  const allTags = useMemo(() => {
+    const set = new Set<string>();
+    articles.forEach(a => (a.tags || []).forEach(t => set.add(t)));
+    return Array.from(set).sort();
+  }, [articles]);
 
   /* ═══════════════════ SIDEBAR ═══════════════════ */
   const Sidebar = () => (
@@ -231,17 +180,19 @@ export default function InsightsClient() {
       </div>
 
       {/* Tags */}
-      <div className="bg-white border border-gray-200 p-4">
-        <h3 className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3"># Popular Tags</h3>
-        <div className="flex flex-wrap gap-1.5">
-          {POPULAR_TAGS.map(tag=>(
-            <button key={tag} onClick={()=>toggleTag(tag)}
-              className={`text-[11px] px-2.5 py-1 border font-medium transition-all ${selectedTags.includes(tag)?"bg-[#C9A24A] text-white border-[#C9A24A]":"bg-white text-gray-500 border-gray-200 hover:border-[#C9A24A]/50 hover:text-[#C9A24A]"}`}>
-              {tag}
-            </button>
-          ))}
+      {allTags.length > 0 && (
+        <div className="bg-white border border-gray-200 p-4">
+          <h3 className="text-[10px] font-bold text-gray-500 tracking-widest uppercase mb-3"># Tags</h3>
+          <div className="flex flex-wrap gap-1.5">
+            {allTags.map(tag=>(
+              <button key={tag} onClick={()=>toggleTag(tag)}
+                className={`text-[11px] px-2.5 py-1 border font-medium transition-all ${selectedTags.includes(tag)?"bg-[#C9A24A] text-white border-[#C9A24A]":"bg-white text-gray-500 border-gray-200 hover:border-[#C9A24A]/50 hover:text-[#C9A24A]"}`}>
+                {tag}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Newsletter */}
       <div className="bg-[#07111D] p-5 text-white relative overflow-hidden">
@@ -266,11 +217,13 @@ export default function InsightsClient() {
   );
 
   /* ═══════════════════ GRID CARD ═══════════════════ */
-  const GridCard = ({ article }: { article: EnrichedArticle }) => (
+  const GridCard = ({ article }: { article: Article }) => {
+    const image = article.featuredImage || CAT_IMAGES[article.category] || "/business.jpg";
+    return (
     <article className="group bg-white border border-gray-200 hover:border-[#C9A24A]/30 hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden">
       {/* Image */}
       <div className="relative h-48 sm:h-52 overflow-hidden shrink-0">
-        <Image src={article.image} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw" />
+        <Image src={image} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:640px)100vw,(max-width:1024px)50vw,33vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
         <div className="absolute top-0 left-0 right-0 flex items-center justify-between p-3">
           <span className={`text-[10px] font-bold px-2.5 py-1 border backdrop-blur-sm ${CAT_COLORS[article.category]||"bg-white/90 text-gray-700 border-gray-200"}`}>
@@ -282,9 +235,7 @@ export default function InsightsClient() {
       {/* Body */}
       <div className="p-4 sm:p-5 flex flex-col flex-1">
         <div className="flex items-center gap-2 mb-3">
-          <DifficultyBadge level={article.difficulty||"Beginner"} />
-          <span className="text-[10px] text-gray-400 flex items-center gap-1 ml-auto"><Clock className="w-3 h-3" /> {article.readTime}</span>
-          <span className="text-[10px] text-gray-400 flex items-center gap-1"><Eye className="w-3 h-3" /> {(article.views||0).toLocaleString()}</span>
+          <span className="text-[10px] text-gray-400 flex items-center gap-1"><Clock className="w-3 h-3" /> {article.readTime}</span>
         </div>
 
         <h3 className="font-bold text-gray-900 text-sm sm:text-[15px] leading-snug mb-2 group-hover:text-[#C9A24A] transition-colors line-clamp-2">
@@ -300,21 +251,12 @@ export default function InsightsClient() {
 
         {/* Footer */}
         <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-          <div className="flex items-center gap-2 min-w-0">
-            <div className={`w-7 h-7 rounded-full ${article.author?.color} flex items-center justify-center text-white text-[10px] font-bold shrink-0`}>
-              {article.author?.initials}
-            </div>
-            <div className="min-w-0">
-              <p className="text-[11px] font-semibold text-gray-800 leading-tight truncate">{article.author?.name}</p>
-              <p className="text-[10px] text-gray-400">{article.date}</p>
-            </div>
-          </div>
+          <span className="text-[11px] text-gray-400">{article.date}</span>
           <div className="flex items-center gap-1 shrink-0">
             <button onClick={()=>toggleBookmark(article.slug)}
               className={`p-1.5 transition-colors ${bookmarked.has(article.slug)?"text-[#C9A24A] bg-[#C9A24A]/10":"text-gray-400 hover:text-[#C9A24A] hover:bg-gray-50"}`} aria-label="Bookmark">
               <Bookmark className="w-3.5 h-3.5" />
             </button>
-            <button className="p-1.5 text-gray-400 hover:text-[#C9A24A] hover:bg-gray-50 transition-colors" aria-label="Share"><Share2 className="w-3.5 h-3.5" /></button>
           </div>
         </div>
         <Link href={`/insights/${article.slug}`}
@@ -323,18 +265,19 @@ export default function InsightsClient() {
         </Link>
       </div>
     </article>
-  );
+  );};
 
   /* ═══════════════════ LIST CARD ═══════════════════ */
-  const ListCard = ({ article }: { article: EnrichedArticle }) => (
+  const ListCard = ({ article }: { article: Article }) => {
+    const image = article.featuredImage || CAT_IMAGES[article.category] || "/business.jpg";
+    return (
     <article className="group bg-white border border-gray-200 hover:border-[#C9A24A]/30 hover:shadow-lg transition-all duration-300 flex overflow-hidden">
       <div className="relative w-40 sm:w-52 shrink-0 overflow-hidden">
-        <Image src={article.image} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:640px)160px,208px" />
+        <Image src={image} alt={article.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:640px)160px,208px" />
       </div>
       <div className="p-4 sm:p-5 flex flex-col flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-2 flex-wrap">
           <span className={`text-[10px] font-semibold px-2.5 py-1 border ${CAT_COLORS[article.category]||"bg-gray-50 text-gray-600 border-gray-200"}`}>{article.category}</span>
-          <DifficultyBadge level={article.difficulty||"Beginner"} />
         </div>
         <h3 className="font-bold text-gray-900 text-base leading-snug mb-1.5 group-hover:text-[#C9A24A] transition-colors line-clamp-2">{article.title}</h3>
         <p className="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-2 flex-1">{article.excerpt}</p>
@@ -345,16 +288,9 @@ export default function InsightsClient() {
         </div>
         <div className="flex items-center gap-3 text-[11px] text-gray-400 mb-3 flex-wrap">
           <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{article.readTime}</span>
-          <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{(article.views||0).toLocaleString()}</span>
-          <span className="hidden sm:flex items-center gap-1"><MessageSquare className="w-3 h-3" />{article.comments}</span>
-          <span className="hidden sm:flex items-center gap-1"><Star className="w-3 h-3 text-amber-400 fill-amber-400" />{article.rating}</span>
         </div>
         <div className="flex items-center justify-between mt-auto gap-2">
-          <div className="flex items-center gap-1.5 min-w-0">
-            <div className={`w-6 h-6 rounded-full ${article.author?.color} flex items-center justify-center text-white text-[9px] font-bold shrink-0`}>{article.author?.initials}</div>
-            <span className="text-[11px] text-gray-600 font-medium truncate">{article.author?.name}</span>
-            <span className="text-[11px] text-gray-400">• {article.date}</span>
-          </div>
+          <span className="text-[11px] text-gray-400">{article.date}</span>
           <div className="flex items-center gap-1 shrink-0">
             <button onClick={()=>toggleBookmark(article.slug)} className={`p-1.5 transition-colors ${bookmarked.has(article.slug)?"text-[#C9A24A] bg-[#C9A24A]/10":"text-gray-400 hover:text-[#C9A24A] hover:bg-gray-50"}`} aria-label="Bookmark"><Bookmark className="w-3.5 h-3.5" /></button>
             <Link href={`/insights/${article.slug}`} className="px-3 py-1.5 bg-[#07111D] hover:bg-[#C9A24A] text-white hover:text-[#07111D] text-xs font-bold transition-all duration-200 flex items-center gap-1">
@@ -364,7 +300,7 @@ export default function InsightsClient() {
         </div>
       </div>
     </article>
-  );
+  );};
 
   /* ═══════════════════════════════════════════════════════════════
      RENDER
@@ -433,46 +369,38 @@ export default function InsightsClient() {
             </div>
 
             {/* ── FEATURED ── */}
-            {!loading && featured && filtered.length > 0 && (
+            {!loading && filtered.length > 0 && (
               <section className="mb-8 sm:mb-10">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="h-px flex-1 bg-gray-200" />
                   <span className="text-[10px] font-bold text-gray-400 tracking-widest uppercase flex items-center gap-1.5">
-                    <Star className="w-3.5 h-3.5 text-[#C9A24A]" /> Featured Article
+                    <BookOpen className="w-3.5 h-3.5 text-[#C9A24A]" /> Latest Article
                   </span>
                   <div className="h-px flex-1 bg-gray-200" />
                 </div>
                 <article className="group bg-white border border-gray-200 hover:border-[#C9A24A]/30 hover:shadow-2xl transition-all duration-300 overflow-hidden">
                   <div className="flex flex-col md:flex-row">
                     <div className="md:w-[48%] relative h-56 sm:h-64 md:h-auto md:min-h-[320px] shrink-0 overflow-hidden">
-                      <Image src={featured.image} alt={featured.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:768px)100vw,50vw" />
+                      <Image src={filtered[0].featuredImage || CAT_IMAGES[filtered[0].category] || "/business.jpg"} alt={filtered[0].title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width:768px)100vw,50vw" />
                       <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-transparent to-black/20" />
                       <div className="absolute top-3 left-3 flex items-center gap-2 flex-wrap">
-                        <span className={`text-[10px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 border backdrop-blur-sm ${CAT_COLORS[featured.category]||"bg-white/90 text-gray-700 border-gray-200"}`}>{featured.category}</span>
+                        <span className={`text-[10px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 border backdrop-blur-sm ${CAT_COLORS[filtered[0].category]||"bg-white/90 text-gray-700 border-gray-200"}`}>{filtered[0].category}</span>
                       </div>
                     </div>
                     <div className="p-5 sm:p-8 md:p-10 flex flex-col justify-center flex-1">
                       <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 flex-wrap">
-                        <DifficultyBadge level={featured.difficulty||"Beginner"} />
-                        <span className="text-xs text-gray-400 flex items-center gap-1"><Clock className="w-3 h-3" /> {featured.readTime}</span>
-                        <span className="text-xs text-gray-400 flex items-center gap-1"><Eye className="w-3 h-3" /> {(featured.views||0).toLocaleString()}</span>
+                        <span className="text-xs text-gray-400 flex items-center gap-1"><Clock className="w-3 h-3" /> {filtered[0].readTime}</span>
                       </div>
-                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 leading-snug group-hover:text-[#C9A24A] transition-colors">{featured.title}</h2>
-                      <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-4 sm:mb-5 line-clamp-3 md:line-clamp-none">{featured.excerpt}</p>
+                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 leading-snug group-hover:text-[#C9A24A] transition-colors">{filtered[0].title}</h2>
+                      <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-4 sm:mb-5 line-clamp-3 md:line-clamp-none">{filtered[0].excerpt}</p>
                       <div className="hidden sm:flex flex-wrap gap-1.5 mb-5 sm:mb-6">
-                        {(featured.tags||[]).map(tag=>(
+                        {(filtered[0].tags||[]).map(tag=>(
                           <span key={tag} className="text-xs px-2.5 py-1 bg-gray-50 border border-gray-200 text-gray-500">{tag}</span>
                         ))}
                       </div>
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                        <div className="flex items-center gap-2.5">
-                          <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full ${featured.author?.color} flex items-center justify-center text-white text-xs font-bold shrink-0`}>{featured.author?.initials}</div>
-                          <div>
-                            <p className="text-sm font-semibold text-gray-900">{featured.author?.name}</p>
-                            <p className="text-xs text-gray-400">{featured.author?.role} · {featured.date}</p>
-                          </div>
-                        </div>
-                        <Link href={`/insights/${featured.slug}`}
+                        <span className="text-xs text-gray-400">{filtered[0].date}</span>
+                        <Link href={`/insights/${filtered[0].slug}`}
                           className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-[#07111D] hover:bg-[#C9A24A] text-white hover:text-[#07111D] text-sm font-bold transition-all duration-200 shadow-lg w-full sm:w-auto justify-center">
                           Read Article <ArrowRight className="w-4 h-4" />
                         </Link>
@@ -486,7 +414,7 @@ export default function InsightsClient() {
             {/* ── TOOLBAR ── */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 mb-4 sm:mb-5 py-3 border-t border-b border-gray-200">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-sm text-gray-500"><span className="font-bold text-gray-900">{rest.length}</span> articles</span>
+                <span className="text-sm text-gray-500"><span className="font-bold text-gray-900">{filtered.length}</span> articles</span>
                 {activeFilterCount>0&&(
                   <button onClick={clearAll} className="flex items-center gap-1 text-xs text-red-500 font-medium bg-red-50 px-2.5 py-1.5 border border-red-100">
                     <X className="w-3 h-3" /> Clear ({activeFilterCount})
