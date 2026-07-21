@@ -103,7 +103,7 @@ export default function Navbar() {
               <div className="flex justify-center shrink-0 mx-2 md:mx-4">
                 <Link href="/" className="flex items-center group">
                   <Image
-                    src="/large-logo.png"
+                    src="/large-logo1.png"
                     alt="Fortress Investment Holdings"
                     width={320}
                     height={96}
