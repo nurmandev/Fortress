@@ -280,12 +280,12 @@ export default function InsightsClient() {
   return (
     <>
       {/* ══ HERO ══ */}
-      <section className="relative pt-24 sm:pt-28 pb-12 sm:pb-16 bg-[#07111D] overflow-hidden">
+      <section className="relative pt-32 sm:pt-36 pb-24 sm:pb-32 bg-[#07111D] overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage:"radial-gradient(#C9A24A 1px,transparent 1px)", backgroundSize:"32px 32px" }} />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#07111D]" />
         <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
 
-          <h1 className="text-white text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-5 leading-tight">
+          <h1 className="text-white text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-5 leading-tight mt-4 sm:mt-0">
             Insights &amp; <span className="bg-gradient-to-r from-[#C9A24A] to-[#E6C879] bg-clip-text text-transparent">Resources</span>
           </h1>
           <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2">
@@ -293,7 +293,7 @@ export default function InsightsClient() {
           </p>
           {/* Search bar */}
           <div className="max-w-2xl mx-auto mb-6 sm:mb-8 relative">
-            <Search className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-400" />
+            <Search className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-500" />
             <input type="text" value={search} onChange={e=>{setSearch(e.target.value);setPage(1);}}
               placeholder="Search articles…"
               className="w-full pl-11 sm:pl-14 pr-11 sm:pr-14 py-4 sm:py-[18px] bg-gray-50 border border-gray-200 text-gray-900 text-sm placeholder:text-gray-500 focus:outline-none focus:border-[#C9A24A]/50 transition-all backdrop-blur-sm  rounded-full" />
