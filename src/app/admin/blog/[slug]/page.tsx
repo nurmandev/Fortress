@@ -4,6 +4,7 @@ import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { toast } from "sonner";
 import {
   ArrowLeft,
   Save,
@@ -13,7 +14,6 @@ import {
   ImageIcon,
   Tag,
   Clock,
-  CheckCircle2,
   AlertCircle,
   Upload,
   X,
@@ -125,7 +125,6 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>("content");
@@ -171,9 +170,8 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
   }
 
   async function handleSave() {
-    if (!title.trim()) return;
+    if (!title.trim()) { toast.error("Title is required"); return; }
     setSaving(true);
-    setSaved(false);
     const articleSlug = isNew ? generateSlug(title) : slug;
     try {
       const res = await fetch("/api/admin/articles", {
@@ -185,13 +183,11 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
           seo: { title: seoTitle || title, description: seoDescription || excerpt },
         }),
       });
-      if (res.ok) {
-        setSaved(true);
-        setTimeout(() => setSaved(false), 3000);
-        if (isNew) router.push(`/admin/blog/${articleSlug}`);
-      }
-    } catch {
-      // fail silently
+      if (!res.ok) { const d = await res.json(); throw new Error(d.error || "Failed to save"); }
+      toast.success(isNew ? "Article created" : "Article saved");
+      if (isNew) router.push(`/admin/blog/${articleSlug}`);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Failed to save");
     } finally {
       setSaving(false);
     }
@@ -200,9 +196,12 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
   async function handleDelete() {
     setDeleteLoading(true);
     try {
-      await fetch(`/api/admin/articles/${slug}`, { method: "DELETE" });
+      const res = await fetch(`/api/admin/articles/${slug}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Delete failed");
+      toast.success("Article deleted");
       router.push("/admin/blog");
     } catch {
+      toast.error("Failed to delete article");
       setDeleteLoading(false);
       setShowDeleteModal(false);
     }
@@ -220,8 +219,11 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Upload failed");
       if (data.url) setFeaturedImage(data.url);
+      toast.success("Image uploaded");
     } catch (err) {
-      setUploadError(err instanceof Error ? err.message : "Upload failed");
+      const msg = err instanceof Error ? err.message : "Upload failed";
+      setUploadError(msg);
+      toast.error(msg);
     } finally {
       setImageUploading(false);
     }
@@ -293,12 +295,6 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
             </div>
 
             <div className="flex items-center gap-2.5 flex-wrap">
-              {saved && (
-                <span className="flex items-center gap-1.5 text-xs text-emerald-400 font-medium bg-emerald-500/10 border border-emerald-500/20 px-3 py-2 rounded-lg">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Saved
-                </span>
-              )}
-
               {/* Status toggle */}
               <div className="hidden sm:flex items-center gap-1 bg-white/5 rounded-lg p-1">
                 <button
@@ -561,7 +557,7 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
                     className="w-full flex items-center justify-center gap-2 py-3 bg-fortress-gold text-fortress-navy text-sm font-bold hover:bg-fortress-champagne transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-lg"
                   >
                     <Save className="w-3.5 h-3.5" />
-                    {saving ? "Saving…" : saved ? "Saved!" : "Save Article"}
+                    {saving ? "Saving…" : "Save Article"}
                   </button>
                   {!isNew && (
                     <button

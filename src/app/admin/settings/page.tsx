@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import {
   Save,
   Plus,
@@ -45,7 +46,6 @@ const sections = [
 export default function SettingsPage() {
   const [data, setData] = useState<SiteSettingsData | null>(null);
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
   const [activeSection, setActiveSection] = useState("company");
 
   useEffect(() => {
@@ -84,35 +84,51 @@ export default function SettingsPage() {
   async function handleLogoUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    const formData = new FormData();
-    formData.append("file", file);
-    const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
-    const result = await res.json();
-    if (result.url) update("logo", result.url);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || "Upload failed");
+      if (result.url) update("logo", result.url);
+      toast.success("Logo uploaded");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Upload failed");
+    }
   }
 
   async function handleFaviconUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    const formData = new FormData();
-    formData.append("file", file);
-    const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
-    const result = await res.json();
-    if (result.url) update("favicon", result.url);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
+      const result = await res.json();
+      if (!res.ok) throw new Error(result.error || "Upload failed");
+      if (result.url) update("favicon", result.url);
+      toast.success("Favicon uploaded");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Upload failed");
+    }
   }
 
   async function handleSave() {
     if (!data) return;
     setSaving(true);
-    setSaved(false);
-    await fetch("/api/admin/settings", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+    try {
+      const res = await fetch("/api/admin/settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("Failed to save");
+      toast.success("Settings saved");
+    } catch {
+      toast.error("Failed to save settings");
+    } finally {
+      setSaving(false);
+    }
   }
 
   function SectionNav() {
@@ -159,7 +175,6 @@ export default function SettingsPage() {
               <p className="text-gray-400 text-sm">General website configuration</p>
             </div>
             <div className="flex items-center gap-2">
-              {saved && <span className="text-xs text-fortress-gold font-medium">Saved</span>}
               <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 px-5 py-2.5 bg-fortress-gold text-fortress-navy text-sm font-bold hover:bg-fortress-champagne transition-colors disabled:opacity-50 rounded-lg">
                 <Save className="w-4 h-4" /> {saving ? "Saving..." : "Save Changes"}
               </button>

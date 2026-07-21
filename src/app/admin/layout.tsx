@@ -1,5 +1,6 @@
 import { requireAuth } from "@/lib/auth-utils";
 import type { Metadata } from "next";
+import AdminProviders from "./AdminProviders";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard",
@@ -11,5 +12,5 @@ export const metadata: Metadata = {
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   await requireAuth();
-  return <>{children}</>;
+  return <AdminProviders>{children}</AdminProviders>;
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import {
   Download,
   Trash2,
@@ -54,15 +55,27 @@ export default function EnquiriesPage() {
   useEffect(load, []);
 
   async function handleMarkRead(id: string) {
-    await fetch(`/api/admin/enquiries/${id}`, { method: "PATCH" });
-    load();
+    try {
+      const res = await fetch(`/api/admin/enquiries/${id}`, { method: "PATCH" });
+      if (!res.ok) throw new Error("Failed");
+      toast.success("Marked as read");
+      load();
+    } catch {
+      toast.error("Failed to update enquiry");
+    }
   }
 
   async function handleDelete(id: string) {
     if (!confirm("Delete this enquiry?")) return;
-    await fetch(`/api/admin/enquiries/${id}`, { method: "DELETE" });
-    setSelected(null);
-    load();
+    try {
+      const res = await fetch(`/api/admin/enquiries/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Failed");
+      toast.success("Enquiry deleted");
+      setSelected(null);
+      load();
+    } catch {
+      toast.error("Failed to delete enquiry");
+    }
   }
 
   const filtered = enquiries.filter((e) => filter === "all" || e.type === filter);

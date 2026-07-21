@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { toast } from "sonner";
 import {
   Newspaper,
   Plus,
@@ -163,10 +164,17 @@ export default function BlogList() {
   async function confirmDelete() {
     if (!deleteTarget) return;
     setDeleteLoading(true);
-    await fetch(`/api/admin/articles/${deleteTarget.slug}`, { method: "DELETE" });
-    setDeleteLoading(false);
-    setDeleteTarget(null);
-    load();
+    try {
+      const res = await fetch(`/api/admin/articles/${deleteTarget.slug}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Delete failed");
+      toast.success("Article deleted");
+      load();
+    } catch {
+      toast.error("Failed to delete article");
+    } finally {
+      setDeleteLoading(false);
+      setDeleteTarget(null);
+    }
   }
 
   const filtered = articles.filter((a) => {

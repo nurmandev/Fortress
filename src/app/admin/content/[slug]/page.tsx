@@ -4,6 +4,7 @@ import { useEffect, useState, use } from "react";
 import Link from "next/link";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminNavbar from "@/components/AdminNavbar";
+import { toast } from "sonner";
 import { ArrowLeft, Save, Eye } from "lucide-react";
 import RichTextEditor from "@/components/RichTextEditor";
 
@@ -24,7 +25,6 @@ export default function PageEditor({ params }: { params: Promise<{ slug: string 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     fetch(`/api/admin/content?slug=${slug}`)
@@ -37,15 +37,19 @@ export default function PageEditor({ params }: { params: Promise<{ slug: string 
 
   async function handleSave() {
     setSaving(true);
-    setSaved(false);
-    await fetch("/api/admin/content", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ slug, title, content }),
-    });
-    setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+    try {
+      const res = await fetch("/api/admin/content", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, title, content }),
+      });
+      if (!res.ok) throw new Error("Failed to save");
+      toast.success("Page saved");
+    } catch {
+      toast.error("Failed to save page");
+    } finally {
+      setSaving(false);
+    }
   }
 
   return (
@@ -65,7 +69,6 @@ export default function PageEditor({ params }: { params: Promise<{ slug: string 
               </Link>
             </div>
             <div className="flex items-center gap-2">
-              {saved && <span className="text-xs text-fortress-gold font-medium">Saved</span>}
               <button
                 onClick={handleSave}
                 disabled={saving}

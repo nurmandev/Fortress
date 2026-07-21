@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useCallback, useEffect } from "react";
+import { toast } from "sonner";
 import {
   Bold,
   Italic,
@@ -52,13 +53,19 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
     input.onchange = async () => {
       const file = input.files?.[0];
       if (!file) return;
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
-      const data = await res.json();
-      if (data.url) {
-        document.execCommand("insertImage", false, data.url);
-        if (editorRef.current) onChange(editorRef.current.innerHTML);
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+        const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Upload failed");
+        if (data.url) {
+          document.execCommand("insertImage", false, data.url);
+          if (editorRef.current) onChange(editorRef.current.innerHTML);
+          toast.success("Image inserted");
+        }
+      } catch (err) {
+        toast.error(err instanceof Error ? err.message : "Image upload failed");
       }
     };
     input.click();

@@ -38,7 +38,10 @@ export async function GET(request: Request) {
       });
     }
 
-    const articles = await Blog.find().sort({ createdAt: -1 }).lean();
+    const articles = await Blog.find({}, { content: 0, seo: 0 })
+      .sort({ createdAt: -1 })
+      .limit(100)
+      .lean();
     return NextResponse.json(
       articles.map((a) => ({
         slug: a.slug,
@@ -46,14 +49,9 @@ export async function GET(request: Request) {
         excerpt: a.excerpt,
         category: a.category,
         tags: a.tags || [],
-        date: a.publishedAt
-          ? new Date(a.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long" })
-          : new Date(a.createdAt).toLocaleDateString("en-US", { year: "numeric", month: "long" }),
-        readTime: a.excerpt ? `${Math.max(1, Math.ceil(a.content.length / 2000))} min read` : "1 min read",
         featuredImage: a.featuredImage || "",
         status: a.status,
         updatedAt: a.updatedAt || a.createdAt,
-        seo: a.seo || { title: a.title, description: a.excerpt || "" },
       }))
     );
   } catch {
