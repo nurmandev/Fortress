@@ -22,6 +22,7 @@ import {
   Layers,
   AlertTriangle,
   ImageOff,
+  ChevronDown,
 } from "lucide-react";
 import AdminSidebar from "@/components/AdminSidebar";
 import AdminNavbar from "@/components/AdminNavbar";
@@ -372,12 +373,12 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
 
               {/* Tabbed panel */}
               <div className="bg-[#07111D]/60 backdrop-blur-xl border border-white/5 rounded-xl overflow-hidden">
-                <div className="flex border-b border-white/5">
+                <div className="flex border-b border-white/5 overflow-x-auto scrollbar-none">
                   {tabs.map((t) => (
                     <button
                       key={t.id}
                       onClick={() => setActiveTab(t.id)}
-                      className={`flex items-center gap-2 px-5 py-3.5 text-xs font-semibold transition-all border-b-2 ${
+                      className={`flex items-center gap-2 px-4 sm:px-5 py-3.5 text-xs font-semibold transition-all border-b-2 shrink-0 ${
                         activeTab === t.id
                           ? "border-fortress-gold text-fortress-gold bg-fortress-gold/5"
                           : "border-transparent text-fortress-silver/40 hover:text-fortress-ivory hover:bg-white/5"
@@ -386,9 +387,9 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
                       {t.icon} {t.label}
                     </button>
                   ))}
-                  <div className="ml-auto flex items-center px-4 gap-3 text-[10px] text-fortress-silver/30 border-b-2 border-transparent">
-                    <span>{wordCount} words</span>
-                    <span>{charCount} chars</span>
+                  <div className="ml-auto flex items-center px-2 sm:px-4 gap-2 sm:gap-3 text-[9px] sm:text-[10px] text-fortress-silver/30 border-b-2 border-transparent shrink-0">
+                    <span className="whitespace-nowrap">{wordCount} words</span>
+                    <span className="whitespace-nowrap">{charCount} chars</span>
                   </div>
                 </div>
 
@@ -623,13 +624,16 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
                   <h3 className="text-xs font-bold text-fortress-ivory uppercase tracking-widest">Category & Metadata</h3>
                 </div>
                 <div className="p-4 space-y-3">
-                  <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 text-fortress-ivory text-sm px-3 py-2.5 focus:outline-none focus:border-fortress-gold/40 transition-colors rounded-lg appearance-none"
-                  >
-                    {categories.map((c) => <option key={c} value={c}>{c}</option>)}
-                  </select>
+                  <div className="relative">
+                    <select
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                      className="w-full bg-white/5 border border-white/10 text-fortress-ivory text-sm px-3 py-2.5 focus:outline-none focus:border-fortress-gold/40 transition-colors rounded-lg appearance-none cursor-pointer"
+                    >
+                      {categories.map((c) => <option key={c} value={c} className="bg-[#07111D] text-fortress-ivory">{c}</option>)}
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-fortress-silver/40 pointer-events-none" />
+                  </div>
                   <div>
                     <label className="flex items-center gap-1.5 text-[10px] font-bold text-fortress-silver/40 uppercase tracking-widest mb-2">
                       <Clock className="w-3 h-3" /> Read Time

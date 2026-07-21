@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   Search, X, Filter, Grid3X3, List, Clock,
-  Bookmark, ArrowRight, BookOpen, Star,
+  ArrowRight, BookOpen, Star,
   Building2, Briefcase, Cpu, UtensilsCrossed, Truck,
   LineChart, Newspaper, Handshake, Check,
   Mail, Crown, FileText, Users, ChevronLeft, ChevronRight, TrendingUp
@@ -88,7 +88,6 @@ export default function InsightsClient() {
   const [page, setPage]                       = useState(1);
   const [loading, setLoading]                 = useState(true);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
-  const [bookmarked, setBookmarked]           = useState<Set<string>>(new Set());
   const [email, setEmail]                     = useState("");
   const [subscribed, setSubscribed]           = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
@@ -107,7 +106,6 @@ export default function InsightsClient() {
 
   const toggleCategory  = (c: string) => { setSelectedCategories(p => p.includes(c) ? p.filter(x=>x!==c) : [...p,c]); setPage(1); };
   const toggleTag       = (t: string) => { setSelectedTags(p => p.includes(t) ? p.filter(x=>x!==t) : [...p,t]); setPage(1); };
-  const toggleBookmark  = (slug: string) => setBookmarked(p => { const n=new Set(p); if(n.has(slug)){n.delete(slug);}else{n.add(slug);} return n; });
 
   const clearAll = () => {
     setSearch(""); setSelectedCategories([]); setSelectedTags([]);

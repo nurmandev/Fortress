@@ -95,7 +95,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
   const article = await getPost(slug);
-  if (!article) notFound();
+  if (!article) { notFound(); return; }
 
   const allPosts = await getAllPosts();
   const related = allPosts.filter((a) => a.slug !== slug).slice(0, 3);
