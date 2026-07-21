@@ -10,17 +10,21 @@ export async function uploadFile(file: File, folder = "fortress") {
 
   const result = await uploadToCloudinary(file, folder);
 
-  await connectDB();
-  const record = await Upload.create({
-    publicId: result.publicId,
-    secureUrl: result.secureUrl,
-    folder,
-    resourceType: result.resourceType,
-    fileName: file.name,
-    fileSize: file.size,
-  });
+  try {
+    await connectDB();
+    await Upload.create({
+      publicId: result.publicId,
+      secureUrl: result.secureUrl,
+      folder,
+      resourceType: result.resourceType,
+      fileName: file.name,
+      fileSize: file.size,
+    });
+  } catch {
+    console.error("Failed to save upload record to DB, but Cloudinary upload succeeded");
+  }
 
-  return { ...result, _id: record._id };
+  return { ...result, _id: "" };
 }
 
 export async function deleteFile(publicId: string) {
