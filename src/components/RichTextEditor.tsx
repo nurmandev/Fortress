@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect } from "react";
 import {
   Bold,
   Italic,
@@ -29,6 +29,16 @@ const tools = [
 
 export default function RichTextEditor({ value, onChange }: RichTextEditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
+  const isInternal = useRef(false);
+
+  useEffect(() => {
+    const el = editorRef.current;
+    if (!el || isInternal.current) {
+      isInternal.current = false;
+      return;
+    }
+    if (el.innerHTML !== value) el.innerHTML = value;
+  }, [value]);
 
   const exec = useCallback((cmd: string, val?: string) => {
     document.execCommand(cmd, false, val);
@@ -52,6 +62,13 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
       }
     };
     input.click();
+  }, [onChange]);
+
+  const handleInput = useCallback(() => {
+    if (editorRef.current) {
+      isInternal.current = true;
+      onChange(editorRef.current.innerHTML);
+    }
   }, [onChange]);
 
   return (
@@ -101,10 +118,7 @@ export default function RichTextEditor({ value, onChange }: RichTextEditorProps)
         contentEditable
         suppressContentEditableWarning
         className="min-h-[300px] p-4 bg-fortress-charcoal text-fortress-ivory text-sm focus:outline-none prose prose-invert max-w-none"
-        dangerouslySetInnerHTML={{ __html: value }}
-        onInput={() => {
-          if (editorRef.current) onChange(editorRef.current.innerHTML);
-        }}
+        onInput={handleInput}
       />
     </div>
   );
