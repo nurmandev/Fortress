@@ -284,9 +284,7 @@ export default function InsightsClient() {
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage:"radial-gradient(#C9A24A 1px,transparent 1px)", backgroundSize:"32px 32px" }} />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#07111D]" />
         <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
-          <p className="inline-flex items-center gap-2 text-[#C9A24A] text-[10px] sm:text-xs font-semibold tracking-[3px] sm:tracking-[4px] uppercase mb-4 sm:mb-5 bg-[#C9A24A]/10 border border-[#C9A24A]/20 px-3 sm:px-4 py-1.5 sm:py-2">
-            <BookOpen className="w-3.5 h-3.5" /> Knowledge Hub
-          </p>
+
           <h1 className="text-white text-3xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-5 leading-tight">
             Insights &amp; <span className="bg-gradient-to-r from-[#C9A24A] to-[#E6C879] bg-clip-text text-transparent">Resources</span>
           </h1>
@@ -298,19 +296,10 @@ export default function InsightsClient() {
             <Search className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 w-4 sm:w-5 h-4 sm:h-5 text-gray-400" />
             <input type="text" value={search} onChange={e=>{setSearch(e.target.value);setPage(1);}}
               placeholder="Search articles…"
-              className="w-full pl-11 sm:pl-14 pr-11 sm:pr-14 py-4 sm:py-[18px] bg-gray-50 border border-gray-200 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-[#C9A24A]/50 transition-all backdrop-blur-sm  rounded-full" />
+              className="w-full pl-11 sm:pl-14 pr-11 sm:pr-14 py-4 sm:py-[18px] bg-gray-50 border border-gray-200 text-gray-900 text-sm placeholder:text-gray-500 focus:outline-none focus:border-[#C9A24A]/50 transition-all backdrop-blur-sm  rounded-full" />
             {search && <button onClick={()=>setSearch("")} className="absolute right-4 sm:right-5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"><X className="w-4 h-4" /></button>}
           </div>
-          {/* Popular tags */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="text-gray-500 text-xs">Popular:</span>
-            {["Real Estate","Private Equity","AI & Technology","Market Insights","UAE","ESG"].map(tag=>(
-              <button key={tag} onClick={()=>rawCategories.find(c=>c.label===tag)?toggleCategory(tag):toggleTag(tag)}
-                className="text-xs px-3.5 py-1.5 border border-white/10 text-gray-400 hover:border-[#C9A24A]/50 hover:text-[#C9A24A] hover:bg-[#C9A24A]/5 transition-all">
-                {tag}
-              </button>
-            ))}
-          </div>
+
         </div>
       </section>
 

@@ -603,7 +603,7 @@ export default function ArticleEditor({ params }: { params: Promise<{ slug: stri
                           <Upload className="w-6 h-6 text-fortress-silver/30" />
                           <div className="text-center">
                             <p className="text-xs text-fortress-silver/60 font-medium">Click to upload</p>
-                            <p className="text-[10px] text-fortress-silver/30">PNG, JPG, WebP up to 10MB</p>
+                            <p className="text-[10px] text-fortress-silver/30">PNG, JPG, WebP up to 5MB</p>
                           </div>
                         </>
                       )}
