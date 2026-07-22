@@ -80,9 +80,9 @@ const steps = [
   {
     icon: Handshake,
     step: "05",
-    title: "Build Long-Term Partnerships",
-    subtitle: "Shared Vision. Aligned Outcomes.",
-    body: "Long-term value is built through strong relationships  and strong relationships are built through consistency. We maintain clear communication, shared objectives, transparency, and mutual accountability between Fortress, management teams, founders, investors, and strategic partners. Markets will bring both opportunities and challenges. Our aim is to build partnerships strong enough for both.",
+    title: "Manage for Long-Term Value",
+    subtitle: "Disciplined Oversight. Sustainable Performance.",
+    body: "Long-term value is created through disciplined management, consistent monitoring, and informed decision-making. We maintain clear investment objectives, transparent reporting, and structured oversight throughout the investment lifecycle.\n\nOur team continuously reviews performance, manages risk, and responds to changing market conditions while remaining focused on sustainable income and long-term capital growth. Every investment is managed with accountability, clarity, and alignment with the agreed strategy.",
   },
 ];
 

@@ -55,7 +55,7 @@ const CAT_COLORS: Record<string, string> = {
   "Trading & Distribution": "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
   "Market Insights": "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
   "Company News": "bg-red-500/10 text-red-400 border-red-500/20",
-  "Strategic Partnerships": "bg-teal-500/10 text-teal-400 border-teal-500/20",
+  "Strategic Investment Management": "bg-teal-500/10 text-teal-400 border-teal-500/20",
 };
 
 /* ─── Delete Confirmation Modal ──────────────────────────────── */

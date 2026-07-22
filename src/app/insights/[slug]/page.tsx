@@ -21,7 +21,7 @@ const CAT_IMAGES: Record<string, string> = {
   "Trading & Distribution": "/discussing-business.jpg",
   "Market Insights": "/strategy-ideas.jpg",
   "Company News": "/african-man-black-suit.jpg",
-  "Strategic Partnerships": "/portrait-smiling.jpg",
+  "Strategic Investment Management": "/portrait-smiling.jpg",
 };
 
 const CAT_COLORS: Record<string, string> = {
@@ -34,7 +34,7 @@ const CAT_COLORS: Record<string, string> = {
   "Trading & Distribution": "bg-cyan-50 text-cyan-700 border-cyan-200",
   "Market Insights": "bg-indigo-50 text-indigo-700 border-indigo-200",
   "Company News": "bg-red-50 text-red-700 border-red-200",
-  "Strategic Partnerships": "bg-teal-50 text-teal-700 border-teal-200",
+  "Strategic Investment Management": "bg-teal-50 text-teal-700 border-teal-200",
 };
 
 function formatDate(date: Date | string | undefined) {

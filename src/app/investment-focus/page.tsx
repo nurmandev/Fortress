@@ -186,22 +186,19 @@ const sectors = [
       "We invest selectively in luxury assets and premium lifestyle opportunities where valuation, demand, liquidity, ownership costs, and long-term return potential are carefully assessed.",
   },
   {
-    id: "strategic-partnerships",
+    id: "strategic-investment-management",
     icon: Handshake,
-    title: "Strategic Partnerships",
-    subtitle: "Creating Value Through Collaboration",
+    title: "Strategic Investment Management",
+    subtitle: "Disciplined Capital Allocation. Sustainable Value Creation.",
     image: "/9.png",
-    body: "The strongest outcomes are rarely achieved alone. Aligned capital, capabilities, and experience consistently outperform any single party working independently.\n\nWe develop strategic partnerships with investors, business owners, family offices, developers, institutions, advisors, and operating companies.",
+    body: "We identify and manage carefully selected investment opportunities across multiple sectors, with a disciplined focus on risk management, income potential, and long-term capital growth.\n\nOur approach is designed for investors seeking professionally managed participation in businesses, projects, and assets across the UAE, GCC, and selected global markets.",
     items: [
-      "Joint Ventures  shared ownership of new projects and businesses",
-      "Co-Investment  investing alongside partners on selected opportunities",
-      "Market Expansion  helping partners enter the UAE and GCC markets",
-      "Project Development  combining capital with execution capability",
-      "Cross-Border Investment  connecting international capital with regional opportunity",
-      "Business Development Alliances  long-term commercial collaborations focused on creating shared value and sustainable growth",
+      { heading: "Diversified Investment Allocation", desc: "Allocating capital across selected sectors and opportunities to create a balanced investment portfolio." },
+      { heading: "Income-Generating Opportunities", desc: "Identifying investments with the potential to generate recurring income and structured distributions." },
+      { heading: "Capital Growth Investments", desc: "Investing in businesses, projects, and assets with strong commercial fundamentals and long-term appreciation potential." },
+      { heading: "Private Market Opportunities", desc: "Providing access to carefully evaluated opportunities beyond traditional public markets." },
     ],
-    closing:
-      "Every joint venture must demonstrate clear responsibilities, commercial alignment, appropriate governance, and shared long-term objectives  agreed before work begins, not negotiated after problems arise.",
+    closing: "",
   },
 ];
 
@@ -334,7 +331,7 @@ export default function InvestmentFocusPage() {
                       "Digital Assets & Blockchain": "OUR DIGITAL ASSET INVESTMENT FOCUS",
                       "Energy & Physical Commodities": "OUR ENERGY & PHYSICAL COMMODITIES INVESTMENT FOCUS",
                       "Luxury Assets": "OUR LUXURY ASSET INVESTMENT FOCUS",
-                      "Strategic Partnerships": "OUR STRATEGIC PARTNERSHIP FOCUS"
+                      "Strategic Investment Management": "OUR STRATEGIC INVESTMENT MANAGEMENT FOCUS"
                     }[sector.title]}
                   </p>
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">

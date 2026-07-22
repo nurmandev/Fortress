@@ -92,7 +92,7 @@ export default function Hero() {
               href="/invest-with-fortress"
               className="block w-full sm:w-auto px-6 sm:px-8 py-3.5 md:py-4 border border-fortress-silver/40 text-white font-bold text-xs sm:text-sm tracking-widest uppercase hover:bg-white/10 hover:border-white transition-all rounded-sm backdrop-blur-sm text-center"
             >
-              Partner With Us
+              Invest With Us
             </Link>
           </motion.div>
         </div>

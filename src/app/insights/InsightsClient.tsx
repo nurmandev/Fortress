@@ -29,7 +29,7 @@ const CAT_ICONS: Record<string, React.ReactNode> = {
   "Trading & Distribution": <Truck className="w-3.5 h-3.5" />,
   "Market Insights": <LineChart className="w-3.5 h-3.5" />,
   "Company News": <Newspaper className="w-3.5 h-3.5" />,
-  "Strategic Partnerships": <Handshake className="w-3.5 h-3.5" />,
+  "Strategic Investment Management": <Handshake className="w-3.5 h-3.5" />,
 };
 const CAT_COLORS: Record<string, string> = {
   "Real Estate": "bg-amber-500/10 text-amber-400 border-amber-500/20",
@@ -41,7 +41,7 @@ const CAT_COLORS: Record<string, string> = {
   "Trading & Distribution": "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
   "Market Insights": "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
   "Company News": "bg-red-500/10 text-red-400 border-red-500/20",
-  "Strategic Partnerships": "bg-teal-500/10 text-teal-400 border-teal-500/20",
+  "Strategic Investment Management": "bg-teal-500/10 text-teal-400 border-teal-500/20",
 };
 
 const ARTICLES_PER_PAGE = 6;
@@ -84,7 +84,7 @@ const CAT_IMAGES: Record<string, string> = {
   "Trading & Distribution": "/discussing-business.jpg",
   "Market Insights": "/strategy-ideas.jpg",
   "Company News": "/african-man-black-suit.jpg",
-  "Strategic Partnerships": "/portrait-smiling.jpg",
+  "Strategic Investment Management": "/portrait-smiling.jpg",
 };
 
 /* ═══════════════════════════════════════════════════════════════

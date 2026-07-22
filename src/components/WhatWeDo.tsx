@@ -1,35 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, Variants } from "framer-motion";
-import {
-  Building2,
-  Cpu,
-  Briefcase,
-  TrendingUp,
-  UtensilsCrossed,
-  Wifi,
-  Truck,
-  Gem,
-  Handshake,
-} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const sectors = [
-  { icon: Building2, title: "Real Estate", href: "/investment-focus#real-estate" },
-  { icon: Briefcase, title: "Business Acquisitions", href: "/investment-focus#business-acquisitions" },
-  { icon: TrendingUp, title: "Private Equity", href: "/investment-focus#private-equity" },
-  { icon: Wifi, title: "AI & Emerging Technology", href: "/investment-focus#ai-technology" },
-  { icon: UtensilsCrossed, title: "Hospitality", href: "/investment-focus#hospitality" },
-  { icon: Cpu, title: "Digital Assets & Blockchain", href: "/investment-focus#digital-assets" },
-  { icon: Truck, title: "Energy & Physical Commodities", href: "/investment-focus#energy-commodities" },
-  { icon: Gem, title: "Luxury Assets", href: "/investment-focus#luxury-assets" },
-  { icon: Handshake, title: "Strategic Partnerships", href: "/investment-focus#strategic-partnerships" },
-];
 
 const cardVariants: Variants = {
   rest: { y: 0, borderColor: "rgba(201,162,74,0.10)", boxShadow: "0 0px 0px rgba(201,162,74,0)" },
@@ -75,16 +51,29 @@ export default function WhatWeDo() {
               02  What We Do
             </span>
             <h2 className="text-2xl md:text-5xl font-light text-fortress-ivory leading-tight uppercase tracking-tight">
-              Strategic Investment. Sustainable Growth.
+              Strategic Investment Management
             </h2>
+            <p className="text-fortress-gold text-base md:text-lg font-medium mt-3">
+              Disciplined Capital Allocation. Sustainable Value Creation.
+            </p>
           </div>
-          <p className="text-fortress-silver/80 text-base md:text-lg leading-relaxed max-w-[500px]">
-            We invest in businesses, assets, and opportunities with strong foundations and meaningful long-term potential.
-          </p>
+          <div className="max-w-[500px] space-y-4">
+            <p className="text-fortress-silver/80 text-base md:text-lg leading-relaxed">
+              We identify and manage carefully selected investment opportunities across multiple sectors, with a disciplined focus on risk management, income potential, and long-term capital growth.
+            </p>
+            <p className="text-fortress-silver/80 text-base md:text-lg leading-relaxed">
+              Our approach is designed for investors seeking professionally managed participation in businesses, projects, and assets across the UAE, GCC, and selected global markets.
+            </p>
+          </div>
         </div>
 
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {sectors.map((sector, i) => (
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[
+            { title: "Diversified Investment Allocation", desc: "Allocating capital across selected sectors and opportunities to create a balanced investment portfolio." },
+            { title: "Income-Generating Opportunities", desc: "Identifying investments with the potential to generate recurring income and structured distributions." },
+            { title: "Capital Growth Investments", desc: "Investing in businesses, projects, and assets with strong commercial fundamentals and long-term appreciation potential." },
+            { title: "Private Market Opportunities", desc: "Providing access to carefully evaluated opportunities beyond traditional public markets." },
+          ].map((item, i) => (
             <motion.div
               key={i}
               variants={cardVariants}
@@ -92,23 +81,23 @@ export default function WhatWeDo() {
               whileHover="hover"
               className="group p-6 md:p-10 border bg-fortress-deep cursor-pointer rounded-sm"
             >
-              <Link href={sector.href} className="block">
-                <div className="w-12 h-12 md:w-14 md:h-14 bg-fortress-gold/10 flex items-center justify-center mb-5 rounded-sm">
-                  <sector.icon className="w-5 h-5 md:w-7 md:h-7 text-fortress-gold" />
-                </div>
+              <div className="block">
                 <span className="text-fortress-gold/45 text-[10px] tracking-[4px] uppercase font-semibold block mb-2">
-                  Sector {String(i + 1).padStart(2, "0")}
+                  Strategic Focus {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="text-xl font-semibold text-fortress-ivory">
-                  {sector.title}
+                <h3 className="text-xl font-semibold text-fortress-ivory mb-3">
+                  {item.title}
                 </h3>
+                <p className="text-fortress-silver/70 text-sm md:text-base leading-relaxed">
+                  {item.desc}
+                </p>
                 <motion.div
                   className="h-px bg-gradient-to-r from-fortress-gold/60 to-transparent mt-6"
                   initial={{ scaleX: 0, transformOrigin: "left" }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
                 />
-              </Link>
+              </div>
             </motion.div>
           ))}
         </div>

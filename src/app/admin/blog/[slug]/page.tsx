@@ -31,7 +31,7 @@ import RichTextEditor from "@/components/RichTextEditor";
 const categories = [
   "Real Estate", "Business Acquisitions", "Private Equity", "AI & Technology",
   "Digital Assets & Blockchain", "Hospitality", "Trading & Distribution",
-  "Market Insights", "Company News", "Strategic Partnerships",
+  "Market Insights", "Company News", "Strategic Investment Management",
 ];
 
 type Tab = "content" | "seo" | "settings";

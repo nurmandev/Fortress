@@ -18,7 +18,7 @@ const sectors = [
   { title: "Digital Assets & Blockchain", desc: "Selective participation in blockchain infrastructure, digital asset platforms, tokenisation, and fintech innovation.", image: "/2.png", className: "md:col-span-1 h-[280px] md:h-[380px]" },
   { title: "Energy & Physical Commodities", desc: "Investments in energy products, physical commodities, and supply and distribution networks driving regional and global trade.", image: "/7.png", className: "md:col-span-1 h-[280px] md:h-[380px]" },
   { title: "Luxury Assets", desc: "Premium real estate, high-value vehicles, yachts, aviation, collectibles, and luxury lifestyle businesses.", image: "/8.png", className: "md:col-span-2 h-[280px] md:h-[380px]" },
-  { title: "Strategic Partnerships", desc: "Joint ventures, co-investments, and strategic alliances with aligned partners and institutions.", image: "/9.png", className: "md:col-span-3 h-[280px] md:h-[380px]" },
+  { title: "Strategic Investment Management", desc: "Joint ventures, co-investments, and strategic alliances with aligned partners and institutions.", image: "/9.png", className: "md:col-span-3 h-[280px] md:h-[380px]" },
 ];
 
 export default function InvestmentSectors() {

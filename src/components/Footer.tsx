@@ -77,8 +77,8 @@ const pillars = [
     ),
   },
   {
-    title: "PARTNERED FOR GROWTH",
-    sub: "Stronger together, building the future",
+    title: "MANAGED WITH DISCIPLINE",
+    sub: "Carefully selected, monitored, and managed investment opportunities.",
     icon: (
       <svg viewBox="0 0 32 32" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M4 18 C4 18 7 14 11 15 L16 16 C18 16.5 20 15.5 20 14 C20 12.5 18.5 12 17 12.5 L14 13.5" strokeLinecap="round" strokeLinejoin="round" />

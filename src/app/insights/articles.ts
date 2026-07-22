@@ -18,7 +18,7 @@ export const categoryColors: Record<string, string> = {
   "Trading & Distribution": "border-l-cyan-400",
   "Market Insights": "border-l-amber-400",
   "Company News": "border-l-red-400",
-  "Strategic Partnerships": "border-l-teal-400",
+  "Strategic Investment Management": "border-l-teal-400",
 };
 
 export const categories = [
@@ -31,7 +31,7 @@ export const categories = [
   { label: "Trading & Distribution" },
   { label: "Market Insights" },
   { label: "Company News" },
-  { label: "Strategic Partnerships" },
+  { label: "Strategic Investment Management" },
 ];
 
 export const allArticles: Article[] = [];
