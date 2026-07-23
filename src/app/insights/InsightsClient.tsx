@@ -173,7 +173,7 @@ export default function InsightsClient() {
           {rawCategories.map(cat=>(
             <button key={cat.label} onClick={()=>toggleCategory(cat.label)}
               className={`flex items-center justify-between px-2 py-2 text-sm transition-all border-l-2 ${selectedCategories.includes(cat.label)?"border-[#C9A24A] text-[#C9A24A] font-semibold bg-[#C9A24A]/5":"border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50"}`}>
-              <span className="flex items-center gap-2">{CAT_ICONS[cat.label]}<span className="truncate">{cat.label === "Digital Assets & Blockchain" ? "Digital & Blockchain" : cat.label}</span></span>
+              <span className="flex items-center gap-2">{CAT_ICONS[cat.label]}<span className="truncate">{cat.label === "Digital Assets & Blockchain" ? "Digital & Blockchain" : cat.label === "Strategic Investment Management" ? "Strategic Mgmt" : cat.label}</span></span>
               <span className="text-[10px] bg-gray-100 text-gray-600 px-1.5 py-0.5 shrink-0 ">{catCounts[cat.label]||0}</span>
             </button>
           ))}

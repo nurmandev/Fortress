@@ -194,7 +194,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer ref={footerRef} className="relative overflow-hidden rounded-2xl">
+    <footer ref={footerRef} className="relative overflow-hidden rounded-t-2xl">
 
       {/* ══════════════ UPPER SECTION ══════════════ */}
       <div className="relative">
