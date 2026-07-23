@@ -33,7 +33,7 @@ const columns = [
     ],
   },
   {
-    heading: "Partnerships",
+    heading: "INVESTOR ACCESS",
     links: [
       { label: "Invest With Fortress", href: "/invest-with-fortress" },
       { label: "Investment Focus", href: "/investment-focus" },
