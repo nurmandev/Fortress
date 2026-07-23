@@ -441,7 +441,7 @@ export default function InsightsClient() {
       </div>
 
       {/* ══ PREMIUM CTA ══ */}
-      <section className="bg-[#07111D] py-20 mx-4 md:mx-8 mb-10 overflow-hidden relative">
+      <section className="bg-[#07111D] py-20 mx-4 md:mx-8 mb-10 overflow-hidden relative rounded-2xl">
         <div className="absolute inset-0 opacity-[0.04]" style={{backgroundImage:"radial-gradient(#C9A24A 1px,transparent 1px)",backgroundSize:"28px 28px"}} />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-px bg-gradient-to-r from-transparent via-[#C9A24A]/50 to-transparent" />
         <div className="relative max-w-[900px] mx-auto px-6 text-center">
@@ -460,7 +460,7 @@ export default function InsightsClient() {
               {icon:<Users className="w-5 h-5"/>,title:"Expert Consultancy",desc:"Direct access to our team"},
               {icon:<Star className="w-5 h-5"/>,title:"Market Reports",desc:"Exclusive sector insights"},
             ].map(b=>(
-              <div key={b.title} className="bg-gray-50 border border-gray-200 p-5 text-left hover:border-[#C9A24A]/30 transition-colors">
+              <div key={b.title} className="bg-gray-50 border border-gray-200 p-5 text-left hover:border-[#C9A24A]/30 transition-colors rounded-xl">
                 <div className="text-[#C9A24A] mb-3">{b.icon}</div>
                 <p className="text-white text-sm font-semibold mb-1">{b.title}</p>
                 <p className="text-gray-500 text-xs">{b.desc}</p>
@@ -468,8 +468,8 @@ export default function InsightsClient() {
             ))}
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link href="/invest-with-fortress" className="px-8 py-4 bg-[#C9A24A] hover:bg-[#E6C879] text-[#07111D] font-bold text-sm transition-all shadow-xl hover:-translate-y-0.5">Become a Member</Link>
-            <Link href="/contact" className="px-8 py-4 border border-white/20 hover:border-white/40 text-white font-bold text-sm transition-all hover:bg-white/5">Talk to Our Team</Link>
+            <Link href="/invest-with-fortress" className="px-8 py-4 bg-[#C9A24A] hover:bg-[#E6C879] text-[#07111D] font-bold text-sm transition-all shadow-xl hover:-translate-y-0.5 rounded-lg">Become a Member</Link>
+            <Link href="/contact" className="px-8 py-4 border border-white/20 hover:border-white/40 text-white font-bold text-sm transition-all hover:bg-white/5 rounded-lg">Talk to Our Team</Link>
           </div>
         </div>
       </section>
