@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import {
   Search, X, Filter, Grid3X3, List, Clock,
   ArrowRight, BookOpen, Star,
@@ -11,6 +12,27 @@ import {
   Crown, FileText, Users, ChevronLeft, ChevronRight, TrendingUp
 } from "lucide-react";
 import { categories as rawCategories } from "./articles";
+
+const fadeUp = {
+  initial: { opacity: 0, y: 40 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-80px" },
+  transition: { duration: 0.6, ease: "easeOut" as const },
+};
+
+const fadeLeft = {
+  initial: { opacity: 0, x: -30 },
+  whileInView: { opacity: 1, x: 0 },
+  viewport: { once: true, margin: "-80px" },
+  transition: { duration: 0.5, ease: "easeOut" as const },
+};
+
+const stagger = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.5, ease: "easeOut" as const },
+};
 
 interface Article {
   slug: string; category: string; title: string; excerpt: string;
@@ -60,14 +82,14 @@ const formatDate = (dateString?: string) => {
 /* ─── Skeleton ───────────────────────────────────────────────── */
 function SkeletonCard() {
   return (
-    <div className="bg-white border border-gray-200 animate-pulse  overflow-hidden">
+    <div className="bg-white border border-gray-200 animate-pulse overflow-hidden">
       <div className="h-52 bg-white/5" />
       <div className="p-5 space-y-3">
-        <div className="h-3 bg-white/5 w-1/3 " />
-        <div className="h-5 bg-white/5 w-full " />
-        <div className="h-5 bg-white/5 w-3/4 " />
-        <div className="h-4 bg-white/5 w-full " />
-        <div className="h-4 bg-white/5 w-5/6 " />
+        <div className="h-3 bg-white/5 w-1/3" />
+        <div className="h-5 bg-white/5 w-full" />
+        <div className="h-5 bg-white/5 w-3/4" />
+        <div className="h-4 bg-white/5 w-full" />
+        <div className="h-4 bg-white/5 w-5/6" />
       </div>
     </div>
   );
@@ -283,7 +305,7 @@ export default function InsightsClient() {
   return (
     <>
       {/* ══ HERO ══ */}
-      <section className="relative pt-32 sm:pt-36 pb-24 sm:pb-32 bg-[#07111D] overflow-hidden">
+      <motion.section {...fadeUp} className="relative pt-32 sm:pt-36 pb-24 sm:pb-32 bg-[#07111D] overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage:"radial-gradient(#C9A24A 1px,transparent 1px)", backgroundSize:"32px 32px" }} />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#07111D]" />
         <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 text-center">
@@ -304,16 +326,16 @@ export default function InsightsClient() {
           </div>
 
         </div>
-      </section>
+      </motion.section>
 
       {/* ══ MAIN LAYOUT ══ */}
       <div className="w-full px-3 sm:px-4 md:pl-0 md:pr-8 lg:pr-12 py-6 sm:py-10">
         <div className="flex gap-6 lg:gap-8 items-start">
 
           {/* Sidebar desktop */}
-          <div className="hidden md:block md:w-56 lg:w-72 xl:w-80 shrink-0 sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-4">
+          <motion.div {...fadeLeft} className="hidden md:block md:w-56 lg:w-72 xl:w-80 shrink-0 sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-4">
             <Sidebar />
-          </div>
+          </motion.div>
 
           {/* Content */}
           <div ref={resultsRef} className="flex-1 min-w-0 w-full">
@@ -334,7 +356,7 @@ export default function InsightsClient() {
 
             {/* ── LATEST ARTICLE ── */}
             {!loading && filtered.length > 0 && (
-              <section className="mb-8 sm:mb-10">
+              <motion.section {...fadeUp} className="mb-8 sm:mb-10">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-[10px] font-bold text-gray-500 tracking-widest uppercase flex items-center gap-1.5 shrink-0">
                     <BookOpen className="w-3.5 h-3.5 text-[#C9A24A]" /> Latest Article
@@ -371,11 +393,11 @@ export default function InsightsClient() {
                     </div>
                   </div>
                 </article>
-              </section>
+              </motion.section>
             )}
 
             {/* ── TOOLBAR ── */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 mb-4 sm:mb-5 py-3 border-t border-b border-gray-200">
+            <motion.div {...stagger} className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 mb-4 sm:mb-5 py-3 border-t border-b border-gray-200">
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-sm text-gray-500"><span className="font-bold text-gray-900">{filtered.length}</span> articles</span>
                 {activeFilterCount>0&&(
@@ -395,7 +417,7 @@ export default function InsightsClient() {
                   <button onClick={()=>setViewMode("list")} className={`p-2.5 transition-colors ${viewMode==="list"?"bg-[#C9A24A]/20 text-[#C9A24A]":"text-gray-500 hover:text-gray-900"}`} aria-label="List view"><List className="w-4 h-4" /></button>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* ── ARTICLES ── */}
             {loading ? (
@@ -403,23 +425,23 @@ export default function InsightsClient() {
                 {Array.from({length:3}).map((_,i)=><SkeletonCard key={i} />)}
               </div>
             ) : paginated.length===0 ? (
-              <div className="flex flex-col items-center justify-center py-16 sm:py-24 text-center px-4">
+              <motion.div {...stagger} className="flex flex-col items-center justify-center py-16 sm:py-24 text-center px-4">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/5 flex items-center justify-center mb-4 sm:mb-5 ">
                   <Search className="w-7 h-7 sm:w-8 sm:h-8 text-gray-500/30" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">No articles found</h3>
                 <p className="text-gray-500 text-sm mb-5 sm:mb-6 max-w-xs">Try adjusting your search or removing some filters.</p>
                 <button onClick={clearAll} className="px-5 sm:px-6 py-2.5 sm:py-3 bg-[#C9A24A]/10 text-[#C9A24A] border border-[#C9A24A]/20 text-sm font-semibold  hover:bg-[#C9A24A] hover:text-[#07111D] transition-all">Clear All Filters</button>
-              </div>
+              </motion.div>
             ) : (
-              <div className={viewMode==="grid"?"grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5":"flex flex-col gap-3 sm:gap-4"}>
-                {paginated.map(a=>viewMode==="grid"?<GridCard key={a.slug} article={a}/>:<ListCard key={a.slug} article={a}/>)}
-              </div>
+              <motion.div {...stagger} className={viewMode==="grid"?"grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5":"flex flex-col gap-3 sm:gap-4"}>
+                {paginated.map((a,i)=>viewMode==="grid"?<motion.div key={a.slug} initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.08,duration:0.4}}><GridCard article={a}/></motion.div>:<motion.div key={a.slug} initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.06,duration:0.4}}><ListCard article={a}/></motion.div>)}
+              </motion.div>
             )}
 
             {/* ── PAGINATION ── */}
             {!loading && totalPages>1 && (
-              <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-8 sm:mt-10 flex-wrap">
+              <motion.div {...stagger} className="flex items-center justify-center gap-1.5 sm:gap-2 mt-8 sm:mt-10 flex-wrap">
                 <button onClick={()=>{setPage(p=>Math.max(1,p-1));resultsRef.current?.scrollIntoView({behavior:"smooth",block:"start"});}}
                   disabled={page===1} className="p-2.5 border border-white/10 text-gray-500 hover:border-[#C9A24A]/50 hover:text-[#C9A24A] disabled:opacity-30 disabled:cursor-not-allowed transition-all bg-white ">
                   <ChevronLeft className="w-4 h-4" />
@@ -434,14 +456,14 @@ export default function InsightsClient() {
                   disabled={page===totalPages} className="p-2.5 border border-white/10 text-gray-500 hover:border-[#C9A24A]/50 hover:text-[#C9A24A] disabled:opacity-30 disabled:cursor-not-allowed transition-all bg-white ">
                   <ChevronRight className="w-4 h-4" />
                 </button>
-              </div>
+              </motion.div>
             )}
           </div>
         </div>
       </div>
 
       {/* ══ PREMIUM CTA ══ */}
-      <section className="bg-[#07111D] py-20 mx-4 md:mx-8 mb-10 overflow-hidden relative rounded-2xl">
+      <motion.section {...fadeUp} className="bg-[#07111D] py-20 mx-4 md:mx-8 mb-10 overflow-hidden relative rounded-2xl">
         <div className="absolute inset-0 opacity-[0.04]" style={{backgroundImage:"radial-gradient(#C9A24A 1px,transparent 1px)",backgroundSize:"28px 28px"}} />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-px bg-gradient-to-r from-transparent via-[#C9A24A]/50 to-transparent" />
         <div className="relative max-w-[900px] mx-auto px-6 text-center">
@@ -459,12 +481,12 @@ export default function InsightsClient() {
               {icon:<FileText className="w-5 h-5"/>,title:"Premium Articles",desc:"In-depth analysis & research"},
               {icon:<Users className="w-5 h-5"/>,title:"Expert Consultancy",desc:"Direct access to our team"},
               {icon:<Star className="w-5 h-5"/>,title:"Market Reports",desc:"Exclusive sector insights"},
-            ].map(b=>(
-              <div key={b.title} className="bg-gray-50 border border-gray-200 p-5 text-left hover:border-[#C9A24A]/30 transition-colors rounded-xl">
+            ].map((b,i)=>(
+              <motion.div key={b.title} initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*0.12,duration:0.5,ease:"easeOut"}} className="bg-gray-50 border border-gray-200 p-5 text-left hover:border-[#C9A24A]/30 transition-colors rounded-xl">
                 <div className="text-[#C9A24A] mb-3">{b.icon}</div>
                 <p className="text-white text-sm font-semibold mb-1">{b.title}</p>
                 <p className="text-gray-500 text-xs">{b.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -472,7 +494,7 @@ export default function InsightsClient() {
             <Link href="/contact" className="px-8 py-4 border border-white/20 hover:border-white/40 text-white font-bold text-sm transition-all hover:bg-white/5 rounded-lg">Talk to Our Team</Link>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ══ MOBILE DRAWER ══ */}
       {mobileDrawerOpen&&(
