@@ -22,13 +22,13 @@ interface SocialLink {
 
 interface SiteSettingsData {
   companyName: string;
-  phoneNumber: string;
-  emailAddress: string;
-  officeAddress: string;
-  googleMapsEmbed: string;
-  whatsappNumber: string;
+  phone: string;
+  email: string;
+  address: string;
+  googleMap: string;
+  whatsapp: string;
   socialLinks: SocialLink[];
-  footerContent: string;
+  footer: string;
   logo: string;
   favicon: string;
 }
@@ -221,19 +221,19 @@ export default function SettingsPage() {
                     </div>
                     <div>
                       <label className="block text-fortress-silver text-xs font-medium mb-1.5 tracking-wide">Phone Number</label>
-                      <input type="text" value={data.phoneNumber} onChange={(e) => update("phoneNumber", e.target.value)} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 rounded-lg" />
+                      <input type="text" value={data.phone} onChange={(e) => update("phone", e.target.value)} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 rounded-lg" />
                     </div>
                     <div>
                       <label className="block text-fortress-silver text-xs font-medium mb-1.5 tracking-wide">Email Address</label>
-                      <input type="email" value={data.emailAddress} onChange={(e) => update("emailAddress", e.target.value)} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 rounded-lg" />
+                      <input type="email" value={data.email} onChange={(e) => update("email", e.target.value)} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 rounded-lg" />
                     </div>
                     <div className="col-span-2">
                       <label className="block text-fortress-silver text-xs font-medium mb-1.5 tracking-wide">Office Address</label>
-                      <input type="text" value={data.officeAddress} onChange={(e) => update("officeAddress", e.target.value)} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 rounded-lg" />
+                      <input type="text" value={data.address} onChange={(e) => update("address", e.target.value)} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 rounded-lg" />
                     </div>
                     <div className="col-span-2">
                       <label className="block text-fortress-silver text-xs font-medium mb-1.5 tracking-wide">Google Maps Embed URL</label>
-                      <input type="text" value={data.googleMapsEmbed} onChange={(e) => update("googleMapsEmbed", e.target.value)} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 rounded-lg" />
+                      <input type="text" value={data.googleMap} onChange={(e) => update("googleMap", e.target.value)} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 rounded-lg" />
                     </div>
                   </div>
                 </div>
@@ -248,7 +248,7 @@ export default function SettingsPage() {
                   <div>
                     <label className="block text-fortress-silver text-xs font-medium mb-1.5 tracking-wide">WhatsApp Number</label>
                     <p className="text-fortress-silver/40 text-[10px] mb-2">Digits only, e.g. 971500000000</p>
-                    <input type="text" value={data.whatsappNumber} onChange={(e) => update("whatsappNumber", e.target.value)} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 rounded-lg" />
+                    <input type="text" value={data.whatsapp} onChange={(e) => update("whatsapp", e.target.value)} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 rounded-lg" />
                   </div>
                 </div>
               )}
@@ -283,7 +283,7 @@ export default function SettingsPage() {
                   </div>
                   <div>
                     <label className="block text-fortress-silver text-xs font-medium mb-1.5 tracking-wide">Footer Description</label>
-                    <textarea value={data.footerContent} onChange={(e) => update("footerContent", e.target.value)} rows={4} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 resize-none rounded-lg" />
+                    <textarea value={data.footer} onChange={(e) => update("footer", e.target.value)} rows={4} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 resize-none rounded-lg" />
                   </div>
                 </div>
               )}

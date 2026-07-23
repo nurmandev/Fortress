@@ -307,11 +307,11 @@ export default function InsightsClient() {
       </section>
 
       {/* ══ MAIN LAYOUT ══ */}
-      <div className="w-full px-3 sm:px-4 md:px-6 lg:pl-0 lg:pr-12 py-6 sm:py-10">
+      <div className="w-full px-3 sm:px-4 md:pl-0 md:pr-8 lg:pr-12 py-6 sm:py-10">
         <div className="flex gap-6 lg:gap-8 items-start">
 
           {/* Sidebar desktop */}
-          <div className="hidden lg:block w-64 shrink-0 sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-4">
+          <div className="hidden md:block md:w-56 lg:w-72 xl:w-80 shrink-0 sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-4">
             <Sidebar />
           </div>
 
@@ -319,7 +319,7 @@ export default function InsightsClient() {
           <div ref={resultsRef} className="flex-1 min-w-0 w-full">
 
             {/* Mobile filter bar */}
-            <div className="lg:hidden flex items-center gap-2 mb-4">
+            <div className="md:hidden flex items-center gap-2 mb-4">
               <button onClick={()=>setMobileDrawerOpen(true)}
                 className="flex items-center gap-1.5 px-3 py-2.5 bg-white border border-white/10 text-sm font-medium text-gray-500 hover:border-[#C9A24A]/50 hover:text-[#C9A24A] transition-all  shrink-0">
                 <Filter className="w-4 h-4" /> Filters
@@ -476,9 +476,9 @@ export default function InsightsClient() {
 
       {/* ══ MOBILE DRAWER ══ */}
       {mobileDrawerOpen&&(
-        <div className="fixed inset-0 z-50 lg:hidden">
+        <div className="fixed inset-0 z-50 md:hidden">
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={()=>setMobileDrawerOpen(false)} />
-          <div className="absolute left-0 top-0 bottom-0 w-[300px] bg-[#03080e] overflow-y-auto shadow-2xl border-r border-gray-200">
+          <div className="absolute left-0 top-0 bottom-0 w-[80vw] max-w-[300px] sm:max-w-[320px] bg-[#03080e] overflow-y-auto shadow-2xl border-r border-gray-200">
             <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-[#07111D] sticky top-0 z-10">
               <h2 className="font-bold text-gray-900 flex items-center gap-2">
                 <Filter className="w-4 h-4 text-[#C9A24A]" /> Filters

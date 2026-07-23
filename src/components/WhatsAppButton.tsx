@@ -1,14 +1,26 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 export default function WhatsAppButton() {
-  const phoneNumber = "971500000000";
+  const [phone, setPhone] = useState("971500000000");
+
+  useEffect(() => {
+    fetch("/api/settings")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data?.data?.whatsapp) setPhone(data.data.whatsapp);
+      })
+      .catch(() => {});
+  }, []);
+
   const message = encodeURIComponent(
     "Hello, I would like to enquire about Fortress Investment Holdings."
   );
 
   return (
     <a
-      href={`https://wa.me/${phoneNumber}?text=${message}`}
+      href={`https://wa.me/${phone}?text=${message}`}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 group"

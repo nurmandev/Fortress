@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import type { Metadata } from "next";
+import { getSettings } from "@/services/settings.service";
 
 export const metadata: Metadata = {
   title: "Contact Us | Fortress Investment Holdings",
@@ -14,34 +15,51 @@ export const metadata: Metadata = {
   },
 };
 
-const contactInfo = [
-  {
-    icon: Phone,
-    label: "Telephone",
-    value: "+971 4 XXX XXXX",
-    href: "tel:+97140000000",
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    value: "info@fortressih.com",
-    href: "mailto:info@fortressih.com",
-  },
-  {
-    icon: MapPin,
-    label: "Office",
-    value: "Dubai, United Arab Emirates",
-    href: "#map",
-  },
-  {
-    icon: Clock,
-    label: "Hours",
-    value: "Sun - Thu, 9AM - 6PM GST",
-    href: "#",
-  },
-];
+export const dynamic = "force-dynamic";
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  let whatsapp = "971500000000";
+  let phoneVal = "+971 4 XXX XXXX";
+  let emailVal = "info@fortressih.com";
+  let addressVal = "Dubai, United Arab Emirates";
+  try {
+    const settings = await getSettings();
+    if (settings) {
+      whatsapp = settings.whatsapp || whatsapp;
+      phoneVal = settings.phone || phoneVal;
+      emailVal = settings.email || emailVal;
+      addressVal = settings.address || addressVal;
+    }
+  } catch {
+    // Use defaults
+  }
+
+  const contactInfo = [
+    {
+      icon: Phone,
+      label: "Telephone",
+      value: phoneVal,
+      href: `tel:${phoneVal.replace(/\s/g, "")}`,
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      value: emailVal,
+      href: `mailto:${emailVal}`,
+    },
+    {
+      icon: MapPin,
+      label: "Office",
+      value: addressVal,
+      href: "#map",
+    },
+    {
+      icon: Clock,
+      label: "Hours",
+      value: "Sun - Thu, 9AM - 6PM GST",
+      href: "#",
+    },
+  ];
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
@@ -106,7 +124,7 @@ export default function ContactPage() {
 
               <div className="mt-10 pt-8 border-t border-fortress-navy/10">
                 <a
-                  href="https://wa.me/971500000000"
+                  href={`https://wa.me/${whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 px-6 py-3 bg-green-500 text-white hover:bg-green-600 transition-all duration-300 text-sm font-medium rounded-xl"
