@@ -101,7 +101,7 @@ const sectors = [
       { heading: "Digital Commerce", desc: "E-commerce, marketplace platforms, and technology-driven retail businesses with growth potential." },
     ],
     closing:
-      "We invest in technology with purpose — businesses that combine innovation, strong execution, market demand, and a clear path to long-term commercial growth.",
+      "We invest in technology with purpose, businesses that combine innovation, strong execution, market demand, and a clear path to long-term commercial growth.",
   },
   {
     id: "hospitality",
@@ -153,14 +153,14 @@ const sectors = [
     title: "Energy & Physical Commodities",
     subtitle: "Investing in Essential Resources and Global Trade Flow",
     image: "/7.png",
-    body: "Energy and physical commodities remain essential to global growth, industrial development, infrastructure, and everyday economic activity.\n\nFortress Investment Holdings focuses on opportunities connected to real, tangible commodities — including energy products, raw materials, and physical goods with genuine demand across regional and global markets.",
+    body: "Energy and physical commodities remain essential to global growth, industrial development, infrastructure, and everyday economic activity.\n\nFortress Investment Holdings focuses on opportunities connected to real, tangible commodities, including energy products, raw materials, and physical goods with genuine demand across regional and global markets.",
     items: [
-      "Energy Products — opportunities connected to crude oil, refined petroleum products, fuel supply, and energy-related trade",
-      "Physical Commodities — tangible goods such as metals, minerals, agricultural products, construction materials, and other high-demand physical resources",
-      "Supply & Distribution Networks — businesses with established sourcing, logistics, storage, and distribution capabilities",
-      "Reliable Trade Partners — strong supplier and buyer relationships with clear documentation, compliance, and delivery capacity",
-      "Regional & Global Demand — commodities with active demand across the UAE, GCC, Africa, Asia, and international markets",
-      "Operational Strength — businesses with proven trade flow, strong margins, risk controls, and transparent execution",
+      "Energy Products: opportunities connected to crude oil, refined petroleum products, fuel supply, and energy-related trade",
+      "Physical Commodities: tangible goods such as metals, minerals, agricultural products, construction materials, and other high-demand physical resources",
+      "Supply & Distribution Networks: businesses with established sourcing, logistics, storage, and distribution capabilities",
+      "Reliable Trade Partners: strong supplier and buyer relationships with clear documentation, compliance, and delivery capacity",
+      "Regional & Global Demand: commodities with active demand across the UAE, GCC, Africa, Asia, and international markets",
+      "Operational Strength: businesses with proven trade flow, strong margins, risk controls, and transparent execution",
     ],
     closing:
       "We focus on physical commodity opportunities backed by real demand, reliable supply chains, disciplined execution, and strong regional or global market potential.",
@@ -426,3 +426,4 @@ export default function InvestmentFocusPage() {
     </main>
   );
 }
+

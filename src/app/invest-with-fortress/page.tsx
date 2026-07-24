@@ -43,11 +43,11 @@ const modelSteps = [
   },
   {
     title: "Define the Investment Strategy",
-    body: "We translate your objectives into a clear investment approach and participation structure — agreed with you, documented, and adhered to throughout.",
+    body: "We translate your objectives into a clear investment approach and participation structure, agreed with you, documented, and adhered to throughout.",
   },
   {
     title: "Identify Qualified Opportunities",
-    body: "We source businesses, assets, and projects through our regional and international networks — and pursue only those that meet our standards.",
+    body: "We source businesses, assets, and projects through our regional and international networks, and pursue only those that meet our standards.",
   },
   {
     title: "Conduct Rigorous Due Diligence",
@@ -202,10 +202,10 @@ export default function InvestWithFortressPage() {
               <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Active Investment Management</p>
               <h2 className="text-xl md:text-4xl font-bold text-fortress-navy mb-4 md:mb-6">We Don&rsquo;t Just Allocate Capital. We Stand Behind It.</h2>
               <p className="text-fortress-charcoal/70 text-sm md:text-base leading-relaxed mb-4">
-                Many firms deploy capital and step back. Fortress stays engaged — providing strategic guidance, governance support, commercial development, and operational oversight, reinforced by access to our regional and international networks.
+                Many firms deploy capital and step back. Fortress stays engaged, providing strategic guidance, governance support, commercial development, and operational oversight, reinforced by access to our regional and international networks.
               </p>
               <p className="text-fortress-charcoal/70 text-sm md:text-base leading-relaxed">
-                This hands-on involvement exists for one reason: to strengthen performance and build durable value at every stage of the investment lifecycle — because disciplined execution remains central to our mandate.
+                This hands-on involvement exists for one reason: to strengthen performance and build durable value at every stage of the investment lifecycle, because disciplined execution remains central to our mandate.
               </p>
             </div>
             <div className="lg:col-span-3 bg-fortress-navy p-6 md:p-10 rounded-2xl">
@@ -230,7 +230,7 @@ export default function InvestWithFortressPage() {
             <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Who We Work With</p>
             <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-4 md:mb-6">For Investors with a Long-Term Outlook</h2>
             <p className="text-fortress-silver text-sm md:text-lg leading-relaxed mb-8 md:mb-10">
-              Fortress works with a select group of investors who value discipline over speculation — from private individuals building diversified exposure to institutions deploying structured capital across the UAE, GCC, and international markets.
+              Fortress works with a select group of investors who value discipline over speculation, from private individuals building diversified exposure to institutions deploying structured capital across the UAE, GCC, and international markets.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
@@ -250,7 +250,7 @@ export default function InvestWithFortressPage() {
             <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Investment Capital</p>
             <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-4 md:mb-6">Structured Around You, Not the Other Way Around</h2>
             <p className="text-fortress-ivory/80 text-sm md:text-lg leading-relaxed mb-8 md:mb-10">
-              No two investors are identical — and no two mandates at Fortress are either. Participation is structured around the opportunity, your objectives, your capital commitment, and your risk profile, under terms agreed transparently before any capital moves.
+              No two investors are identical, and no two mandates at Fortress are either. Participation is structured around the opportunity, your objectives, your capital commitment, and your risk profile, under terms agreed transparently before any capital moves.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
@@ -267,9 +267,9 @@ export default function InvestWithFortressPage() {
       <section className="py-12 md:py-20 my-8 md:my-12 sm:mx-4 rounded-2xl bg-fortress-navy">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8 text-center">
           <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Begin Your Investment Journey</p>
-          <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-4 md:mb-6">The First Step Is a Conversation — Not a Commitment</h2>
+          <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-4 md:mb-6">The First Step Is a Conversation, Not a Commitment</h2>
           <p className="text-fortress-silver text-sm md:text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-            Tell us about your investment objectives, preferred sectors, capital range, and time horizon. Our team will review your enquiry in confidence and present opportunities genuinely suited to your profile — with no obligation to proceed.
+            Tell us about your investment objectives, preferred sectors, capital range, and time horizon. Our team will review your enquiry in confidence and present opportunities genuinely suited to your profile, with no obligation to proceed.
           </p>
           <a
             href="#enquiry"
@@ -288,12 +288,12 @@ export default function InvestWithFortressPage() {
               <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Submit Your Investor Enquiry</p>
               <h2 className="text-xl md:text-4xl font-bold text-fortress-navy mb-4 md:mb-6">Start the Conversation with Fortress</h2>
               <p className="text-fortress-charcoal/70 text-sm md:text-base leading-relaxed mb-6 md:mb-8">
-                Share your investment objectives and preferences below. A member of our investment team will review your enquiry personally and respond within two to three business days — in strict confidence, and with no obligation on your part.
+                Share your investment objectives and preferences below. A member of our investment team will review your enquiry personally and respond within two to three business days, in strict confidence, and with no obligation on your part.
               </p>
               <div className="space-y-3 md:space-y-4">
                 {[
                   "Handled in strict confidence",
-                  "Reviewed by our investment team — not an automated process",
+                  "Reviewed by our investment team, not an automated process",
                   "No obligation to proceed at the enquiry stage",
                   "Personal response within 2–3 business days",
                 ].map((item) => (
@@ -331,3 +331,4 @@ export default function InvestWithFortressPage() {
     </main>
   );
 }
+
