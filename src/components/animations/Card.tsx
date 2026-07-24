@@ -16,13 +16,8 @@ export default function AnimatedCard({ children, className, delay = 0, hover = t
       initial="hidden"
       whileInView="visible"
       viewport={viewportOptions}
-      variants={{
-        hidden: cardVariants.hidden,
-        visible: {
-          ...cardVariants.visible,
-          transition: { ...cardVariants.visible.transition, delay },
-        },
-      }}
+      variants={cardVariants}
+      transition={{ delay }}
       whileHover={hover ? "hover" : undefined}
       className={className}
     >
