@@ -20,10 +20,13 @@ export interface ISettings extends Document {
   footer: string;
 }
 
-const SocialLinkSchema = new Schema<ISocialLink>({
-  platform: { type: String, required: true },
-  url: { type: String, required: true },
-});
+const SocialLinkSchema = new Schema<ISocialLink>(
+  {
+    platform: { type: String, required: true },
+    url: { type: String, required: true },
+  },
+  { _id: false }
+);
 
 const SettingsSchema = new Schema<ISettings>(
   {

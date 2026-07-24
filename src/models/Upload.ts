@@ -22,7 +22,6 @@ const UploadSchema = new Schema<IUpload>(
   { timestamps: true }
 );
 
-UploadSchema.index({ publicId: 1 });
 UploadSchema.index({ folder: 1 });
 
 const Upload = mongoose.models.Upload || mongoose.model<IUpload>("Upload", UploadSchema);

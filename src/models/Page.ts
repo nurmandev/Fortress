@@ -55,8 +55,6 @@ const PageSchema = new Schema<IPage>(
   { timestamps: true }
 );
 
-PageSchema.index({ slug: 1 });
-
 const Page = mongoose.models.Page || mongoose.model<IPage>("Page", PageSchema);
 
 export default Page;

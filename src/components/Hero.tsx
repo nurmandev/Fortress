@@ -1,30 +1,50 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import gsap from "gsap";
 import { motion } from "framer-motion";
 
+const heroContainerVariants = {
+  hidden: { opacity: 0, scale: 1.03 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 1.4, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
+const heroChildrenVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.18, delayChildren: 0.6 },
+  },
+};
+
+const heroItemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
+const heroButtonVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+  },
+};
+
 export default function Hero() {
-  const containerRef = useRef<HTMLElement>(null);
-  const badgeRef = useRef<HTMLSpanElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const subRef = useRef<HTMLParagraphElement>(null);
-  const btnsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-    tl.fromTo(containerRef.current, { opacity: 0, scale: 1.03 }, { opacity: 1, scale: 1, duration: 1.4 })
-      .fromTo(badgeRef.current, { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.7")
-      .fromTo(headingRef.current, { opacity: 0, y: 50, skewY: 2 }, { opacity: 1, y: 0, skewY: 0, duration: 0.9 }, "-=0.4")
-      .fromTo(subRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7 }, "-=0.5")
-      .fromTo(btnsRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6 }, "-=0.3");
-  }, []);
-
   return (
-    <section
-      ref={containerRef}
+    <motion.section
+      variants={heroContainerVariants}
+      initial="hidden"
+      animate="visible"
       className="relative min-h-[85vh] md:min-h-screen pt-20 pb-12 md:pt-28 md:pb-16 px-5 sm:px-6 lg:px-12 flex flex-col items-center justify-center overflow-hidden bg-fortress-navy"
     >
       {/* Background image with layered gradient overlay */}
@@ -37,7 +57,6 @@ export default function Hero() {
           priority
           sizes="100vw"
         />
-        {/* Stronger overlay on mobile so text stays readable */}
         <div className="absolute inset-0 bg-fortress-navy/80 md:bg-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-fortress-navy/95 via-fortress-navy/85 md:via-fortress-navy/80 to-fortress-navy/60 md:to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-fortress-navy/80 via-transparent to-fortress-navy/30" />
@@ -51,24 +70,38 @@ export default function Hero() {
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Content  centred on mobile, left-aligned on md+ */}
-      <div className="relative z-10 w-full max-w-[1280px] mx-auto flex flex-col items-center text-center md:items-start md:text-left">
-        <span ref={badgeRef} className="block text-fortress-gold text-[10px] sm:text-xs md:text-sm tracking-[4px] md:tracking-[6px] uppercase font-semibold mb-4 md:mb-6">
+      {/* Content centred on mobile, left-aligned on md+ */}
+      <motion.div
+        variants={heroChildrenVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 w-full max-w-[1280px] mx-auto flex flex-col items-center text-center md:items-start md:text-left"
+      >
+        <motion.span
+          variants={heroItemVariants}
+          className="block text-fortress-gold text-[10px] sm:text-xs md:text-sm tracking-[4px] md:tracking-[6px] uppercase font-semibold mb-4 md:mb-6"
+        >
           Fortress Investment Holdings
-        </span>
+        </motion.span>
 
-        <h1 ref={headingRef} className="text-white text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light leading-[1.1] uppercase tracking-tight mb-5 md:mb-8 max-w-xs sm:max-w-lg md:max-w-4xl">
+        <motion.h1
+          variants={heroItemVariants}
+          className="text-white text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-light leading-[1.1] uppercase tracking-tight mb-5 md:mb-8 max-w-xs sm:max-w-lg md:max-w-4xl"
+        >
           Built on Strength.<br />
           <span className="font-semibold bg-gradient-to-r from-fortress-gold to-fortress-champagne bg-clip-text text-transparent">
             Driven by Vision.
           </span>
-        </h1>
+        </motion.h1>
 
-        <p ref={subRef} className="text-fortress-silver/90 text-sm sm:text-base md:text-lg lg:text-xl max-w-sm sm:max-w-xl md:max-w-3xl leading-relaxed mb-8 md:mb-10 font-light">
+        <motion.p
+          variants={heroItemVariants}
+          className="text-fortress-silver/90 text-sm sm:text-base md:text-lg lg:text-xl max-w-sm sm:max-w-xl md:max-w-3xl leading-relaxed mb-8 md:mb-10 font-light"
+        >
           A Dubai-based diversified investment holding company focused on identifying, acquiring, and growing high-potential opportunities across real estate, private equity, technology, digital assets, energy, commodities, and hospitality.
-        </p>
+        </motion.p>
 
-        <div ref={btnsRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+        <motion.div variants={heroButtonVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
           <motion.div
             className="w-full sm:w-auto"
             whileHover={{ scale: 1.03, y: -2 }}
@@ -95,8 +128,8 @@ export default function Hero() {
               Invest With Us
             </Link>
           </motion.div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Animated decorative gold line at bottom */}
       <motion.div
@@ -105,6 +138,6 @@ export default function Hero() {
         animate={{ scaleX: 1 }}
         transition={{ duration: 1.4, ease: "easeOut", delay: 1.2 }}
       />
-    </section>
+    </motion.section>
   );
 }

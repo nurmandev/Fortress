@@ -1,4 +1,4 @@
-import Settings from "@/models/Settings";
+import Settings, { type ISettings } from "@/models/Settings";
 import type { SettingsInput } from "@/validators";
 import { connectDB } from "@/lib/db";
 
@@ -24,13 +24,23 @@ const DEFAULT_SETTINGS = {
 };
 
 export async function getSettings() {
-  await connectDB();
-  let settings = await Settings.findOne().lean();
-  if (!settings) {
-    settings = await Settings.create(DEFAULT_SETTINGS);
-    settings = settings.toObject();
+  try {
+    await connectDB();
+    let settings = await Settings.findOne().lean();
+    if (!settings) {
+      try {
+        settings = await Settings.create(DEFAULT_SETTINGS);
+        settings = settings.toObject ? settings.toObject() : settings;
+      } catch (err) {
+        console.warn("Could not create settings document (limit reached), using fallback defaults:", err);
+        return DEFAULT_SETTINGS as unknown as ISettings;
+      }
+    }
+    return settings;
+  } catch (err) {
+    console.error("Database connection/query error in getSettings:", err);
+    return DEFAULT_SETTINGS as unknown as ISettings;
   }
-  return settings;
 }
 
 export async function updateSettings(data: SettingsInput) {

@@ -8,6 +8,8 @@ import Philosophy from "@/components/Philosophy";
 import PartnershipCTA from "@/components/PartnershipCTA";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
+import PageTransition from "@/components/animations/PageTransition";
+import { FloatingBlobs } from "@/components/animations/AnimatedBackground";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -23,17 +25,20 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
-      <Navbar />
-      <Hero />
-      <Introduction />
-      <WhatWeDo />
-      <InvestmentSectors />
-      <WhyChooseUs />
-      <Philosophy />
-      <PartnershipCTA />
-      <Newsletter />
-      <Footer />
-    </main>
+    <PageTransition>
+      <main className="min-h-screen bg-white relative">
+        <FloatingBlobs />
+        <Navbar />
+        <Hero />
+        <Introduction />
+        <WhatWeDo />
+        <InvestmentSectors />
+        <WhyChooseUs />
+        <Philosophy />
+        <PartnershipCTA />
+        <Newsletter />
+        <Footer />
+      </main>
+    </PageTransition>
   );
 }

@@ -1,15 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
+import Stagger from "@/components/animations/Stagger";
+import StaggerItem from "@/components/animations/StaggerItem";
 
-gsap.registerPlugin(ScrollTrigger);
-
-/* ─── Nav columns ───────────────────────────────────────────── */
 const columns = [
   {
     heading: "Company",
@@ -51,7 +47,6 @@ const columns = [
   },
 ];
 
-/* ─── Bottom pillars ─────────────────────────────────────────── */
 const pillars = [
   {
     title: "BUILT ON TRUST",
@@ -90,7 +85,6 @@ const pillars = [
   },
 ];
 
-/* ─── Social icons ───────────────────────────────────────────── */
 const socialLinks = [
   {
     label: "LinkedIn",
@@ -148,57 +142,21 @@ const socialLinks = [
   },
 ];
 
-/* ─── Component ─────────────────────────────────────────────── */
+const sectionReveal = {
+  hidden: { opacity: 0, y: 60 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
+};
+
 export default function Footer() {
-  const footerRef = useRef<HTMLElement>(null);
-  const mainRef = useRef<HTMLDivElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Main area children stagger in
-      gsap.fromTo(
-        mainRef.current ? Array.from(mainRef.current.children) : [],
-        { opacity: 0, y: 36 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.65,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: "top 88%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-      // Bottom bar
-      gsap.fromTo(
-        bottomRef.current,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 0.6,
-          delay: 0.55,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: footerRef.current,
-            start: "top 88%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    }, footerRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <footer ref={footerRef} className="relative overflow-hidden rounded-t-2xl">
-
-      {/* ══════════════ UPPER SECTION ══════════════ */}
+    <motion.footer
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      variants={sectionReveal}
+      className="relative overflow-hidden rounded-t-2xl"
+    >
       <div className="relative">
-        {/* Background image  right half visible, left fades out */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/Hero-Background.png"
@@ -208,173 +166,156 @@ export default function Footer() {
             sizes="100vw"
             aria-hidden="true"
           />
-          {/* Strong overlay  heavy left, lighter right so skyline peeks through */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#080e1a] via-[#080e1a]/92 to-[#080e1a]/65" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#080e1a] via-transparent to-[#080e1a]/40" />
         </div>
 
-        {/* Gold top border */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C9A24A]/50 to-transparent z-10" />
 
-        {/* Content */}
-        <div
-          ref={mainRef}
-          className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-16 pt-16 pb-14 grid grid-cols-1 md:grid-cols-[260px_1fr] gap-12"
-        >
-          {/* ── Left: Brand block ── */}
-          <div className="flex flex-col gap-6">
-            {/* Logo */}
-            <Link href="/" className="inline-block">
-              <Image
-                src="/large-logo.png"
-                alt="Fortress Investment Holdings"
-                width={320}
-                height={96}
-                className="h-24 w-auto object-contain drop-shadow-lg"
-              />
-            </Link>
-
-            {/* Description */}
-            <p className="text-[#8fa0b8] text-sm leading-relaxed max-w-[230px]">
-              A Dubai-based diversified investment holding company focused on identifying, acquiring, and growing high-potential opportunities across real estate, private equity, technology, digital assets, energy, commodities, and hospitality.
-            </p>
-
-            {/* Download Brochure button */}
-            <motion.a
-              href="#"
-              className="inline-flex items-center gap-2.5 border border-[#C9A24A]/50 text-[#C9A24A] text-xs font-semibold tracking-widest uppercase px-5 py-3 w-fit hover:bg-[#C9A24A]/10 transition-colors"
-              whileHover={{ borderColor: "rgba(201,162,74,0.9)" }}
-              transition={{ duration: 0.2 }}
-            >
-              {/* Document icon */}
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="9" y1="13" x2="15" y2="13" />
-                <line x1="9" y1="17" x2="12" y2="17" />
-              </svg>
-              Download Brochure
-            </motion.a>
-          </div>
-
-          {/* ── Right: 4 nav columns ── */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
-            {columns.map((col) => (
-              <div key={col.heading} className="flex flex-col gap-4">
-                {/* Heading + gold underline */}
-                <div>
-                  <h4 className="text-white text-xs font-bold tracking-[3px] uppercase mb-2">
-                    {col.heading}
-                  </h4>
-                  <div className="h-[1.5px] w-8 bg-[#C9A24A]" />
-                </div>
-                <ul className="flex flex-col gap-2.5">
-                  {col.links.map((l) => (
-                    <li key={l.label}>
-                      <Link
-                        href={l.href}
-                        className="group flex items-center gap-1.5 text-[13px] text-[#8fa0b8] hover:text-[#C9A24A] transition-colors"
-                      >
-                        {/* Chevron */}
-                        <svg
-                          className="w-2.5 h-2.5 text-[#C9A24A]/60 group-hover:text-[#C9A24A] shrink-0 transition-colors"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <polyline points="9 18 15 12 9 6" />
-                        </svg>
-                        {l.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ══════════════ BOTTOM BAR ══════════════ */}
-      <div
-        ref={bottomRef}
-        className="relative z-10 bg-[#060c17] border-t border-[#C9A24A]/15"
-      >
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-16 py-6 flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-0 justify-between">
-
-          {/* Brand text + copyright */}
-          <div className="flex flex-col gap-1 shrink-0">
-            <Link href="/" className="flex items-baseline gap-1.5">
-              <span className="text-white text-sm font-bold tracking-[5px] uppercase">FORTRESS</span>
-              <span className="text-[#C9A24A] text-sm font-bold tracking-[5px] uppercase">IH</span>
-            </Link>
-            <p className="text-[#8fa0b8]/50 text-[11px] leading-snug">
-              © {new Date().getFullYear()} Fortress Investment Holdings.
-              <br />
-              All Rights Reserved.
-            </p>
-          </div>
-
-          {/* 3 Pillars  icons only, text on hover */}
-          <div className="flex flex-row gap-6 sm:gap-10 lg:gap-14">
-            {pillars.map((p) => (
-              <div key={p.title} className="group relative flex items-center justify-center">
-                {/* Tooltip */}
-                <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">
-                  <div className="bg-[#0f1a2e] border border-[#C9A24A]/30 rounded px-3 py-2 shadow-xl whitespace-nowrap">
-                    <p className="text-white text-[11px] font-bold tracking-[2px] uppercase leading-tight text-center">
-                      {p.title}
-                    </p>
-                    <p className="text-[#8fa0b8] text-[10px] leading-snug mt-0.5 text-center">
-                      {p.sub}
-                    </p>
-                  </div>
-                  <div className="w-2 h-2 bg-[#0f1a2e] border-r border-b border-[#C9A24A]/30 rotate-45 mx-auto -mt-1" />
-                </div>
-                {/* Hexagon-bordered icon */}
-                <div className="relative flex items-center justify-center w-11 h-11 shrink-0">
-                  <svg viewBox="0 0 44 44" className="absolute inset-0 w-full h-full" fill="none">
-                    <polygon
-                      points="22,2 40,12 40,32 22,42 4,32 4,12"
-                      stroke="#C9A24A"
-                      strokeOpacity="0.5"
-                      strokeWidth="1"
-                    />
-                  </svg>
-                  <span className="text-[#C9A24A]/80">{p.icon}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Follow Us + social icons */}
-          <div className="flex flex-col gap-2.5 shrink-0">
-            <p className="text-white text-[11px] font-bold tracking-[3px] uppercase">
-              FOLLOW US
-            </p>
-            <div className="flex items-center gap-2">
-              {socialLinks.map((s) => (
+        <Stagger>
+          <StaggerItem>
+            <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-16 pt-16 pb-14 grid grid-cols-1 md:grid-cols-[260px_1fr] gap-12">
+              <div className="flex flex-col gap-6">
+                <Link href="/" className="inline-block">
+                  <Image
+                    src="/large-logo.png"
+                    alt="Fortress Investment Holdings"
+                    width={320}
+                    height={96}
+                    className="h-24 w-auto object-contain drop-shadow-lg"
+                  />
+                </Link>
+                <p className="text-[#8fa0b8] text-sm leading-relaxed max-w-[230px]">
+                  A Dubai-based diversified investment holding company focused on identifying, acquiring, and growing high-potential opportunities across real estate, private equity, technology, digital assets, energy, commodities, and hospitality.
+                </p>
                 <motion.a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="w-8 h-8 rounded-full border border-[#8fa0b8]/25 flex items-center justify-center text-[#8fa0b8]/60 hover:border-[#C9A24A]/60 hover:text-[#C9A24A] transition-colors"
-                  whileHover={{ scale: 1.12, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ type: "spring", stiffness: 450, damping: 18 }}
+                  href="#"
+                  className="inline-flex items-center gap-2.5 border border-[#C9A24A]/50 text-[#C9A24A] text-xs font-semibold tracking-widest uppercase px-5 py-3 w-fit hover:bg-[#C9A24A]/10 transition-colors"
+                  whileHover={{ borderColor: "rgba(201,162,74,0.9)" }}
+                  transition={{ duration: 0.2 }}
                 >
-                  {s.icon}
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="9" y1="13" x2="15" y2="13" />
+                    <line x1="9" y1="17" x2="12" y2="17" />
+                  </svg>
+                  Download Brochure
                 </motion.a>
-              ))}
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+                {columns.map((col) => (
+                  <div key={col.heading} className="flex flex-col gap-4">
+                    <div>
+                      <h4 className="text-white text-xs font-bold tracking-[3px] uppercase mb-2">
+                        {col.heading}
+                      </h4>
+                      <div className="h-[1.5px] w-8 bg-[#C9A24A]" />
+                    </div>
+                    <ul className="flex flex-col gap-2.5">
+                      {col.links.map((l) => (
+                        <li key={l.label}>
+                          <Link
+                            href={l.href}
+                            className="group flex items-center gap-1.5 text-[13px] text-[#8fa0b8] hover:text-[#C9A24A] transition-colors"
+                          >
+                            <svg
+                              className="w-2.5 h-2.5 text-[#C9A24A]/60 group-hover:text-[#C9A24A] shrink-0 transition-colors"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <polyline points="9 18 15 12 9 6" />
+                            </svg>
+                            {l.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </StaggerItem>
 
-        </div>
+          <StaggerItem>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="relative z-10 bg-[#060c17] border-t border-[#C9A24A]/15"
+            >
+              <div className="max-w-[1400px] mx-auto px-6 lg:px-16 py-6 flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-0 justify-between">
+                <div className="flex flex-col gap-1 shrink-0">
+                  <Link href="/" className="flex items-baseline gap-1.5">
+                    <span className="text-white text-sm font-bold tracking-[5px] uppercase">FORTRESS</span>
+                    <span className="text-[#C9A24A] text-sm font-bold tracking-[5px] uppercase">IH</span>
+                  </Link>
+                  <p className="text-[#8fa0b8]/50 text-[11px] leading-snug">
+                    &copy; {new Date().getFullYear()} Fortress Investment Holdings.
+                    <br />
+                    All Rights Reserved.
+                  </p>
+                </div>
+
+                <div className="flex flex-row gap-6 sm:gap-10 lg:gap-14">
+                  {pillars.map((p) => (
+                    <div key={p.title} className="group relative flex items-center justify-center">
+                      <div className="absolute bottom-full mb-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">
+                        <div className="bg-[#0f1a2e] border border-[#C9A24A]/30 rounded px-3 py-2 shadow-xl whitespace-nowrap">
+                          <p className="text-white text-[11px] font-bold tracking-[2px] uppercase leading-tight text-center">
+                            {p.title}
+                          </p>
+                          <p className="text-[#8fa0b8] text-[10px] leading-snug mt-0.5 text-center">
+                            {p.sub}
+                          </p>
+                        </div>
+                        <div className="w-2 h-2 bg-[#0f1a2e] border-r border-b border-[#C9A24A]/30 rotate-45 mx-auto -mt-1" />
+                      </div>
+                      <div className="relative flex items-center justify-center w-11 h-11 shrink-0">
+                        <svg viewBox="0 0 44 44" className="absolute inset-0 w-full h-full" fill="none">
+                          <polygon
+                            points="22,2 40,12 40,32 22,42 4,32 4,12"
+                            stroke="#C9A24A"
+                            strokeOpacity="0.5"
+                            strokeWidth="1"
+                          />
+                        </svg>
+                        <span className="text-[#C9A24A]/80">{p.icon}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-col gap-2.5 shrink-0">
+                  <p className="text-white text-[11px] font-bold tracking-[3px] uppercase">
+                    FOLLOW US
+                  </p>
+                  <div className="flex items-center gap-2">
+                    {socialLinks.map((s) => (
+                      <motion.a
+                        key={s.label}
+                        href={s.href}
+                        aria-label={s.label}
+                        className="w-8 h-8 rounded-full border border-[#8fa0b8]/25 flex items-center justify-center text-[#8fa0b8]/60 hover:border-[#C9A24A]/60 hover:text-[#C9A24A] transition-colors"
+                        whileHover={{ scale: 1.12, y: -2 }}
+                        whileTap={{ scale: 0.9 }}
+                        transition={{ type: "spring", stiffness: 450, damping: 18 }}
+                      >
+                        {s.icon}
+                      </motion.a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </StaggerItem>
+        </Stagger>
       </div>
-
-    </footer>
+    </motion.footer>
   );
 }

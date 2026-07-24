@@ -2,6 +2,9 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Shield, Eye, Target, Award, Users, Scale, Lock, Hexagon, Heart } from "lucide-react";
+import Reveal from "@/components/animations/Reveal";
+import Stagger from "@/components/animations/Stagger";
+import StaggerItem from "@/components/animations/StaggerItem";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -45,7 +48,7 @@ export default function AboutPage() {
       {/* Banner */}
       <section className="relative pt-24 md:pt-32 pb-12 md:pb-20 overflow-hidden bg-white text-center">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
+          <Reveal className="max-w-3xl mx-auto">
             <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">About Us</p>
             <h1 className="text-3xl md:text-6xl font-bold mb-4 md:mb-6 leading-tight">
               <span className="text-fortress-navy">Built to Protect. </span>
@@ -56,14 +59,14 @@ export default function AboutPage() {
             <p className="text-fortress-charcoal/70 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">
               Fortress Investment Holdings brings together disciplined capital, strategic thinking, and long-term vision to build sustainable value across selected businesses, assets, and markets.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Company Introduction */}
       <section className="py-12 md:py-20 bg-fortress-navy my-8 md:my-12 sm:mx-4 rounded-2xl">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
+          <Reveal className="max-w-3xl mx-auto text-center">
             <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">About Fortress Investment Holdings</p>
             <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-4 md:mb-6">
               A Platform Built for Long-Term Value
@@ -71,15 +74,15 @@ export default function AboutPage() {
             <p className="text-fortress-silver text-sm md:text-lg leading-relaxed">
               Fortress Investment Holdings is a diversified investment holding company headquartered in Dubai, United Arab Emirates. We identify valuable opportunities, invest responsibly, and support businesses with genuine potential for sustainable growth.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Vision & Mission */}
       <section className="py-12 md:py-20 my-8 md:my-12 sm:mx-4 rounded-2xl bg-white">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-6 md:gap-12">
-            <div className="bg-fortress-navy border border-fortress-gold/10 p-6 md:p-10 rounded-2xl">
+          <Stagger className="grid md:grid-cols-2 gap-6 md:gap-12">
+            <StaggerItem className="bg-fortress-navy border border-fortress-gold/10 p-6 md:p-10 rounded-2xl">
               <div className="w-12 h-12 md:w-14 md:h-14 bg-fortress-gold/10 flex items-center justify-center mb-4 md:mb-6 rounded-sm">
                 <Eye className="w-6 h-6 md:w-7 md:h-7 text-fortress-gold" />
               </div>
@@ -88,8 +91,8 @@ export default function AboutPage() {
               <p className="text-fortress-silver text-sm md:text-base leading-relaxed">
                 Our vision is to establish Fortress Investment Holdings as a trusted, diversified, and internationally recognised investment group built around client confidence, disciplined growth, and long-term value creation. We measure success by the strength of our portfolio and the trust we build with every client and partner.
               </p>
-            </div>
-            <div className="bg-fortress-deep border border-fortress-gold/10 p-6 md:p-10 rounded-2xl">
+            </StaggerItem>
+            <StaggerItem className="bg-fortress-deep border border-fortress-gold/10 p-6 md:p-10 rounded-2xl">
               <div className="w-12 h-12 md:w-14 md:h-14 bg-fortress-gold/10 flex items-center justify-center mb-4 md:mb-6 rounded-sm">
                 <Target className="w-6 h-6 md:w-7 md:h-7 text-fortress-gold" />
               </div>
@@ -98,20 +101,20 @@ export default function AboutPage() {
               <p className="text-fortress-silver text-sm md:text-base leading-relaxed">
                 Our mission is to identify high-potential opportunities, deploy capital responsibly, and support sustainable growth through strategic involvement, strong governance, and long-term partnerships. We place clients at the centre of every decision, focusing on transparency, trust, and value-driven outcomes.
               </p>
-            </div>
-          </div>
+            </StaggerItem>
+          </Stagger>
         </div>
       </section>
 
       {/* Leadership */}
       <section className="py-12 md:py-20 bg-fortress-deep my-8 md:my-12 sm:mx-4 rounded-2xl">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-12">
+          <Reveal className="text-center mb-8 md:mb-12">
             <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Leadership</p>
             <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory">Leadership Built on Vision and Responsibility</h2>
-          </div>
-          <div className="grid lg:grid-cols-2 gap-6 md:gap-12">
-            <div className="group bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 rounded-2xl transition-all duration-500 hover:border-fortress-gold/40 hover:shadow-2xl hover:shadow-fortress-gold/10 hover:-translate-y-1">
+          </Reveal>
+          <Stagger className="grid lg:grid-cols-2 gap-6 md:gap-12">
+            <StaggerItem className="group bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 rounded-2xl transition-all duration-500 hover:border-fortress-gold/40 hover:shadow-2xl hover:shadow-fortress-gold/10 hover:-translate-y-1">
               <div className="relative w-full aspect-[4/5] mb-6 overflow-hidden rounded-lg">
                 <Image src="/Azzam-El-Khatib.jpeg" alt="Azzam El-Khatib" fill className="object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" sizes="(max-width: 768px) 100vw, 50vw" />
               </div>
@@ -122,8 +125,8 @@ export default function AboutPage() {
                 <p>With an extensive network across the UAE, GCC and international markets, Azzam plays a central role in building strategic relationships, identifying investment opportunities, and driving the company&rsquo;s long-term vision.</p>
                 <p>His leadership is defined by discipline, accountability, and a client-first approach. He is committed to protecting clients&rsquo; interests, creating sustainable value, and delivering strong, well-considered returns on every investment.</p>
               </div>
-            </div>
-            <div className="group bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 rounded-2xl transition-all duration-500 hover:border-fortress-gold/40 hover:shadow-2xl hover:shadow-fortress-gold/10 hover:-translate-y-1">
+            </StaggerItem>
+            <StaggerItem className="group bg-gradient-to-br from-fortress-navy to-fortress-charcoal border border-fortress-gold/10 p-6 md:p-10 rounded-2xl transition-all duration-500 hover:border-fortress-gold/40 hover:shadow-2xl hover:shadow-fortress-gold/10 hover:-translate-y-1">
               <div className="relative w-full aspect-[4/5] mb-6 overflow-hidden rounded-lg">
                 <Image src="/Serhii-Pohrebniak.jpeg" alt="Serhii Pohrebniak" fill className="object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" sizes="(max-width: 768px) 100vw, 50vw" />
               </div>
@@ -134,49 +137,49 @@ export default function AboutPage() {
                 <p>His diverse life and business experiences allow him to approach challenges with clarity, practical thinking, and a long-term perspective. Serhii plays an important role in shaping business strategies, identifying opportunities, and supporting the company&rsquo;s growth.</p>
                 <p>He strongly believes that meaningful goals are achieved through consistency, discipline, and focused action. This philosophy forms the foundation of his approach to both business and life.</p>
               </div>
-            </div>
-          </div>
+            </StaggerItem>
+          </Stagger>
         </div>
       </section>
 
       {/* Values */}
       <section className="py-12 md:py-20 my-8 md:my-12 sm:mx-4 rounded-2xl bg-white">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="text-center mb-10 md:mb-16">
+          <Reveal className="text-center mb-10 md:mb-16">
             <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Our Values</p>
             <h2 className="text-xl md:text-4xl font-bold text-fortress-navy">The Principles Behind Every Decision</h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+          </Reveal>
+          <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
             {values.map((v) => (
-              <div key={v.title} className="bg-fortress-navy border border-fortress-gold/10 p-6 md:p-8 hover:border-fortress-gold/30 hover:shadow-xl hover:shadow-fortress-gold/5 hover:-translate-y-1 transition-all duration-300 rounded-2xl">
+              <StaggerItem key={v.title} className="bg-fortress-navy border border-fortress-gold/10 p-6 md:p-8 hover:border-fortress-gold/30 hover:shadow-xl hover:shadow-fortress-gold/5 hover:-translate-y-1 transition-all duration-300 rounded-2xl">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-fortress-gold/10 flex items-center justify-center mb-4 md:mb-5 rounded-sm">
                   <v.icon className="w-5 h-5 md:w-6 md:h-6 text-fortress-gold" />
                 </div>
                 <h3 className="text-fortress-ivory font-bold text-base md:text-lg mb-2 md:mb-3">{v.title}</h3>
                 <p className="text-fortress-silver text-xs md:text-sm leading-relaxed">{v.description}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* Investment Philosophy */}
       <section className="py-12 md:py-20 bg-fortress-navy my-8 md:my-12 sm:mx-4 rounded-2xl">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-12">
+          <Reveal className="text-center mb-8 md:mb-12">
             <p className="text-fortress-gold text-sm font-medium tracking-[2px] md:tracking-[4px] uppercase mb-4">Our Investment Philosophy</p>
             <h2 className="text-xl md:text-4xl font-bold text-fortress-ivory mb-3 md:mb-4">Disciplined Capital. Strategic Growth.</h2>
             <p className="text-fortress-ivory/80 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">
               Sustainable value begins with strong fundamentals. Everything else is noise.
             </p>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-3 md:gap-4 max-w-4xl mx-auto">
+          </Reveal>
+          <Stagger className="grid sm:grid-cols-2 gap-3 md:gap-4 max-w-4xl mx-auto">
             {philosophyPoints.map((point, i) => (
-              <div key={i} className="p-4 md:p-5 bg-fortress-deep border border-fortress-gold/10 rounded-sm transition-all duration-300 hover:border-fortress-gold/30 hover:shadow-lg hover:shadow-fortress-gold/5 hover:-translate-y-0.5">
+              <StaggerItem key={i} className="p-4 md:p-5 bg-fortress-deep border border-fortress-gold/10 rounded-sm transition-all duration-300 hover:border-fortress-gold/30 hover:shadow-lg hover:shadow-fortress-gold/5 hover:-translate-y-0.5">
                 <p className="text-fortress-silver text-xs md:text-sm leading-relaxed">{point}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 

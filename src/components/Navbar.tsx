@@ -5,7 +5,7 @@ import Link from "next/link";
 import { User, Target, Handshake, Newspaper, TrendingUp, Menu, X } from "lucide-react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import gsap from "gsap";
+import { navVariants } from "@/lib/animation";
 
 const navItems = [
   { label: "About", href: "/about", icon: User },
@@ -15,33 +15,49 @@ const navItems = [
   { label: "Insights", href: "/insights", icon: Newspaper },
 ];
 
+const linkVariants = {
+  rest: { color: "rgba(255,255,255,0.8)" },
+  hover: { color: "#C9A24A" },
+};
+
 const NavLink = ({ href, icon: Icon, label }: { href: string; icon: React.ComponentType<{ className?: string }>; label: string }) => (
-  <Link
-    href={href}
-    className="group flex items-center gap-1.5 text-sm font-medium transition-colors whitespace-nowrap text-white/80 hover:text-[#C9A24A]"
-  >
-    <Icon className="w-4 h-4 opacity-70 group-hover:opacity-100" />
-    <span>{label}</span>
-  </Link>
+  <motion.div initial="rest" whileHover="hover" className="group">
+    <Link
+      href={href}
+      className="flex items-center gap-1.5 text-sm font-medium whitespace-nowrap"
+    >
+      <motion.div variants={linkVariants} transition={{ duration: 0.3 }}>
+        <Icon className="w-4 h-4" />
+      </motion.div>
+      <motion.span variants={linkVariants} transition={{ duration: 0.3 }}>{label}</motion.span>
+    </Link>
+    <motion.div
+      className="h-px bg-fortress-gold mt-0.5"
+      initial={{ scaleX: 0 }}
+      whileHover={{ scaleX: 1 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      style={{ transformOrigin: "left" }}
+    />
+  </motion.div>
 );
+
+const mobileItemVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { delay: i * 0.06, duration: 0.35, ease: [0.22, 1, 0.36, 1] as const },
+  }),
+};
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
-  // GSAP entrance: slide down from above on page load
-  useEffect(() => {
-    gsap.fromTo(
-      headerRef.current,
-      { y: -80, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.9, ease: "power4.out", delay: 0.1 }
-    );
-  }, []);
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -58,7 +74,13 @@ export default function Navbar() {
 
   return (
     <>
-      <header ref={headerRef} className="fixed top-0 inset-x-0 z-50 h-24 flex px-0">
+      <motion.header
+        ref={headerRef}
+        variants={navVariants}
+        initial="hidden"
+        animate="visible"
+        className="fixed top-0 inset-x-0 z-50 h-24 flex px-0"
+      >
         <div className={`flex-1 h-10 ${bgClass} z-20 relative min-w-0`}>
           <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
             <line x1="0" y1="39.5" x2="100%" y2="39.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
@@ -90,7 +112,9 @@ export default function Navbar() {
                 ))}
               </nav>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 className={`md:hidden p-1 transition-colors ${
                   scrolled ? "text-gray-600 hover:text-fortress-gold" : "text-white/80 hover:text-[#C9A24A]"
                 }`}
@@ -98,7 +122,7 @@ export default function Navbar() {
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
+              </motion.button>
 
               <div className="flex justify-center shrink-0 mx-2 md:mx-4">
                 <Link href="/" className="flex items-center group">
@@ -130,16 +154,20 @@ export default function Navbar() {
                 <div className={`flex gap-4 pl-4 shrink-0 items-center border-l ${
                   scrolled ? "border-fortress-gold/20" : "border-white/10"
                 }`}>
-                  <Link
-                    href="/contact"
-                    className="px-4 py-1.5 text-sm font-medium text-fortress-navy bg-fortress-gold hover:bg-fortress-champagne transition-colors whitespace-nowrap shadow-sm"
+                  <motion.div
+                    whileHover={{ scale: 1.03, y: -1 }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
                   >
-                    Contact Us
-                  </Link>
+                    <Link
+                      href="/contact"
+                      className="block px-4 py-1.5 text-sm font-medium text-fortress-navy bg-fortress-gold hover:bg-fortress-champagne transition-colors whitespace-nowrap shadow-sm"
+                    >
+                      Contact Us
+                    </Link>
+                  </motion.div>
                 </div>
               </nav>
-
-
             </div>
           </div>
 
@@ -158,37 +186,67 @@ export default function Navbar() {
             <line x1="0" y1="36.5" x2="100%" y2="36.5" stroke="currentColor" strokeOpacity={0.08} strokeWidth={0.5} className="text-fortress-silver" />
           </svg>
         </div>
-      </header>
+      </motion.header>
 
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-24 z-40 bg-[#07111D] border-b border-white/10 p-4 md:hidden shadow-2xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-x-0 top-24 z-40 md:hidden"
           >
-            <nav className="flex flex-col gap-1">
-              {navItems.map(item => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="flex items-center gap-3 p-3 hover:bg-white/5 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
+            <motion.div
+              initial={{ opacity: 0, y: -10, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.97 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="bg-[#07111D]/98 backdrop-blur-xl border-b border-white/10 p-4 shadow-2xl"
+            >
+              <nav className="flex flex-col gap-1">
+                {navItems.map((item, i) => (
+                  <motion.div
+                    key={item.label}
+                    custom={i}
+                    variants={mobileItemVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                  >
+                    <Link
+                      href={item.href}
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.15, rotate: 5 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 12 }}
+                      >
+                        <item.icon className="w-5 h-5 text-fortress-gold/80 group-hover:text-fortress-gold transition-colors" />
+                      </motion.div>
+                      <span className="font-medium text-white/80 group-hover:text-white transition-colors">{item.label}</span>
+                    </Link>
+                  </motion.div>
+                ))}
+                <motion.div
+                  custom={navItems.length}
+                  variants={mobileItemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  className="mt-2"
                 >
-                  <item.icon className="w-5 h-5 text-[#C9A24A]/80" />
-                  <span className="font-medium text-white/80">{item.label}</span>
-                </Link>
-              ))}
-              <Link
-                href="/contact"
-                className="flex items-center justify-center gap-2 p-3 bg-[#C9A24A] text-[#07111D] font-bold mt-1"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Contact Us
-              </Link>
-            </nav>
+                  <Link
+                    href="/contact"
+                    className="flex items-center justify-center gap-2 p-3 bg-fortress-gold text-fortress-navy font-bold rounded-lg hover:bg-fortress-champagne transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Contact Us
+                  </Link>
+                </motion.div>
+              </nav>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
