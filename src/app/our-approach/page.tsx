@@ -132,13 +132,13 @@ export default function OurApproachPage() {
           <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <Reveal>
-                <span className="inline-block text-fortress-gold text-[10px] sm:text-sm font-semibold tracking-[3px] sm:tracking-[6px] uppercase mb-4 px-3 sm:px-4 py-1.5 rounded-full border border-fortress-gold/20 bg-fortress-gold/10">
+                <span className="inline-block text-fortress-gold text-xs sm:text-sm font-semibold tracking-[4px] sm:tracking-[6px] uppercase mb-4 px-4 py-1.5 rounded-full border border-fortress-gold/20 bg-fortress-gold/10">
                   Our Approach
                 </span>
               </Reveal>
 
               <Reveal delay={0.1}>
-                <h1 className="text-2xl sm:text-5xl md:text-6xl font-light tracking-tight text-white uppercase mb-5 sm:mb-6 leading-[1.15]">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight text-white uppercase mb-5 sm:mb-6 leading-[1.15]">
                   Disciplined{" "}
                   <span className="font-bold bg-gradient-to-r from-fortress-gold to-fortress-champagne bg-clip-text text-transparent">
                     Strategic
@@ -214,12 +214,12 @@ export default function OurApproachPage() {
                             <span className="text-fortress-gold text-[10px] font-mono font-bold tracking-widest uppercase block">
                               Step {stepItem.step}
                             </span>
-                            <h3 className="text-base sm:text-xl md:text-2xl font-bold text-fortress-ivory leading-tight">
+                            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-fortress-ivory leading-tight">
                               {stepItem.title}
                             </h3>
                           </div>
                         </div>
-                        <span className="text-3xl sm:text-5xl font-black font-mono text-fortress-gold/20 select-none shrink-0">
+                        <span className="hidden sm:block text-4xl sm:text-5xl font-black font-mono text-fortress-gold/20 select-none shrink-0">
                           {stepItem.step}
                         </span>
                       </div>
