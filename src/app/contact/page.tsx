@@ -6,12 +6,41 @@ import type { Metadata } from "next";
 import { getSettings } from "@/services/settings.service";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Fortress Investment Holdings",
+  title: "Contact Us",
   description:
-    "Contact Fortress Investment Holdings in Dubai, UAE. Get in touch by phone, email, or visit our office. We respond to all enquiries within 1-2 business days.",
+    "Contact Fortress Investment Holdings in Dubai, UAE by phone or email. Our investment team responds to all enquiries within 1-2 business days in strict confidence.",
+  keywords: [
+    "contact Fortress Investment Holdings",
+    "Dubai investment company contact",
+    "investment enquiries UAE",
+    "Fortress Investment Holdings Dubai office",
+  ],
+  alternates: {
+    canonical: "https://fortressih.com/contact",
+  },
   openGraph: {
     title: "Contact Us | Fortress Investment Holdings",
-    description: "Get in touch with Fortress Investment Holdings in Dubai.",
+    description:
+      "Get in touch with Fortress Investment Holdings in Dubai, UAE. We respond to enquiries within 1-2 business days.",
+    url: "https://fortressih.com/contact",
+    siteName: "Fortress Investment Holdings",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/website%20image.png",
+        width: 1200,
+        height: 630,
+        alt: "Contact Fortress Investment Holdings - Dubai",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | Fortress Investment Holdings",
+    description:
+      "Get in touch with Fortress Investment Holdings in Dubai, UAE. We respond to enquiries within 1-2 business days.",
+    images: ["/website%20image.png"],
   },
 };
 

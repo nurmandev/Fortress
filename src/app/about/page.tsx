@@ -10,11 +10,39 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Fortress Investment Holdings is a Dubai-based diversified investment holding company. Learn about our vision, mission, values, and leadership.",
+    "Discover Fortress Investment Holdings, a Dubai-based investment holding company. Learn about our vision, mission, values, leadership, and disciplined approach to long-term value creation.",
+  keywords: [
+    "about Fortress Investment Holdings",
+    "investment company Dubai",
+    "Dubai investment firm leadership",
+    "Fortress vision mission values",
+  ],
+  alternates: {
+    canonical: "https://fortressih.com/about",
+  },
   openGraph: {
     title: "About Us | Fortress Investment Holdings",
     description:
-      "Learn about our vision, mission, values, and leadership.",
+      "Learn about our vision, mission, values, and leadership at Fortress Investment Holdings in Dubai.",
+    url: "https://fortressih.com/about",
+    siteName: "Fortress Investment Holdings",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/website%20image.png",
+        width: 1200,
+        height: 630,
+        alt: "About Fortress Investment Holdings - Dubai investment company",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | Fortress Investment Holdings",
+    description:
+      "Learn about our vision, mission, values, and leadership at Fortress Investment Holdings in Dubai.",
+    images: ["/website%20image.png"],
   },
 };
 

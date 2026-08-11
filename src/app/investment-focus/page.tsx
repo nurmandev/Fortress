@@ -19,11 +19,43 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Investment Focus",
   description:
-    "Explore Fortress Investment Holdings' investment sectors: real estate, digital assets, business acquisitions, private equity, hospitality, AI & technology, trading, luxury assets, and strategic partnerships.",
+    "Explore Fortress Investment Holdings' investment sectors: real estate, private equity, business acquisitions, AI & technology, hospitality, digital assets, energy, luxury assets, and strategic ventures across the UAE and GCC.",
+  keywords: [
+    "Fortress investment sectors",
+    "real estate investment Dubai",
+    "private equity UAE",
+    "AI technology investment",
+    "hospitality investment Dubai",
+    "digital assets investment UAE",
+    "luxury assets investment",
+    "business acquisitions Dubai",
+  ],
+  alternates: {
+    canonical: "https://fortressih.com/investment-focus",
+  },
   openGraph: {
     title: "Investment Focus | Fortress Investment Holdings",
     description:
-      "Explore our diversified investment sectors across the UAE and beyond.",
+      "Explore our diversified investment sectors across the UAE, GCC, and international markets.",
+    url: "https://fortressih.com/investment-focus",
+    siteName: "Fortress Investment Holdings",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/website%20image.png",
+        width: 1200,
+        height: 630,
+        alt: "Fortress Investment Holdings - investment sectors",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Investment Focus | Fortress Investment Holdings",
+    description:
+      "Explore our diversified investment sectors across the UAE, GCC, and international markets.",
+    images: ["/website%20image.png"],
   },
 };
 

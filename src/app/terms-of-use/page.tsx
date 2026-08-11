@@ -5,7 +5,15 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms of Use",
   description:
-    "Terms of Use for the Fortress Investment Holdings website. Please read these terms carefully before using our website.",
+    "Read the Terms of Use for the Fortress Investment Holdings website, covering website use, content, and acceptable conduct.",
+  keywords: ["Fortress Investment Holdings terms", "website terms of use UAE"],
+  alternates: {
+    canonical: "https://fortressih.com/terms-of-use",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function TermsOfUsePage() {

@@ -5,7 +5,15 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Privacy Policy of Fortress Investment Holdings. Learn how we collect, use, store, and protect your personal information.",
+    "Read the Privacy Policy of Fortress Investment Holdings to learn how we collect, use, store, and protect your personal information.",
+  keywords: ["Fortress Investment Holdings privacy", "data protection UAE"],
+  alternates: {
+    canonical: "https://fortressih.com/privacy-policy",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function PrivacyPolicyPage() {

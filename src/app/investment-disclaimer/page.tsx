@@ -5,7 +5,15 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Investment Disclaimer",
   description:
-    "Investment Disclaimer and Risk Disclosure for Fortress Investment Holdings. Important information about investment risks and regulatory status.",
+    "Read the Investment Disclaimer and risk disclosure for Fortress Investment Holdings, including important information about investment risks and regulatory status.",
+  keywords: ["Fortress investment disclaimer", "investment risk disclosure UAE"],
+  alternates: {
+    canonical: "https://fortressih.com/investment-disclaimer",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function InvestmentDisclaimerPage() {

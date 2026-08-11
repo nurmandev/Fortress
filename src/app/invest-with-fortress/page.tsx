@@ -5,13 +5,43 @@ import { CheckCircle } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Invest With Fortress | Fortress Investment Holdings",
+  title: "Invest With Fortress",
   description:
-    "Invest with Fortress Investment Holdings. Allocate capital across carefully selected opportunities in the UAE, GCC, and international markets with disciplined risk management.",
+    "Invest with Fortress Investment Holdings in Dubai. Allocate capital across real estate, private equity, and business acquisitions in the UAE, GCC, and international markets with disciplined risk management.",
+  keywords: [
+    "invest with Fortress",
+    "Dubai investment opportunities",
+    "UAE private equity investment",
+    "family office investment Dubai",
+    "capital allocation UAE",
+    "invest in Dubai real estate",
+  ],
+  alternates: {
+    canonical: "https://fortressih.com/invest-with-fortress",
+  },
   openGraph: {
     title: "Invest With Fortress | Fortress Investment Holdings",
     description:
-      "Your capital deserves discipline, access, and enduring value. Invest with Fortress.",
+      "Your capital deserves discipline, access, and enduring value. Invest with Fortress in Dubai.",
+    url: "https://fortressih.com/invest-with-fortress",
+    siteName: "Fortress Investment Holdings",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/website%20image.png",
+        width: 1200,
+        height: 630,
+        alt: "Invest With Fortress - Dubai investment opportunities",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Invest With Fortress | Fortress Investment Holdings",
+    description:
+      "Your capital deserves discipline, access, and enduring value. Invest with Fortress in Dubai.",
+    images: ["/website%20image.png"],
   },
 };
 

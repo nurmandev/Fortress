@@ -80,14 +80,48 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = await getPost(slug);
-  if (!article) return { title: "Article Not Found" };
+  if (!article) {
+    return {
+      title: "Article Not Found",
+      robots: { index: false },
+    };
+  }
+  const ogImage =
+    article.featuredImage || CAT_IMAGES[article.category] || "/business.jpg";
   return {
-    title: `${article.title} | Fortress Investment Holdings`,
+    title: article.title,
     description: article.excerpt,
+    keywords: [
+      article.category,
+      "Fortress Investment Holdings insights",
+      "UAE investment analysis",
+      "Dubai market insights",
+    ],
+    alternates: {
+      canonical: `https://fortressih.com/insights/${slug}`,
+    },
     openGraph: {
       title: article.title,
       description: article.excerpt,
       type: "article",
+      url: `https://fortressih.com/insights/${slug}`,
+      siteName: "Fortress Investment Holdings",
+      locale: "en_US",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
+      authors: ["Fortress Investment Holdings"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt,
+      images: [ogImage],
     },
   };
 }

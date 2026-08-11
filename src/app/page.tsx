@@ -13,13 +13,45 @@ import { FloatingBlobs } from "@/components/animations/AnimatedBackground";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: {
+    absolute: "Fortress Investment Holdings | Investment Company in Dubai, UAE",
+  },
   description:
-    "Fortress Investment Holdings is a leading Dubai-based investment firm specializing in real estate, private equity, business acquisitions, AI & technology, and hospitality.",
+    "Fortress Investment Holdings is a leading Dubai investment company specialising in real estate, private equity, business acquisitions, AI & technology, and hospitality across the UAE and GCC.",
+  keywords: [
+    "investment company Dubai",
+    "investment firm UAE",
+    "real estate investment Dubai",
+    "private equity Dubai",
+    "business acquisitions UAE",
+    "Dubai investment opportunities",
+  ],
+  alternates: {
+    canonical: "https://fortressih.com",
+  },
   openGraph: {
-    title: "Home | Fortress Investment Holdings",
+    title: "Fortress Investment Holdings | Investment Company in Dubai, UAE",
     description:
-      "Leading Dubai-based investment firm specializing in real estate, private equity, and business acquisitions.",
+      "A leading Dubai investment company specialising in real estate, private equity, business acquisitions, AI & technology, and hospitality.",
+    url: "https://fortressih.com",
+    siteName: "Fortress Investment Holdings",
+    type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/website%20image.png",
+        width: 1200,
+        height: 630,
+        alt: "Fortress Investment Holdings - Dubai investment company",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fortress Investment Holdings | Investment Company in Dubai, UAE",
+    description:
+      "A leading Dubai investment company specialising in real estate, private equity, business acquisitions, AI & technology, and hospitality.",
+    images: ["/website%20image.png"],
   },
 };
 
