@@ -11,7 +11,7 @@ export default function ContactForm() {
     name: "",
     email: "",
     phone: "",
-    subject: "",
+    type: "",
     message: "",
   });
 
@@ -31,7 +31,7 @@ export default function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, subject: formData.type }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -115,18 +115,18 @@ export default function ContactForm() {
             Subject *
           </label>
           <select
-            name="subject"
-            value={formData.subject}
+            name="type"
+            value={formData.type}
             onChange={handleChange}
             required
             className="w-full px-4 md:px-5 py-3 md:py-3.5 bg-white border border-fortress-navy/20 text-fortress-navy focus:outline-none focus:border-fortress-gold transition-colors appearance-none rounded-xl"
           >
             <option value="">Select a subject</option>
-            <option value="general">General Enquiry</option>
-            <option value="investment">Investment Opportunity</option>
-            <option value="partnership">Partnership</option>
-            <option value="media">Media & Press</option>
-            <option value="careers">Careers</option>
+            <option value="Contact">General Enquiry</option>
+            <option value="Investment Opportunity">Investment Opportunity</option>
+            <option value="Business Acquisition">Business Acquisition</option>
+            <option value="Joint Venture">Joint Venture</option>
+            <option value="Strategic Partnership">Strategic Partnership</option>
           </select>
         </div>
       </div>
