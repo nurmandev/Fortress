@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,12 +25,25 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    setSubmitted(true);
+    setError("");
+    setSending(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setError(data.message || "Something went wrong. Please try again.");
+        setSending(false);
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError("Network error. Please try again.");
+      setSending(false);
+    }
   };
 
   if (submitted) {
@@ -133,11 +148,19 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 bg-fortress-gold text-fortress-navy font-bold text-sm hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2 rounded-xl"
+        disabled={sending}
+        className="w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 bg-fortress-gold text-fortress-navy font-bold text-sm hover:opacity-90 transition-all duration-300 flex items-center justify-center gap-2 rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <Send className="w-4 h-4" />
-        Send Message
+        {sending ? "Sending..." : "Send Message"}
       </button>
+
+      {error && (
+        <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 border border-red-200 px-4 py-3 rounded-xl">
+          <AlertCircle className="w-4 h-4 shrink-0" />
+          {error}
+        </div>
+      )}
     </form>
   );
 }

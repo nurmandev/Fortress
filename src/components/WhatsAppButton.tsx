@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export default function WhatsAppButton() {
-  const [phone, setPhone] = useState("971500000000");
+  const [phone, setPhone] = useState("971561143005");
 
   useEffect(() => {
     fetch("/api/settings")

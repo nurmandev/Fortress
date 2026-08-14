@@ -47,8 +47,8 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function ContactPage() {
-  let whatsapp = "971500000000";
-  let phoneVal = "+971 4 XXX XXXX";
+  let whatsapp = "971561143005";
+  let phoneVal = "+971 561143005";
   let emailVal = "info@fortressih.com";
   let addressVal = "Dubai, United Arab Emirates";
   try {

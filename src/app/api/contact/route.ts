@@ -28,9 +28,15 @@ export async function POST(request: NextRequest) {
 
     const enquiry = await enquiryService.createEnquiry(parsed.data);
 
-    sendEnquiryNotification(parsed.data).catch((err) =>
-      console.error("Failed to send notification email:", err)
-    );
+    try {
+      await sendEnquiryNotification(parsed.data);
+    } catch (error) {
+      console.error("Failed to send notification email:", error);
+      return errorResponse(
+        "Your message was received, but the email notification failed to send. Our team has been alerted.",
+        502
+      );
+    }
 
     return successResponse(enquiry, "Enquiry submitted successfully", 201);
   } catch (error) {

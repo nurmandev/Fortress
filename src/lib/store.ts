@@ -227,11 +227,11 @@ export interface SiteSettings {
 
 const defaultSettings: SiteSettings = {
   companyName: "Fortress Investment Holdings",
-  phoneNumber: "+971 4 XXX XXXX",
+  phoneNumber: "+971 561143005",
   emailAddress: "info@fortressih.com",
   officeAddress: "Dubai, United Arab Emirates",
   googleMapsEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.643879742878!2d55.2708!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5d348d56a8df%3A0x2e84e1b4b4b4b4b4!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sae!4v1234567890",
-  whatsappNumber: "971500000000",
+  whatsappNumber: "971561143005",
   socialLinks: [
     { platform: "LinkedIn", url: "https://www.linkedin.com/company/135716850/admin/dashboard/?editPageActiveTab=info" },
     { platform: "Instagram", url: "https://www.instagram.com/fortressihdubai/" },

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   FileText,
@@ -28,6 +29,16 @@ interface AdminSidebarProps {
 
 export default function AdminSidebar({ active }: AdminSidebarProps) {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  async function handleSignOut() {
+    try {
+      await fetch("/api/admin-logout", { method: "POST" });
+    } finally {
+      setOpen(false);
+      router.replace("/admin-login");
+    }
+  }
 
   return (
     <>
@@ -85,14 +96,14 @@ export default function AdminSidebar({ active }: AdminSidebarProps) {
           })}
         </nav>
         <div className="p-4 border-t border-fortress-gold/10">
-          <Link
-            href="/admin-login"
-            onClick={() => setOpen(false)}
-            className="flex items-center gap-3 px-4 py-3 text-sm text-fortress-silver/60 hover:text-fortress-champagne transition-all duration-300 hover:bg-fortress-gold/5 rounded-xl group"
+          <button
+            type="button"
+            onClick={handleSignOut}
+            className="w-full flex items-center gap-3 px-4 py-3 text-sm text-fortress-silver/60 hover:text-fortress-champagne transition-all duration-300 hover:bg-fortress-gold/5 rounded-xl group"
           >
             <LogOut className="w-4 h-4 shrink-0 group-hover:-translate-x-1 transition-transform" />
             <span className="tracking-wide">Sign Out</span>
-          </Link>
+          </button>
         </div>
       </aside>
     </>

@@ -7,9 +7,9 @@ const DEFAULT_SETTINGS = {
   logo: "/large-logo.png",
   favicon: "",
   email: "info@fortressih.com",
-  phone: "+971 4 XXX XXXX",
+  phone: "+971 561143005",
   address: "Dubai, United Arab Emirates",
-  whatsapp: "971500000000",
+  whatsapp: "971561143005",
   googleMap: "",
   socialLinks: [
     { platform: "LinkedIn", url: "#" },

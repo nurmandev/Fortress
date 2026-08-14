@@ -247,7 +247,7 @@ export default function SettingsPage() {
                   </div>
                   <div>
                     <label className="block text-fortress-silver text-xs font-medium mb-1.5 tracking-wide">WhatsApp Number</label>
-                    <p className="text-fortress-silver/40 text-[10px] mb-2">Digits only, e.g. 971500000000</p>
+                    <p className="text-fortress-silver/40 text-[10px] mb-2">Digits only, e.g. 971561143005</p>
                     <input type="text" value={data.whatsapp} onChange={(e) => update("whatsapp", e.target.value)} className="w-full bg-fortress-deep border border-white/10 text-fortress-ivory text-sm px-4 py-3 focus:outline-none focus:border-fortress-gold/50 rounded-lg" />
                   </div>
                 </div>
