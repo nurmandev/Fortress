@@ -50,7 +50,7 @@ export default async function ContactPage() {
   let whatsapp = "971561143005";
   let phoneVal = "+971 561143005";
   let emailVal = "info@fortressih.com";
-  let addressVal = "Dubai, United Arab Emirates";
+  let addressVal = "Meydan Grandstand, 6th floor, Meydan Road, Nad Al Sheba, Dubai, U.A.E.";
   try {
     const settings = await getSettings();
     if (settings) {
@@ -66,7 +66,7 @@ export default async function ContactPage() {
   const contactInfo = [
     {
       icon: Phone,
-      label: "Telephone",
+      label: "Mobile",
       value: phoneVal,
       href: `tel:${phoneVal.replace(/\s/g, "")}`,
     },
@@ -85,7 +85,7 @@ export default async function ContactPage() {
     {
       icon: Clock,
       label: "Hours",
-      value: "Sun - Thu, 9AM - 6PM GST",
+      value: "Monday to Friday, 9AM - 6PM GST",
       href: "#",
     },
   ];
