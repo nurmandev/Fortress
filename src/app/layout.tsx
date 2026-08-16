@@ -34,9 +34,9 @@ export const metadata: Metadata = {
   category: "Investment",
   themeColor: "#07111D",
   icons: {
-    icon: "/small-logo.png",
-    shortcut: "/small-logo.png",
-    apple: "/small-logo.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   openGraph: {
     title: "Fortress Investment Holdings | Investment Company in Dubai, UAE",

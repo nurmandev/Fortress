@@ -63,12 +63,20 @@ export default async function ContactPage() {
     // Use defaults
   }
 
+  const displayPhone = (phone: string) => {
+    const digits = phone.replace(/\D/g, "");
+    if (digits.startsWith("971") && digits.length === 12) {
+      return `+971-${digits.slice(3, 6)}-${digits.slice(6)}`;
+    }
+    return phone;
+  };
+
   const contactInfo = [
     {
       icon: Phone,
       label: "Mobile",
-      value: phoneVal,
-      href: `tel:${phoneVal.replace(/\s/g, "")}`,
+      value: displayPhone(phoneVal),
+      href: `tel:${phoneVal.replace(/\D/g, "")}`,
     },
     {
       icon: Mail,
