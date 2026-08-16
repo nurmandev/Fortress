@@ -48,7 +48,7 @@ export const dynamic = "force-dynamic";
 
 export default async function ContactPage() {
   let whatsapp = "971561143005";
-  let phoneVal = "+971 561143005";
+  let phoneVal = "+971 561 143 005";
   let emailVal = "info@fortressih.com";
   let addressVal = "Meydan Grandstand, 6th floor, Meydan Road, Nad Al Sheba, Dubai, U.A.E.";
   try {
