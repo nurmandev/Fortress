@@ -132,7 +132,7 @@ export default function RootLayout({
       <head>
         {/* Google Analytics */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+          src="https://www.googletagmanager.com/gtag/js?id=G-Y2071DJC3R"
           strategy="afterInteractive"
         />
         <Script id="ga-init" strategy="afterInteractive">
@@ -140,7 +140,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
+            gtag('config', 'G-Y2071DJC3R');
           `}
         </Script>
         {/* Meta Pixel */}
