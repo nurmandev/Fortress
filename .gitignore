@@ -12,7 +12,7 @@
 
 # deploy.sh
 
-/.deploy.sh
+deploy.sh
 
 # production
 /build
